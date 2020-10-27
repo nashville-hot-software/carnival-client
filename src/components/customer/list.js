@@ -8,7 +8,7 @@ const Customers = props => {
   const [customers, setCustomers] = useState([]);
 
   const getAllCustomers = () => {
-    CustomerManager.getAllCustomers().then(customers => {
+    CustomerManager.getAll("customers").then(customers => {
       setCustomers(customers);
     });
   };
@@ -20,7 +20,7 @@ const Customers = props => {
   return (
     <>
       <div className="customersContainer">
-        {customers.map(customer => {
+        {customers.slice(0,3).map(customer => {
           return (
             <CustomerCard
               key={customer.id}

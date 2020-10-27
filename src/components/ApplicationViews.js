@@ -1,17 +1,19 @@
 import React from "react"
-import DashBoard from "../components/dashboard/DashBoard.js"
 import { Route, Redirect } from "react-router-dom"
+import DashBoard from "../components/dashboard/DashBoard.js"
+// import Customers from "../components/customer/list.js"
+
 const ApplicationViews = props => {
 
     return (
         <>
            
             <Route exact path="/home" render={props => {
-                if (hasUser) {
+                // if (hasUser) {
                     return <DashBoard />
-                } else {
-                    return <Redirect to="/" />
-                }
+                // } else {
+                //     return <Redirect to="/" />
+                // }
             }}/>
          
         </>
