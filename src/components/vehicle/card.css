@@ -1,0 +1,14 @@
+.vehicle-card--container {
+    border-bottom: 1px solid black;
+}
+.vehicle-card--container:hover {
+    border-bottom: 1px solid rgba(255, 125, 4, 0.801);
+    cursor: pointer;
+    color: rgba(255, 125, 4, 0.801);
+}
+
+.vehicle-card--name {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+}
