@@ -2,7 +2,6 @@ import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import DashBoard from "../components/dashboard/DashBoard.js"
 import CustomerDetails from "./customer/detail.js"
-// import Customers from "../components/customer/list.js"
 
 const ApplicationViews = props => {
 
