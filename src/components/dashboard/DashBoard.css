@@ -1,0 +1,18 @@
+.dashboard-row--1 {
+    border: 3px solid black;
+    border-radius: 8px;
+    padding: 100px 250px;
+    margin-top: 140px;
+    margin-left: 5%;
+    max-width: 250px;
+}
+
+.dashboard-row--2 {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 5%;
+}
+
+.vehicles--container {
+    margin-right: 5%;
+}
