@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CustomerCard from "./card";
 import CustomerManager from "../../api/dataManager";
+import "./list.css"
 
 const Customers = props => {
 //   const activeUser = props.activeUserId;
@@ -20,12 +21,13 @@ const Customers = props => {
   return (
     <>
       <div className="customersContainer">
-        {customers.slice(0,3).map(customer => {
+        {customers.slice(0,20).map(customer => {
           return (
             <CustomerCard
               key={customer.id}
               customer={customer}
-              getAllcustomers={getAllcustomers}
+              getAllCustomers={getAllCustomers}
+              {...props}
             />
           );
         })}
