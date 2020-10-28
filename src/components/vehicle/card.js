@@ -17,7 +17,7 @@ const VehicleCard = props => {
   return (
     <>
         <div onClick={() => props.history.push(`/vehicles/${vehicle.id}`)} className="vehicle-card--container">
-            <h2 className="vehicle-card--name">{`${vehicle.engine_type}`}</h2>
+            <h2 className="vehicle-card--name">{`${vehicle.vehicle_type.make} ${vehicle.vehicle_type.model}`}</h2>
         </div>
     </>
   );

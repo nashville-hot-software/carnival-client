@@ -6,6 +6,7 @@
     font-weight: 400;
     font-size: 60px;
     border-bottom: 3px solid black;
+    padding: 7px 0;
 }
 
 .headerBannerTwo {
@@ -17,6 +18,11 @@
 .nav-list {
     display: flex;
     margin-right: 10%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 ul li {

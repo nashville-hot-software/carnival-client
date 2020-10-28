@@ -10,7 +10,6 @@ const Vehicles = props => {
 
   const getAllVehicles = () => {
     VehicleManager.getAll("vehicles").then(response => {
-        console.log(response)
       setVehicles(response);
     });
   };
