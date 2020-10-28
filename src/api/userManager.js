@@ -1,4 +1,4 @@
-export const baseUrl = '/api/v1';
+export const baseUrl = 'http://127.0.0.1:8000';
 
 export const createAuthHeaders = () => {
   const token = localStorage.getItem('token');

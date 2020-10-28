@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CustomerManager from "../../api/dataManager";
+import "./card.css"
 
 const CustomerCard = props => {
 
@@ -20,7 +21,7 @@ const CustomerCard = props => {
   return (
     <>
         <div className="customer-card--container">
-            <h1>{`${customer.first_name} ${customer.last_name}`}</h1>
+            <h2 className="customer-card--name">{`${customer.first_name} ${customer.last_name}`}</h2>
         </div>
     </>
   );

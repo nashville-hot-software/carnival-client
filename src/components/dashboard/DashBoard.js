@@ -5,19 +5,12 @@ import Customers from "../customer/list.js"
 
 const DashBoard = props => {
 
-
-
-
-
-
-
     
     return (
       <>
+        {/* <ActionPieChart/> */}
 
-        <ActionPieChart/>
-
-        <Customers />
+        <Customers {...props} />
       </>
     )
 }
