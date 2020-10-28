@@ -7,7 +7,7 @@ let API = {
 
     getOne: (resource, id) => {
         const authHeader = createAuthHeaders()
-        return fetch(`${baseUrl}/${resource},${id}`, {
+        return fetch(`${baseUrl}/${resource}/${id}`, {
             method: "GET",
             // headers: authHeader
         }).then(data => data.json())
