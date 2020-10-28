@@ -7,11 +7,11 @@ const ApplicationViews = props => {
         <>
            
             <Route exact path="/home" render={props => {
-                if (hasUser) {
+                // if (hasUser) {
                     return <DashBoard />
-                } else {
-                    return <Redirect to="/" />
-                }
+                // } else {
+                //     return <Redirect to="/" />
+                // }
             }}/>
          
         </>
