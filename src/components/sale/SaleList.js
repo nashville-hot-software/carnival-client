@@ -1,21 +1,23 @@
 
 import React, { useState, useEffect } from "react";
-import DashBoard from "../components/dashboard/DashBoard.js"
 import { Route, Redirect } from "react-router-dom"
 import API from "../../api/dataManager.js"
 import SaleCard from "../sale/SaleCard.js"
+
 const SaleList = props => {
 
 
-//     const [sales, setSales] = useState([]);
+    const [sales, setSales] = useState([]);
 
     const getSales = () => {
         // if((isAuthenticated())){
         // }
-                 API.getAll("sales").then((response) => {
-                    setSales(response);
-                });
+        API.getAll("sales").then((response) => {
+            setSales(response);
+            console.log(response)
+        });
     };
+
 
     useEffect(() => {
         getSales();
@@ -23,19 +25,19 @@ const SaleList = props => {
 
     return (
         <>
-           <div >
-            <div>
-                <h2>Sale</h2>
+            <div >
                 <div>
-                    {/* {sales.map(((item, id) => (
-                        <SaleCard  key={id} item={item} {...props} />
-                    )))} */}
+                    <h2>Sale</h2>
+                    <div>
+                        {sales.slice(0,20).map((item, id) => (
+                            <SaleCard key={id} item={item} {...props} />
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
-        
-         
+
+
         </>
     )
 }
-export default  SaleList;
+export default SaleList;
