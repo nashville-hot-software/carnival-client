@@ -9,7 +9,7 @@ let API = {
         const authHeader = createAuthHeaders()
         return fetch(`${baseUrl}/${resource},${id}`, {
             method: "GET",
-            headers: authHeader
+            // headers: authHeader
         }).then(data => data.json())
     },
     //https://localhost:5001/api/v1/Resource
@@ -27,7 +27,7 @@ let API = {
         const authHeader = createAuthHeaders()
         return fetch(`${baseUrl}/${resource}/${id}?includes=${secondResource}`, {
             method: "GET",
-            headers: authHeader
+            // headers: authHeader
         }).then(data => data.json())
     },
     //an Expand
@@ -38,9 +38,8 @@ let API = {
             method: "POST",
             body: JSON.stringify(newObj),
             headers: {
-                ...authHeader,
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
+                // ...authHeader,
+                // Accept: 'application/json',
             },
         }).then(response => response.json())
     },
@@ -49,7 +48,7 @@ let API = {
         const authHeader = createAuthHeaders()
         return fetch(`${baseUrl}/${resource}/${Id}`, {
             method: "DELETE",
-            headers: authHeader
+            // headers: authHeader
         }).then(response => response.json())
 
     },
@@ -58,8 +57,8 @@ let API = {
         return fetch(`${baseUrl}/${database}/${editedObject.id}`, {
             method: "PUT",
             headers: {
-                ...authHeader,
-                Accept: 'application/json',
+                // ...authHeader,
+                // Accept: 'application/json',
             },
             body: JSON.stringify(editedObject)
         }).then(data => data.json())
