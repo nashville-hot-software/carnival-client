@@ -14,10 +14,6 @@ const CustomerCard = props => {
 //     }
 //   };
 
-  useEffect(() => {
-    console.log(customer)
-  }, []);
-
   return (
     <>
         <div onClick={() => props.history.push(`/customers/${customer.id}`)} className="customer-card--container">
