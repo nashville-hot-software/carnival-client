@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom"
 import API from "../../api/dataManager.js"
-import SaleCard from "../sale/SaleCard.js"
+import SaleCard from "./card.js"
 
-const SaleList = props => {
+const Sales = props => {
 
 
     const [sales, setSales] = useState([]);
@@ -30,7 +30,7 @@ const SaleList = props => {
                     <h2>Sale</h2>
                     <div>
                         {sales.slice(0,20).map((item, id) => (
-                            <SaleCard key={id} item={item} {...props} />
+                            <SaleCard key={id} item={item} getSales={getSales}{...props} />
                         ))}
                     </div>
                 </div>
@@ -40,4 +40,4 @@ const SaleList = props => {
         </>
     )
 }
-export default SaleList;
+export default Sales;
