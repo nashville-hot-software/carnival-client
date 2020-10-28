@@ -1,21 +1,21 @@
-import ApplicationViews from './components/ApplicationViews'
+import ApplicationViews from './components/ApplicationViews.js'
 import NavBar from './components/navbar/Navbar.js'
+import React from 'react'
+function App(){
 
-function App() {
 
 
-
-  const isAuthenticated = () => sessionStorage.getItem("Active User Id") !== null;
-  const [hasUser, setHasUser] = useState(isAuthenticated());
-  const setUser = (userId, token) => {
-    sessionStorage.setItem("Active User Id", JSON.stringify(userId));
-    sessionStorage.setItem("Token", JSON.stringify(token));
-    setHasUser(isAuthenticated());
-  }
-  const clearUser = () => {
-    sessionStorage.clear();
-    setHasUser(isAuthenticated());
-  }
+  // const isAuthenticated = () => sessionStorage.getItem("Active User Id") !== null;
+  // const [hasUser, setHasUser] = useState(isAuthenticated());
+  // const setUser = (userId, token) => {
+  //   sessionStorage.setItem("Active User Id", JSON.stringify(userId));
+  //   sessionStorage.setItem("Token", JSON.stringify(token));
+  //   setHasUser(isAuthenticated());
+  // }
+  // const clearUser = () => {
+  //   sessionStorage.clear();
+  //   setHasUser(isAuthenticated());
+  // }
 
 
 
