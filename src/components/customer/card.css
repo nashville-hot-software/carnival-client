@@ -1,4 +1,8 @@
-.customer-card--name:hover {
+.customer-card--container {
+    border-bottom: 1px solid gray;
+}
+.customer-card--container:hover {
+    border-bottom: 1px solid rgba(255, 125, 4, 0.801);
     cursor: pointer;
     color: rgba(255, 125, 4, 0.801);
 }
