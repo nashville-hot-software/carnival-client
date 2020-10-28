@@ -5,15 +5,18 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 60px;
+    border-bottom: black;
 }
 
 .headerBannerTwo {
     display: flex;
     justify-content: flex-end;
+    border-bottom: black;
 }
 
 .nav-list {
     display: flex;
+    margin-right: 10%;
 }
 
 ul li {
@@ -21,7 +24,7 @@ ul li {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 20px;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 ul li:hover {
     color: rgba(255, 125, 4, 0.801);
