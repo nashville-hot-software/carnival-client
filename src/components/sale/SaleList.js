@@ -1,23 +1,14 @@
 
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import DashBoard from "../components/dashboard/DashBoard.js"
 import { Route, Redirect } from "react-router-dom"
 import API from "../../api/dataManager.js"
 import SaleCard from "../sale/SaleCard.js"
 const SaleList = props => {
-=======
-// import React, { useState, useEffect } from "react";
-// import DashBoard from "../components/dashboard/DashBoard.js"
-// import { Route, Redirect } from "react-router-dom"
-// import API from ""
-// const SaleList = props => {
->>>>>>> main
 
 
 //     const [sales, setSales] = useState([]);
 
-<<<<<<< HEAD
     const getSales = () => {
         // if((isAuthenticated())){
         // }
@@ -48,36 +39,3 @@ const SaleList = props => {
     )
 }
 export default  SaleList;
-=======
-//     const getBags = () => {
-//         // if((isAuthenticated())){
-
-//         // }
-//                  API.getAll("bags").then((response) => {
-//                     setBags(response);
-//                 });
-//     };
-
-//     useEffect(() => {
-//         getBags();
-//     }, []);
-
-//     return (
-//         <>
-//            <div >
-//             <div>
-//                 <h2>Your Sale</h2>
-//                 <div>
-//                     {bags.map(((sale, id) => (
-//                         <SaleCard  key={id} sale={sale} {...props} />
-//                     )))}
-//                 </div>
-//             </div>
-//         </div>
-        
-         
-//         </>
-//     )
-// }
-// export default ApplicationViews;
->>>>>>> main
