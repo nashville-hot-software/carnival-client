@@ -12,7 +12,7 @@ const NavBar = props => {
         Carnival!
       </div>
       <div className="headerBannerTwo">
-        <ul>
+        <ul className="nav-list">
             <a><li>Employees</li></a>
             <a><li>Customers</li></a>
             <a><li>Dealerships</li></a>
