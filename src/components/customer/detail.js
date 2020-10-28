@@ -30,8 +30,8 @@ const CustomerDetails = props => {
         {customer !== undefined ? (
             <div className="customer-details--container">
                 <h2 className="customer-details--name">{`${customer.first_name} ${customer.last_name}`}</h2>
-                <p className="customer-details--email">{customer.email}</p>
-                <p className="customer-details--phone">{customer.phone}</p>
+                <p className="customer-details--email"><strong>Email:</strong> {customer.email}</p>
+                <p className="customer-details--phone"><strong>Phone:</strong> {customer.phone}</p>
             </div>
         ) : null}
     </>

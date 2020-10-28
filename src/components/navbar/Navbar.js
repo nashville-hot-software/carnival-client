@@ -13,6 +13,7 @@ const NavBar = props => {
       </div>
       <div className="headerBannerTwo">
         <ul className="nav-list">
+            <a href="/"><li>Dashboard</li></a>
             <a><li>Employees</li></a>
             <a><li>Customers</li></a>
             <a><li>Dealerships</li></a>

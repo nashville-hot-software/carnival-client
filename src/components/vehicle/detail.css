@@ -1,0 +1,19 @@
+.vehicle-details--container {
+    border: 3px solid black;
+    border-radius: 8px;
+    max-width: 270px;
+    padding-left: 20px;
+    margin: 50px auto;
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+}
