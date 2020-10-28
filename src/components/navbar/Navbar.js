@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-// import "./NavBar.css";
+import "./nav.css";
 
 const NavBar = props => {
   const hasUser = props.hasUser;
@@ -9,7 +9,7 @@ const NavBar = props => {
   return (
     <header className="header">
       <div className="headerBannerOne">
-        <h1>Carnival!</h1>
+        Carnival!
       </div>
       <div className="headerBannerTwo">
         <ul>
