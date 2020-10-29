@@ -32,7 +32,7 @@ let API = {
     },
     //an Expand
     //(https://localhost:5001/api/v1/resource/1?includes=secondResource)
-    PostData(resource, newObj) {
+    PostData:(resource, newObj) => {
         const authHeader = createAuthHeaders()
         return fetch(`${baseUrl}/${resource}`, {
             method: "POST",
@@ -44,7 +44,7 @@ let API = {
         }).then(response => response.json())
     },
 
-    deleteUserData(resource, Id) {
+    deleteUserData:(resource, Id) => {
         const authHeader = createAuthHeaders()
         return fetch(`${baseUrl}/${resource}/${Id}`, {
             method: "DELETE",
@@ -52,7 +52,7 @@ let API = {
         }).then(response => response.json())
 
     },
-    update(editedObject, database) {
+    update:(editedObject, database) => {
         const authHeader = createAuthHeaders()
         return fetch(`${baseUrl}/${database}/${editedObject.id}`, {
             method: "PUT",
