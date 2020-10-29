@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import VehicleManager from "../../api/dataManager";
+// import VehicleManager from "../../api/dataManager";
 import "./card.css"
 
 const VehicleCard = props => {

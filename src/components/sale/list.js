@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom"
-import API from "../../api/dataManager.js"
+import SaleManager from "../../api/dataManager.js"
 import SaleCard from "./card.js"
+import './sale.css'
 
 const Sales = props => {
 
@@ -12,7 +13,7 @@ const Sales = props => {
     const getSales = () => {
         // if((isAuthenticated())){
         // }
-        API.getAll("sales").then((response) => {
+        SaleManager.getAll("sales").then((response) => {
             setSales(response);
             console.log(response)
         });
@@ -25,18 +26,11 @@ const Sales = props => {
 
     return (
         <>
-            <div >
-                <div>
-                    <h2>Sale</h2>
-                    <div>
-                        {sales.slice(0,20).map((item, id) => (
-                            <SaleCard key={id} item={item} getSales={getSales}{...props} />
-                        ))}
-                    </div>
-                </div>
+            <div className="salesContainer">
+                {sales.slice(0, 20).map((item, id) => (
+                    <SaleCard key={id} item={item} getSales={getSales}{...props} />
+                ))}
             </div>
-
-
         </>
     )
 }
