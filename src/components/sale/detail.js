@@ -11,6 +11,7 @@ const SaleDetails = props => {
         .then(response => {
             setSale(response)
         })
+        
   }
 
   useEffect(() => {
