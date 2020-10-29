@@ -1,0 +1,10 @@
+.salesContainer {
+    border: 3px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 270px;
+    max-width: 270px;
+    max-height: 250px;
+    overflow: scroll;
+    /* margin: 20px auto; */
+}
