@@ -21,7 +21,7 @@ const ApplicationViews = props => {
                 return <VehicleDetails vehicleId={parseInt(props.match.params.vehicleId)} {...props} />
             }}/>
             <Route exact path="/sales/:saleId(\d+)" render={props => {
-                return <SaleDetails vehicleId={parseInt(props.match.params.saleId)} {...props} />
+                return <SaleDetails saleId={parseInt(props.match.params.saleId)} {...props} />
             }}/>
         </>
     )

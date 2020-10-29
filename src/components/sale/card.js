@@ -3,12 +3,12 @@ import React from "react";
 // import { makeStyles } from '@material-ui/core/styles';
 // import Paper from '@material-ui/core/Paper';
 // import Grid from '@material-ui/core/Grid';
-
+import './card.css'
 const SaleCard = (props) => {
     
       return (
-        <div onClick={() => props.history.push(`/sales/${sales.id}`)} className="sale-card--container">
-        <h2 className="sale-card--name">{`${sale.sale_type.make} ${sale.sale_type.model}`}</h2>
+        <div onClick={() => props.history.push(`/sales/${props.item.id}`)} className="sale-card--container">
+        <h2 className="sale-card--name">{`${props.item.price} ${props.item.purchase_date}`}</h2>
     </div>
       );
     

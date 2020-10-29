@@ -27,7 +27,7 @@ const DashBoard = props => {
             <h2>Customers</h2>
             <Customers {...props} />
           </div>
-          <div className="Sales--container">
+          <div className="sales--container">
             <h2>Sale</h2>
             <Sales {...props} />
           </div>
