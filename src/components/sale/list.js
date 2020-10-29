@@ -13,7 +13,7 @@ const Sales = props => {
     const getSales = () => {
         // if((isAuthenticated())){
         // }
-        SaleManager.getAll("sales").then((response) => {
+        SaleManager.getAll("sales",20).then((response) => {
             setSales(response);
             console.log(response)
         });
