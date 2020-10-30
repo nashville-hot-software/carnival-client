@@ -1,7 +1,7 @@
 
 
 .sale-card--container {
-    border-bottom: 1px solid black;
+   
 }
 .sale-card--container:hover {
     border-bottom: 1px solid rgba(255, 125, 4, 0.801);
