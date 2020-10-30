@@ -1,15 +1,40 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-// import { makeStyles } from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-// import Grid from '@material-ui/core/Grid';
+import { Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import './card.css'
+
 const SaleCard = (props) => {
+  
+
     
       return (
         <div onClick={() => props.history.push(`/sales/${props.item.id}`)} className="sale-card--container">
-        <h2 className="sale-card--name">{`${props.item.price} ${props.item.purchase_date}`}</h2>
+<div className={props.classes.root}>
+      <Grid  container wrap="nowrap" container spacing={1}>
+        <Grid item xs={8} sm={6}>
+          <Paper className={`sale-card--name ${props.classes.paper}`}>{props.item.invoice_number}{" "}</Paper>
+        </Grid>
+        <Grid item xs={8} sm={10}>
+          <Paper className={`sale-card--name ${props.classes.paper}`}>{`${props.item.purchase_date}`}</Paper>
+        </Grid>
+        <Grid item xs={6} sm={4}>
+          <Paper className={`sale-card--name ${props.classes.paper}`}>Vehicle</Paper>
+        </Grid>
+        <Grid item xs={6} sm={4}>
+          <Paper className={`sale-card--name ${props.classes.paper}`}>{props.item.sales_type.name}</Paper>
+        </Grid>
+        <Grid item xs={6} sm={4}>
+          <Paper className={`sale-card--name ${props.classes.paper}`}>{props.item.price} </Paper>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper className={`sale-card--name ${props.classes.paper}`}></Paper>
+        </Grid>
+      </Grid>
     </div>
+</div>
+    
       );
     
 };
@@ -42,21 +67,6 @@ export default SaleCard;
 
 
 // ----------------- This Code is for the card look at later 10/28/20
-// //         <div className={classes.root}>
-        
-// </div>
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing(2),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   },
-// }));
-//   const classes = useStyles();
 
 {/* <Grid container spacing={3}>
 <Grid item xs={12}>
