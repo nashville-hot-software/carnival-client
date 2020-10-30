@@ -50,10 +50,7 @@ const classes2 = useStyles2();
             <Vehicles {...props} />
                 </CardContent>
             </Card>
-                
-
           </div>
-
           <div className="customers--container">
           <Card className={classes2.root}>
                 <CardContent>
