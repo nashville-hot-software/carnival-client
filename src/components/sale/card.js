@@ -14,7 +14,7 @@ const SaleCard = (props) => {
 <div className={props.classes.root}>
       <Grid  container wrap="nowrap" container spacing={1}>
         <Grid item xs={8} sm={6}>
-          <Paper className={`sale-card--name ${props.classes.paper}`}>{props.item.invoice_number}{" "}</Paper>
+          <Paper className={`sale-card--name ${props.classes.paper}`}>{`#${props.item.invoice_number}`}{" "}</Paper>
         </Grid>
         <Grid item xs={8} sm={10}>
           <Paper className={`sale-card--name ${props.classes.paper}`}>{`${props.item.purchase_date}`}</Paper>
@@ -26,7 +26,7 @@ const SaleCard = (props) => {
           <Paper className={`sale-card--name ${props.classes.paper}`}>{props.item.sales_type.name}</Paper>
         </Grid>
         <Grid item xs={6} sm={4}>
-          <Paper className={`sale-card--name ${props.classes.paper}`}>{props.item.price} </Paper>
+          <Paper className={`sale-card--name ${props.classes.paper}`}>{`$${props.item.price}`} </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={`sale-card--name ${props.classes.paper}`}></Paper>
