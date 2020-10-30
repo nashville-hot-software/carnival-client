@@ -1,12 +1,8 @@
 .salesContainer {
-    /* border: 3px solid black; */
-    box-shadow: 2px 4px 7px 0 gray;
-    border-radius: 8px;
-    padding: 20px 15px;
-    min-width: 270px;
-    min-width: 540px;
+    padding: 10px;
+    min-width: 600px;
+    max-width: 600px;
     max-height: 250px;
     overflow: scroll;
-    background-color: rgba(240, 240, 240, 0.74);
     /* margin: 20px auto; */
 }
