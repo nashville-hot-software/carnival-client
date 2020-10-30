@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import VehicleManager from "../../api/dataManager";
 import "./card.css"
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import Modal from 'react-bootstrap/Modal';
 // import closeButton from 'react-bootstrap/closeButton';
