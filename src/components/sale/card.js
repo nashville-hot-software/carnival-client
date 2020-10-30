@@ -8,8 +8,10 @@ const SaleCard = (props) => {
     
       return (
         <div onClick={() => props.history.push(`/sales/${props.item.id}`)} className="sale-card--container">
-        <h2 className="sale-card--name">{`${props.item.price} ${props.item.purchase_date}`}</h2>
-    </div>
+          <div className="customer-name">{`${props.item.customer.first_name} ${props.item.customer.last_name}`}</div>
+          <div className="customer-name">{`$${props.item.price}`}</div>
+          <div className="customer-name">{`Purchase Date: ${props.item.purchase_date}`}</div>
+        </div>
       );
     
 };

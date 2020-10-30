@@ -22,7 +22,7 @@ const SaleDetails = props => {
     <>
         {sale !== undefined ? (
             <div className="sale-details--container">
-                <h2 className="sale-details--id">{`${sale.id}`}</h2>
+                <h2>Sale:</h2>
                 <p className="sale-details--Price"><strong>Price:</strong> ${`${sale.price}`}</p>
                 <p className="sale-details--Deposit"><strong>Deposit:</strong> ${`${sale.deposit}`}</p>
                 <p className="sale-details--PurchaseDate"><strong>Purchase Date:</strong> ${`${sale.purchase_date}`}</p>
