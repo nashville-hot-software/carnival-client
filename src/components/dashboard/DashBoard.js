@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import { Route, Redirect } from "react-router-dom"
 import ActionPieChart from '../charts/PieChart'
 import "./DashBoard.css"
@@ -7,7 +7,6 @@ import Sales from "../sale/list.js"
 import Vehicles from "../vehicle/list.js"
 
 const DashBoard = props => {
-
     
     return (
       <>
