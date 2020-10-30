@@ -32,6 +32,9 @@ const NavBar = props => {
           <Nav.Item>
             <Nav.Link className="nav-item" eventKey="link-3">Vehicles</Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link className="nav-item" href="/dealerships" eventKey="link-4">Dealerships</Nav.Link>
+          </Nav.Item>
         </Nav>
       </div>
 
