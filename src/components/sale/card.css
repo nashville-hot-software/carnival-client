@@ -1,7 +1,7 @@
 
 
 .sale-card--container {
-   
+    border-bottom: 1px solid black;
 }
 .sale-card--container:hover {
     border-bottom: 1px solid rgba(255, 125, 4, 0.801);
@@ -11,6 +11,7 @@
 
 .sale-card--name {
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    color:#33475B !important;
 }
