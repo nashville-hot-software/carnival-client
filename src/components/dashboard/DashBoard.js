@@ -19,16 +19,16 @@ const DashBoard = props => {
         
         <div className="dashboard-row--2">
           <div className="vehicles--container">
-            <h2>Vehicles</h2>
+            <h2 className="label">Vehicles</h2>
             <Vehicles {...props} />
           </div>
 
           <div className="customers--container">
-            <h2>Customers</h2>
+            <h2 className="label">Customers</h2>
             <Customers {...props} />
           </div>
           <div className="sales--container">
-            <h2>Sale</h2>
+            <h2 className="label">Sale</h2>
             <Sales {...props} />
           </div>
         </div>
