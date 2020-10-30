@@ -1,12 +1,9 @@
 .vehiclesContainer {
-    /* border: 3px solid black; */
-    border-radius: 8px;
-    box-shadow: 2px 4px 7px 0 gray;
-    padding: 10px 15px;
+    padding: 10px;
     min-width: 270px;
     max-width: 270px;
     max-height: 250px;
     overflow: scroll;
-    background-color: rgba(240, 240, 240, 0.74);
     /* margin: 20px auto; */
+    color:'#33475B'
 }
