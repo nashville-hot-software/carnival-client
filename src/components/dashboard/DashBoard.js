@@ -50,10 +50,7 @@ const DashBoard = props => {
               <Vehicles {...props} />
             </CardContent>
           </Card>
-
-
         </div>
-
         <div className="customers--container">
           <Card className={classes2.root}>
             <CardContent>
@@ -66,7 +63,6 @@ const DashBoard = props => {
           <Card className={classes2.root}>
             <CardContent>
               <h2 className={classes2.title}>Recent Sales</h2>
-
               <Sales {...props} />
             </CardContent>
           </Card>
