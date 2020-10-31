@@ -9,7 +9,7 @@ const Customers = props => {
   const [customers, setCustomers] = useState([]);
 
   const getAllCustomers = () => {
-    CustomerManager.getAll("customers",20).then(customers => {
+    CustomerManager.getAll("customers", "limit", 20).then(customers => {
       setCustomers(customers);
     });
   };
