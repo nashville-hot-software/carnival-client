@@ -1,14 +1,15 @@
 .customer-card--container {
     border-bottom: 1px solid black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    margin-bottom: 15px;
 }
 .customer-card--container:hover {
-    border-bottom: 1px solid rgba(255, 125, 4, 0.801);
     cursor: pointer;
     color: rgba(255, 125, 4, 0.801);
 }
 
-.customer-card--name {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    font-size: 18px;
+.customer-card--saleInvoice {
+    margin-bottom: 5px;
 }

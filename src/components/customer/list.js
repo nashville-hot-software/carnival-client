@@ -9,8 +9,10 @@ const Customers = props => {
   const [customers, setCustomers] = useState([]);
 
   const getAllCustomers = () => {
-    CustomerManager.getAll("customers", "limit", 20).then(customers => {
-      setCustomers(customers);
+    // Hitting sales endpoint here as the data contains the most-recent
+    // customer data that I need for this customer list
+    CustomerManager.getAll("sales", "limit", 20).then(sales => {
+      setCustomers(sales);
     });
   };
 
