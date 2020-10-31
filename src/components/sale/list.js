@@ -47,9 +47,7 @@ const Sales = props => {
     const [sales, setSales] = useState([]);
 
     const getSales = () => {
-        // if((isAuthenticated())){
-        // }
-        SaleManager.getAll("sales", 20).then((response) => {
+        SaleManager.getAll("sales", "limit", 20).then((response) => {
             setSales(response);
             console.log(response)
         });
