@@ -1,5 +1,6 @@
 .vehiclesContainer {
     padding: 10px;
+    min-height: 250px;
     min-width: 270px;
     max-width: 270px;
     max-height: 250px;

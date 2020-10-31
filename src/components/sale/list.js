@@ -15,6 +15,7 @@ const Sales = props => {
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
+            maxHeight: '250px'
             
         },
         paper: {
