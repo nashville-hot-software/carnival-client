@@ -3,12 +3,12 @@ import React, { useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom"
 import SaleManager from "../../api/dataManager.js"
 import SaleCard from "./card.js"
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import './sale.css'
+
 
 const Sales = props => {
 
@@ -24,7 +24,7 @@ const Sales = props => {
         },
     }));
     const classes = useStyles();
-
+//---------------------------------- useStyles2 styles the sales card on the dashboard
     const useStyles2 = makeStyles({
         root: {
             minWidth: 275,
@@ -42,10 +42,23 @@ const Sales = props => {
             marginBottom: 12,
         },
     });
+//---------------------------------- useStyles2 styles the sales card on the dashboard
+
+    
+      const useStyles3 = makeStyles({
+        table: {
+          minWidth: 700,
+        },
+      });  
 
     const classes2 = useStyles2();
-    const [sales, setSales] = useState([]);
 
+
+
+    // State variable that handles storing the list of sales 
+    const [sales, setSales] = useState([]);
+    
+    // Function that calls the (SalesManager) datamanager to fetch sales data from the database
     const getSales = () => {
         // if((isAuthenticated())){
         // }
