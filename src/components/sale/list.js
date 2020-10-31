@@ -15,8 +15,8 @@ const Sales = props => {
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
-            maxHeight: '250px'
-            
+            maxHeight: '250px',
+            backgroundColor: '#F5F8FA'
         },
         paper: {
             padding: theme.spacing(1),
