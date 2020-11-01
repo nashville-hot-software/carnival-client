@@ -16,7 +16,7 @@ const SaleCard = (props) => {
       return (
         <>
           <div onClick={() => handleShow()} className="sale-card--container">
-          <div className={props.classes.root}>
+          <div>
          
           </div>
           </div>
