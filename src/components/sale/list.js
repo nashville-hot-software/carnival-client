@@ -14,14 +14,15 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Modal from "react-bootstrap/Modal";
 
 const Sales = (props) => {
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
-            maxHeight: '250px',
-            backgroundColor: '#F5F8FA',
-             overflow: "auto"
+            maxHeight: "250px",
+            backgroundColor: "#F5F8FA",
+            overflow: "auto",
         },
         paper: {
             padding: theme.spacing(1),
@@ -29,8 +30,8 @@ const Sales = (props) => {
             color: theme.palette.text.secondary,
         },
         tableHeader: {
-            position: "fixed"
-        }
+            position: "fixed",
+        },
     }));
     const classes = useStyles();
     //---------------------------------- useStyles2 styles the sales card on the dashboard
@@ -54,15 +55,12 @@ const Sales = (props) => {
 
     const useStyles3 = makeStyles({
         table: {
-            minWidth: 700
+            minWidth: 700,
         },
-        tableBody: {
-
-
-        }
+        tableBody: {},
     });
     const classes3 = useStyles3();
-    //------------------------------------- useStyles3 
+    //------------------------------------- useStyles3
     // const classes2 = useStyles2();
 
     const StyledTableCell = withStyles((theme) => ({
@@ -75,7 +73,7 @@ const Sales = (props) => {
         },
     }))(TableCell);
 
-    const StyledTableRow = withStyles((theme) => ({
+   const StyledTableRow = withStyles((theme) => ({
         root: {
             "&:nth-of-type(odd)": {
                 backgroundColor: theme.palette.action.hover,
@@ -85,6 +83,10 @@ const Sales = (props) => {
 
     // State variable that handles storing the list of sales
     const [sales, setSales] = useState([]);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     // Function that calls the (SalesManager) datamanager to fetch sales data from the database
     const getSales = () => {
@@ -98,56 +100,38 @@ const Sales = (props) => {
         getSales();
     }, []);
 
+
     return (
         <>
             {/* <div className="salesContainer"> */}
-                
+
             <TableContainer className={classes.root} component={Paper}>
-                <Table
-                    stickyHeader 
-                    aria-label="customized table"
-                >
+                <Table stickyHeader aria-label="customized table">
                     <TableHead classname={classes.tableHeader}>
                         <TableRow>
-                            <StyledTableCell>#invoice number</StyledTableCell>
-                            <StyledTableCell align="right">purchase_date</StyledTableCell>
-                            <StyledTableCell align="right">vehicle</StyledTableCell>
-                            <StyledTableCell align="right">sale_type</StyledTableCell>
-                            <StyledTableCell align="right">$sale_price</StyledTableCell>
+                            <StyledTableCell align="left">invoice number</StyledTableCell>
+                            <StyledTableCell align="center">purchase date</StyledTableCell>
+                            <StyledTableCell align="center">vehicle</StyledTableCell>
+                            <StyledTableCell align="center">sale type</StyledTableCell>
+                            <StyledTableCell align="center">price</StyledTableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody className={classes3.tableBody} >
+                    <TableBody className={classes3.tableBody}>
                         {sales.map((row) => (
-                            <StyledTableRow key={row.name}>
-                                <StyledTableCell component="th" scope="row">
-                                    {row.name}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                    {row.invoice_number}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">{row.invoice_number}</StyledTableCell>
-                                <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                                <StyledTableCell align="right">
-                                    {row.protein}
-                                </StyledTableCell>
-                            </StyledTableRow>
+                            <>
+                                <SaleCard row={row} {...props} />
+
+                            </>
                         ))}
+
                     </TableBody>
                 </Table>
             </TableContainer>
 
-
-            {sales.slice(0, 20).map((item, id) => (
-                <SaleCard
-                    key={id}
-                    item={item}
-                    getSales={getSales}
-                    // classes={classes}
-                    {...props}
-                />
-            ))}
             {/* </div> */}
         </>
     );
 };
-export default Sales;
+export default Sales
+
+
