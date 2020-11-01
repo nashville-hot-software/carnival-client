@@ -34,32 +34,17 @@ const Sales = (props) => {
         },
     }));
     const classes = useStyles();
-    //---------------------------------- useStyles2 styles the sales card on the dashboard
-    // const useStyles2 = makeStyles({
-    //     root: {
-    //         minWidth: 275,
-    //     },
-    //     bullet: {
-    //         display: "inline-block",
-    //         margin: "0 2px",
-    //         transform: "scale(0.8)",
-    //     },
-    //     title: {
-    //         fontSize: 14,
-    //     },
-    //     pos: {
-    //         marginBottom: 12,
-    //     },
-    // });
-    //---------------------------------- useStyles2 styles the sales card on the dashboard
+    //---------------------------------- useStyles effects the sales card on the dashboard
 
-    const useStyles3 = makeStyles({
+    //---------------------------------- useStyles2 effects the sales Grid on the dashboard
+
+    const useStyles2 = makeStyles({
         table: {
-            minWidth: 700,
+            minWidth: 800,
         },
         tableBody: {},
     });
-    const classes3 = useStyles3();
+    const classes3 = useStyles2();
     //------------------------------------- useStyles3
     // const classes2 = useStyles2();
 
