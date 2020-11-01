@@ -20,42 +20,50 @@ const Sales = (props) => {
         root: {
             flexGrow: 1,
             maxHeight: '250px',
-            backgroundColor: '#F5F8FA'
+            backgroundColor: '#F5F8FA',
+             overflow: "auto"
         },
         paper: {
             padding: theme.spacing(1),
             textAlign: "left",
             color: theme.palette.text.secondary,
         },
+        tableHeader: {
+            position: "fixed"
+        }
     }));
     const classes = useStyles();
     //---------------------------------- useStyles2 styles the sales card on the dashboard
-    const useStyles2 = makeStyles({
-        root: {
-            minWidth: 275,
-        },
-        bullet: {
-            display: "inline-block",
-            margin: "0 2px",
-            transform: "scale(0.8)",
-        },
-        title: {
-            fontSize: 14,
-        },
-        pos: {
-            marginBottom: 12,
-        },
-    });
+    // const useStyles2 = makeStyles({
+    //     root: {
+    //         minWidth: 275,
+    //     },
+    //     bullet: {
+    //         display: "inline-block",
+    //         margin: "0 2px",
+    //         transform: "scale(0.8)",
+    //     },
+    //     title: {
+    //         fontSize: 14,
+    //     },
+    //     pos: {
+    //         marginBottom: 12,
+    //     },
+    // });
     //---------------------------------- useStyles2 styles the sales card on the dashboard
 
     const useStyles3 = makeStyles({
         table: {
-            minWidth: 700,
+            minWidth: 700
         },
+        tableBody: {
+
+
+        }
     });
     const classes3 = useStyles3();
-
-    const classes2 = useStyles2();
+    //------------------------------------- useStyles3 
+    // const classes2 = useStyles2();
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -92,52 +100,53 @@ const Sales = (props) => {
 
     return (
         <>
-            <div className="salesContainer">
-         <TableContainer component={Paper}>
-                        <Table
-                            className={classes.table}
-                            aria-label="customized table"
-                        >
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>#invoice number</StyledTableCell>
-                                    <StyledTableCell align="right">purchase_date</StyledTableCell>
-                                    <StyledTableCell align="right">vehicle</StyledTableCell>
-                                    <StyledTableCell align="right">sale_type</StyledTableCell>
-                                    <StyledTableCell align="right">$sale_price</StyledTableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {sales.map((row) => (
-                                    <StyledTableRow key={row.name}>
-                                        <StyledTableCell component="th" scope="row">
-                                            {row.name}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="right">
-                                            {row.calories}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                                        <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-                                        <StyledTableCell align="right">
-                                            {row.protein}
-                                        </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-          
-                   
-                        {sales.slice(0, 20).map((item, id) => (
-                            <SaleCard
-                                key={id}
-                                item={item}
-                                getSales={getSales}
-                                classes={classes}
-                                {...props}
-                            />
+            {/* <div className="salesContainer"> */}
+                
+            <TableContainer className={classes.root} component={Paper}>
+                <Table
+                    stickyHeader 
+                    aria-label="customized table"
+                >
+                    <TableHead classname={classes.tableHeader}>
+                        <TableRow>
+                            <StyledTableCell>#invoice number</StyledTableCell>
+                            <StyledTableCell align="right">purchase_date</StyledTableCell>
+                            <StyledTableCell align="right">vehicle</StyledTableCell>
+                            <StyledTableCell align="right">sale_type</StyledTableCell>
+                            <StyledTableCell align="right">$sale_price</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody className={classes3.tableBody} >
+                        {sales.map((row) => (
+                            <StyledTableRow key={row.name}>
+                                <StyledTableCell component="th" scope="row">
+                                    {row.name}
+                                </StyledTableCell>
+                                <StyledTableCell align="right">
+                                    {row.invoice_number}
+                                </StyledTableCell>
+                                <StyledTableCell align="right">{row.invoice_number}</StyledTableCell>
+                                <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+                                <StyledTableCell align="right">
+                                    {row.protein}
+                                </StyledTableCell>
+                            </StyledTableRow>
                         ))}
-                    </div>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+
+            {sales.slice(0, 20).map((item, id) => (
+                <SaleCard
+                    key={id}
+                    item={item}
+                    getSales={getSales}
+                    // classes={classes}
+                    {...props}
+                />
+            ))}
+            {/* </div> */}
         </>
     );
 };
