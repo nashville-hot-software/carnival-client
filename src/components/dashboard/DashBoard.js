@@ -14,7 +14,8 @@ const DashBoard = props => {
   const useStyles2 = makeStyles({
     root: {
         minWidth: 275,
-        color:'#33475B'
+        color:'#33475B',
+        backgroundColor: '#F5F8FA'
     },
     bullet: {
         display: 'inline-block',
