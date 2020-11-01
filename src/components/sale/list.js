@@ -19,6 +19,8 @@ const Sales = (props) => {
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
+            maxHeight: '250px',
+            backgroundColor: '#F5F8FA'
         },
         paper: {
             padding: theme.spacing(1),
@@ -78,9 +80,7 @@ const Sales = (props) => {
 
     // Function that calls the (SalesManager) datamanager to fetch sales data from the database
     const getSales = () => {
-        // if((isAuthenticated())){
-        // }
-        SaleManager.getAll("sales", 20).then((response) => {
+        SaleManager.getAll("sales", "limit", 20).then((response) => {
             setSales(response);
             console.log(response);
         });
