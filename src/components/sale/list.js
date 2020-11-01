@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Route, Redirect } from "react-router-dom";
 import SaleManager from "../../api/dataManager.js";
 import SaleCard from "./card.js";
-import Card from "@material-ui/core/Card";
-// import Grid from '@material-ui/core/Grid';
-import CardContent from "@material-ui/core/CardContent";
 import "./sale.css";
 import Table from "@material-ui/core/Table";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -14,9 +10,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Modal from "react-bootstrap/Modal";
 
 const Sales = (props) => {
+
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
@@ -33,6 +29,7 @@ const Sales = (props) => {
             position: "fixed",
         },
     }));
+
     const classes = useStyles();
     //---------------------------------- useStyles effects the sales card on the dashboard
 
@@ -58,20 +55,8 @@ const Sales = (props) => {
         },
     }))(TableCell);
 
-   const StyledTableRow = withStyles((theme) => ({
-        root: {
-            "&:nth-of-type(odd)": {
-                backgroundColor: theme.palette.action.hover,
-            },
-        },
-    }))(TableRow);
-
     // State variable that handles storing the list of sales
     const [sales, setSales] = useState([]);
-
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     // Function that calls the (SalesManager) datamanager to fetch sales data from the database
     const getSales = () => {
