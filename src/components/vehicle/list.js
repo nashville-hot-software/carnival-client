@@ -9,7 +9,8 @@ const Vehicles = props => {
   const [vehicles, setVehicles] = useState([]);
 
   const getAllVehicles = () => {
-    VehicleManager.getAll("vehicles",20).then(response => {
+    VehicleManager.getAll("vehicles","popular_models","True").then(response => {
+      console.log(response)
       setVehicles(response);
     });
   };
