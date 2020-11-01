@@ -8,10 +8,12 @@ import Paper from "@material-ui/core/Paper";
 import Modal from "react-bootstrap/Modal";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 const SaleCard = (props) => {
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: theme.palette.common.black,
@@ -29,23 +31,30 @@ const SaleCard = (props) => {
         },
     },
 }))(TableRow);
+
   return (
     <>
       <StyledTableRow onClick={() => handleShow()} key={props.row.name}>
-        <StyledTableCell align="center">{props.row.invoice_number}</StyledTableCell>
+        <StyledTableCell align="center">#{props.row.invoice_number}</StyledTableCell>
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
         <StyledTableCell align="center">{props.row.vehicle.vehicle_type.make} {props.row.vehicle.vehicle_type.model}</StyledTableCell>
         <StyledTableCell align="center">{props.row.sales_type.name}</StyledTableCell>
         <StyledTableCell align="center">{`$${props.row.price}`}</StyledTableCell>
       </StyledTableRow>
+
       <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Sale</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{`${props.row.customer.first_name} ${props.row.customer.last_name}`}</Modal.Body>
-        <Modal.Body>{`$${props.row.price}`}</Modal.Body>
-        <Modal.Body>{`Purchase Date: ${props.row.purchase_date}`}</Modal.Body>
-        <Modal.Footer></Modal.Footer>
+        <Modal.Body><strong>Invoice:</strong> {`#${props.row.invoice_number}`}</Modal.Body>
+        <Modal.Body><strong>Customer:</strong> {`${props.row.customer.first_name} ${props.row.customer.last_name}`}</Modal.Body>
+        <Modal.Body><strong>Dealership:</strong> {`${props.row.dealership.business_name}`}</Modal.Body>
+        <Modal.Body><strong>State:</strong> {`${props.row.dealership.state}`}</Modal.Body>
+        <Modal.Body><strong>Price:</strong> {`$${props.row.price}`}</Modal.Body>
+        <Modal.Body><strong>Deposit:</strong> {`$${props.row.deposit}`}</Modal.Body>
+        <Modal.Body><strong>Payment Method:</strong> {`${props.row.payment_method}`}</Modal.Body>
+        <Modal.Body><strong>Purchase Date:</strong> {`${props.row.purchase_date}`}</Modal.Body>
+        <Modal.Body><strong>Pickup Date:</strong> {`${props.row.pickup_date}`}</Modal.Body>
       </Modal>{" "}
     </>
   );
