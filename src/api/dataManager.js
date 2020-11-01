@@ -13,9 +13,9 @@ let API = {
         }).then(data => data.json())
     },
     //https://localhost:5001/api/v1/Resource
-    getAll: (resource,limit) => {
+    getAll: (resource, queryParam, value) => {
         const authHeader = createAuthHeaders()
-        return fetch(`${baseUrl}/${resource}?limit=${limit}`, {
+        return fetch(`${baseUrl}/${resource}?${queryParam}=${value}`, {
             method: "GET",
             // headers: authHeader
         }).then(data => data.json())
