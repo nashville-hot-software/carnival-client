@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import { Route, Redirect } from "react-router-dom"
 import ActionPieChart from '../charts/PieChart'
 import "./DashBoard.css"
@@ -18,59 +18,58 @@ const DashBoard = props => {
         backgroundColor: '#F5F8FA'
     },
     bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 30,
-        fontFamily: 'Roboto',
-        fontWeight: 500,
-        color:'#33475B'
+      fontSize: 30,
+      fontFamily: 'Roboto',
+      fontWeight: 500,
+      color: '#33475B'
 
     },
     pos: {
-        marginBottom: 12,
+      marginBottom: 12,
     },
-});
-const classes2 = useStyles2();
+  });
+  const classes2 = useStyles2();
 
-    return (
-      <>
-        {/* <ActionPieChart/> */}
+  return (
+    <>
+      {/* <ActionPieChart/> */}
 
-        <div className="dashboard-row--1">
-          hello
+      <div className="dashboard-row--1">
+        hello
         </div>
-        
-        <div className="dashboard-row--2">
-          <div className="vehicles--container">
-          <Card className={classes2.root}>
-                <CardContent>
-            <h2>Vehicles</h2>
-            <Vehicles {...props} />
-                </CardContent>
-            </Card>
-          </div>
-          <div className="customers--container">
-          <Card className={classes2.root}>
-                <CardContent>
-            <h2>Customers</h2>
-            <Customers {...props} />
-                </CardContent>
-            </Card>
-          </div>
-          <div className="sales--container">
-          <Card className={classes2.root}>
-                <CardContent>
-            <h2 className={classes2.title}>Recent Sales</h2>
 
-            <Sales {...props} />
-                </CardContent>
-            </Card>
-          </div>
+      <div className="dashboard-row--2">
+        <div className="vehicles--container">
+          <Card className={classes2.root}>
+            <CardContent>
+              <h2>Vehicles</h2>
+              <Vehicles {...props} />
+            </CardContent>
+          </Card>
         </div>
-      </>
-    )
+        <div className="customers--container">
+          <Card className={classes2.root}>
+            <CardContent>
+              <h2>Customers</h2>
+              <Customers {...props} />
+            </CardContent>
+          </Card>
+        </div>
+        <div className="sales--container">
+          <Card className={classes2.root}>
+            <CardContent>
+              <h2 className={classes2.title}>Recent Sales</h2>
+              <Sales {...props} />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </>
+  )
 }
 export default DashBoard;
