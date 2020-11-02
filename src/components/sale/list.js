@@ -32,15 +32,14 @@ const Sales = (props) => {
 
     const classes = useStyles();
 
-    const useStyles3 = makeStyles({
+    const useStyles2 = makeStyles({
         table: {
-            minWidth: 700,
-            boxShadow: '2px 4px 7px 0 gray'
+            minWidth: 800,
         },
         tableBody: {},
     });
-    
-    const classes3 = useStyles3();
+    const classes3 = useStyles2();
+
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
