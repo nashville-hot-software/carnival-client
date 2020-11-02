@@ -35,6 +35,7 @@ const Sales = (props) => {
     const useStyles3 = makeStyles({
         table: {
             minWidth: 700,
+            boxShadow: '2px 4px 7px 0 gray'
         },
         tableBody: {},
     });
