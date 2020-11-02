@@ -34,11 +34,11 @@ const Sales = (props) => {
 
     const useStyles2 = makeStyles({
         table: {
-            minWidth: 800,
+            minWidth: 700,
         },
         tableBody: {},
     });
-    const classes3 = useStyles2();
+    const classes2 = useStyles2();
 
 
     const StyledTableCell = withStyles((theme) => ({
@@ -82,7 +82,7 @@ const Sales = (props) => {
                             <StyledTableCell align="center">price</StyledTableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody className={classes3.tableBody}>
+                    <TableBody className={classes2.tableBody}>
                         {sales.map((row) => (
                             <>
                                 <SaleCard row={row} {...props} />
