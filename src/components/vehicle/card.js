@@ -27,7 +27,7 @@ const VehicleCard = props => {
     <>
         <div onClick={() => handleShow()} className="vehicle-card--container">
             <h2 className="vehicle-card--name">{`${vehicle.make} ${vehicle.model}`}</h2>
-            <p className="vehicle-card--numberSold"><span className="label">Number Sold:</span> {`${vehicle.vehicles_sold}`}</p>
+            <p className="vehicle-card--numberSold"><span className="label">Vehicles Sold:</span> {`${vehicle.vehicles_sold}`}</p>
         </div>
 
         <Modal centered show={show} onHide={handleClose}>
@@ -36,6 +36,7 @@ const VehicleCard = props => {
           </Modal.Header>
           <Modal.Body><strong>Make:</strong> {vehicle.make}</Modal.Body>
           <Modal.Body><strong>Model:</strong> {vehicle.model}</Modal.Body>
+          <Modal.Body><strong>Vehicles Sold:</strong> {vehicle.vehicles_sold}</Modal.Body>
         </Modal>
     </>
   );
