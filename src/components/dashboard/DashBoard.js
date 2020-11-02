@@ -40,7 +40,7 @@ const DashBoard = props => {
     <>
       {/* <ActionPieChart/> */}
 
-      <div className="dashboard-row--1">
+      <div className={`dashboard-row--1 ${classes2.root}`}>
         hello
         </div>
 
