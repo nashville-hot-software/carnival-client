@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-// import VehicleManager from "../../api/dataManager";
 import "./card.css"
-
-
 import Modal from 'react-bootstrap/Modal';
-// import closeButton from 'react-bootstrap/closeButton';
 
 const VehicleCard = props => {
 
