@@ -27,6 +27,7 @@ const VehicleCard = props => {
     <>
         <div onClick={() => handleShow()} className="vehicle-card--container">
             <h2 className="vehicle-card--name">{`${vehicle.make} ${vehicle.model}`}</h2>
+            <p className="vehicle-card--numberSold"><span className="label">Number Sold:</span> {`${vehicle.vehicles_sold}`}</p>
         </div>
 
         <Modal centered show={show} onHide={handleClose}>
