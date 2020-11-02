@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Route, Redirect } from "react-router-dom"
-import ActionPieChart from '../charts/PieChart'
+import SalesPieChart from '../charts/PieChart'
 import "./DashBoard.css"
 import Customers from "../customer/list.js"
 import Sales from "../sale/list.js"
@@ -38,10 +38,10 @@ const DashBoard = props => {
 
   return (
     <>
-      {/* <ActionPieChart/> */}
 
       <div className={`dashboard-row--1 ${classes2.root}`}>
         hello
+       <SalesPieChart/> 
         </div>
 
       <div className="dashboard-row--2">
