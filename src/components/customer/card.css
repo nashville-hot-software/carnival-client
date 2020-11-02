@@ -18,4 +18,10 @@
 .customer-card--saleInvoice {
     margin-bottom: 5px;
     font-weight: 300;
+    font-size: 16x;
+    color: rgb(102, 102, 102);
+}
+
+.label {
+    margin: 0;
 }
