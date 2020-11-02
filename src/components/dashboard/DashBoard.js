@@ -16,7 +16,7 @@ const DashBoard = props => {
         minWidth: 275,
         color:'#33475B',
         backgroundColor: '#F5F8FA',
-        boxShadow: '2px 4px 6px 1px #cacaca'
+        boxShadow: '2px 2px 4px 1px #cacaca'
     },
     bullet: {
       display: 'inline-block',
