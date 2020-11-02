@@ -15,7 +15,8 @@ const DashBoard = props => {
     root: {
         minWidth: 275,
         color:'#33475B',
-        backgroundColor: '#F5F8FA'
+        backgroundColor: '#F5F8FA',
+        boxShadow: '1px 4px 3px 0 #A9A9A9'
     },
     bullet: {
       display: 'inline-block',
@@ -39,7 +40,7 @@ const DashBoard = props => {
     <>
       {/* <ActionPieChart/> */}
 
-      <div className="dashboard-row--1">
+      <div className={`dashboard-row--1 ${classes2.root}`}>
         hello
         </div>
 
