@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import "./nav.css";
 import Nav from 'react-bootstrap/Nav';
@@ -10,15 +10,9 @@ const NavBar = props => {
   return (
     <header className="header">
       <div className="headerBannerOne">
-        Carnival!
+        Carnival
       </div>
       <div className="headerBannerTwo">
-        {/* <ul className="nav-list">
-            <a href="/"><li>Dashboard</li></a>
-            <a><li>Employees</li></a>
-            <a><li>Customers</li></a>
-            <a><li>Dealerships</li></a>
-        </ul> */}
         <Nav className="nav-list" activeKey="/">
           <Nav.Item>
             <Nav.Link className="nav-item" href="/">Dashboard</Nav.Link>
