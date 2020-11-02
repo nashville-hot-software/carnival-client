@@ -29,12 +29,17 @@ const SaleCard = (props) => {
         "&:nth-of-type(odd)": {
             backgroundColor: theme.palette.action.hover,
         },
+        // borderBottom: '1px solid black',
+        "&:hover": {
+          // borderBottom: "rgba(255, 125, 4, 0.801)",
+          cursor: 'pointer'
+      },
     },
 }))(TableRow);
 
   return (
     <>
-      <StyledTableRow onClick={() => handleShow()} key={props.row.name}>
+      <StyledTableRow onClick={() => handleShow()} className={props.classes} key={props.row.name}>
         <StyledTableCell align="center">#{props.row.invoice_number}</StyledTableCell>
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
         <StyledTableCell align="center">{props.row.vehicle.vehicle_type.make} {props.row.vehicle.vehicle_type.model}</StyledTableCell>
