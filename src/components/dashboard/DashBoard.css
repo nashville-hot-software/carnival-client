@@ -1,13 +1,10 @@
 .dashboard-row--1 {
-    /* border: 3px solid black; */
-    box-shadow: 2px 4px 7px 0 gray;
     border-radius: 8px;
     padding: 100px 250px;
     margin-top: 80px;
     margin-bottom: 40px;
     margin-left: 5%;
     max-width: 250px;
-    background-color: rgba(240, 240, 240, 0.74);
 }
 
 .dashboard-row--2 {

@@ -1,11 +1,10 @@
 .vehicle-card--container {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightgray;
     margin-bottom: 15px;
 }
 .vehicle-card--container:hover {
-    border-bottom: 1px solid rgba(255, 125, 4, 0.801);
+    border-bottom: 2px solid rgba(255, 125, 4, 0.801);
     cursor: pointer;
-    color: rgba(255, 125, 4, 0.801);
 }
 
 .vehicle-card--name {
