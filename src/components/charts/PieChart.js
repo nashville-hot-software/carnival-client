@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import  API from '../../api/dataManager';
 
 
 
@@ -7,7 +8,7 @@ const SalesPieChart = (props) => {
     const [vehicles, setVehicles] = useState([]);
 
     const getAllSales = () => {
-      .getAll("vehicles","popular_models","True").then(response => {
+      API.getAll("vehicles","popular_models","True").then(response => {
         console.log(response)
         setVehicles(response);
       });
@@ -31,6 +32,7 @@ const SalesPieChart = (props) => {
     }
     useEffect(() => {
         filterSales()
+        getAllSales()
     }, []);
 
     return (
@@ -43,6 +45,5 @@ const SalesPieChart = (props) => {
             />
         </div>
     )
-}
 }
 export default SalesPieChart
