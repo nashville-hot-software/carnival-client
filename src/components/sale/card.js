@@ -7,6 +7,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Modal from "react-bootstrap/Modal";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import NumberFormat from 'react-number-format';
+
+
 const SaleCard = (props) => {
 
   const [show, setShow] = useState(false);
@@ -44,7 +47,10 @@ const SaleCard = (props) => {
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
         <StyledTableCell align="center">{props.row.vehicle.vehicle_type.make} {props.row.vehicle.vehicle_type.model}</StyledTableCell>
         <StyledTableCell align="center">{props.row.sales_type.name}</StyledTableCell>
-        <StyledTableCell align="center">{`$${props.row.price}`}</StyledTableCell>
+        {/* <StyledTableCell align="center">{`$${props.row.price}`}</StyledTableCell> */}
+        <StyledTableCell align="center">
+          <NumberFormat value={props.row.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+          </StyledTableCell>
       </StyledTableRow>
 
       <Modal centered show={show} onHide={handleClose}>
