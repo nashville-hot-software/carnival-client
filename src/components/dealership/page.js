@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import DealershipManager from "../../api/dataManager";
-import DealershipDetails from "./detail";
+import Dealerships from "./list";
+import DealershipCard from "./card"
+import Testing from "./test";
 import Modal from 'react-bootstrap/Modal';
-// import "./card.css"
+import AutoCompleteText from "../autocomplete/AutoComplete";
+import "./card.css"
 
 
 const DealershipPage = props => {
@@ -11,12 +14,8 @@ const DealershipPage = props => {
 
   return (
     <>
-        <div className="dealership-info--container">
-            <DealershipDetails {...props} />
-            <h2>Info Here</h2>
-        </div>
         <div className="dealership-list--container">
-            <h2>List Here</h2>
+            <AutoCompleteText items = {Dealerships}/>
         </div>
     </>
   );
