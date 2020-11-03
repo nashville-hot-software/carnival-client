@@ -7,7 +7,7 @@
 }
 .customer-card--container:hover {
     cursor: pointer;
-    border-bottom: 2px solid rgba(255, 125, 4, 0.801);;
+    border-bottom: 2px solid rgba(54, 162, 235, 0.8);
 }
 
 .customer-card--name {
