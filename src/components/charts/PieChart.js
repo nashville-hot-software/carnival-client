@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import API from "../../api/dataManager";
 
 const SalesPieChart = (props) => {
-    const [sales, setSales] = useState([]);
     const [purchaseData, setPurchaseData] = useState();
     const [leaseData, setLeaseData] = useState();
 
     const getAllSales = () => {
+        
+        // Getting all recent sales
         API.getAll("sales", "popular_models", "True").then((response) => {
-            setSales(sales);
             
             let saleCount = [];
             let purchaseCount = [];
@@ -25,26 +26,17 @@ const SalesPieChart = (props) => {
                 }
             })
 
-            console.log(saleCount.length)
-            console.log(purchaseCount.length)
-            console.log(leaseCount.length)
 
-            const purchasePercentage = parseFloat((purchaseCount.length / saleCount.length) * 100).toFixed(2);
-            const leasePercentage = parseFloat((leaseCount.length / saleCount.length) * 100).toFixed(2);
+            const purchasePercentage = parseInt((purchaseCount.length / saleCount.length) * 100);
+            const leasePercentage = parseInt((leaseCount.length / saleCount.length) * 100);
 
             setPurchaseData(purchasePercentage);
             setLeaseData(leasePercentage);
-            
-            console.log(`purchasePercentage: ${purchasePercentage}%, leasePercentage: ${leasePercentage}%`);
-
-            
         });
     };
-    // const filterSales = () => {
-    // const sale = props.sales.filter((st) => st.sale_type_id === 1).length;
-    // const lease = props.sales.filter((st) => st.sale_type_id === 2).length; //using a filter and .length
+
     const data = {
-        labels: ["Sale", "Lease"],
+        labels: ["Sale %", "Lease %"],
         datasets: [
             {
                 label: "Sales Data",
@@ -52,18 +44,11 @@ const SalesPieChart = (props) => {
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.8)", //Red
                     "rgba(54, 162, 235, 0.8)", //Blue
-                ],
-                datalabels: {
-                    labels: {
-                        title: 'test'
-                    }
-                }
-            },
+                ]
+            }
         ],
     };
-    // };
     useEffect(() => {
-        // filterSales();
         getAllSales();
     }, []);
     return (
@@ -71,8 +56,8 @@ const SalesPieChart = (props) => {
 
         <Doughnut
             data={data}
-            width={250}
-            height={250}
+            width={225}
+            height={225}
             options={{ maintainAspectRatio: false }}
         />
 
