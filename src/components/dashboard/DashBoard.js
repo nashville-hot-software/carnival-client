@@ -68,6 +68,8 @@ const DashBoard = props => {
         
           <Card className={classes2.root}>
             <CardContent>
+              <div className="saleMetric--container">
+
               <h2>Sales Metrics</h2>
 
               {saleCount !== undefined ? (
@@ -83,11 +85,12 @@ const DashBoard = props => {
                   <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                 </div>
               ) : null}
-
+              </div>
             </CardContent>
           </Card>
         </div>
       </div>
+              <SalesPieChart/>
 
       <div className="dashboard-row--2">
         <div className="vehicles--container">
