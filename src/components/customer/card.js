@@ -25,7 +25,7 @@ const CustomerCard = props => {
     <>
         <div onClick={() => handleShow()} className="customer-card--container">
           <h2 className="customer-card--name">{`${customer.customer.first_name} ${customer.customer.last_name}`}</h2>
-          <p className="customer-card--saleInvoice">{`Invoice: #${customer.invoice_number}`}</p>
+          <p className="customer-card--saleInvoice"><span className="label">Invoice:</span> {`#${customer.invoice_number}`}</p>
         </div>
 
         <Modal centered show={show} onHide={handleClose}>
