@@ -43,7 +43,7 @@ const DashBoard = props => {
   const [revenue, setRevenue] = useState(0)
    
   const getSales = () => {
-    DataManager.getAll("sales", "sale_count", "True").then(response => {
+    DataManager.getAll("sales", "limit", "20").then(response => {
       console.log(response)
 
       setSaleCount(response.length);
@@ -114,7 +114,7 @@ const DashBoard = props => {
         <div className="vehicles--container">
           <Card className={classes2.root}>
             <CardContent>
-              <h2>Vehicles</h2>
+              <h2>Top Vehicles</h2>
               <Vehicles {...props} />
             </CardContent>
           </Card>
@@ -122,7 +122,7 @@ const DashBoard = props => {
         <div className="customers--container">
           <Card className={classes2.root}>
             <CardContent>
-              <h2>Customers</h2>
+              <h2>Recent Customers</h2>
               <Customers {...props} />
             </CardContent>
           </Card>
