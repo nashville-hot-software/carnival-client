@@ -1,6 +1,7 @@
+import { Route, Redirect } from "react-router-dom"
+import SalesPieChart from '../charts/PieChart'
 import React, { useEffect, useState } from "react"
 import DataManager from '../../api/dataManager'
-import ActionPieChart from '../charts/PieChart'
 import "./DashBoard.css"
 import Customers from "../customer/list.js"
 import Sales from "../sale/list.js"
@@ -14,10 +15,10 @@ const DashBoard = props => {
 
   const useStyles2 = makeStyles({
     root: {
-        minWidth: 275,
-        color:'#33475B',
-        backgroundColor: '#F5F8FA',
-        boxShadow: '2px 2px 4px 1px #cacaca'
+      minWidth: 275,
+      color: '#33475B',
+      backgroundColor: '#F5F8FA',
+      boxShadow: '2px 2px 4px 1px #cacaca'
     },
     bullet: {
       display: 'inline-block',
@@ -41,7 +42,7 @@ const DashBoard = props => {
   const [revenue, setRevenue] = useState(0)
 
   const getSales = () => {
-    DataManager.getAll("sales","sale_count","True").then(response => {
+    DataManager.getAll("sales", "sale_count", "True").then(response => {
       console.log(response)
 
       setSaleCount(response.length);
@@ -53,34 +54,42 @@ const DashBoard = props => {
       setRevenue(totalRev)
     })
   };
-  
+
+
   useEffect(() => {
     getSales()
   }, [])
 
   return (
     <>
-      {/* <ActionPieChart/> */}
 
       <div className="dashboard-row--1">
         <div className="vehicles--container">
+
           <Card className={classes2.root}>
             <CardContent>
-              <h2>Sales Metrics</h2>
+              <div className="saleMetric--container">
+                <div className="saleMetricDetails--container">
 
-              {saleCount !== undefined ? (
-                <div className="totalSales--container">
-                  <p className="totalSales--label"><strong>Total Sales:</strong></p>
-                  <p className="totalSales">{saleCount}</p>
-                </div>
-              ) : null}
+                  <h2>Sales Metrics</h2>
 
-              {revenue !== undefined ? (
-                <div className="totalRevenue--container">
-                  <p className="totalRevenue--label"><strong>Total Revenue:</strong></p>
-                  <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                  {saleCount !== undefined ? (
+                    <div className="totalSales--container">
+                      <p className="totalSales--label"><strong>Total Sales:</strong></p>
+                      <p className="totalSales">{saleCount}</p>
+                    </div>
+                  ) : null}
+
+                  {revenue !== undefined ? (
+                    <div className="totalRevenue--container">
+                      <p className="totalRevenue--label"><strong>Total Revenue:</strong></p>
+                      <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                    </div>
+                  ) : null}
                 </div>
-              ) : null}
+                <SalesPieChart />
+                {/* <button>more</button> */}
+              </div>
             </CardContent>
           </Card>
         </div>

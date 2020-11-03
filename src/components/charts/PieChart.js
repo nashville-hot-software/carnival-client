@@ -1,36 +1,47 @@
-// import React, { Component } from 'react';
-// import { Doughnut } from 'react-chartjs-2';
+import React, { useEffect, useState } from "react";
+import { Doughnut } from "react-chartjs-2";
+import API from "../../api/dataManager";
+
+const SalesPieChart = (props) => {
+    const [sales, setSales] = useState([]);
+
+    const getAllSales = () => {
+        API.getAll("sales", "popular_models", "True").then((response) => {
+            console.log(response);
+            setSales(sales);
+        });
+    };
+    // const filterSales = () => {
+    // const sale = props.sales.filter((st) => st.sale_type_id === 1).length;
+    // const lease = props.sales.filter((st) => st.sale_type_id === 2).length; //using a filter and .length
+    const data = {
+        labels: ["Sale", "Lease"],
+        datasets: [
+            {
+                label: "Sales Data",
+                data: [50, 50],
+                backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)", //Red
+                    "rgba(54, 162, 235, 0.2)", //Blue
+                ],
+            },
+        ],
+    };
+    // };
+    useEffect(() => {
+        // filterSales();
+        getAllSales();
+    }, []);
+    return (
 
 
+        <Doughnut
+            data={data}
+            width={100}
+            height={100}
+        options={{ maintainAspectRatio: false }}
+        />
 
-// const SalesPieChart() => {
-//     render() {
-//         const sale =  this.props.sales.filter(st => st.sale_type_id === 1).length
-//         const lease =  this.props.records.filter(st => st.sale_type_id === 2).length                                                      //using a filter and .length
-//         const data = {
-//             labels: ["Submitted", "Resisted", "Undo",],
-//             datasets: [
-//                 {
-//                     label: "Compulsion Data",
-//                     data: [Submitted, Resisted, Undo],
-//                     backgroundColor: [
-//                         'rgba(255, 99, 132, 0.2)', //Red
-//                         'rgba(54, 162, 235, 0.2)', //Blue
-//                         'rgba(255, 206, 86, 0.2)', //Yellow
-//                     ],
-//                 }
-//             ]
-//         }
-//         return (
-//             <div >
-//                 <Doughnut
-//                     data={data}
-//                     width={300}
-//                     height={300}
-//                    //options={{ maintainAspectRatio: false }}
-//                 />
-//             </div>
-//         )
-//     }
-// }
-// export default SalesPieChart
+    );
+};
+export default SalesPieChart;
