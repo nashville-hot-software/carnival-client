@@ -1,15 +1,26 @@
 .vehicle-card--container {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid lightgray;
     margin-bottom: 15px;
 }
 .vehicle-card--container:hover {
-    border-bottom: 1px solid rgba(255, 125, 4, 0.801);
+    border-bottom: 2px solid rgba(255, 125, 4, 0.801);
     cursor: pointer;
-    color: rgba(255, 125, 4, 0.801);
 }
 
 .vehicle-card--name {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 18px;
+}
+
+.vehicle-card--numberSold {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: rgb(102, 102, 102);
+}
+
+.label {
+    margin: 0;
 }

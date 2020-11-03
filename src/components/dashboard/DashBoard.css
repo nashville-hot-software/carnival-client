@@ -1,13 +1,10 @@
 .dashboard-row--1 {
-    /* border: 3px solid black; */
-    box-shadow: 2px 4px 7px 0 gray;
     border-radius: 8px;
-    padding: 100px 250px;
-    margin-top: 80px;
+    margin-top: 60px;
     margin-bottom: 40px;
     margin-left: 5%;
-    max-width: 250px;
-    background-color: rgba(240, 240, 240, 0.74);
+    max-width: 650px;
+    max-height: 300px;
 }
 
 .dashboard-row--2 {
@@ -31,4 +28,32 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 50px;
+}
+
+.totalSales--container {
+    margin-top: 20px;
+    max-width: 200px;
+    border-bottom: 1px solid gray;
+}
+
+.totalRevenue--container {
+    max-width: 200px;
+    margin-top: 25px;
+}
+
+.totalSales--label {
+    margin-bottom: 5px;
+}
+
+.totalSales {
+    font-size: 18px;
+}
+
+.totalRevenue--label {
+    margin-bottom: 5px;
+}
+
+.totalRevenue {
+    margin-bottom: 0;
+    font-size: 18px;
 }

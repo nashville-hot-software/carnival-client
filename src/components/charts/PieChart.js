@@ -3,12 +3,10 @@
 
 
 
-// export default class ActionPieChart extends Component {
+// const SalesPieChart() => {
 //     render() {
-//         const Submitted =  this.props.records.filter(r => r.patientActionId === 2).length
-//         const Resisted =  this.props.records.filter(r => r.patientActionId === 1).length
-//         const Undo =  this.props.records.filter(r => r.patientActionId === 3).length
-//                                                       //using a filter and .length
+//         const sale =  this.props.sales.filter(st => st.sale_type_id === 1).length
+//         const lease =  this.props.records.filter(st => st.sale_type_id === 2).length                                                      //using a filter and .length
 //         const data = {
 //             labels: ["Submitted", "Resisted", "Undo",],
 //             datasets: [
@@ -35,3 +33,4 @@
 //         )
 //     }
 // }
+// export default SalesPieChart
