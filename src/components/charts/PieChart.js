@@ -36,11 +36,16 @@ const SalesPieChart = (props) => {
     };
 
     const data = {
-        labels: ["Sale %", "Lease %"],
+        labels: ["Purchase %", "Lease %"],
         datasets: [
             {
                 label: "Sales Data",
                 data: [leaseData, purchaseData],
+                datalabels: {
+                    formatter: function(value, context) {
+                        return value + '%';
+                    }
+                },
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.8)", //Red
                     "rgba(54, 162, 235, 0.8)", //Blue
