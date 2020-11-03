@@ -10,7 +10,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import NumberFormat from 'react-number-format';
-
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Modal from 'react-bootstrap/Modal';
 const DashBoard = props => {
 
   const useStyles2 = makeStyles({
@@ -40,7 +41,7 @@ const DashBoard = props => {
 
   const [saleCount, setSaleCount] = useState()
   const [revenue, setRevenue] = useState(0)
-
+   
   const getSales = () => {
     DataManager.getAll("sales", "sale_count", "True").then(response => {
       console.log(response)
@@ -59,6 +60,10 @@ const DashBoard = props => {
   useEffect(() => {
     getSales()
   }, [])
+// State for Modal in the sales metric details
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -75,25 +80,35 @@ const DashBoard = props => {
 
                   {saleCount !== undefined ? (
                     <div className="totalSales--container">
-                      <p className="totalSales--label"><strong>Total Sales:</strong></p>
+                      <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
                       <p className="totalSales">{saleCount}</p>
                     </div>
                   ) : null}
 
                   {revenue !== undefined ? (
                     <div className="totalRevenue--container">
-                      <p className="totalRevenue--label"><strong>Total Revenue:</strong></p>
+                      <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
                       <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     </div>
                   ) : null}
                 </div>
                 <SalesPieChart />
-                {/* <button>more</button> */}
+                <ArrowForwardIcon onclick/>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
+
+      {/* <Modal centered show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Sale</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><strong>Invoice:</strong> {`#${props.row.invoice_number}`}</Modal.Body>
+        <Modal.Body><strong>Customer:</strong> {`${props.row.customer.first_name} ${props.row.customer.last_name}`}</Modal.Body>
+        <Modal.Body><strong>Dealership:</strong> {`${props.row.dealership.business_name}`}</Modal.Body>
+        <Modal.Body><strong>State:</strong> {`${props.row.dealership.state}`}</Modal.Body>
+      </Modal> */}
 
       <div className="dashboard-row--2">
         <div className="vehicles--container">
