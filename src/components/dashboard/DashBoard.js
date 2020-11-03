@@ -53,6 +53,7 @@ const DashBoard = props => {
       setRevenue(totalRev)
     })
   };
+
   
   useEffect(() => {
     getSales()
@@ -63,6 +64,7 @@ const DashBoard = props => {
 
       <div className="dashboard-row--1">
         <div className="vehicles--container">
+        
           <Card className={classes2.root}>
             <CardContent>
               <h2>Sales Metrics</h2>
@@ -80,6 +82,7 @@ const DashBoard = props => {
                   <p className="totalRevenue">${revenue}</p>
                 </div>
               ) : null}
+
             </CardContent>
           </Card>
         </div>
