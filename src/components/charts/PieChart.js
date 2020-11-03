@@ -15,14 +15,14 @@ const SalesPieChart = (props) => {
     // const sale = props.sales.filter((st) => st.sale_type_id === 1).length;
     // const lease = props.sales.filter((st) => st.sale_type_id === 2).length; //using a filter and .length
     const data = {
-        labels: ["Sale", "Lease"],
+        labels: ["Purchase", "Lease"],
         datasets: [
             {
                 label: "Sales Data",
                 data: [50, 50],
                 backgroundColor: [
-                    "rgba(255, 99, 132, 0.2)", //Red
-                    "rgba(54, 162, 235, 0.2)", //Blue
+                    "rgba(255, 99, 132, 0.8)", //Red
+                    "rgba(54, 162, 235, 0.8)", //Blue
                 ],
             },
         ],
@@ -37,8 +37,8 @@ const SalesPieChart = (props) => {
 
         <Doughnut
             data={data}
-            width={100}
-            height={100}
+            width={250}
+            height={250}
         options={{ maintainAspectRatio: false }}
         />
 

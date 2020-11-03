@@ -1,69 +1,72 @@
 .dashboard-row--1 {
-  border-radius: 8px;
-  margin-top: 60px;
-  margin-bottom: 40px;
-  margin-left: 5%;
-  max-width: 650px;
-  max-height: 300px;
+    border-radius: 8px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    margin-left: 5%;
+    max-width: 650px;
+    max-height: 300px;
 }
 
 .dashboard-row--2 {
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 5%;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 5%;
 }
 
 .label {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .vehicles--container {
-  margin-right: 5%;
+    margin-right: 5%;
 }
+
 .sales--container {
-  margin-left: 5%;
+    margin-left: 5%;
 }
 
 .sale-card--name {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 50px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
 }
 
 .totalSales--container {
-  margin-top: 20px;
-  max-width: 200px;
-  border-bottom: 1px solid gray;
+    margin-top: 20px;
+    max-width: 200px;
+    border-bottom: 1px solid gray;
 }
 
 .totalRevenue--container {
-  max-width: 200px;
-  margin-top: 25px;
+    max-width: 200px;
+    margin-top: 25px;
 }
 
 .totalSales--label {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .totalSales {
-  font-size: 18px;
-  color: #33475b;
+    font-size: 18px;
+    color: #33475b;
 }
 
 .totalRevenue--label {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .totalRevenue {
-  margin-bottom: 0;
-  font-size: 18px;
+    margin-bottom: 0;
+    font-size: 18px;
 }
 
 .saleMetric--container {
-  display: flex;
-  width: 200px;
-  margin-right: 0 !important;
+    display: flex;
+    width: 200px;
+    margin-right: 0 !important;
 }
+
 .saleMetricDetails--container {
-    margin-right: 160px;
+    margin-right: 100px;
+    min-width: 200px;
 }
