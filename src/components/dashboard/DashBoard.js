@@ -58,7 +58,7 @@ const DashBoard = (props) => {
   // State for Modal in the sales metric details
   //----------------------------------------------
 const [vehicles, setVehicles] = useState()
-  export const getVehicles = () => {
+   const getVehicles = () => {
     DataManager.getAll("vehicles","popular_models","True").then(response => {
       console.log(response)
       setVehicles(response);
@@ -120,7 +120,7 @@ const [vehicles, setVehicles] = useState()
         </div>
       </div>
 
-      <Modal centered show={show} onHide={handleClose}>
+      {/* <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Sale</Modal.Title>
         </Modal.Header>
@@ -137,7 +137,7 @@ const [vehicles, setVehicles] = useState()
         <Modal.Body>
           <strong>State:</strong> {`${props.row.dealership.state}`}
         </Modal.Body>
-      </Modal>
+      </Modal> */}
 
       <div className="dashboard-row--2">
         <div className="vehicles--container">
