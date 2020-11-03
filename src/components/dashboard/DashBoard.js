@@ -88,7 +88,7 @@ const DashBoard = props => {
                   ) : null}
                 </div>
                 <SalesPieChart />
-                <button>more</button>
+                {/* <button>more</button> */}
               </div>
             </CardContent>
           </Card>
