@@ -39,7 +39,7 @@ const SalesPieChart = (props) => {
             data={data}
             width={100}
             height={100}
-        //options={{ maintainAspectRatio: false }}
+        options={{ maintainAspectRatio: false }}
         />
 
     );
