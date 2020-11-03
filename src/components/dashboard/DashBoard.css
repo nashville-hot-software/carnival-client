@@ -58,3 +58,8 @@
     margin-bottom: 0;
     font-size: 18px;
 }
+
+.saleMetric--container {
+width: 200px;
+margin-right: 0 !important;
+}
