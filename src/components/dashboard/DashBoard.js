@@ -28,6 +28,11 @@ const DashBoard = props => {
       backgroundColor: '#F5F8FA',
       boxShadow: '2px 2px 4px 1px #cacaca'
     },
+    content: {
+      // '&:last-child': {
+      //   paddingBottom: 0
+      // }
+    },
     bullet: {
       display: 'inline-block',
       margin: '0 2px',
@@ -44,8 +49,10 @@ const DashBoard = props => {
       marginBottom: 12,
     },
     formControl: {
-      margin: theme.spacing(1),
+      margin: 0,
       minWidth: 120,
+      marginLeft: 0,
+      // height: 20
     },
     selectSaleType: {
       minWidth: '150px',
@@ -54,7 +61,8 @@ const DashBoard = props => {
       }
     },
     selectLabel: {
-      color: '#33475B',
+      color: 'gray',
+      fontSize: '14px',
       '&.MuiFormLabel-root.Mui-focused': {
         color: 'gray'
       }
@@ -104,7 +112,7 @@ const DashBoard = props => {
         <div className="vehicles--container">
 
           <Card className={classes2.root}>
-            <CardContent>
+            <CardContent className={classes2.content}>
               <div className="saleMetric--container">
                 <div className="saleMetricDetails--container">
 

@@ -37,7 +37,7 @@ const SalesPieChart = (props) => {
     };
 
     const data = {
-        labels: ["Purchase %", "Lease %"],
+        labels: ["Sale Purchase %", "Sale Lease %"],
         datasets: [
             {
                 label: "Sales Data",
@@ -62,8 +62,8 @@ const SalesPieChart = (props) => {
         <div className="pieChart">
         <Doughnut
             data={data}
-            width={235}
-            height={235}
+            width={245}
+            height={245}
             options={{ maintainAspectRatio: false }}
         />
         </div>
