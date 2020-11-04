@@ -79,7 +79,8 @@ const [vehicles, setVehicles] = useState()
   
 
   return (
-    <>
+    <div className="dashboard">
+
       <div className="dashboard-row--1">
         <div className="vehicles--container">
           <Card className={classes2.root}>
@@ -165,7 +166,7 @@ const [vehicles, setVehicles] = useState()
           </Card>
         </div>
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}
 export default DashBoard;
