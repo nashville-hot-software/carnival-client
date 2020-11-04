@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NumberFormat from 'react-number-format';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Modal from 'react-bootstrap/Modal';
+import welcomeImage from '../../images/Welcome1.png'
 
 const DashBoard = props => {
 
@@ -36,6 +37,13 @@ const DashBoard = props => {
     pos: {
       marginBottom: 12,
     },
+    arrowIcon: {
+      marginRight: '10px',
+      marginTop: '220px',
+      '&:hover': {
+        cursor: 'pointer'
+      }
+    }
   });
   const classes2 = useStyles2();
   //----------------------------------------------
@@ -117,12 +125,14 @@ const [vehicles, setVehicles] = useState()
                     </div>
                   ) : null}
                 </div>
-                <SalesPieChart />
-                <ArrowForwardIcon onClick={() => handleShow()} />
+                <SalesPieChart className="pieChart" />
+                <ArrowForwardIcon className={classes2.arrowIcon} div onClick={() => handleShow()} />
               </div>
             </CardContent>
           </Card>
         </div>
+
+        <img src={welcomeImage} className="welcomeImg" />
       </div>
 
       <Modal centered show={show} onHide={handleClose}>

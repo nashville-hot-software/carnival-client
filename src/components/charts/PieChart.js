@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import API from "../../api/dataManager";
+import "./PieChart.css"
 
 const SalesPieChart = (props) => {
     const [purchaseData, setPurchaseData] = useState();
@@ -58,14 +59,14 @@ const SalesPieChart = (props) => {
     }, []);
     return (
 
-
+        <div className="pieChart">
         <Doughnut
             data={data}
-            width={225}
-            height={225}
+            width={235}
+            height={235}
             options={{ maintainAspectRatio: false }}
         />
-
+        </div>
     );
 };
 export default SalesPieChart;
