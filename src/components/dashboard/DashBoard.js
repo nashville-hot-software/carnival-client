@@ -9,14 +9,19 @@ import Vehicles from "../vehicle/list.js"
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
-import NumberFormat from 'react-number-format';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import NumberFormat from 'react-number-format';
 import Modal from 'react-bootstrap/Modal';
 import welcomeImage from '../../images/Welcome1.png'
 
 const DashBoard = props => {
 
-  const useStyles2 = makeStyles({
+  const useStyles2 = makeStyles((theme) => ({
     root: {
       minWidth: 275,
       color: '#33475B',
@@ -38,6 +43,22 @@ const DashBoard = props => {
     pos: {
       marginBottom: 12,
     },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
+    selectSaleType: {
+      minWidth: '150px',
+      '&.MuiInput-underline:after': {
+        borderBottom: '1px solid gray'
+      }
+    },
+    selectLabel: {
+      color: '#33475B',
+      '&.MuiFormLabel-root.Mui-focused': {
+        color: 'gray'
+      }
+    },
     arrowIcon: {
       marginRight: '10px',
       marginTop: '220px',
@@ -45,7 +66,7 @@ const DashBoard = props => {
         cursor: 'pointer'
       }
     }
-  });
+  }));
   const classes2 = useStyles2();
 
   const [saleCount, setSaleCount] = useState()
@@ -102,6 +123,37 @@ const DashBoard = props => {
                       <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     </div>
                   ) : null}
+
+                  <FormControl className={classes2.formControl}>
+                    <InputLabel className={classes2.selectLabel}>
+                      Sale Types
+                    </InputLabel>
+                    <Select
+                      className={classes2.selectSaleType}
+                      // displayEmpty
+                      labelId="unitedStateId"
+                      id="stateId"
+                      // value={usaState}
+                      // onChange={handleStatePick}
+                    >
+                      <MenuItem value="" >
+                        Total
+                      </MenuItem>
+                      <MenuItem value="" >
+                        Purchase
+                      </MenuItem>
+                      <MenuItem value="" >
+                        Lease
+                      </MenuItem>
+                      {/* {usaStateList.map((item, i) => (
+
+                          <MenuItem key={i} id={"stateId"} value={item.id}>
+                              {item.name}
+                          </MenuItem> */}
+
+                      {/* ))} */}
+                    </Select>
+                  </FormControl>
                 </div>
                 <SalesPieChart className="pieChart" />
                 <ArrowForwardIcon className={classes2.arrowIcon} onclick/>
