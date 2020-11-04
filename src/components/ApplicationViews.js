@@ -5,7 +5,7 @@ import CustomerDetails from "./customer/detail.js"
 import VehicleDetails from "./vehicle/detail.js"
 import SaleDetails from "./sale/detail.js"
 import DealershipDetails from "./dealership/detail.js"
-import DealershipPage from "./dealership/page.js"
+import DealershipPage from "./dealership/page"
 
 
 const ApplicationViews = props => {
