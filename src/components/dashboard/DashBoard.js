@@ -66,7 +66,7 @@ const DashBoard = props => {
   const handleShow = () => setShow(true);
 
   return (
-    <>
+    <div className="dashboard">
 
       <div className="dashboard-row--1">
         <div className="vehicles--container">
@@ -136,7 +136,7 @@ const DashBoard = props => {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 export default DashBoard;

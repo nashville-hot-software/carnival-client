@@ -1,3 +1,8 @@
+.header {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
 .headerBannerOne {
     display: flex;
     flex-direction: column;
@@ -9,12 +14,19 @@
 }
 
 .headerBannerTwo {
-    display: flex;
-    justify-content: flex-end;
+    min-width: 150px;
+    min-height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    background-color: #6A78D1;
+    border-radius: 8px;
+    margin-right: 10px;
 }
 
 .nav-list {
     display: flex;
+    flex-direction: column;
     margin-right: 10%;
     margin-top: 10px;
 }
@@ -22,10 +34,12 @@
 .nav-item {
     text-decoration: none;
     color: black;
-    font-size: 18px;
+    font-size: 20px;
+    padding: 20px 0;
 }
 
 .nav-item:hover {
-    color: rgba(54, 162, 235, 1);
+    color: rgb(250, 253, 255);
+    /* background-color:  rgba(250, 253, 255, .2); */
     cursor: pointer;
 }
