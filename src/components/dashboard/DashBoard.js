@@ -1,18 +1,20 @@
-import { Route, Redirect } from "react-router-dom";
-import SalesPieChart from "../charts/PieChart";
-import React, { useEffect, useState } from "react";
-import DataManager from "../../api/dataManager";
-import "./DashBoard.css";
-import Customers from "../customer/list.js";
-import Sales from "../sale/list.js";
-import Vehicles from "../vehicle/list.js";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import { makeStyles } from "@material-ui/core/styles";
-import NumberFormat from "react-number-format";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-import Modal from "react-bootstrap/Modal";
-const DashBoard = (props) => {
+import { Route, Redirect } from "react-router-dom"
+import SalesPieChart from '../charts/PieChart'
+import React, { useEffect, useState } from "react"
+import DataManager from '../../api/dataManager'
+import "./DashBoard.css"
+import Customers from "../customer/list.js"
+import Sales from "../sale/list.js"
+import Vehicles from "../vehicle/list.js"
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { makeStyles } from '@material-ui/core/styles';
+import NumberFormat from 'react-number-format';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Modal from 'react-bootstrap/Modal';
+
+const DashBoard = props => {
+
   const useStyles2 = makeStyles({
     root: {
       minWidth: 275,
@@ -80,6 +82,8 @@ const [vehicles, setVehicles] = useState()
 
   return (
     <div className="dashboard">
+
+      <div className="dashboard--header">Dashboard</div>
 
       <div className="dashboard-row--1">
         <div className="vehicles--container">

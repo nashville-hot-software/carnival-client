@@ -21,6 +21,8 @@ const Dealerships = props => {
   return (
     <>
       <div className="dealershipsContainer">
+        <div className="dealership--header">Dealerships</div>
+
         {dealerships.slice(0,20).map(dealership => {
           return (
             <DealershipCard
