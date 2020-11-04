@@ -19,72 +19,114 @@ import NumberFormat from 'react-number-format';
 import Modal from 'react-bootstrap/Modal';
 import welcomeImage from '../../images/Welcome1.png'
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minWidth: 275,
+    color: '#33475B',
+    backgroundColor: '#F5F8FA',
+    boxShadow: '2px 2px 4px 1px #cacaca'
+  },
+  content: {
+    // '&:last-child': {
+    //   paddingBottom: 0
+    // }
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 30,
+    fontFamily: 'Roboto',
+    fontWeight: 500,
+    color: '#33475B'
+
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  formControl: {
+    marginTop: 10,
+    minWidth: 120,
+    marginLeft: 0,
+  },
+  selectSaleType: {
+    minWidth: '150px',
+    '&.MuiInput-underline:after': {
+      borderBottom: '1px solid gray'
+    }
+  },
+  selectLabel: {
+    color: 'gray',
+    fontSize: '14px',
+    '&.MuiFormLabel-root.Mui-focused': {
+      color: 'gray'
+    }
+  },
+  arrowIcon: {
+    marginRight: '10px',
+    marginTop: '220px',
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  }
+}));
+
 const DashBoard = props => {
 
-  const useStyles2 = makeStyles((theme) => ({
-    root: {
-      minWidth: 275,
-      color: '#33475B',
-      backgroundColor: '#F5F8FA',
-      boxShadow: '2px 2px 4px 1px #cacaca'
-    },
-    content: {
-      // '&:last-child': {
-      //   paddingBottom: 0
-      // }
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
-    },
-    title: {
-      fontSize: 30,
-      fontFamily: 'Roboto',
-      fontWeight: 500,
-      color: '#33475B'
-
-    },
-    pos: {
-      marginBottom: 12,
-    },
-    formControl: {
-      margin: 0,
-      minWidth: 120,
-      marginLeft: 0,
-      // height: 20
-    },
-    selectSaleType: {
-      minWidth: '150px',
-      '&.MuiInput-underline:after': {
-        borderBottom: '1px solid gray'
-      }
-    },
-    selectLabel: {
-      color: 'gray',
-      fontSize: '14px',
-      '&.MuiFormLabel-root.Mui-focused': {
-        color: 'gray'
-      }
-    },
-    arrowIcon: {
-      marginRight: '10px',
-      marginTop: '220px',
-      '&:hover': {
-        cursor: 'pointer'
-      }
-    }
-  }));
-  const classes2 = useStyles2();
+  const classes = useStyles();
 
   const [saleCount, setSaleCount] = useState()
+  const [totalLeaseCount, setTotalLeaseCount] = useState()
+  const [totalPurchaseCount, setTotalPurchaseCount] = useState()
+
   const [revenue, setRevenue] = useState(0)
+  const [leaseRevenue, setLeaseRevenue] = useState(0)
+  const [purchaseRevenue, setPurchaseRevenue] = useState(0)
+  const [saleType, setSaleType] = useState('Total')
+
+
+  // State for Modal in the sales metric details
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // Handler for sales type select menu
+  const handleSaleType = evt => {
+    setSaleType(evt.target.value)
+  }
    
+  // Ping API for 20 most recent sales, set states for total,
+  // purchase, and lease types sales revenues...
+  // set states for total, purchase, and lease types sale counts
   const getSales = () => {
     DataManager.getAll("sales", "limit", "20").then(response => {
       console.log(response)
 
       setSaleCount(response.length);
+
+      let totalLeaseRev = 0;
+      let totalPurchaseRev = 0;
+
+      let leaseCounter = 0;
+      let purchaseCounter = 0;
+
+      response.forEach(sale => {
+        if (sale.sales_type.name === "Lease") {
+          leaseCounter += 1
+          totalLeaseRev += parseFloat(sale.price)
+        } else if (sale.sales_type.name === "Purchase") {
+          purchaseCounter += 1
+          totalPurchaseRev += parseFloat(sale.price)
+        }
+      })
+
+      setTotalLeaseCount(leaseCounter)
+      setTotalPurchaseCount(purchaseCounter)
+
+      setLeaseRevenue(totalLeaseRev.toFixed(2))
+      setPurchaseRevenue(totalPurchaseRev.toFixed(2))
 
       let totalRev = 0;
       response.forEach(sale => {
@@ -96,12 +138,8 @@ const DashBoard = props => {
 
 
   useEffect(() => {
-    getSales()
+    getSales();
   }, [])
-// State for Modal in the sales metric details
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   return (
     <div className="dashboard">
@@ -111,60 +149,79 @@ const DashBoard = props => {
       <div className="dashboard-row--1">
         <div className="vehicles--container">
 
-          <Card className={classes2.root}>
-            <CardContent className={classes2.content}>
+          <Card className={classes.root}>
+            <CardContent className={classes.content}>
               <div className="saleMetric--container">
                 <div className="saleMetricDetails--container">
 
                   <h2>Sales Metrics</h2>
 
-                  {saleCount !== undefined ? (
+                  {saleType === "Total" && saleCount !== undefined && revenue !== undefined ? (
+                    <>
                     <div className="totalSales--container">
                       <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
                       <p className="totalSales">{saleCount}</p>
                     </div>
-                  ) : null}
-
-                  {revenue !== undefined ? (
                     <div className="totalRevenue--container">
                       <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
                       <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     </div>
+                    </>
                   ) : null}
 
-                  <FormControl className={classes2.formControl}>
-                    <InputLabel className={classes2.selectLabel}>
+                  {saleType === "Lease" && totalLeaseCount !== undefined ? (
+                    <>
+                    <div className="totalSales--container">
+                      <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
+                      <p className="totalSales">{totalLeaseCount}</p>
+                    </div>
+                    <div className="totalRevenue--container">
+                      <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
+                      <NumberFormat className="totalRevenue" value={leaseRevenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                    </div>
+                    </>
+                  ) : null}
+                  
+                  {saleType === "Purchase" && totalPurchaseCount !== undefined ? (
+                    <>
+                    <div className="totalSales--container">
+                      <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
+                      <p className="totalSales">{totalPurchaseCount}</p>
+                    </div>
+                    <div className="totalRevenue--container">
+                      <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
+                      <NumberFormat className="totalRevenue" value={purchaseRevenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                    </div>
+                    </>
+                  ) : null}
+
+                  <FormControl className={classes.formControl}>
+                    <InputLabel className={classes.selectLabel}>
                       Sale Types
                     </InputLabel>
                     <Select
-                      className={classes2.selectSaleType}
-                      // displayEmpty
-                      labelId="unitedStateId"
+                      className={classes.selectSaleType}
                       id="stateId"
                       // value={usaState}
-                      // onChange={handleStatePick}
+                      onChange={handleSaleType}
                     >
-                      <MenuItem value="" >
+                      <MenuItem value="Total" >
                         Total
                       </MenuItem>
-                      <MenuItem value="" >
+                      <MenuItem value="Purchase" >
                         Purchase
                       </MenuItem>
-                      <MenuItem value="" >
+                      <MenuItem value="Lease" >
                         Lease
                       </MenuItem>
-                      {/* {usaStateList.map((item, i) => (
-
-                          <MenuItem key={i} id={"stateId"} value={item.id}>
-                              {item.name}
-                          </MenuItem> */}
-
-                      {/* ))} */}
                     </Select>
                   </FormControl>
                 </div>
+
                 <SalesPieChart className="pieChart" />
-                <ArrowForwardIcon className={classes2.arrowIcon} onclick/>
+
+                <ArrowForwardIcon className={classes.arrowIcon} onclick/>
+
               </div>
             </CardContent>
           </Card>
@@ -185,7 +242,7 @@ const DashBoard = props => {
 
       <div className="dashboard-row--2">
         <div className="vehicles--container">
-          <Card className={classes2.root}>
+          <Card className={classes.root}>
             <CardContent>
               <h2>Top Vehicles</h2>
               <Vehicles {...props} />
@@ -193,7 +250,7 @@ const DashBoard = props => {
           </Card>
         </div>
         <div className="customers--container">
-          <Card className={classes2.root}>
+          <Card className={classes.root}>
             <CardContent>
               <h2>Recent Customers</h2>
               <Customers {...props} />
@@ -201,9 +258,9 @@ const DashBoard = props => {
           </Card>
         </div>
         <div className="sales--container">
-          <Card className={classes2.root}>
+          <Card className={classes.root}>
             <CardContent>
-              <h2 className={classes2.title}>Recent Sales</h2>
+              <h2 className={classes.title}>Recent Sales</h2>
               <Sales {...props} />
             </CardContent>
           </Card>
