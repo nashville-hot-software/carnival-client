@@ -37,7 +37,7 @@ const SalesPieChart = (props) => {
     };
 
     const data = {
-        labels: ["Sale Purchase %", "Sale Lease %"],
+        labels: ["Purchase Sale %", "Lease Sale %"],
         datasets: [
             {
                 label: "Sales Data",
