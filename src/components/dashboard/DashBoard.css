@@ -9,11 +9,13 @@
 }
 
 .dashboard-row--1 {
+    display: flex;
+    /* justify-content: space-evenly; */
     border-radius: 8px;
     margin-top: 100px;
     margin-bottom: 40px;
     margin-left: 13%;
-    max-width: 650px;
+    /* max-width: 650px; */
     max-height: 300px;
 }
 
@@ -72,11 +74,14 @@
 
 .saleMetric--container {
     display: flex;
-    width: 200px;
+    /* width: 600px; */
     margin-right: 0 !important;
 }
 
 .saleMetricDetails--container {
-    margin-right: 100px;
     min-width: 200px;
+}
+
+.welcomeImg {
+    margin-left: 100px;
 }
