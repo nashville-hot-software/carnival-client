@@ -51,6 +51,7 @@ const DashBoard = props => {
   //----------------------------------------------
   const [saleCount, setSaleCount] = useState();
   const [revenue, setRevenue] = useState(0);
+  const [sales, setSales] = useState([])
   //Function To grab 20 recent sales objects and store them in state
   const getSales = () => {
     DataManager.getAll("sales", "limit", "20").then((response) => {
@@ -61,15 +62,16 @@ const DashBoard = props => {
         totalRev += parseFloat(sale.price);
       });
       setRevenue(totalRev);
+      setSales(response)
     });
   };
 
   //----------------------------------------------
   // State for Modal in the sales metric details
   //----------------------------------------------
-const [vehicles, setVehicles] = useState()
-   const getVehicles = () => {
-    DataManager.getAll("vehicles","popular_models","True").then(response => {
+  const [vehicles, setVehicles] = useState()
+  const getVehicles = () => {
+    DataManager.getAll("vehicles", "popular_models", "True").then(response => {
       console.log(response)
       setVehicles(response);
     });
@@ -86,7 +88,7 @@ const [vehicles, setVehicles] = useState()
     getVehicles()
   }, []);
   // 
-  
+
 
   return (
     <div className="dashboard">
@@ -134,25 +136,40 @@ const [vehicles, setVehicles] = useState()
 
         <img src={welcomeImage} className="welcomeImg" />
       </div>
+     
+      { sales !== undefined ?
+        (
+          < Modal centered show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Sale Metric Details </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              
+              <ul>
 
-      <Modal centered show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sale</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <strong>Invoice:</strong> {`#${}`}
-        </Modal.Body>
-        <Modal.Body>
-          <strong>Customer:</strong>{" "}
-          {`${} ${}`}
-        </Modal.Body>
-        <Modal.Body>
-          <strong>Dealership:</strong> {`${}`}
-        </Modal.Body>
-        <Modal.Body>
-          <strong>State:</strong> {`${}`}
-        </Modal.Body>
-      </Modal>
+              {sales.map(sale => {
+                console.log(sale, "this is the sale state")
+                {<li> {sale.vehicle.vehicle_type.make}  </li>}
+              })}
+              </ul>
+            </Modal.Body>
+            <>
+              {/* //     <strong>Make:</strong> {`#${sale.vehicle.vehicle_type.make}/${sale.vehicle.vehicle_type.model}`}
+                 {/* <Modal.Body>
+              //     <strong>Customer:</strong>{" "}
+              //     {`${} ${}`}
+              //   </Modal.Body>
+              //   <Modal.Body>
+              //     <strong>Dealership:</strong> {`${}`}
+              //   </Modal.Body>
+              //   <Modal.Body>
+              //     <strong>State:</strong> {`${}`}
+              //   </Modal.Body> */}
+            </>
+
+          </Modal>
+        ) : null
+      }
 
       <div className="dashboard-row--2">
         <div className="vehicles--container">
