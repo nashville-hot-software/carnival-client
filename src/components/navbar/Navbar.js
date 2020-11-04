@@ -9,12 +9,6 @@ const NavBar = props => {
 
   return (
     <>
-    <header className="header">
-      <div className="headerBannerOne">
-        Carnival
-      </div>
-
-    </header>
       <div className="headerBannerTwo">
         <Nav className="nav-list" activeKey="/">
           <Nav.Item>

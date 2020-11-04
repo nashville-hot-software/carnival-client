@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NumberFormat from 'react-number-format';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Modal from 'react-bootstrap/Modal';
+
 const DashBoard = props => {
 
   const useStyles2 = makeStyles({
@@ -67,6 +68,8 @@ const DashBoard = props => {
 
   return (
     <div className="dashboard">
+
+      <div className="dashboard--header">Dashboard</div>
 
       <div className="dashboard-row--1">
         <div className="vehicles--container">
