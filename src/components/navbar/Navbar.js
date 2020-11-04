@@ -8,10 +8,13 @@ const NavBar = props => {
   const clearUser = props.clearUser;
 
   return (
+    <>
     <header className="header">
       <div className="headerBannerOne">
         Carnival
       </div>
+
+    </header>
       <div className="headerBannerTwo">
         <Nav className="nav-list" activeKey="/">
           <Nav.Item>
@@ -31,8 +34,7 @@ const NavBar = props => {
           </Nav.Item>
         </Nav>
       </div>
-
-    </header>
+      </>
   );
 };
 
