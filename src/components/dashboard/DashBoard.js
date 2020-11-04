@@ -118,31 +118,31 @@ const [vehicles, setVehicles] = useState()
                   ) : null}
                 </div>
                 <SalesPieChart />
-                <ArrowForwardIcon onclick />
+                <ArrowForwardIcon onClick={() => handleShow()} />
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
 
-      {/* <Modal centered show={show} onHide={handleClose}>
+      <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Sale</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <strong>Invoice:</strong> {`#${props.row.invoice_number}`}
+          <strong>Invoice:</strong> {`#${}`}
         </Modal.Body>
         <Modal.Body>
           <strong>Customer:</strong>{" "}
-          {`${props.row.customer.first_name} ${props.row.customer.last_name}`}
+          {`${} ${}`}
         </Modal.Body>
         <Modal.Body>
-          <strong>Dealership:</strong> {`${props.row.dealership.business_name}`}
+          <strong>Dealership:</strong> {`${}`}
         </Modal.Body>
         <Modal.Body>
-          <strong>State:</strong> {`${props.row.dealership.state}`}
+          <strong>State:</strong> {`${}`}
         </Modal.Body>
-      </Modal> */}
+      </Modal>
 
       <div className="dashboard-row--2">
         <div className="vehicles--container">
