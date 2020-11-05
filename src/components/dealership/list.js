@@ -3,36 +3,37 @@ import DealershipCard from "./card";
 import DealershipManager from "../../api/dataManager";
 import "./list.css"
 
+
 const Dealerships = props => {
 
   const [dealerships, setDealerships] = useState([]);
 
-  const getAllDealerships = () => {
-    DealershipManager.getAll("dealerships",20)
-      .then(dealerships => {
-        setDealerships(dealerships);
+  const handleFieldChange = evt => {
+    DealershipManager.getAll("dealerships","searchTerm",evt.target.value)
+      .then(matchedDealerships => {
+        setDealerships(matchedDealerships);
     });
-  };
-
-  useEffect(() => {
-    getAllDealerships();
-  }, []);
+  }
 
   return (
     <>
       <div className="dealershipsContainer">
         <div className="dealership--header">Dealerships</div>
-
-        {dealerships.slice(0,20).map(dealership => {
-          return (
-            <DealershipCard
-              key={dealership.id}
-              dealership={dealership}
-              getAllDealerships={getAllDealerships}
-              {...props}
-            />
-          );
-        })}
+        <input type='text' onChange={handleFieldChange} />
+        
+        {dealerships !== undefined ? (
+          <div>
+          {dealerships.map(dealership => {
+            return (
+              <DealershipCard
+                key={dealership.id}
+                dealership={dealership}
+                {...props}
+              />
+            );
+          })}
+          </div>
+        ) : null}
       </div>
     </>
   );
