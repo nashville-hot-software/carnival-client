@@ -44,7 +44,7 @@ const SaleCard = (props) => {
   }))(TableRow);
 
   return (
-    <>
+    <>  
       <StyledTableRow onClick={() => handleShow()} className={props.classes} key={props.row.name}>
         <StyledTableCell align="center">{props.row.invoice_number}</StyledTableCell>
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
