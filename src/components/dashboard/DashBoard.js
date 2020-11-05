@@ -13,6 +13,7 @@ import NumberFormat from 'react-number-format';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Modal from 'react-bootstrap/Modal';
 import welcomeImage from '../../images/Welcome1.png'
+import DashBoardDetailsCard from '../dashboard/DashBoardDetailsCard'
 
 const DashBoard = props => {
 
@@ -136,7 +137,7 @@ const DashBoard = props => {
 
         <img src={welcomeImage} className="welcomeImg" />
       </div>
-     
+
       { sales !== undefined ?
         (
           < Modal centered show={show} onHide={handleClose}>
@@ -144,33 +145,18 @@ const DashBoard = props => {
               <Modal.Title>Sale Metric Details </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              
-              <ul>
-
-              {sales.map(sale => {
-                console.log(sale, "this is the sale state")
-                {<li> {sale.vehicle.vehicle_type.make}  </li>}
-              })}
-              </ul>
+              <>
+                {sales.map((item, id) => {
+                  <DashBoardDetailsCard 
+                  item={item}
+                  Key={id}
+                  {...props}
+                  />
+                })}
+              </>
             </Modal.Body>
-            <>
-              {/* //     <strong>Make:</strong> {`#${sale.vehicle.vehicle_type.make}/${sale.vehicle.vehicle_type.model}`}
-                 {/* <Modal.Body>
-              //     <strong>Customer:</strong>{" "}
-              //     {`${} ${}`}
-              //   </Modal.Body>
-              //   <Modal.Body>
-              //     <strong>Dealership:</strong> {`${}`}
-              //   </Modal.Body>
-              //   <Modal.Body>
-              //     <strong>State:</strong> {`${}`}
-              //   </Modal.Body> */}
-            </>
-
-          </Modal>
-        ) : null
-      }
-
+      </Modal>
+      ) : null}
       <div className="dashboard-row--2">
         <div className="vehicles--container">
           <Card className={classes2.root}>

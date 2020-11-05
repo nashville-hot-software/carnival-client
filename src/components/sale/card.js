@@ -13,7 +13,6 @@ import NumberFormat from 'react-number-format';
 const SaleCard = (props) => {
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -61,8 +60,8 @@ const SaleCard = (props) => {
         <Modal.Body><strong>Customer:</strong> {`${props.row.customer.first_name} ${props.row.customer.last_name}`}</Modal.Body>
         <Modal.Body><strong>Dealership:</strong> {`${props.row.dealership.business_name}`}</Modal.Body>
         <Modal.Body><strong>State:</strong> {`${props.row.dealership.state}`}</Modal.Body>
-        <Modal.Body><strong>Price:</strong> {`$${props.row.price}`}</Modal.Body>
-        <Modal.Body><strong>Deposit:</strong> {`$${props.row.deposit}`}</Modal.Body>
+        <Modal.Body><strong>Price:</strong><NumberFormat value={props.row.price} displayType={'text'} thousandSeparator={true} prefix={'$'} /> </Modal.Body>
+        <Modal.Body><strong>Deposit:</strong><NumberFormat value={props.row.deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} /></Modal.Body>
         <Modal.Body><strong>Payment Method:</strong> {`${props.row.payment_method}`}</Modal.Body>
         <Modal.Body><strong>Purchase Date:</strong> {`${props.row.purchase_date}`}</Modal.Body>
         <Modal.Body><strong>Pickup Date:</strong> {`${props.row.pickup_date}`}</Modal.Body>
