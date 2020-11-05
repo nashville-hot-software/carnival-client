@@ -40,30 +40,6 @@ const SalesPieChart = (props) => {
 
     if (props.saleType === "Total") {
         data = {
-            labels: ["Lease Sale %", "Purchase Sale %"],
-            datasets: [
-                {
-                    label: "Sales Data",
-                    data: [leaseData, purchaseData],
-                    datalabels: {
-                        formatter: function(value, context) {
-                            return value + '%';
-                        },
-                        color: 'black',
-                        font: {
-                            weight: 'bold',
-                            size: '13'
-                        }
-                    },
-                    backgroundColor: [
-                        "rgba(255, 99, 132, 0.8)", //Red
-                        "rgba(54, 162, 235, 0.8)", //Blue
-                    ]
-                }
-            ],
-        };
-    } else if (props.saleType === "Purchase") {
-        data = {
             labels: ["Purchase Sale %", "Lease Sale %"],
             datasets: [
                 {
@@ -86,7 +62,7 @@ const SalesPieChart = (props) => {
                 }
             ],
         };
-    } else if (props.saleType === "Lease") {
+    } else if (props.saleType === "Purchase") {
         data = {
             labels: ["Lease Sale %", "Purchase Sale %"],
             datasets: [
@@ -106,6 +82,30 @@ const SalesPieChart = (props) => {
                     backgroundColor: [
                         "rgba(255, 99, 132, 0.8)", //Red
                         "rgba(54, 162, 235, 0.8)", //Blue
+                    ]
+                }
+            ],
+        };
+    } else if (props.saleType === "Lease") {
+        data = {
+            labels: ["Purchase Sale %", "Lease Sale %"],
+            datasets: [
+                {
+                    label: "Sales Data",
+                    data: [purchaseData, leaseData],
+                    datalabels: {
+                        formatter: function(value, context) {
+                            return value + '%';
+                        },
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                            size: '13'
+                        }
+                    },
+                    backgroundColor: [
+                        "rgba(54, 162, 235, 0.8)", //Blue
+                        "rgba(255, 99, 132, 0.8)", //Red
                     ]
                 }
             ],
