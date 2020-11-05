@@ -6,6 +6,7 @@ import "./list.css"
 const Dealerships = props => {
 
   const [dealerships, setDealerships] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
   const getAllDealerships = () => {
     DealershipManager.getAll("dealerships",20)
@@ -13,6 +14,11 @@ const Dealerships = props => {
         setDealerships(dealerships);
     });
   };
+
+  const handleFieldChange = evt => {
+    // console.log(evt.target.value)
+    setSearchValue(evt.target.value)
+  }
 
   useEffect(() => {
     getAllDealerships();
@@ -22,7 +28,7 @@ const Dealerships = props => {
     <>
       <div className="dealershipsContainer">
         <div className="dealership--header">Dealerships</div>
-
+        <input type='text' onChange={handleFieldChange} />
         {dealerships.slice(0,20).map(dealership => {
           return (
             <DealershipCard
