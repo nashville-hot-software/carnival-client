@@ -7,39 +7,33 @@ import "./list.css"
 const Dealerships = props => {
 
   const [dealerships, setDealerships] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
-
-  const getAllDealerships = () => {
-    DealershipManager.getAll("dealerships",20)
-      .then(dealerships => {
-        setDealerships(dealerships);
-    });
-  };
 
   const handleFieldChange = evt => {
-    // console.log(evt.target.value)
-    setSearchValue(evt.target.value)
+    DealershipManager.getAll("dealerships","searchTerm",evt.target.value)
+      .then(matchedDealerships => {
+        setDealerships(matchedDealerships);
+    });
   }
-
-  useEffect(() => {
-    getAllDealerships();
-  }, []);
 
   return (
     <>
       <div className="dealershipsContainer">
         <div className="dealership--header">Dealerships</div>
         <input type='text' onChange={handleFieldChange} />
-        {dealerships.slice(0,20).map(dealership => {
-          return (
-            <DealershipCard
-              key={dealership.id}
-              dealership={dealership}
-              getAllDealerships={getAllDealerships}
-              {...props}
-            />
-          );
-        })}
+        
+        {dealerships !== undefined ? (
+          <div>
+          {dealerships.map(dealership => {
+            return (
+              <DealershipCard
+                key={dealership.id}
+                dealership={dealership}
+                {...props}
+              />
+            );
+          })}
+          </div>
+        ) : null}
       </div>
     </>
   );
