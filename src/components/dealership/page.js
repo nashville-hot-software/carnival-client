@@ -5,7 +5,6 @@ import DealershipManager from "../../api/dataManager";
 const DealershipPage = props => {
 
     const [data, setData] = useState([]);
-    const [query, setQuery] = useState('');
     const [dealerships, setDealerships] = useState([]);
 
     const getDealership = () => {
