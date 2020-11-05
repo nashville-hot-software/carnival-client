@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import Modal from "react-bootstrap/Modal";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import NumberFormat from 'react-number-format';
+import { BorderBottomRounded } from "@material-ui/icons";
 
 
 const SaleCard = (props) => {
@@ -18,7 +19,7 @@ const SaleCard = (props) => {
 
   const StyledTableCell = withStyles((theme) => ({
     head: {
-      backgroundColor: theme.palette.common.black,
+      backgroundColor: theme.palette.common.white,
       color: theme.palette.common.white,
     },
     body: {
@@ -29,24 +30,24 @@ const SaleCard = (props) => {
   const StyledTableRow = withStyles((theme) => ({
     root: {
       "&:nth-of-type(odd)": {
-        backgroundColor: theme.palette.action.hover,
+        backgroundColor: theme.palette.action.white ,
       },
       // borderBottom: '1px solid black',
       "&:hover": {
-        // borderBottom: "rgba(255, 125, 4, 0.801)",
-        cursor: 'pointer'
+        backgroundColor: "#36A2EB",
+        cursor: 'pointer',
+        // #36A2EB
       },
     },
   }))(TableRow);
 
   return (
     <>
-      <StyledTableRow onClick={() => handleShow()} className={props.classes} key={props.row.name}>
-        <StyledTableCell align="center">#{props.row.invoice_number}</StyledTableCell>
+      <StyledTableRow hover onClick={() => handleShow()} className={props.classes} key={props.row.name}>
+        <StyledTableCell align="center">{props.row.invoice_number}</StyledTableCell>
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
         <StyledTableCell align="center">{props.row.vehicle.vehicle_type.make} {props.row.vehicle.vehicle_type.model}</StyledTableCell>
-        <StyledTableCell align="center">{props.row.sales_type.name}</StyledTableCell>
-        {/* <StyledTableCell align="center">{`$${props.row.price}`}</StyledTableCell> */}
+        <StyledTableCell  align="center">{props.row.sales_type.name}</StyledTableCell>
         <StyledTableCell align="center">
           <NumberFormat value={props.row.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         </StyledTableCell>
