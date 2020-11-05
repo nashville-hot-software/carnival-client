@@ -48,6 +48,11 @@ const SalesPieChart = (props) => {
                     datalabels: {
                         formatter: function(value, context) {
                             return value + '%';
+                        },
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                            size: '13'
                         }
                     },
                     backgroundColor: [
@@ -67,6 +72,11 @@ const SalesPieChart = (props) => {
                     datalabels: {
                         formatter: function(value, context) {
                             return value + '%';
+                        },
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                            size: '13'
                         }
                     },
                     backgroundColor: [
@@ -86,6 +96,11 @@ const SalesPieChart = (props) => {
                     datalabels: {
                         formatter: function(value, context) {
                             return value + '%';
+                        },
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                            size: '13'
                         }
                     },
                     backgroundColor: [
