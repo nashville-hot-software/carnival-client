@@ -40,7 +40,7 @@ const SalesPieChart = (props) => {
 
     if (props.saleType === "Total") {
         data = {
-            labels: ["Purchase Sale %", "Lease Sale %"],
+            labels: ["Lease Sale %", "Purchase Sale %"],
             datasets: [
                 {
                     label: "Sales Data",
@@ -80,15 +80,15 @@ const SalesPieChart = (props) => {
                         }
                     },
                     backgroundColor: [
-                        "rgba(255, 99, 132, 0.8)", //Red
                         "rgba(54, 162, 235, 0.8)", //Blue
+                        "rgba(255, 99, 132, 0.8)", //Red
                     ]
                 }
             ],
         };
     } else if (props.saleType === "Lease") {
         data = {
-            labels: ["Purchase Sale %", "Lease Sale %"],
+            labels: ["Lease Sale %", "Purchase Sale %"],
             datasets: [
                 {
                     label: "Sales Data",
