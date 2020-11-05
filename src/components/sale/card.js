@@ -9,7 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import NumberFormat from 'react-number-format';
 import { BorderBottomRounded } from "@material-ui/icons";
-
+import { borderBottom } from '@material-ui/system';
 
 const SaleCard = (props) => {
 
@@ -36,14 +36,16 @@ const SaleCard = (props) => {
       "&:hover": {
         backgroundColor: "#36A2EB",
         cursor: 'pointer',
+        opacity: 0.6,
+        color: "#000000"
         // #36A2EB
-      },
+      },  
     },
   }))(TableRow);
 
   return (
     <>
-      <StyledTableRow hover onClick={() => handleShow()} className={props.classes} key={props.row.name}>
+      <StyledTableRow onClick={() => handleShow()} className={props.classes} key={props.row.name}>
         <StyledTableCell align="center">{props.row.invoice_number}</StyledTableCell>
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
         <StyledTableCell align="center">{props.row.vehicle.vehicle_type.make} {props.row.vehicle.vehicle_type.model}</StyledTableCell>
