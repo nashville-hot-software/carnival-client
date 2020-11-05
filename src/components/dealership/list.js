@@ -3,6 +3,7 @@ import DealershipCard from "./card";
 import DealershipManager from "../../api/dataManager";
 import "./list.css"
 
+
 const Dealerships = props => {
 
   const [dealerships, setDealerships] = useState([]);
