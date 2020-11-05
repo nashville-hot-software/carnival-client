@@ -10,7 +10,7 @@ const NavBar = props => {
   return (
     <>
       <div className="headerBannerTwo">
-        <Nav className="nav-list" activeKey="/">
+        {/* <Nav className="nav-list" activeKey="/">
           <Nav.Item>
             <Nav.Link className="nav-item" href="/">Dashboard</Nav.Link>
           </Nav.Item>
@@ -26,7 +26,24 @@ const NavBar = props => {
           <Nav.Item>
             <Nav.Link className="nav-item" href="/dealerships" eventKey="link-4">Dealerships</Nav.Link>
           </Nav.Item>
-        </Nav>
+        </Nav> */}
+        <ul className="nav-list" >
+          <li className="nav-item">
+            <a href="/">Dashboard</a>
+          </li>
+          <li className="nav-item">
+            <a>Employees</a>
+          </li>
+          <li className="nav-item">
+            <a>Sales</a>
+          </li>
+          <li className="nav-item">
+            <a>Vehicles</a>
+          </li>
+          <li className="nav-item">
+            <a href="/dealerships">Dealerships</a>
+          </li>
+        </ul>
       </div>
       </>
   );
