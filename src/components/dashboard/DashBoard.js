@@ -218,7 +218,7 @@ const DashBoard = props => {
                   </FormControl>
                 </div>
 
-                <SalesPieChart className="pieChart" />
+                <SalesPieChart saleType={saleType} className="pieChart" />
 
                 <ArrowForwardIcon className={classes.arrowIcon} onclick/>
 
