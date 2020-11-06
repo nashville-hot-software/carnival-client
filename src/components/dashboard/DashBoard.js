@@ -18,6 +18,7 @@ import Select from "@material-ui/core/Select";
 import NumberFormat from 'react-number-format';
 import Modal from 'react-bootstrap/Modal';
 import welcomeImage from '../../images/Welcome1.png'
+import DashBoardDetailsCard from "../dashboard/DashBoardDetailsCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,7 +97,7 @@ const DashBoard = props => {
   const handleSaleType = evt => {
     setSaleType(evt.target.value)
   }
-   
+
   // Ping API for 20 most recent sales, set states for total,
   // purchase, and lease types sales revenues...
   // set states for total, purchase, and lease types sale counts
@@ -136,9 +137,21 @@ const DashBoard = props => {
     })
   };
 
+  const [sales, setSales] = useState([])
+  const [vehicles, setVehicles] = useState([]);
+  const getVehicles = () => {
+    DataManager.getAll("vehicles", "popular_models", "True").then(
+      (response) => {
+        console.log(response);
+        setVehicles(response);
+      }
+    );
+  };
+
 
   useEffect(() => {
     getSales();
+    getVehicles();
   }, [])
 
   return (
@@ -158,40 +171,40 @@ const DashBoard = props => {
 
                   {saleType === "Total" && saleCount !== undefined && revenue !== undefined ? (
                     <>
-                    <div className="totalSales--container">
-                      <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
-                      <p className="totalSales">{saleCount}</p>
-                    </div>
-                    <div className="totalRevenue--container">
-                      <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
-                      <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-                    </div>
+                      <div className="totalSales--container">
+                        <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
+                        <p className="totalSales">{saleCount}</p>
+                      </div>
+                      <div className="totalRevenue--container">
+                        <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
+                        <NumberFormat className="totalRevenue" value={revenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                      </div>
                     </>
                   ) : null}
 
                   {saleType === "Lease" && totalLeaseCount !== undefined ? (
                     <>
-                    <div className="totalSales--container">
-                      <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
-                      <p className="totalSales">{totalLeaseCount}</p>
-                    </div>
-                    <div className="totalRevenue--container">
-                      <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
-                      <NumberFormat className="totalRevenue" value={leaseRevenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-                    </div>
+                      <div className="totalSales--container">
+                        <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
+                        <p className="totalSales">{totalLeaseCount}</p>
+                      </div>
+                      <div className="totalRevenue--container">
+                        <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
+                        <NumberFormat className="totalRevenue" value={leaseRevenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                      </div>
                     </>
                   ) : null}
-                  
+
                   {saleType === "Purchase" && totalPurchaseCount !== undefined ? (
                     <>
-                    <div className="totalSales--container">
-                      <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
-                      <p className="totalSales">{totalPurchaseCount}</p>
-                    </div>
-                    <div className="totalRevenue--container">
-                      <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
-                      <NumberFormat className="totalRevenue" value={purchaseRevenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-                    </div>
+                      <div className="totalSales--container">
+                        <p className="totalSales--label"><strong>Total # of Sales:</strong></p>
+                        <p className="totalSales">{totalPurchaseCount}</p>
+                      </div>
+                      <div className="totalRevenue--container">
+                        <p className="totalRevenue--label"><strong>Total Sales Revenue:</strong></p>
+                        <NumberFormat className="totalRevenue" value={purchaseRevenue} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                      </div>
                     </>
                   ) : null}
 
@@ -219,8 +232,10 @@ const DashBoard = props => {
                 </div>
 
                 <SalesPieChart saleType={saleType} className="pieChart" />
-
-                <ArrowForwardIcon className={classes.arrowIcon} onclick/>
+                <ArrowForwardIcon
+                  className={classes.arrowIcon}
+                  onClick={() => handleShow()}
+                />
 
               </div>
             </CardContent>
@@ -230,15 +245,20 @@ const DashBoard = props => {
         <img src={welcomeImage} className="welcomeImg" />
       </div>
 
-      {/* <Modal centered show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sale</Modal.Title>
-        </Modal.Header>
-        <Modal.Body><strong>Invoice:</strong> {`#${props.row.invoice_number}`}</Modal.Body>
-        <Modal.Body><strong>Customer:</strong> {`${props.row.customer.first_name} ${props.row.customer.last_name}`}</Modal.Body>
-        <Modal.Body><strong>Dealership:</strong> {`${props.row.dealership.business_name}`}</Modal.Body>
-        <Modal.Body><strong>State:</strong> {`${props.row.dealership.state}`}</Modal.Body>
-      </Modal> */}
+      {sales !== undefined ? (
+        <Modal centered show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Sale Metric Details </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <>
+              {sales.map((item, id) => {
+                <DashBoardDetailsCard item={item} Key={id} {...props} />;
+              })}
+            </>
+          </Modal.Body>
+        </Modal>
+      ) : null}
 
       <div className="dashboard-row--2">
         <div className="vehicles--container">
