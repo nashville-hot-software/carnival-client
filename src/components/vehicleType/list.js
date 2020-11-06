@@ -18,7 +18,7 @@ const VehicleType = props => {
       <>
         <div className="vehicletype--container">
           <div className="vehicletype--header">Vehicles</div>
-          <input placeholder="search model type" type='text' onChange={handleFieldChange} />
+          <input placeholder="Search by model type" type='text' onChange={handleFieldChange} />
           
           {vehicles !== undefined ? (
             <div>
