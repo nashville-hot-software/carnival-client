@@ -45,6 +45,12 @@
     cursor: pointer;
     text-decoration: none;
 }
+
+.nav-item a {
+    text-decoration: none;
+    color: black;
+}
+
 .nav-item a:hover {
     text-decoration: none;
 }
