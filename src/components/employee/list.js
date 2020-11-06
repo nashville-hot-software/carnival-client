@@ -41,6 +41,12 @@ const Employees = props => {
                     })}
                 </div>
             ) : null}
+
+            {/* <div className="btn-hover-zoom"> */}
+                <button className="addEmployee--btn">
+                    Add New Employee
+                </button>
+            {/* </div> */}
         </div>
     </div>
   );
