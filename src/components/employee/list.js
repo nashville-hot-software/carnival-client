@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
-// import "./list.css"
+import "./list.css"
 
 
 const Employees = props => {
