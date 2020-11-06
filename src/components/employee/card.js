@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EmployeeManager from "../../api/dataManager";
-// import "./card.css"
+import "./card.css"
 
 const EmployeeCard = props => {
 
