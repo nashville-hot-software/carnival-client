@@ -1,0 +1,16 @@
+.employee-card--container {
+    border-bottom: 1px solid gray;
+    /* margin-bottom: 2%; */
+    padding: 10px 10px 2px 10px;
+}
+
+.employee-card--container:hover {
+    cursor: pointer;
+}
+
+.employee-card--name {
+    font-size: 20px;
+}
+.employee-card--name:hover {
+    color: lightgray;
+}
