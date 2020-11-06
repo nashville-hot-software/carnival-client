@@ -1,0 +1,88 @@
+.dashboard--header {
+    margin-left: 13%;
+    margin-top: 40px;
+    padding-left: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 2.5rem;
+    color: #33475B;
+}
+
+.dashboard-row--1 {
+    display: flex;
+    /* justify-content: space-evenly; */
+    border-radius: 8px;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    margin-left: 13%;
+    /* max-width: 650px; */
+    max-height: 300px;
+}
+
+.dashboard-row--2 {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 13%;
+    margin-bottom: 20px;
+}
+
+.label {
+    margin-left: 10px;
+}
+
+.vehicles--container {
+    margin-right: 3%;
+}
+
+.sales--container {
+    margin-left: 3%;
+}
+
+.sale-card--name {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 50px;
+}
+
+.totalSales--container {
+    margin-top: 20px;
+    max-width: 200px;
+    border-bottom: 1px solid gray;
+}
+
+.totalRevenue--container {
+    max-width: 200px;
+    margin-top: 25px;
+}
+
+.totalSales--label {
+    margin-bottom: 5px;
+}
+
+.totalSales {
+    font-size: 18px;
+    color: #33475b;
+}
+
+.totalRevenue--label {
+    margin-bottom: 5px;
+}
+
+.totalRevenue {
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.saleMetric--container {
+    display: flex;
+    /* width: 600px; */
+    margin-right: 0 !important;
+}
+
+.saleMetricDetails--container {
+    min-width: 200px;
+}
+
+.welcomeImg {
+    margin-left: 100px;
+}

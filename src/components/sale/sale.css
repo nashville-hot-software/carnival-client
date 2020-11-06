@@ -1,0 +1,7 @@
+.salesContainer {
+    padding: 10px;
+    min-width: 600px;
+    max-width: 600px;
+    max-height: 250px;
+    /* overflow: scroll; */
+}
