@@ -21,7 +21,7 @@ const NavBar = props => {
             <a>Sales</a>
           </li>
           <li className="nav-item">
-            <a>Vehicles</a>
+            <a href="/vehicles">Vehicles</a>
           </li>
           <li className="nav-item">
             <a href="/dealerships">Dealerships</a>

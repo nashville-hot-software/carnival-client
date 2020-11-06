@@ -7,12 +7,13 @@ const Vehicles = props => {
 //   const activeUser = props.activeUserId;
 
   const [vehicles, setVehicles] = useState([]);
-
+  
   const getAllVehicles = () => {
-    VehicleManager.getAll("vehicles","popular_models","True").then(response => {
-      console.log(response)
-      setVehicles(response);
-    });
+    VehicleManager.getAll("vehicles","popular_models","True")
+      .then(response => {
+        console.log(response)
+        setVehicles(response);
+      });
   };
 
   useEffect(() => {
@@ -38,3 +39,5 @@ const Vehicles = props => {
 };
 
 export default Vehicles;
+
+

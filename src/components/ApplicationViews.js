@@ -7,6 +7,7 @@ import SaleDetails from "./sale/detail.js"
 import DealershipDetails from "./dealership/detail.js"
 import DealershipList from "./dealership/list"
 import EmployeeList from "./employee/list"
+import VehicleTypeList from "./vehicleType/list"
 
 
 const ApplicationViews = props => {
@@ -31,6 +32,10 @@ const ApplicationViews = props => {
 
             <Route path="/dealerships" render={props => {
                 return <DealershipList {...props} />
+            }}/>
+
+            <Route path="/vehicles" render={props => {
+                return <VehicleTypeList {...props} />
             }}/>
 
             <Route exact path="/dealerships/:dealerhsipId(\d+)" render={props => {

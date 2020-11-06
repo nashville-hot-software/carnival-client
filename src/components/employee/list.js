@@ -3,7 +3,6 @@ import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css"
 
-
 const Employees = props => {
 
   const [employees, setEmployees] = useState([]);

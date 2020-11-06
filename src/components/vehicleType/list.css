@@ -1,0 +1,12 @@
+.vehicletype--container {
+    margin-left: 13%;
+}
+
+.vehicletype--header {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 2.5rem;
+    color: #33475B;
+}
