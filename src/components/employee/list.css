@@ -66,3 +66,38 @@
 .modal--form {
     margin-top: 150px !important;
 }
+
+.modalBody {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+.dealership--dropdown {
+    max-width: 200px;
+    max-height: 200px;
+    overflow: scroll;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+.modal--input {
+    width: 200px;
+    line-height: 25px;
+    border: 2px solid gray;
+    border-radius: 4px;
+    padding-left: 7px;
+}
+
+.modal--input:focus {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 8px #9ecaed;
+}

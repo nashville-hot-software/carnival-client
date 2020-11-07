@@ -8,6 +8,7 @@ const Employees = props => {
 
   const [employees, setEmployees] = useState([]);
   const [employeeTypes, setEmployeeTypes] = useState([]);
+  const [dealerships, setDealerships] = useState([]);
 
   // Below 3 are for Modal
   const [show, setShow] = useState(false);
@@ -27,6 +28,14 @@ const Employees = props => {
     EmployeeManager.getAll("employees","searchTerm",evt.target.value)
       .then(matchedEmployees => {
         setEmployees(matchedEmployees);
+    });
+  }
+
+  const handleFieldChange2 = evt => {
+    EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
+      .then(matchedDealerships => {
+        console.log(matchedDealerships)
+        setDealerships(matchedDealerships);
     });
   }
 
@@ -70,47 +79,52 @@ const Employees = props => {
                 <Modal.Header closeButton>
                     <Modal.Title>Add Employee</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <label className="name--label">First Name:</label>
-                    <input type="text"/>
-                </Modal.Body>
-                <Modal.Body>
-                    <label className="name--label">Last Name:</label>
-                    <input type="text"/>
-                </Modal.Body>
-                <Modal.Body>
-                    <label className="name--label">Email:</label>
-                    <input type="text"/>
-                </Modal.Body>
-                <Modal.Body>
-                    <label className="name--label">Phone:</label>
-                    <input type="text"/>
-                </Modal.Body>
-
-                {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
-                <Modal.Body>
-                    <label className="name--label">Dealership:</label>
-                    <select>
-                            {employeeTypes.map(type => {
-                                return (
-                                    <option>{type.name}</option>
-                                )
-                            })}
-                        </select>
-                </Modal.Body>
-                
-                {employeeTypes !== undefined ? (
-                    <Modal.Body>
-                        <label className="name--label">Employee Type:</label>
-                        <select>
-                            {employeeTypes.map(type => {
-                                return (
-                                    <option>{type.name}</option>
-                                )
-                            })}
-                        </select>
+                <div className="modalBody">
+                    <Modal.Body className="fieldset">
+                        <label className="name--label">First Name:</label>
+                        <input className="modal--input" type="text"/>
                     </Modal.Body>
-                ) : null}
+                    <Modal.Body className="fieldset">
+                        <label className="name--label">Last Name:</label>
+                        <input className="modal--input" type="text"/>
+                    </Modal.Body>
+                    <Modal.Body className="fieldset">
+                        <label className="name--label">Email:</label>
+                        <input className="modal--input" type="text"/>
+                    </Modal.Body>
+                    <Modal.Body className="fieldset">
+                        <label className="name--label">Phone:</label>
+                        <input className="modal--input" type="text"/>
+                    </Modal.Body>
+
+                    {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
+                    <Modal.Body className="fieldset">
+                        <label className="name--label">Dealership:</label>
+                        <input className="modal--input" type="text" onChange={handleFieldChange2} />
+                        {dealerships !== undefined && dealerships.length > 0 ? (
+                            <div className="dealership--dropdown">
+                                {dealerships.map(dealership => {
+                                    return (
+                                    <p>{dealership.business_name}</p>
+                                    )
+                                })}
+                            </div>
+                        ) : null}
+                    </Modal.Body>
+                    
+                    {employeeTypes !== undefined ? (
+                        <Modal.Body className="fieldset">
+                            <label className="name--label">Employee Type:</label>
+                            <select>
+                                {employeeTypes.map(type => {
+                                    return (
+                                        <option>{type.name}</option>
+                                    )
+                                })}
+                            </select>
+                        </Modal.Body>
+                    ) : null}
+                </div>
             </Modal>
         </div>
     </div>
