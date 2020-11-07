@@ -39,7 +39,7 @@ let API = {
             body: JSON.stringify(newObj),
             headers: {
                 // ...authHeader,
-                // Accept: 'application/json',
+                "Content-Type": "application/json"
             },
         }).then(response => response.json())
     },

@@ -40,10 +40,13 @@ const Employees = props => {
   }
 
   const handleInputFieldChange = evt => {
-    console.log(evt.target.id)
+    // console.log(evt.target.id)
+    // console.log(evt.target.value)
     
     const stateToChange = {...newEmployee}
-    stateToChange.evt.target.id = evt.target.value
+    stateToChange[evt.target.id] = evt.target.value
+    console.log(stateToChange)
+    setNewEmployee(stateToChange)
   }
 
   const handleDealershipSearch = evt => {
@@ -59,6 +62,13 @@ const Employees = props => {
 
     const stateToChange = {...newEmployee}
     stateToChange.dealership_id = evt.target.id
+    console.log(stateToChange)
+    setNewEmployee(stateToChange)
+  }
+
+  const handleSubmit = () => {
+    console.log(newEmployee)
+    EmployeeManager.PostData("employees", newEmployee)
   }
 
   useEffect(() => {
@@ -112,7 +122,7 @@ const Employees = props => {
                     </Modal.Body>
                     <Modal.Body className="fieldset">
                         <label className="name--label">Email:</label>
-                        <input onChange={handleInputFieldChange} id="email" className="modal--input" type="text"/>
+                        <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text"/>
                     </Modal.Body>
                     <Modal.Body className="fieldset">
                         <label className="name--label">Phone:</label>
@@ -128,12 +138,6 @@ const Employees = props => {
                                 {dealerships.map(dealership => {
                                     return (
                                     <>
-                                        {/* <input 
-                                            type="hidden" 
-                                            id="dealership_id"
-                                            value={dealership.id} 
-                                            onClick={handleDealerSelect} 
-                                        /> */}
                                         <div 
                                             className="dealership--select"
                                             id={dealership.id}
@@ -151,14 +155,13 @@ const Employees = props => {
                     {employeeTypes !== undefined ? (
                         <Modal.Body className="fieldset">
                             <label className="name--label">Employee Type:</label>
-                            <select>
+                            <select 
+                                id="employee_type_id" 
+                                onChange={handleInputFieldChange}
+                            >
                                 {employeeTypes.map(type => {
                                     return (
-                                        <option 
-                                            onClick={handleInputFieldChange}
-                                            id="employee_type_id"
-                                            value={type.id}
-                                        >
+                                        <option value={type.id}>
                                             {type.name}
                                         </option>
                                     )
@@ -166,6 +169,12 @@ const Employees = props => {
                             </select>
                         </Modal.Body>
                     ) : null}
+
+                    <Modal.Body>
+                        <button onClick={handleSubmit} className="addEmployee--btn">
+                            Submit
+                        </button>
+                    </Modal.Body>
                 </div>
             </Modal>
         </div>
