@@ -59,6 +59,7 @@ const Employees = props => {
 
   const handleSubmit = () => {
     EmployeeManager.PostData("employees", newEmployee)
+        .then(() => setShow(false))
   }
 
   useEffect(() => {
