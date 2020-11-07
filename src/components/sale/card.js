@@ -33,7 +33,7 @@ const SaleCard = (props) => {
         backgroundColor: theme.palette.action.white ,
       },
       "&:hover": {
-        backgroundColor: "#36A2EB",
+          
         cursor: 'pointer',
         opacity: 0.6,
         color: "#000000"
