@@ -59,3 +59,10 @@
 .addEmployee--btn:hover {
     transform: scale(1.07);
 }
+.addEmployee--btn:focus {
+    outline: none;
+}
+
+.modal--form {
+    margin-top: 150px !important;
+}
