@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import DataManager from "../../api/dataManager";
 import "./DashBoard.css";
 import Customers from "../customer/list.js";
-import Sales from "../sale/list.js";
+import Sales from "../sale/table.js";
 import Vehicles from "../vehicle/list.js";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
