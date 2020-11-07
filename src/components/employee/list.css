@@ -64,12 +64,18 @@
 }
 
 .modal--form {
-    margin-top: 100px !important;
-    max-height: 700px;
+    margin-top: 70px !important;
+    border-radius: 8px;
+    max-height: 750px;
     overflow: scroll;
 }
 
+.modalHeader {
+    margin: 0 auto;
+}
+
 .modalBody {
+    border-radius: 8px;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -92,8 +98,8 @@
 
 .dealership--select:hover {
     cursor: pointer;
+    color: lightgray;
 }
-
 
 .modal--input {
     width: 200px;

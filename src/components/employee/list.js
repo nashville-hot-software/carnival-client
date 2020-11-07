@@ -27,7 +27,6 @@ const Employees = props => {
   const fetchEmployeeTypes = () => {
     EmployeeManager.getAll("employeetypes")
       .then(employeeTypes => {
-        console.log(employeeTypes)
         setEmployeeTypes(employeeTypes);
     });
   }
@@ -40,34 +39,25 @@ const Employees = props => {
   }
 
   const handleInputFieldChange = evt => {
-    // console.log(evt.target.id)
-    // console.log(evt.target.value)
-    
     const stateToChange = {...newEmployee}
     stateToChange[evt.target.id] = evt.target.value
-    console.log(stateToChange)
     setNewEmployee(stateToChange)
   }
 
   const handleDealershipSearch = evt => {
     EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
       .then(matchedDealerships => {
-        console.log(matchedDealerships)
         setDealerships(matchedDealerships);
     });
   }
   
   const handleDealerSelect = evt => {
-    console.log(evt.target.id)
-
     const stateToChange = {...newEmployee}
     stateToChange.dealership_id = evt.target.id
-    console.log(stateToChange)
     setNewEmployee(stateToChange)
   }
 
   const handleSubmit = () => {
-    console.log(newEmployee)
     EmployeeManager.PostData("employees", newEmployee)
   }
 
@@ -108,7 +98,7 @@ const Employees = props => {
             </button>
 
             <Modal className="modal--form" show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header className="modalHeader" closeButton>
                     <Modal.Title>Add Employee</Modal.Title>
                 </Modal.Header>
                 <div className="modalBody">
