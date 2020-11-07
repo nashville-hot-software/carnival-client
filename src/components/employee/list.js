@@ -90,7 +90,13 @@ const Employees = props => {
                 {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
                 <Modal.Body>
                     <label className="name--label">Dealership:</label>
-                    <input type="text"/>
+                    <select>
+                            {employeeTypes.map(type => {
+                                return (
+                                    <option>{type.name}</option>
+                                )
+                            })}
+                        </select>
                 </Modal.Body>
                 
                 {employeeTypes !== undefined ? (
