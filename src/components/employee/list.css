@@ -86,7 +86,12 @@
     overflow: scroll;
     border: 1px solid gray;
     border-radius: 8px;
+    margin-top: 15px;
     padding: 10px;
+}
+
+.dealership--select:hover {
+    cursor: pointer;
 }
 
 

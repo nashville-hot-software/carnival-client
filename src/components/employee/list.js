@@ -9,6 +9,14 @@ const Employees = props => {
   const [employees, setEmployees] = useState([]);
   const [employeeTypes, setEmployeeTypes] = useState([]);
   const [dealerships, setDealerships] = useState([]);
+  const [newEmployee, setNewEmployee] = useState({
+    first_name: "",
+    last_name: "",
+    email_address: "",
+    phone: "",
+    dealership_id: 1,
+    employee_type_id: 1
+  })
 
   // Below 3 are for Modal
   const [show, setShow] = useState(false);
@@ -24,19 +32,33 @@ const Employees = props => {
     });
   }
 
-  const handleFieldChange = evt => {
+  const handleEmployeeSearch = evt => {
     EmployeeManager.getAll("employees","searchTerm",evt.target.value)
       .then(matchedEmployees => {
         setEmployees(matchedEmployees);
     });
   }
 
-  const handleFieldChange2 = evt => {
+  const handleInputFieldChange = evt => {
+    console.log(evt.target.id)
+    
+    const stateToChange = {...newEmployee}
+    stateToChange.evt.target.id = evt.target.value
+  }
+
+  const handleDealershipSearch = evt => {
     EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
       .then(matchedDealerships => {
         console.log(matchedDealerships)
         setDealerships(matchedDealerships);
     });
+  }
+  
+  const handleDealerSelect = evt => {
+    console.log(evt.target.id)
+
+    const stateToChange = {...newEmployee}
+    stateToChange.dealership_id = evt.target.id
   }
 
   useEffect(() => {
@@ -53,7 +75,7 @@ const Employees = props => {
             <input 
                 className="employees-searchBar" 
                 type='text' 
-                onChange={handleFieldChange} 
+                onChange={handleEmployeeSearch} 
                 placeholder="Search for Employees" 
             />
             
@@ -82,30 +104,44 @@ const Employees = props => {
                 <div className="modalBody">
                     <Modal.Body className="fieldset">
                         <label className="name--label">First Name:</label>
-                        <input className="modal--input" type="text"/>
+                        <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text"/>
                     </Modal.Body>
                     <Modal.Body className="fieldset">
                         <label className="name--label">Last Name:</label>
-                        <input className="modal--input" type="text"/>
+                        <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text"/>
                     </Modal.Body>
                     <Modal.Body className="fieldset">
                         <label className="name--label">Email:</label>
-                        <input className="modal--input" type="text"/>
+                        <input onChange={handleInputFieldChange} id="email" className="modal--input" type="text"/>
                     </Modal.Body>
                     <Modal.Body className="fieldset">
                         <label className="name--label">Phone:</label>
-                        <input className="modal--input" type="text"/>
+                        <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
                     </Modal.Body>
 
                     {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
                     <Modal.Body className="fieldset">
                         <label className="name--label">Dealership:</label>
-                        <input className="modal--input" type="text" onChange={handleFieldChange2} />
+                        <input className="modal--input" type="text" onChange={handleDealershipSearch} />
                         {dealerships !== undefined && dealerships.length > 0 ? (
                             <div className="dealership--dropdown">
                                 {dealerships.map(dealership => {
                                     return (
-                                    <p>{dealership.business_name}</p>
+                                    <>
+                                        {/* <input 
+                                            type="hidden" 
+                                            id="dealership_id"
+                                            value={dealership.id} 
+                                            onClick={handleDealerSelect} 
+                                        /> */}
+                                        <div 
+                                            className="dealership--select"
+                                            id={dealership.id}
+                                            onClick={handleDealerSelect}  
+                                        >
+                                            {dealership.business_name}
+                                        </div>
+                                    </>
                                     )
                                 })}
                             </div>
@@ -118,7 +154,13 @@ const Employees = props => {
                             <select>
                                 {employeeTypes.map(type => {
                                     return (
-                                        <option>{type.name}</option>
+                                        <option 
+                                            onClick={handleInputFieldChange}
+                                            id="employee_type_id"
+                                            value={type.id}
+                                        >
+                                            {type.name}
+                                        </option>
                                     )
                                 })}
                             </select>
