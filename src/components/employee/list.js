@@ -15,26 +15,40 @@ const Employees = props => {
   }
 
   return (
-    <>
-      <div className="employees--container">
-        <div className="employees--header">Employees</div>
-        <input type='text' onChange={handleFieldChange} />
-        
-        {employees !== undefined ? (
-          <div>
-          {employees.map(employee => {
-            return (
-              <EmployeeCard
-                key={employee.id}
-                employee={employee}
-                {...props}
-              />
-            );
-          })}
-          </div>
-        ) : null}
-      </div>
-    </>
+    <div className="employees--container">
+        <div className="employees--subContainer">
+            <div className="employees--header">
+                Employees
+            </div>
+
+            <input 
+                className="employees-searchBar" 
+                type='text' 
+                onChange={handleFieldChange} 
+                placeholder="Search for Employees" 
+            />
+            
+            {employees !== undefined ? (
+                <div className="searchResults">
+                    {employees.map(employee => {
+                        return (
+                        <EmployeeCard
+                            key={employee.id}
+                            employee={employee}
+                            {...props}
+                        />
+                        );
+                    })}
+                </div>
+            ) : null}
+
+            {/* <div className="btn-hover-zoom"> */}
+                <button className="addEmployee--btn">
+                    Add New Employee
+                </button>
+            {/* </div> */}
+        </div>
+    </div>
   );
 };
 
