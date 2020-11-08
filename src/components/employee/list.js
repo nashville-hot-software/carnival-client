@@ -14,8 +14,8 @@ const Employees = props => {
     last_name: "",
     email_address: "",
     phone: "",
-    dealership_id: 1,
-    employee_type_id: 1
+    dealership_id: 0,
+    employee_type_id: 0
   })
 
   // Below 3 are for Modal
@@ -58,9 +58,21 @@ const Employees = props => {
   }
 
   const handleSubmit = () => {
-    EmployeeManager.PostData("employees", newEmployee)
-        .then(() => setShow(false))
-  }
+    if (newEmployee.first_name === "" && newEmployee.last_name === "") {
+        window.alert("Please fill out employee name fields")
+    } else if (newEmployee.email_address === "") {
+        window.alert("Please enter an email address")
+    } else if (newEmployee.phone === "") {
+        window.alert("Please enter a phone number")
+    } else if (newEmployee.dealership_id === 0) {
+        window.alert("Please select a valid dealership")
+    } else if (newEmployee.employee_type_id === 0) {
+        window.alert("Please select a valid employee type")
+    } else {
+        EmployeeManager.PostData("employees", newEmployee)
+            .then(() => setShow(false))
+    }
+  } 
 
   useEffect(() => {
     fetchEmployeeTypes();
