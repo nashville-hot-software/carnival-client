@@ -13,6 +13,7 @@ const EmployeeCard = props => {
 
   const [employee, setEmployee] = useState(props.employee);
   // const [updatedEmployee, setUpdatedEmployee] = useState();
+  const [dealerships, setDealerships] = useState([]);
   const [employeeTypes, setEmployeeTypes] = useState([]);
 
   const [show, setShow] = useState(false);
@@ -39,6 +40,21 @@ const EmployeeCard = props => {
     console.log(stateToChange);
     setEmployee(stateToChange);
   };
+
+  const handleDealershipSearch = evt => {
+    EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
+      .then(matchedDealerships => {
+        setDealerships(matchedDealerships);
+    });
+  }
+  
+  const handleDealerSelect = evt => {
+    const stateToChange = {...employee}
+    stateToChange.dealership_id = parseInt(evt.target.id)
+    stateToChange.business_name = evt.target.innerHTML
+    console.log(stateToChange);
+    setEmployee(stateToChange)
+  }
 
   const handleSubmit = () => {
     console.log(employee);
@@ -123,13 +139,41 @@ const EmployeeCard = props => {
                   onChange={handleFieldChange}
                 />
               </Modal.Body>
-              <Modal.Body className="fieldset">
+              {/* <Modal.Body className="fieldset">
                 <label><strong>Dealership:</strong></label> 
                 <input 
                   type="text"
                   placeholder={`${employee.business_name}`}
                   onChange={handleFieldChange}
                 />
+              </Modal.Body> */}
+
+              <Modal.Body className="fieldset">
+                  <label className="name--label">Dealership:</label>
+                  <input 
+                    type="text" 
+                    className="modal--input" 
+                    onChange={handleDealershipSearch} 
+                    placeholder={`${employee.business_name}`} 
+                  />
+                  
+                  {dealerships !== undefined && dealerships.length > 0 ? (
+                      <div className="dealership--dropdown">
+                          {dealerships.map(dealership => {
+                              return (
+                              <>
+                                  <div 
+                                      className="dealership--select"
+                                      id={dealership.id}
+                                      onClick={handleDealerSelect}  
+                                  >
+                                      {dealership.business_name}
+                                  </div>
+                              </>
+                              )
+                          })}
+                      </div>
+                  ) : null}
               </Modal.Body>
 
               {employeeTypes !== undefined ? (
