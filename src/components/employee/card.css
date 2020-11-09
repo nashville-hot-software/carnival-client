@@ -32,7 +32,20 @@
     margin-left: 30%;
 }
 
+.modal-edit--body {
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-left: 30%;
+}
+
 .fieldset {
     display: flex;
     flex-direction: column;
+    max-width: 250px;
+}
+
+.edit--switch {
+    margin-left: 10%;
+    margin-bottom: 5%;
 }
