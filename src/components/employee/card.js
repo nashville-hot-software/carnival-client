@@ -23,8 +23,10 @@ const EmployeeCard = props => {
             <Modal.Title>Employee</Modal.Title>
           </Modal.Header>
           <Modal.Body><strong>Name:</strong> {`${employee.first_name} ${employee.last_name}`}</Modal.Body>
-          {/* <Modal.Body><strong>Model:</strong> {vehicle.model}</Modal.Body>
-          <Modal.Body><strong>Vehicles Sold:</strong> {vehicle.vehicles_sold}</Modal.Body> */}
+          <Modal.Body><strong>Email:</strong> {`${employee.email_address}`}</Modal.Body>
+          <Modal.Body><strong>Phone:</strong> {`${employee.phone}`}</Modal.Body>
+          <Modal.Body><strong>Dealership:</strong> {`${employee.business_name}`}</Modal.Body>
+          <Modal.Body><strong>Employee Type:</strong> {`${employee.employee_type}`}</Modal.Body>
         </Modal>
     </>
   );
