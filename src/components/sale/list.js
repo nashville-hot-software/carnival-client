@@ -15,7 +15,7 @@ const SaleList = (props) => {
     };
     
     return (
-        <div className="sales--container">
+        <div className="sales-searchlist--container">
             <div className="sales--subContainer">
                 <div className="sales--header">Sales</div>
                 <input
@@ -32,11 +32,11 @@ const SaleList = (props) => {
                     </div>
                 ) : null}
 
-                {/* <div className="btn-hover-zoom"> */}
-                {/* <button className="addEmployee--btn">
-                    
-                </button> */}
-                {/* </div> */}
+                <div className="btn-hover-zoom">
+                <button className="addSale--btn">
+                    Add Sale
+                </button>
+                </div>
             </div>
         </div>
     );

@@ -295,7 +295,7 @@ const DashBoard = (props) => {
             </CardContent>
           </Card>
         </div>
-        <div className="sales--container">
+        <div className="sales-dashboard--container">
           <Card className={classes.root}>
             <CardContent>
               <h2 className={classes.title}>Recent Sales</h2>
