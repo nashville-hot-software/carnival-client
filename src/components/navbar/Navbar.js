@@ -18,7 +18,7 @@ const NavBar = props => {
             <a href="/employees">Employees</a>
           </li>
           <li className="nav-item">
-            <a>Sales</a>
+          <a href="/sales">Sales</a>
           </li>
           <li className="nav-item">
             <a href="/vehicles">Vehicles</a>
