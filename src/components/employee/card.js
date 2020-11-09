@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 const EmployeeCard = props => {
 
   const [employee, setEmployee] = useState(props.employee);
+  // const [updatedEmployee, setUpdatedEmployee] = useState();
   const [employeeTypes, setEmployeeTypes] = useState([]);
 
   const [show, setShow] = useState(false);
@@ -33,10 +34,33 @@ const EmployeeCard = props => {
   };
 
   const handleFieldChange = evt => {
-    const updatedEmployee = {...employee};
-    updatedEmployee[evt.target.id] = evt.target.value;
-    console.log(updatedEmployee)
+    const stateToChange = {...employee};
+    stateToChange[evt.target.id] = evt.target.value;
+    console.log(stateToChange);
+    setEmployee(stateToChange);
   };
+
+  const handleSubmit = () => {
+    console.log(employee);
+
+    if (employee.first_name === "" && employee.last_name === "") {
+        window.alert("Please fill out employee name fields")
+    } else if (employee.email_address === "") {
+        window.alert("Please enter an email address")
+    } else if (employee.phone === "") {
+        window.alert("Please enter a phone number")
+    } else if (employee.dealership_id === 0) {
+        window.alert("Please select a valid dealership")
+    } else if (employee.employee_type_id === 0) {
+        window.alert("Please select a valid employee type")
+    } else {
+      console.log("It worked!!")
+        // EmployeeManager.PostData("employees", updatedEmployee)
+        //     .then(() => {
+        //       setShow(false)
+        //     })
+    }
+  } 
 
   useEffect(() => {
     fetchEmployeeTypes();
@@ -126,6 +150,12 @@ const EmployeeCard = props => {
                       </select>
                   </Modal.Body>
               ) : null}
+
+              <Modal.Body>
+                  <button onClick={handleSubmit} className="updateEmployee--btn">
+                      Update
+                  </button>
+              </Modal.Body>
             </div>
           )}
 
@@ -133,10 +163,10 @@ const EmployeeCard = props => {
             <FormControl component="fieldset">
               <FormGroup aria-label="position" row>
               <FormControlLabel
-                onClick={handleEditMode}
+                
                 value="Edit"
-                control={<Switch color="primary" />}
-                label="Edit"
+                control={<Switch onClick={handleEditMode} color="primary" />}
+                label="Update"
                 labelPlacement="top"
               />
               </FormGroup>
