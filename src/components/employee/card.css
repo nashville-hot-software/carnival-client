@@ -29,14 +29,18 @@
     border-radius: 8px;
     display: flex !important;
     flex-direction: column !important;
-    margin-left: 30%;
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .modal-edit--body {
     border-radius: 8px;
     display: flex !important;
     flex-direction: column !important;
-    margin-left: 30%;
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .fieldset {

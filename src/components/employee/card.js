@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./card.css"
 
@@ -12,11 +12,19 @@ import FormControl from '@material-ui/core/FormControl';
 const EmployeeCard = props => {
 
   const [employee, setEmployee] = useState(props.employee);
+  const [employeeTypes, setEmployeeTypes] = useState([]);
 
   const [show, setShow] = useState(false);
   
   const [editMode, setEditMode] = useState(false);
 
+  const fetchEmployeeTypes = () => {
+    EmployeeManager.getAll("employeetypes")
+      .then(employeeTypes => {
+        setEmployeeTypes(employeeTypes);
+    });
+  }
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -27,8 +35,12 @@ const EmployeeCard = props => {
   const handleFieldChange = evt => {
     const updatedEmployee = {...employee};
     updatedEmployee[evt.target.id] = evt.target.value;
-    // console.log(updatedEmployee)
+    console.log(updatedEmployee)
   };
+
+  useEffect(() => {
+    fetchEmployeeTypes();
+  }, [])
 
   return (
     <>
@@ -75,7 +87,7 @@ const EmployeeCard = props => {
                   type="text"
                   id="email_address"
                   placeholder={`${employee.email_address}`}
-                  // onChange={handleFieldChange}
+                  onChange={handleFieldChange}
                 />
               </Modal.Body>
               <Modal.Body className="fieldset">
@@ -84,7 +96,7 @@ const EmployeeCard = props => {
                   type="text"
                   id="phone"
                   placeholder={`${employee.phone}`}
-                  // onChange={handleFieldChange}
+                  onChange={handleFieldChange}
                 />
               </Modal.Body>
               <Modal.Body className="fieldset">
@@ -92,17 +104,28 @@ const EmployeeCard = props => {
                 <input 
                   type="text"
                   placeholder={`${employee.business_name}`}
-                  // onChange={handleFieldChange}
+                  onChange={handleFieldChange}
                 />
               </Modal.Body>
-              <Modal.Body className="fieldset">
-                <label><strong>Employee Type:</strong></label> 
-                <input 
-                  type="text"
-                  placeholder={`${employee.employee_type}`}
-                  // onChange={handleFieldChange}
-                />
-              </Modal.Body>
+
+              {employeeTypes !== undefined ? (
+                  <Modal.Body className="fieldset">
+                      <label className="name--label">Employee Type:</label>
+                      <select 
+                          id="employee_type_id" 
+                          onChange={handleFieldChange}
+                      >
+                          <option defaultValue={employee.employee_type}>{employee.employee_type}</option>
+                          {employeeTypes.map(type => {
+                              return (
+                                  <option value={type.id}>
+                                      {type.name}
+                                  </option>
+                              )
+                          })}
+                      </select>
+                  </Modal.Body>
+              ) : null}
             </div>
           )}
 
