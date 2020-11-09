@@ -24,17 +24,18 @@ const Employees = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleEmployeeSearch = evt => {
+    EmployeeManager.getAll("employees","searchTerm",evt.target.value)
+      .then(matchedEmployees => {
+        console.log(matchedEmployees)
+        setEmployees(matchedEmployees);
+    });
+  }
+  
   const fetchEmployeeTypes = () => {
     EmployeeManager.getAll("employeetypes")
       .then(employeeTypes => {
         setEmployeeTypes(employeeTypes);
-    });
-  }
-
-  const handleEmployeeSearch = evt => {
-    EmployeeManager.getAll("employees","searchTerm",evt.target.value)
-      .then(matchedEmployees => {
-        setEmployees(matchedEmployees);
     });
   }
 
