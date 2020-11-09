@@ -1,8 +1,24 @@
-
-
 .sale-grid--container {
-    border-bottom: 1px solid rgb(209, 159, 159)  !important 
+    border-bottom: 1px solid rgb(209, 159, 159) !important;
 }
-.sale-grid--container:hover  {
-    border-bottom: 2px solid rgba(54, 162, 235, 0.8)  !important 
-} 
+
+.sale-grid--container:hover {
+    border-bottom: 2px solid rgba(54, 162, 235, 0.8) !important;
+}
+
+.sale-card--container {
+    border-bottom: 1px solid gray;
+    padding: 10px 10px 2px 10px;
+}
+
+.sale-card--container:hover {
+    cursor: pointer;
+}
+
+.sale-card--name {
+    font-size: 20px;
+}
+
+.sale-card--name:hover {
+    color: lightgray;
+}

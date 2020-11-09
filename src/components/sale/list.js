@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SaleCard from "./tableCard";
+import SaleCard from "./card";
 import SaleManager from "../../api/dataManager";
 import "./list.css";
 
 const SaleList = (props) => {
-    const [sales, setSales] = useState([]);
+    const [sales, setSales] = useState();
 
     const handleFieldChange = (evt) => {
         SaleManager.getAll("sales", "searchTerm", evt.target.value).then(
@@ -13,6 +13,22 @@ const SaleList = (props) => {
             }
         );
     };
+
+    const handleSalesSearch = evt => {
+        SaleManager.getAll("sales","searchTerm",evt.target.value)
+          .then(matchedSales => {
+              console.log(matchedSales)
+            setSales(matchedSales);
+        });
+      }
+
+
+    
+//   const handleInputFieldChange = evt => {
+//     const stateToChange = {...newEmployee}
+//     stateToChange[evt.target.id] = evt.target.value
+//     setNewEmployee(stateToChange)
+//   }
     
     return (
         <div className="sales-searchlist--container">
@@ -21,13 +37,13 @@ const SaleList = (props) => {
                 <input
                     className="sales-searchBar"
                     type="text"
-                    onChange={handleFieldChange}
+                    onChange={handleSalesSearch}
                     placeholder="Search for Sales"
                 />
                 {sales !== undefined ? (
                     <div className="searchResults">
-                        {sales.map((item) => {
-                            return <SaleCard key={item.id} item={item} {...props} />;
+                        {sales.map((sale) => {
+                            return <SaleCard key={sale.id} sale={sale} {...props} />;
                         })}
                     </div>
                 ) : null}

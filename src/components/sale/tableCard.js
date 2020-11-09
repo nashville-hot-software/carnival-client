@@ -10,7 +10,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import NumberFormat from 'react-number-format';
 
 
-const SaleCard = (props) => {
+const SaleTableCard = (props) => {
 
   const [show, setShow] = useState(false);
 
@@ -71,4 +71,4 @@ const SaleCard = (props) => {
   );
 };
 
-export default SaleCard;
+export default SaleTableCard;

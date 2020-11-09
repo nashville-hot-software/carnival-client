@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SaleManager from "../../api/dataManager.js";
-import SaleCard from "./tableCard.js";
+import SaleTableCard from "./tableCard.js";
 import "./sale.css";
 import Table from "@material-ui/core/Table";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -85,8 +85,7 @@ const Sales = (props) => {
                     <TableBody className={classes2.tableBody}>
                         {sales.map((row) => (
                             <>
-                                <SaleCard row={row} {...props} />
-
+                                <SaleTableCard row={row} {...props} />
                             </>
                         ))}
 
