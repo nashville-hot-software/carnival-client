@@ -59,3 +59,58 @@
 .addEmployee--btn:hover {
     transform: scale(1.07);
 }
+.addEmployee--btn:focus {
+    outline: none;
+}
+
+.modal--form {
+    margin-top: 70px !important;
+    border-radius: 8px;
+    max-height: 750px;
+    overflow: scroll;
+}
+
+.modalHeader {
+    margin: 0 auto;
+}
+
+.modalBody {
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+.dealership--dropdown {
+    max-width: 200px;
+    max-height: 200px;
+    overflow: scroll;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.dealership--select:hover {
+    cursor: pointer;
+    color: lightgray;
+}
+
+.modal--input {
+    width: 200px;
+    line-height: 25px;
+    border: 2px solid gray;
+    border-radius: 4px;
+    padding-left: 7px;
+}
+
+.modal--input:focus {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 8px #9ecaed;
+}
