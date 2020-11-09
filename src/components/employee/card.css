@@ -13,3 +13,26 @@
 .employee-card--name:hover {
     color: lightgray;
 }
+
+.modal-details--form {
+    margin-top: 70px !important;
+    border-radius: 8px;
+    max-height: 750px;
+    overflow: scroll;
+}
+
+.modalHeader {
+    margin: 0 auto;
+}
+
+.modal-details--body {
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-left: 30%;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+}
