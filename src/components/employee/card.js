@@ -55,6 +55,16 @@ const EmployeeCard = props => {
     console.log(stateToChange);
     setEmployee(stateToChange)
   }
+  
+  const handleEmployeeTypeSelect = evt => {
+    const stateToChange = {...employee}
+    stateToChange.employee_type_id = parseInt(evt.target.value)
+    
+    const selectedIndex = evt.target.selectedIndex
+    stateToChange.employee_type = evt.target.options[selectedIndex].innerHTML
+    console.log(stateToChange);
+    // setEmployee(stateToChange)
+  }
 
   const handleSubmit = () => {
     console.log(employee);
@@ -181,7 +191,7 @@ const EmployeeCard = props => {
                       <label className="name--label">Employee Type:</label>
                       <select 
                           id="employee_type_id" 
-                          onChange={handleFieldChange}
+                          onChange={handleEmployeeTypeSelect}
                       >
                           <option defaultValue={employee.employee_type}>{employee.employee_type}</option>
                           {employeeTypes.map(type => {
