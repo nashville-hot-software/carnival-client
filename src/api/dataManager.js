@@ -52,16 +52,16 @@ let API = {
         }).then(response => response.json())
 
     },
-    update:(editedObject, database) => {
+    update:(resource, editedObject) => {
         const authHeader = createAuthHeaders()
-        return fetch(`${baseUrl}/${database}/${editedObject.id}`, {
+        return fetch(`${baseUrl}/${resource}/${editedObject.id}`, {
             method: "PUT",
             headers: {
                 // ...authHeader,
-                // Accept: 'application/json',
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(editedObject)
-        }).then(data => data.json())
+        })
     }
 }
 export default API
