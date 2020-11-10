@@ -1,103 +1,63 @@
 import React, { useState, useEffect } from "react";
-import SaleManager from "../../api/dataManager.js";
-import SaleCard from "./card.js";
-import "./sale.css";
-import Table from "@material-ui/core/Table";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import SaleCard from "./card";
+import SaleManager from "../../api/dataManager";
+import "./list.css";
 
-const Sales = (props) => {
+const SaleList = (props) => {
+    const [sales, setSales] = useState();
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            flexGrow: 1,
-            maxHeight: "250px",
-            backgroundColor: "#F5F8FA",
-            overflow: "auto",
-        },
-        paper: {
-            padding: theme.spacing(1),
-            textAlign: "left",
-            color: theme.palette.text.secondary,
-        },
-        tableHeader: {
-            position: "fixed",
-        },
-    }));
-
-    const classes = useStyles();
-
-    const useStyles2 = makeStyles({
-        table: {
-            minWidth: 700,
-        },
-        tableBody: {},
-    });
-    const classes2 = useStyles2();
-
-
-    const StyledTableCell = withStyles((theme) => ({
-        head: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
-        },
-        body: {
-            fontSize: 14,
-        },
-    }))(TableCell);
-
-    // State variable that handles storing the list of sales
-    const [sales, setSales] = useState([]);
-
-    // Function that calls the (SalesManager) datamanager to fetch sales data from the database
-    const getSales = () => {
-        SaleManager.getAll("sales", "limit", 20).then((response) => {
-            setSales(response);
-            console.log(response);
-        });
+    const handleFieldChange = (evt) => {
+        SaleManager.getAll("sales", "searchTerm", evt.target.value).then(
+            (matchedSales) => {
+                setSales(matchedSales);
+            }
+        );
     };
 
-    useEffect(() => {
-        getSales();
-    }, []);
+    const handleSalesSearch = evt => {
+        SaleManager.getAll("sales","searchTerm",evt.target.value)
+          .then(matchedSales => {
+              console.log(matchedSales)
+            setSales(matchedSales);
+        });
+      }
 
 
+    
+//   const handleInputFieldChange = evt => {
+//     const stateToChange = {...newEmployee}
+//     stateToChange[evt.target.id] = evt.target.value
+//     setNewEmployee(stateToChange)
+//   }
+    
     return (
-        <>
-            {/* <div className="salesContainer"> */}
+        <div className="sales-searchlist--container">
+            <div className="sales--subContainer">
+                <div className="sales--header">Sales</div>
+                <input
+                    className="sales-searchBar"
+                    type="text"
+                    onChange={handleSalesSearch}
+                    placeholder="Search for Sales"
+                />
+                {sales !== undefined ? (
+                    <div className="searchResults">
+                        {sales.map((sale) => {
+                            return <SaleCard key={sale.id} sale={sale} {...props} />;
+                        })}
+                    </div>
+                ) : null}
 
-            <TableContainer className={classes.root} component={Paper}>
-                <Table stickyHeader aria-label="customized table">
-                    <TableHead classname={classes.tableHeader}>
-                        <TableRow>
-                            <StyledTableCell align="left">invoice number</StyledTableCell>
-                            <StyledTableCell align="center">purchase date</StyledTableCell>
-                            <StyledTableCell align="center">vehicle</StyledTableCell>
-                            <StyledTableCell align="center">sale type</StyledTableCell>
-                            <StyledTableCell align="center">price</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody className={classes2.tableBody}>
-                        {sales.map((row) => (
-                            <>
-                                <SaleCard row={row} {...props} />
-
-                            </>
-                        ))}
-
-                    </TableBody>
-                </Table>
-            </TableContainer>
-
-            {/* </div> */}
-        </>
+                <div className="btn-hover-zoom">
+                <button className="addSale--btn">
+                    Add Sale
+                </button>
+                </div>
+            </div>
+        </div>
     );
 };
-export default Sales
+
+export default SaleList;
 
 
