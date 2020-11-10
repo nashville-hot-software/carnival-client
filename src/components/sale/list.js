@@ -45,9 +45,9 @@ const SaleList = (props) => {
             });
     }
     const handleDealerSelect = evt => {
-        const stateToChange = {...newEmployee}
+        const stateToChange = {...newSale}
         stateToChange.dealership_id = evt.target.id
-        setNewEmployee(stateToChange)
+        setNewSale(stateToChange)
       }
       const handleInputFieldChange = evt => {
           const stateToChange = { ...newSale }
