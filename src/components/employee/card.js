@@ -12,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 const EmployeeCard = props => {
 
   const [employee, setEmployee] = useState(props.employee);
-  // const [updatedEmployee, setUpdatedEmployee] = useState();
   const [dealerships, setDealerships] = useState([]);
   const [employeeTypes, setEmployeeTypes] = useState([]);
 
@@ -37,7 +36,6 @@ const EmployeeCard = props => {
   const handleFieldChange = evt => {
     const stateToChange = {...employee};
     stateToChange[evt.target.id] = evt.target.value;
-    console.log(stateToChange);
     setEmployee(stateToChange);
   };
 
@@ -51,19 +49,12 @@ const EmployeeCard = props => {
   const handleDealerSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.dealership_id = parseInt(evt.target.id)
-    stateToChange.business_name = evt.target.innerHTML
-    console.log(stateToChange);
     setEmployee(stateToChange)
   }
   
   const handleEmployeeTypeSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.employee_type_id = parseInt(evt.target.value)
-    console.log(stateToChange)
-
-    const selectedIndex = evt.target.selectedIndex
-
-    stateToChange.employee_type = evt.target.options[selectedIndex].innerHTML
     setEmployee(stateToChange)
   }
 
