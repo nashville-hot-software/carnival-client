@@ -5,14 +5,21 @@ import "./list.css";
 
 const SaleList = (props) => {
     const [sales, setSales] = useState();
+    const [show, setShow] = useState(false);
 
-    const handleFieldChange = (evt) => {
-        SaleManager.getAll("sales", "searchTerm", evt.target.value).then(
-            (matchedSales) => {
-                setSales(matchedSales);
-            }
-        );
-    };
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [newSale, setNewSale] = useState({
+        city: "",
+        last_name: "",
+        email_address: "",
+        phone: "",
+        dealership_id: 0,
+        employee_type_id: 0
+      })
+
+
+    
 
     const handleSalesSearch = evt => {
         SaleManager.getAll("sales","searchTerm",evt.target.value)
@@ -24,11 +31,11 @@ const SaleList = (props) => {
 
 
     
-//   const handleInputFieldChange = evt => {
-//     const stateToChange = {...newEmployee}
-//     stateToChange[evt.target.id] = evt.target.value
-//     setNewEmployee(stateToChange)
-//   }
+  const handleInputFieldChange = evt => {
+    const stateToChange = {...newSale}
+    stateToChange[evt.target.id] = evt.target.value
+    setNewSale(stateToChange)
+  }
     
     return (
         <div className="sales-searchlist--container">
