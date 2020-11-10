@@ -129,7 +129,7 @@ const DashBoard = (props) => {
       response.forEach((sale) => {
         totalRev += parseFloat(sale.price);
       });
-      setRevenue(totalRev);
+      setRevenue(totalRev.toFixed(2));
     });
   };
 
