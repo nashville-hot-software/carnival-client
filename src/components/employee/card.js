@@ -72,7 +72,6 @@ const EmployeeCard = props => {
     } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
     } else {
-      console.log("It worked!!")
         EmployeeManager.update("employees", employee, employee.id)
             .then(() => {
               setEditMode(false)

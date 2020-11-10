@@ -13,3 +13,64 @@
 .dealership-card--name:hover {
     color: lightgray;
 }
+
+/* Modal styling below */
+
+
+.modal-details--form {
+    margin-top: 70px !important;
+    border-radius: 8px;
+    max-height: 750px;
+    overflow: scroll;
+}
+
+.modalHeader {
+    margin: 0 auto;
+}
+
+.modal-details--body {
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.modal-edit--body {
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    overflow: scroll;
+}
+
+.edit--switch {
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+.updateEmployee--btn {
+    line-height: 40px;
+    width: 200px;
+    margin-top: 3.5%;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF7A59;
+    color: #252222;
+    transition: transform .5s ease;
+}
+.updateEmployee--btn:hover {
+    transform: scale(1.07);
+}
+.updateEmployee--btn:focus {
+    outline: none;
+}
