@@ -59,6 +59,7 @@ const EmployeeCard = props => {
   const handleEmployeeTypeSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.employee_type_id = parseInt(evt.target.value)
+    console.log(stateToChange)
 
     const selectedIndex = evt.target.selectedIndex
 
@@ -81,10 +82,10 @@ const EmployeeCard = props => {
         window.alert("Please select a valid employee type")
     } else {
       console.log("It worked!!")
-        // EmployeeManager.PostData("employees", updatedEmployee)
-        //     .then(() => {
-        //       setShow(false)
-        //     })
+        EmployeeManager.update("employees", employee, employee.id)
+            .then(() => {
+              setEditMode(false)
+            })
     }
   } 
 

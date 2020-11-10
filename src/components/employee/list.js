@@ -95,10 +95,10 @@ const Employees = props => {
             
             {employees !== undefined ? (
                 <div className="searchResults">
-                    {employees.map(employee => {
+                    {employees.map((employee, i) => {
                         return (
                         <EmployeeCard
-                            key={employee.id}
+                            key={i}
                             employee={employee}
                             {...props}
                         />
