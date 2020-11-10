@@ -1,0 +1,15 @@
+.dealership-card--container {
+    border-bottom: 1px solid gray;
+    padding: 10px 10px 2px 10px;
+}
+
+.dealership-card--container:hover {
+    cursor: pointer;
+}
+
+.dealership-card--name {
+    font-size: 20px;
+}
+.dealership-card--name:hover {
+    color: lightgray;
+}
