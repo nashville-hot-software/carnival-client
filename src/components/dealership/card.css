@@ -20,8 +20,6 @@
 .modal-details--form {
     margin-top: 70px !important;
     border-radius: 8px;
-    max-height: 750px;
-    overflow: scroll;
 }
 
 .modalHeader {
