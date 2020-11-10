@@ -7,12 +7,12 @@ import "./list.css";
 
 const SaleList = (props) => {
     // var invNum = require('invoice-number')
-    // invNum.next('899ZZZ9')
+    // invNum.next(`${incrementedValue}`) 899ZZZ9
+//    let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     const [sales, setSales] = useState();
     const [show, setShow] = useState(false);
-    const [employeeTypes, setEmployeeTypes] = useState([]);
     const [dealerships, setDealerships] = useState([]);
-
+    const [vehicles, setVehicles] = useState([]);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [newSale, setNewSale] = useState(      {
@@ -61,6 +61,8 @@ const SaleList = (props) => {
             window.alert("Please select a valid vehicle")
         } else if (newSale.price === "") {
             window.alert("Please select a valid vehicle")
+        } else if (newSale.price === "") {
+            window.alert("Please select a valid vehicle")
         } else if (newSale.invoice_number === "") {
             window.alert("Please select a valid vehicle")
         } else {
@@ -83,9 +85,20 @@ const SaleList = (props) => {
                 setDealerships(matchedDealerships);
             });
     }
+    const handleVehicleSearch = evt => {
+        DataManager.getAll("vehicles", "searchTerm", evt.target.value)
+            .then(matchedVehicles => {
+                setVehicles(matchedVehicles);
+            });
+    }
     const handleDealerSelect = evt => {
         const stateToChange = { ...newSale }
         stateToChange.dealership_id = evt.target.id
+        setNewSale(stateToChange)
+    }
+    const handleVehicleSelect = evt => {
+        const stateToChange = { ...newSale }
+        stateToChange.vehicle_id = evt.target.id
         setNewSale(stateToChange)
     }
     const handleInputFieldChange = evt => {
