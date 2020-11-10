@@ -59,7 +59,7 @@ const Employees = props => {
   }
 
   const handleSubmit = () => {
-    if (newEmployee.first_name === "" && newEmployee.last_name === "") {
+    if (newEmployee.first_name === "" || newEmployee.last_name === "") {
         window.alert("Please fill out employee name fields")
     } else if (newEmployee.email_address === "") {
         window.alert("Please enter an email address")

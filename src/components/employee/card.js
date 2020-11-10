@@ -59,17 +59,17 @@ const EmployeeCard = props => {
   const handleEmployeeTypeSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.employee_type_id = parseInt(evt.target.value)
-    
+
     const selectedIndex = evt.target.selectedIndex
+
     stateToChange.employee_type = evt.target.options[selectedIndex].innerHTML
-    console.log(stateToChange);
-    // setEmployee(stateToChange)
+    setEmployee(stateToChange)
   }
 
   const handleSubmit = () => {
     console.log(employee);
 
-    if (employee.first_name === "" && employee.last_name === "") {
+    if (employee.first_name === "" || employee.last_name === "") {
         window.alert("Please fill out employee name fields")
     } else if (employee.email_address === "") {
         window.alert("Please enter an email address")
