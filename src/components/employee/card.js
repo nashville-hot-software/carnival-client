@@ -11,34 +11,39 @@ import FormControl from '@material-ui/core/FormControl';
 
 const EmployeeCard = props => {
 
+  // employee obj to update (passed down from parent list component)
   const [employee, setEmployee] = useState(props.employee);
+
+  // dealerships fetched from search, populating the dealership select dropdown
   const [dealerships, setDealerships] = useState([]);
+
+  // employee types fetched from search, populating the employee types select dropdown
   const [employeeTypes, setEmployeeTypes] = useState([]);
 
+  // State for modal show/close
   const [show, setShow] = useState(false);
-  
+
+  // State for modal edit mode
   const [editMode, setEditMode] = useState(false);
 
-  const fetchEmployeeTypes = () => {
-    EmployeeManager.getAll("employeetypes")
-      .then(employeeTypes => {
-        setEmployeeTypes(employeeTypes);
-    });
-  }
-  
+ 
+  // Open / close the modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // Turn on edit mode with MUI switch 
   const handleEditMode = () => {
     setEditMode(!editMode)
   };
 
+  // (For edit mode) Update employee object as new values entered in input fields
   const handleFieldChange = evt => {
     const stateToChange = {...employee};
     stateToChange[evt.target.id] = evt.target.value;
     setEmployee(stateToChange);
   };
 
+  // Fetches dealerships for the dropdown menu to select a new dealership
   const handleDealershipSearch = evt => {
     EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
       .then(matchedDealerships => {
@@ -46,18 +51,29 @@ const EmployeeCard = props => {
     });
   }
   
+  // Update employee obj with new dealership selected from expanded dropdown
   const handleDealerSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.dealership_id = parseInt(evt.target.id)
     setEmployee(stateToChange)
   }
-  
+
+  // Fetch all employee types for the select menu in modal edit form
+  const fetchEmployeeTypes = () => {
+    EmployeeManager.getAll("employeetypes")
+      .then(employeeTypes => {
+        setEmployeeTypes(employeeTypes);
+    });
+  }
+
+  // Update employee obj with new employee type selected from select menu
   const handleEmployeeTypeSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.employee_type_id = parseInt(evt.target.value)
     setEmployee(stateToChange)
   }
 
+  // Submits PUT req if all conditions from the form are met
   const handleSubmit = () => {
     console.log(employee);
 
@@ -79,6 +95,7 @@ const EmployeeCard = props => {
     }
   } 
 
+  // Fetch the employee types for the dropdown as soon as component mounts
   useEffect(() => {
     fetchEmployeeTypes();
   }, [])
