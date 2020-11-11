@@ -73,67 +73,66 @@ const DealershipCard = props => {
             </div>
           ) : (
             <div className="modal-edit--body">
-              <Modal.Body className="fieldset">
-                <label><strong>Dealership Name:</strong></label> 
-                <input 
-                  type="text"
-                  id="business_name"
-                  onChange={handleFieldChange}
-                  placeholder={dealership.business_name}
-                />
-              </Modal.Body>
-              
-              <Modal.Body className="fieldset">
-                <label><strong>City:</strong></label> 
-                <input 
-                  type="text"
-                  id="city"
-                  onChange={handleFieldChange}
-                  placeholder={dealership.city}
-                />
-              </Modal.Body>
-              
-              <Modal.Body className="fieldset">
-                <label><strong>State:</strong></label> 
-                <input 
-                  type="text"
-                  id="state"
-                  onChange={handleFieldChange}
-                  placeholder={dealership.state}
-                />
-              </Modal.Body>
-              
-              <Modal.Body className="fieldset">
-                <label><strong>Phone Number:</strong></label> 
-                <input 
-                  type="text"
-                  id="phone"
-                  onChange={handleFieldChange}
-                  placeholder={dealership.phone}
-                />
-              </Modal.Body>
-              
-              <Modal.Body className="fieldset">
-                <label><strong>Website:</strong></label> 
-                <input 
-                  type="text"
-                  id="website"
-                  onChange={handleFieldChange}
-                  placeholder={dealership.website}
-                />
-              </Modal.Body>
-              
-              <Modal.Body className="fieldset">
-                <label><strong>Tax ID:</strong></label> 
-                <input 
-                  type="text"
-                  id="tax_id"
-                  onChange={handleFieldChange}
-                  placeholder={dealership.tax_id}
-                />
-              </Modal.Body>
+                <Modal.Body className="fieldset">
+                  <label><strong>Dealership Name:</strong></label> 
+                  <input 
+                    type="text"
+                    id="business_name"
+                    onChange={handleFieldChange}
+                    placeholder={dealership.business_name}
+                    className="inputField"
+                  />
+                
+                
+                  <label><strong>City:</strong></label> 
+                  <input 
+                    type="text"
+                    id="city"
+                    onChange={handleFieldChange}
+                    placeholder={dealership.city}
+                    className="inputField"
+                  />
+                
+                
+                  <label><strong>State:</strong></label> 
+                  <input 
+                    type="text"
+                    id="state"
+                    onChange={handleFieldChange}
+                    placeholder={dealership.state}
+                    className="inputField"
+                  />
+                
+                
+                  <label><strong>Phone Number:</strong></label> 
+                  <input 
+                    type="text"
+                    id="phone"
+                    onChange={handleFieldChange}
+                    placeholder={dealership.phone}
+                    className="inputField"
+                  />
+                
+                
+                  <label><strong>Website:</strong></label> 
+                  <input 
+                    type="text"
+                    id="website"
+                    onChange={handleFieldChange}
+                    placeholder={dealership.website}
+                    className="inputField"
+                  />
+                
+                
+                  <label><strong>Tax ID:</strong></label> 
+                  <input 
+                    type="text"
+                    id="tax_id"
+                    onChange={handleFieldChange}
+                    placeholder={dealership.tax_id}
+                    className="inputField"
+                  />
 
-              <Modal.Body>
                   <button className="updateEmployee--btn">
                       Update
                   </button>

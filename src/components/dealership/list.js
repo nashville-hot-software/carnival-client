@@ -96,30 +96,23 @@ const Dealerships = props => {
                     <Modal.Body className="fieldset">
                         <label className="name--label">Dealership Name:</label>
                         <input onChange={handleInputFieldChange} id="business_name" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">City:</label>
                         <input onChange={handleInputFieldChange} id="city" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">State:</label>
                         <input onChange={handleInputFieldChange} id="state" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">Phone:</label>
                         <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">Website:</label>
                         <input onChange={handleInputFieldChange} id="website" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">Tax ID:</label>
                         <input onChange={handleInputFieldChange} id="tax_id" className="modal--input" type="text"/>
-                    </Modal.Body>
 
-                    <Modal.Body>
-                        <button onClick={handleSubmit} className="addEmployee--btn">
+                        <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
                             Submit
                         </button>
                     </Modal.Body>

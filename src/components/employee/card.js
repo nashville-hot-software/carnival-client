@@ -111,51 +111,46 @@ const EmployeeCard = props => {
                   id="first_name"
                   placeholder={`${employee.first_name}`}
                   onChange={handleFieldChange}
+                  className="inputField"
                 />
-              </Modal.Body>
-              <Modal.Body className="fieldset">
+              
+              
                 <label><strong>Last Name:</strong></label> 
                 <input 
                   type="text"
                   id="last_name"
                   placeholder={`${employee.last_name}`}
                   onChange={handleFieldChange}
+                  className="inputField"
                 />
-              </Modal.Body>
-              <Modal.Body className="fieldset">
+              
+              
                 <label><strong>Email:</strong></label> 
                 <input 
                   type="text"
                   id="email_address"
                   placeholder={`${employee.email_address}`}
                   onChange={handleFieldChange}
+                  className="inputField"
                 />
-              </Modal.Body>
-              <Modal.Body className="fieldset">
-                <label><strong>Phone:</strong></label> 
-                <input 
-                  type="text"
-                  id="phone"
-                  placeholder={`${employee.phone}`}
-                  onChange={handleFieldChange}
-                />
-              </Modal.Body>
-              {/* <Modal.Body className="fieldset">
-                <label><strong>Dealership:</strong></label> 
-                <input 
-                  type="text"
-                  placeholder={`${employee.business_name}`}
-                  onChange={handleFieldChange}
-                />
-              </Modal.Body> */}
-
-              <Modal.Body className="fieldset">
+              
+              
+                  <label><strong>Phone:</strong></label> 
+                  <input 
+                    type="text"
+                    id="phone"
+                    placeholder={`${employee.phone}`}
+                    onChange={handleFieldChange}
+                    className="inputField"
+                  />
+              
                   <label className="name--label">Dealership:</label>
                   <input 
                     type="text" 
                     className="modal--input" 
                     onChange={handleDealershipSearch} 
                     placeholder={`${employee.business_name}`} 
+                    className="inputField"
                   />
                   
                   {dealerships !== undefined && dealerships.length > 0 ? (
@@ -175,28 +170,28 @@ const EmployeeCard = props => {
                           })}
                       </div>
                   ) : null}
-              </Modal.Body>
+              
 
-              {employeeTypes !== undefined ? (
-                  <Modal.Body className="fieldset">
-                      <label className="name--label">Employee Type:</label>
-                      <select 
-                          id="employee_type_id" 
-                          onChange={handleEmployeeTypeSelect}
-                      >
-                          <option defaultValue={employee.employee_type}>{employee.employee_type}</option>
-                          {employeeTypes.map(type => {
-                              return (
-                                  <option value={type.id}>
-                                      {type.name}
-                                  </option>
-                              )
-                          })}
-                      </select>
-                  </Modal.Body>
-              ) : null}
+                  {employeeTypes !== undefined ? (
+                      <>
+                          <label className="employeeType--label">Employee Type:</label>
+                          <select 
+                              id="employee_type_id" 
+                              onChange={handleEmployeeTypeSelect}
+                              className="employeeType--select"
+                          >
+                              <option defaultValue={employee.employee_type}>{employee.employee_type}</option>
+                              {employeeTypes.map(type => {
+                                  return (
+                                      <option value={type.id}>
+                                          {type.name}
+                                      </option>
+                                  )
+                              })}
+                          </select>
+                        </>
+                  ) : null}
 
-              <Modal.Body>
                   <button onClick={handleSubmit} className="updateEmployee--btn">
                       Update
                   </button>

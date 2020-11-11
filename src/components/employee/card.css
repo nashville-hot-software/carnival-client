@@ -49,6 +49,23 @@
     display: flex;
     flex-direction: column;
     max-width: 250px;
+    /* max-height: 450px;
+    overflow: scroll; */
+}
+
+.inputField {
+    margin-bottom: 15px;
+    border-radius: 4px;
+    line-height: 25px;
+    border: 2px solid gray;
+}
+.inputField:last-of-type {
+    margin-bottom: 0;
+}
+.inputField:focus {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 8px #9ecaed;
 }
 
 .edit--switch {
@@ -59,7 +76,7 @@
 .updateEmployee--btn {
     line-height: 40px;
     width: 200px;
-    margin-top: 3.5%;
+    margin-top: 15%;
     border-radius: 5px;
     border: none;
     background-color: #FF7A59;
@@ -79,4 +96,8 @@
 }
 .dealership--dropdown:hover {
     height: 200px;
+}
+
+.employeeType--label {
+    margin-top: 15px;
 }
