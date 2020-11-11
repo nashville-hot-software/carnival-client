@@ -8,6 +8,7 @@ const Employees = props => {
 
   // Holds all employees returned from employee search bar
   const [employees, setEmployees] = useState([]);
+  const [updatedEmployees, setUpdatedEmployees] = useState([]);
 
   // Skeleton for new employee to be POSTed
   const [newEmployee, setNewEmployee] = useState({
@@ -39,7 +40,12 @@ const Employees = props => {
         .then(matchedEmployees => {
             console.log(matchedEmployees)
             setEmployees(matchedEmployees);
+            // REVIEW: this below is highlighting the issue.. cards are lagging behind
+            // this state update after the fetch...
+            console.log(employees)
         });
+    } else {
+        setEmployees([])
     }
   }
   
@@ -88,7 +94,9 @@ const Employees = props => {
 
   useEffect(() => {
     fetchEmployeeTypes();
-  }, [])
+    console.log(employees)
+    // setUpdatedEmployees(employees)
+  }, [employees])
 
   return (
     <div className="employees--container">
@@ -104,19 +112,21 @@ const Employees = props => {
                 placeholder="Search for Employees" 
             />
             
-            {employees !== undefined ? (
-                <div className="searchResults">
-                    {employees.map((employee, i) => {
-                        return (
-                        <EmployeeCard
-                            key={i}
-                            employee={employee}
-                            {...props}
-                        />
-                        );
-                    })}
-                </div>
-            ) : null}
+            <div className="searchResults">
+                {employees.length > 0 ? (
+                <>
+                {employees.map(employee => {
+                    return (
+                    <EmployeeCard
+                        // key={i}
+                        employee={employee}
+                        {...props}
+                    />
+                    );
+                })}
+                </>
+                ) : null}
+            </div>
 
             <button onClick={() => handleShow()} className="addEmployee--btn">
                 Add New Employee
