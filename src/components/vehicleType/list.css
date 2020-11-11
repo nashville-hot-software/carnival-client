@@ -1,8 +1,8 @@
-.vehicletypes--container {
+.vehicles--container {
     margin-left: 13%;
 }
 
-.vehicletypes--subContainer {
+.vehicles--subContainer {
     background-color: #F5F8FA;
     box-shadow: 1px 3px 6px 1px #cacaca;
     border-radius: 7px;
@@ -14,7 +14,7 @@
     align-items: center;
 }
 
-.vehicletypes--header {
+.vehicles--header {
     margin-top: 40px;
     margin-bottom: 30px;
     font-family: 'Roboto', sans-serif;
@@ -23,14 +23,14 @@
     color: #33475B;
 }
 
-.vehicletypes-searchBar {
+.vehicles-searchBar {
     width: 400px;
     line-height: 35px;
     border: 2px solid gray;
     border-radius: 4px;
     padding-left: 7px;
 }
-.vehicletypes-searchBar:focus {
+.vehicles-searchBar:focus {
     outline: none;
     border-color: #9ecaed;
     box-shadow: 0 0 8px #9ecaed;
