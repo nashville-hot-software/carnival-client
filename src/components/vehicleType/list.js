@@ -2,19 +2,48 @@ import React, { useState, useEffect } from "react";
 import VehicleTypeCard from "./card";
 import VehicleManager from "../../api/dataManager";
 import "./list.css"
-import { Modal, ModalTitle } from "react-bootstrap";
-import ModalHeader from "react-bootstrap/esm/ModalHeader";
+import { Modal} from "react-bootstrap";
 
 const VehicleType = props => {
 
-    const [vehicles, setVehicles] = useState([]);
+		const [vehicles, setVehicles] = useState([]);
+		const [newVehicle, setNewVehicle] = useState({
+			body_type: "",
+			make: "",
+			model: ""
+		});
+
+const [show, setShow] = useState(false);
+
+		const handleClose = () => setShow(false);
+		const handleShow = () => setShow(true);
+	
 
     const handleFieldChange = evt => {
     VehicleManager.getAll("vehicletypes","searchTerm",evt.target.value)
         .then(matchedVehicles => {
             setVehicles(matchedVehicles);
         });
-    }
+		}
+		
+		const handleInputFieldChange = evt => {
+			const stateToChange = {...newVehicle}
+			stateToChange[evt.target.id] = evt.target.value
+			setNewVehicle(stateToChange)
+		}
+
+		const handleSubmit = () => {
+			if (newVehicle.body_type === "" || newVehicle.last_name === "") {
+					window.alert("Please fill out body type field")
+			} else if (newVehicle.make === "") {
+					window.alert("Please enter a make")
+			} else if (newVehicle.model === "") {
+					window.alert("Please enter a model")
+			} else {
+					VehicleManager.PostData("vehicletypes", newVehicle)
+							.then(() => setShow(false))
+			}
+		} 
   
     return (
       <>
@@ -25,13 +54,14 @@ const VehicleType = props => {
             </div>
 
 						<input 
+							className="vehicletypes-searchBar" 
 							placeholder="Search by model type" 
 							type='text' 
 							onChange={handleFieldChange}
 						/>
 						
 						{vehicles !== undefined ? (
-								<div>
+								<div className="searchResults">
 							{vehicles.map(vehicletype => {
 									return (
 											<VehicleTypeCard
@@ -46,8 +76,8 @@ const VehicleType = props => {
 
 						<button 
 							onClick={() => handleShow()} 
-							className="addEmployee--btn">
-              Add New Employee
+							className="addVehicleType--btn">
+              Add New Vehicle
 						</button>
 
 						<Modal 
@@ -71,55 +101,13 @@ const VehicleType = props => {
                         <input onChange={handleInputFieldChange} id="model" className="modal--input" type="text"/>
                     </Modal.Body>
 
-                    {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
-                    <Modal.Body className="fieldset">
-                        <label className="name--label">Dealership:</label>
-                        <input className="modal--input" type="text" onChange={handleDealershipSearch} />
-                        {dealerships !== undefined && dealerships.length > 0 ? (
-                            <div className="dealership--dropdown">
-                                {dealerships.map(dealership => {
-                                    return (
-                                    <>
-                                        <div 
-                                            className="dealership--select"
-                                            id={dealership.id}
-                                            onClick={handleDealerSelect}  
-                                        >
-                                            {dealership.business_name}
-                                        </div>
-                                    </>
-                                    )
-                                })}
-                            </div>
-                        ) : null}
-                    </Modal.Body>
-                    
-                    {employeeTypes !== undefined ? (
-                        <Modal.Body className="fieldset">
-                            <label className="name--label">Employee Type:</label>
-                            <select 
-                                id="employee_type_id" 
-                                onChange={handleInputFieldChange}
-                            >
-                                {employeeTypes.map(type => {
-                                    return (
-                                        <option value={type.id}>
-                                            {type.name}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                        </Modal.Body>
-                    ) : null}
-
                     <Modal.Body>
-                        <button onClick={handleSubmit} className="addEmployee--btn">
+                        <button onClick={handleSubmit} className="addVehicleType--btn">
                             Submit
                         </button>
                     </Modal.Body>
 								</div>
 						</Modal>
-
           </div>
         </div>
       </>
