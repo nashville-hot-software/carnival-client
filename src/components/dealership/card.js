@@ -11,46 +11,53 @@ import FormControl from '@material-ui/core/FormControl';
 
 const DealershipCard = props => {
 
+  // Dealership obj to update, coming from parent dealership list map
   const [dealership, setDealership] = useState(props.dealership);
 
+  // State to hide/show the modal
   const [show, setShow] = useState(false);
 
+  // State for modal edit mode on MUI switch click
   const [editMode, setEditMode] = useState(false);
 
+  // Handle opening/closing of modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
+  // Updates modal edit state to engage edit mode on MUI switch click
   const handleEditMode = () => {
     setEditMode(!editMode)
   };
 
+  // Update dealership state obj on new input field values entered
   const handleFieldChange = evt => {
     const stateToChange = {...dealership};
     stateToChange[evt.target.id] = evt.target.value;
-    console.log(dealership)
     setDealership(stateToChange);
   };
 
-  // const handleSubmit = () => {
-  //   console.log(employee);
-
-  //   if (employee.first_name === "" || employee.last_name === "") {
-  //       window.alert("Please fill out employee name fields")
-  //   } else if (employee.email_address === "") {
-  //       window.alert("Please enter an email address")
-  //   } else if (employee.phone === "") {
-  //       window.alert("Please enter a phone number")
-  //   } else if (employee.dealership_id === 0) {
-  //       window.alert("Please select a valid dealership")
-  //   } else if (employee.employee_type_id === 0) {
-  //       window.alert("Please select a valid employee type")
-  //   } else {
-  //       EmployeeManager.update("employees", employee, employee.id)
-  //           .then(() => {
-  //             setEditMode(false)
-  //           })
-  //   }
-  // } 
+  // Submit a PUT request with updated dealership state obj if all form
+  // condtions are met
+  const handleSubmit = () => {
+    if (dealership.business_name === "") {
+        window.alert("Please fill out dealership name fields")
+    } else if (dealership.city === "") {
+        window.alert("Please enter a city")
+    } else if (dealership.state === "") {
+        window.alert("Please enter a state")
+    } else if (dealership.phone === "") {
+        window.alert("Please enter a phone number")
+    } else if (dealership.website === "") {
+        window.alert("Please enter a website")
+    } else if (dealership.tax_id === "") {
+        window.alert("Please enter a tax ID")
+    } else {
+        DealershipManager.update("dealerships", dealership, dealership.id)
+            .then(() => {
+              setEditMode(false)
+            })
+    }
+  } 
 
   return (
     <>
@@ -133,7 +140,7 @@ const DealershipCard = props => {
                     className="inputField"
                   />
 
-                  <button className="updateEmployee--btn">
+                  <button onClick={handleSubmit} className="updateEmployee--btn">
                       Update
                   </button>
               </Modal.Body>
