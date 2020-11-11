@@ -34,11 +34,13 @@ const Employees = props => {
 
   
   const handleEmployeeSearch = evt => {
-    EmployeeManager.getAll("employees","searchTerm",evt.target.value)
-      .then(matchedEmployees => {
-        console.log(matchedEmployees)
-        setEmployees(matchedEmployees);
-    });
+    if (evt.target.value.length > 0) {
+        EmployeeManager.getAll("employees","searchTerm",evt.target.value)
+        .then(matchedEmployees => {
+            console.log(matchedEmployees)
+            setEmployees(matchedEmployees);
+        });
+    }
   }
   
   const fetchEmployeeTypes = () => {
