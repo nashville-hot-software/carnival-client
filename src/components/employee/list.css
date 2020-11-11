@@ -49,8 +49,8 @@
 .addEmployee--btn {
     line-height: 40px;
     width: 200px;
-    margin-top: 3.5%;
     border-radius: 5px;
+    margin-top: 3.5%;
     border: none;
     background-color: #FF7A59;
     color: #252222;
@@ -81,14 +81,17 @@
     align-items: center !important;
 }
 
+
 .fieldset {
     display: flex;
     flex-direction: column;
+    max-width: 250px;
+    /* max-height: 450px;
+    overflow: scroll; */
 }
 
 .dealership--dropdown {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 230px;
     overflow: scroll;
     border: 1px solid gray;
     border-radius: 8px;
@@ -102,15 +105,25 @@
 }
 
 .modal--input {
-    width: 200px;
     line-height: 25px;
+    margin-bottom: 15px;
     border: 2px solid gray;
     border-radius: 4px;
     padding-left: 7px;
 }
-
 .modal--input:focus {
     outline: none;
     border-color: #9ecaed;
     box-shadow: 0 0 8px #9ecaed;
+}
+.modal--input:last-of-type {
+    margin-bottom: 0;
+}
+
+.employeeType--label {
+    margin-top: 15px;
+}
+
+.modal--addBtn {
+    margin: 15% 0 10% 0;
 }
