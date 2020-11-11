@@ -33,6 +33,7 @@ const EmployeeCard = props => {
 
   // Turn on edit mode with MUI switch 
   const handleEditMode = () => {
+    fetchEmployeeTypes();
     setEditMode(!editMode)
   };
 
@@ -97,7 +98,7 @@ const EmployeeCard = props => {
 
   // Fetch the employee types for the dropdown as soon as component mounts
   useEffect(() => {
-    fetchEmployeeTypes();
+    // fetchEmployeeTypes();
   }, [])
 
   return (
