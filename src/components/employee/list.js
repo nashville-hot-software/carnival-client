@@ -24,17 +24,18 @@ const Employees = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleEmployeeSearch = evt => {
+    EmployeeManager.getAll("employees","searchTerm",evt.target.value)
+      .then(matchedEmployees => {
+        console.log(matchedEmployees)
+        setEmployees(matchedEmployees);
+    });
+  }
+  
   const fetchEmployeeTypes = () => {
     EmployeeManager.getAll("employeetypes")
       .then(employeeTypes => {
         setEmployeeTypes(employeeTypes);
-    });
-  }
-
-  const handleEmployeeSearch = evt => {
-    EmployeeManager.getAll("employees","searchTerm",evt.target.value)
-      .then(matchedEmployees => {
-        setEmployees(matchedEmployees);
     });
   }
 
@@ -58,7 +59,7 @@ const Employees = props => {
   }
 
   const handleSubmit = () => {
-    if (newEmployee.first_name === "" && newEmployee.last_name === "") {
+    if (newEmployee.first_name === "" || newEmployee.last_name === "") {
         window.alert("Please fill out employee name fields")
     } else if (newEmployee.email_address === "") {
         window.alert("Please enter an email address")
@@ -94,10 +95,10 @@ const Employees = props => {
             
             {employees !== undefined ? (
                 <div className="searchResults">
-                    {employees.map(employee => {
+                    {employees.map((employee, i) => {
                         return (
                         <EmployeeCard
-                            key={employee.id}
+                            key={i}
                             employee={employee}
                             {...props}
                         />
