@@ -19,6 +19,7 @@ import NumberFormat from "react-number-format";
 import Modal from "react-bootstrap/Modal";
 import welcomeImage from "../../images/Welcome1.png";
 import DashBoardDetailCard from "../dashboard/DashBoardDetailCard";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 275,
@@ -157,7 +158,7 @@ const DashBoard = (props) => {
       <div className="dashboard--header">Dashboard</div>
 
       <div className="dashboard-row--1">
-        <div className="vehicles--container">
+        <div className="saleMetrics--container">
           <Card className={classes.root}>
             <CardContent className={classes.content}>
               <div className="saleMetric--container">
@@ -282,11 +283,12 @@ const DashBoard = (props) => {
         <div className="vehicles--container">
           <Card className={classes.root}>
             <CardContent>
-              <h2>Top Vehicles</h2>
+              <h2>Top Vehicles Sold</h2>
               <Vehicles {...props} />
             </CardContent>
           </Card>
         </div>
+
         <div className="customers--container">
           <Card className={classes.root}>
             <CardContent>
@@ -295,6 +297,7 @@ const DashBoard = (props) => {
             </CardContent>
           </Card>
         </div>
+
         <div className="sales-dashboard--container">
           <Card className={classes.root}>
             <CardContent>
