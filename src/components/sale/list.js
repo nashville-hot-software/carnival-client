@@ -106,14 +106,8 @@ const SaleList = (props) => {
         stateToChange[evt.target.id] = evt.target.value
         setNewSale(stateToChange)
     }
-    const fetchEmployeeTypes = () => {
-        DataManager.getAll("employeetypes")
-            .then(employeeTypes => {
-                setEmployeeTypes(employeeTypes);
-            });
-    }
+ 
     useEffect(() => {
-        fetchEmployeeTypes();
     }, [])
     
    
@@ -138,7 +132,7 @@ const SaleList = (props) => {
                 ) : null}
 
                 <div className="btn-hover-zoom">
-                    <button className="addSale--btn">
+                    <button onClick={() => handleShow()} className="addSale--btn">
                         Add Sale
                 </button>
 
@@ -185,24 +179,28 @@ const SaleList = (props) => {
                                     </div>
                                 ) : null}
                             </Modal.Body>
-
-                            {employeeTypes !== undefined ? (
-                                <Modal.Body className="fieldset">
-                                    <label className="name--label">Employee Type:</label>
-                                    <select
-                                        id="employee_type_id"
-                                        onChange={handleInputFieldChange}
-                                    >
-                                        {employeeTypes.map(type => {
+                            <Modal.Body className="fieldset">
+                                <label className="name--label">Select Vehicle:</label>
+                                <input className="modal--input" type="text" onChange={handleVehicleSearch} />
+                                {vehicles !== undefined && vehicles.length > 0 ? (
+                                    <div className="vehicles--dropdown">
+                                        {vehicles.map(vehicle => {
                                             return (
-                                                <option value={type.id}>
-                                                    {type.name}
-                                                </option>
+                                                <>
+                                                    <div
+                                                        className="vehicles--select"
+                                                        id={vehicle.id}
+                                                        onClick={handleVehicleSelect}
+                                                    >{vehicle.make,vehicle.model}
+                                                    </div>
+                                                </>
                                             )
                                         })}
-                                    </select>
-                                </Modal.Body>
-                            ) : null}
+                                    </div>
+                                ) : null}
+                            </Modal.Body>
+
+                        
 
                             <Modal.Body>
                                 <button onClick={handleSubmit} className="addEmployee--btn">
