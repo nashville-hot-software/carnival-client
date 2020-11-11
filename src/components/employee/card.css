@@ -72,3 +72,11 @@
 .updateEmployee--btn:focus {
     outline: none;
 }
+
+.dealership--dropdown {
+    height: 45px;
+    transition: height .4s ease;
+}
+.dealership--dropdown:hover {
+    height: 200px;
+}
