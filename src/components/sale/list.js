@@ -50,11 +50,9 @@ const SaleList = (props) => {
                 ) : null}
                 </div>
 
-                <div className="btn-hover-zoom">
                 <button className="addSale--btn">
                     Add Sale
                 </button>
-                </div>
             </div>
         </div>
     );
