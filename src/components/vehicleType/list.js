@@ -33,7 +33,7 @@ const [show, setShow] = useState(false);
 		}
 
 		const handleSubmit = () => {
-			if (newVehicle.body_type === "" || newVehicle.last_name === "") {
+			if (newVehicle.body_type === "") {
 					window.alert("Please fill out body type field")
 			} else if (newVehicle.make === "") {
 					window.alert("Please enter a make")
