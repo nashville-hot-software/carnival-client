@@ -119,22 +119,16 @@ const Employees = props => {
                     <Modal.Body className="fieldset">
                         <label className="name--label">First Name:</label>
                         <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">Last Name:</label>
                         <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">Email:</label>
                         <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text"/>
-                    </Modal.Body>
-                    <Modal.Body className="fieldset">
+
                         <label className="name--label">Phone:</label>
                         <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
-                    </Modal.Body>
 
-                    {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
-                    <Modal.Body className="fieldset">
                         <label className="name--label">Dealership:</label>
                         <input className="modal--input" type="text" onChange={handleDealershipSearch} />
                         {dealerships !== undefined && dealerships.length > 0 ? (
@@ -154,28 +148,27 @@ const Employees = props => {
                                 })}
                             </div>
                         ) : null}
-                    </Modal.Body>
                     
-                    {employeeTypes !== undefined ? (
-                        <Modal.Body className="fieldset">
-                            <label className="name--label">Employee Type:</label>
-                            <select 
-                                id="employee_type_id" 
-                                onChange={handleInputFieldChange}
-                            >
-                                {employeeTypes.map(type => {
-                                    return (
-                                        <option value={type.id}>
-                                            {type.name}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                        </Modal.Body>
-                    ) : null}
+                        {employeeTypes !== undefined ? (
+                            <>
+                                <label className="employeeType--label">Employee Type:</label>
+                                <select 
+                                    id="employee_type_id" 
+                                    onChange={handleInputFieldChange}
+                                    className="employeeType--select"
+                                >
+                                    {employeeTypes.map(type => {
+                                        return (
+                                            <option value={type.id}>
+                                                {type.name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                            </>
+                        ) : null}
 
-                    <Modal.Body>
-                        <button onClick={handleSubmit} className="addEmployee--btn">
+                        <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
                             Submit
                         </button>
                     </Modal.Body>

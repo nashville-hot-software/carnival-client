@@ -10,12 +10,10 @@
 
 .dashboard-row--1 {
     display: flex;
-    /* justify-content: space-evenly; */
     border-radius: 8px;
     margin-top: 80px;
     margin-bottom: 40px;
     margin-left: 13%;
-    /* max-width: 650px; */
     max-height: 300px;
 }
 
@@ -75,7 +73,6 @@
 
 .saleMetric--container {
     display: flex;
-    /* width: 600px; */
     margin-right: 0 !important;
 }
 
