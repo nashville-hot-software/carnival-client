@@ -11,34 +11,39 @@ import FormControl from '@material-ui/core/FormControl';
 
 const EmployeeCard = props => {
 
+  // employee obj to update (passed down from parent list component)
   const [employee, setEmployee] = useState(props.employee);
+
+  // dealerships fetched from search, populating the dealership select dropdown
   const [dealerships, setDealerships] = useState([]);
+
+  // employee types fetched from search, populating the employee types select dropdown
   const [employeeTypes, setEmployeeTypes] = useState([]);
 
+  // State for modal show/close
   const [show, setShow] = useState(false);
-  
+
+  // State for modal edit mode
   const [editMode, setEditMode] = useState(false);
 
-  const fetchEmployeeTypes = () => {
-    EmployeeManager.getAll("employeetypes")
-      .then(employeeTypes => {
-        setEmployeeTypes(employeeTypes);
-    });
-  }
-  
+ 
+  // Open / close the modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // Turn on edit mode with MUI switch 
   const handleEditMode = () => {
     setEditMode(!editMode)
   };
 
+  // (For edit mode) Update employee object as new values entered in input fields
   const handleFieldChange = evt => {
     const stateToChange = {...employee};
     stateToChange[evt.target.id] = evt.target.value;
     setEmployee(stateToChange);
   };
 
+  // Fetches dealerships for the dropdown menu to select a new dealership
   const handleDealershipSearch = evt => {
     EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
       .then(matchedDealerships => {
@@ -46,18 +51,29 @@ const EmployeeCard = props => {
     });
   }
   
+  // Update employee obj with new dealership selected from expanded dropdown
   const handleDealerSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.dealership_id = parseInt(evt.target.id)
     setEmployee(stateToChange)
   }
-  
+
+  // Fetch all employee types for the select menu in modal edit form
+  const fetchEmployeeTypes = () => {
+    EmployeeManager.getAll("employeetypes")
+      .then(employeeTypes => {
+        setEmployeeTypes(employeeTypes);
+    });
+  }
+
+  // Update employee obj with new employee type selected from select menu
   const handleEmployeeTypeSelect = evt => {
     const stateToChange = {...employee}
     stateToChange.employee_type_id = parseInt(evt.target.value)
     setEmployee(stateToChange)
   }
 
+  // Submits PUT req if all conditions from the form are met
   const handleSubmit = () => {
     console.log(employee);
 
@@ -72,7 +88,6 @@ const EmployeeCard = props => {
     } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
     } else {
-      console.log("It worked!!")
         EmployeeManager.update("employees", employee, employee.id)
             .then(() => {
               setEditMode(false)
@@ -80,6 +95,7 @@ const EmployeeCard = props => {
     }
   } 
 
+  // Fetch the employee types for the dropdown as soon as component mounts
   useEffect(() => {
     fetchEmployeeTypes();
   }, [])
@@ -112,51 +128,46 @@ const EmployeeCard = props => {
                   id="first_name"
                   placeholder={`${employee.first_name}`}
                   onChange={handleFieldChange}
+                  className="inputField"
                 />
-              </Modal.Body>
-              <Modal.Body className="fieldset">
+              
+              
                 <label><strong>Last Name:</strong></label> 
                 <input 
                   type="text"
                   id="last_name"
                   placeholder={`${employee.last_name}`}
                   onChange={handleFieldChange}
+                  className="inputField"
                 />
-              </Modal.Body>
-              <Modal.Body className="fieldset">
+              
+              
                 <label><strong>Email:</strong></label> 
                 <input 
                   type="text"
                   id="email_address"
                   placeholder={`${employee.email_address}`}
                   onChange={handleFieldChange}
+                  className="inputField"
                 />
-              </Modal.Body>
-              <Modal.Body className="fieldset">
-                <label><strong>Phone:</strong></label> 
-                <input 
-                  type="text"
-                  id="phone"
-                  placeholder={`${employee.phone}`}
-                  onChange={handleFieldChange}
-                />
-              </Modal.Body>
-              {/* <Modal.Body className="fieldset">
-                <label><strong>Dealership:</strong></label> 
-                <input 
-                  type="text"
-                  placeholder={`${employee.business_name}`}
-                  onChange={handleFieldChange}
-                />
-              </Modal.Body> */}
-
-              <Modal.Body className="fieldset">
+              
+              
+                  <label><strong>Phone:</strong></label> 
+                  <input 
+                    type="text"
+                    id="phone"
+                    placeholder={`${employee.phone}`}
+                    onChange={handleFieldChange}
+                    className="inputField"
+                  />
+              
                   <label className="name--label">Dealership:</label>
                   <input 
                     type="text" 
                     className="modal--input" 
                     onChange={handleDealershipSearch} 
                     placeholder={`${employee.business_name}`} 
+                    className="inputField"
                   />
                   
                   {dealerships !== undefined && dealerships.length > 0 ? (
@@ -176,28 +187,28 @@ const EmployeeCard = props => {
                           })}
                       </div>
                   ) : null}
-              </Modal.Body>
+              
 
-              {employeeTypes !== undefined ? (
-                  <Modal.Body className="fieldset">
-                      <label className="name--label">Employee Type:</label>
-                      <select 
-                          id="employee_type_id" 
-                          onChange={handleEmployeeTypeSelect}
-                      >
-                          <option defaultValue={employee.employee_type}>{employee.employee_type}</option>
-                          {employeeTypes.map(type => {
-                              return (
-                                  <option value={type.id}>
-                                      {type.name}
-                                  </option>
-                              )
-                          })}
-                      </select>
-                  </Modal.Body>
-              ) : null}
+                  {employeeTypes !== undefined ? (
+                      <>
+                          <label className="employeeType--label">Employee Type:</label>
+                          <select 
+                              id="employee_type_id" 
+                              onChange={handleEmployeeTypeSelect}
+                              className="employeeType--select"
+                          >
+                              <option defaultValue={employee.employee_type}>{employee.employee_type}</option>
+                              {employeeTypes.map(type => {
+                                  return (
+                                      <option value={type.id}>
+                                          {type.name}
+                                      </option>
+                                  )
+                              })}
+                          </select>
+                        </>
+                  ) : null}
 
-              <Modal.Body>
                   <button onClick={handleSubmit} className="updateEmployee--btn">
                       Update
                   </button>
