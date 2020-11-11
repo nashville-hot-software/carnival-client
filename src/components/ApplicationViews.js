@@ -1,10 +1,6 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import DashBoard from "../components/dashboard/DashBoard.js"
-import CustomerDetails from "./customer/detail.js"
-import VehicleDetails from "./vehicle/detail.js"
-import SaleDetails from "./sale/detail.js"
-import DealershipDetails from "./dealership/detail.js"
 import DealershipList from "./dealership/list"
 import EmployeeList from "./employee/list"
 import VehicleTypeList from "./vehicleType/list"
@@ -19,13 +15,9 @@ const ApplicationViews = props => {
                 return <DashBoard {...props} />
             }} />
 
-            <Route exact path="/customers/:customerId(\d+)" render={props => {
+            {/* <Route exact path="/customers/:customerId(\d+)" render={props => {
                 return <CustomerDetails customerId={parseInt(props.match.params.customerId)} {...props} />
-            }} />
-
-            <Route exact path="/vehicles/:vehicleId(\d+)" render={props => {
-                return <VehicleDetails vehicleId={parseInt(props.match.params.vehicleId)} {...props} />
-            }} />
+            }} /> */}
 
             <Route path="/employees" render={props => {
                 return <EmployeeList {...props} />
@@ -39,16 +31,8 @@ const ApplicationViews = props => {
                 return <VehicleTypeList {...props} />
             }} />
 
-            <Route exact path="/dealerships/:dealerhsipId(\d+)" render={props => {
-                return <DealershipDetails dealerhsipId={parseInt(props.match.params.dealerhsipId)} {...props} />
-            }} />
-
             <Route path="/sales" render={props => {
                 return <SaleList {...props} />
-            }} />
-
-            <Route exact path="/sales/:saleId(\d+)" render={props => {
-                return <SaleDetails saleId={parseInt(props.match.params.saleId)} {...props} />
             }} />
         </>
     )
