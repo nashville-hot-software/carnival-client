@@ -21,6 +21,13 @@
     border-radius: 8px;
     max-height: 750px;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome/Safari/Opera */
+.modal-details--form::-webkit-scrollbar {
+    display: none;
 }
 
 .modalHeader {
