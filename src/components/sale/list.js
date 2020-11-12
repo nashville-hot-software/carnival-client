@@ -123,13 +123,15 @@ const SaleList = (props) => {
                     onChange={handleSalesSearch}
                     placeholder="Search for Sales"
                 />
+                <div className="searchResults">
                 {sales !== undefined ? (
-                    <div className="searchResults">
+                    <>
                         {sales.map((sale) => {
                             return <SaleCard key={sale.id} sale={sale} {...props} />;
                         })}
-                    </div>
+                    </>
                 ) : null}
+                </div>
 
                 <div className="btn-hover-zoom">
                     <button onClick={() => handleShow()} className="addSale--btn">

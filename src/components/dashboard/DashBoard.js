@@ -280,7 +280,7 @@ const DashBoard = (props) => {
       ) : null}
 
       <div className="dashboard-row--2">
-        <div className="vehicles--container">
+        <div className="dash-vehicles--container">
           <Card className={classes.root}>
             <CardContent>
               <h2>Top Vehicles Sold</h2>

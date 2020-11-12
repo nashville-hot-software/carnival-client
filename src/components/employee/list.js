@@ -6,9 +6,11 @@ import Modal from 'react-bootstrap/Modal';
 
 const Employees = props => {
 
+  // Holds all employees returned from employee search bar
   const [employees, setEmployees] = useState([]);
-  const [employeeTypes, setEmployeeTypes] = useState([]);
-  const [dealerships, setDealerships] = useState([]);
+  const [updatedEmployees, setUpdatedEmployees] = useState([]);
+
+  // Skeleton for new employee to be POSTed
   const [newEmployee, setNewEmployee] = useState({
     first_name: "",
     last_name: "",
@@ -18,18 +20,33 @@ const Employees = props => {
     employee_type_id: 0
   })
 
-  // Below 3 are for Modal
+  // Holds all employee types for the sub-select menu in employee creation form
+  const [employeeTypes, setEmployeeTypes] = useState([]);
+  
+  // Holds all dealerships for the sub-select menu in employee creation form
+  const [dealerships, setDealerships] = useState([]);
+
+  // State for hiding/showing modal
   const [show, setShow] = useState(false);
 
+  // Handlers for showing/hiding modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  
   const handleEmployeeSearch = evt => {
-    EmployeeManager.getAll("employees","searchTerm",evt.target.value)
-      .then(matchedEmployees => {
-        console.log(matchedEmployees)
-        setEmployees(matchedEmployees);
-    });
+    if (evt.target.value.length > 0) {
+        EmployeeManager.getAll("employees","searchTerm",evt.target.value)
+        .then(matchedEmployees => {
+            console.log(matchedEmployees)
+            setEmployees(matchedEmployees);
+            // REVIEW: this below is highlighting the issue.. cards are lagging behind
+            // this state update after the fetch...
+            console.log(employees)
+        });
+    } else {
+        setEmployees([])
+    }
   }
   
   const fetchEmployeeTypes = () => {
@@ -77,7 +94,9 @@ const Employees = props => {
 
   useEffect(() => {
     fetchEmployeeTypes();
-  }, [])
+    console.log(employees)
+    // setUpdatedEmployees(employees)
+  }, [employees])
 
   return (
     <div className="employees--container">
@@ -93,19 +112,21 @@ const Employees = props => {
                 placeholder="Search for Employees" 
             />
             
-            {employees !== undefined ? (
-                <div className="searchResults">
-                    {employees.map((employee, i) => {
-                        return (
-                        <EmployeeCard
-                            key={i}
-                            employee={employee}
-                            {...props}
-                        />
-                        );
-                    })}
-                </div>
-            ) : null}
+            <div className="searchResults">
+                {employees.length > 0 ? (
+                <>
+                {employees.map(employee => {
+                    return (
+                    <EmployeeCard
+                        // key={i}
+                        employee={employee}
+                        {...props}
+                    />
+                    );
+                })}
+                </>
+                ) : null}
+            </div>
 
             <button onClick={() => handleShow()} className="addEmployee--btn">
                 Add New Employee
