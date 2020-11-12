@@ -47,8 +47,8 @@
 }
 
 .addEmployee--btn {
-    line-height: 40px;
     width: 200px;
+    line-height: 40px;
     border-radius: 5px;
     margin-top: 3.5%;
     border: none;
@@ -90,12 +90,42 @@
     overflow: scroll; */
 }
 
-.dealership--dropdown {
-    max-width: 230px;
+.dealership--label {
+    margin-top: 15px;
+}
+
+.dealership--search {
+    border: 1px solid white;
+    border-bottom: 1px solid lightgray;
+    width: 220px;
+    line-height: 25px;
+    /* margin-bottom: 15px; */
+    /* border-radius: 4px; */
+    padding-left: 7px;
+}
+.dealership--search:focus {
+    outline: none;
+}
+
+.dealership-list--dropdown {
+    width: 221px;
     overflow: scroll;
     border: 1px solid gray;
-    border-radius: 8px;
-    margin-top: 15px;
+    border-radius: 5px;
+    /* margin-top: 15px; */
+    /* padding: 10px; */
+    height: 30px;
+    transition: height .4s ease;
+}
+
+.dealership-list--dropdown:hover {
+    height: 200px;
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 8px #9ecaed;
+}
+
+.dealerships-results--container {
     padding: 10px;
 }
 
@@ -105,6 +135,7 @@
 }
 
 .modal--input {
+    width: 220px;
     line-height: 25px;
     margin-bottom: 15px;
     border: 2px solid gray;
@@ -125,5 +156,5 @@
 }
 
 .modal--addBtn {
-    margin: 15% 0 10% 0;
+    margin: 15% 0 10% 3.0%;
 }

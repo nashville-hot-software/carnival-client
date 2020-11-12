@@ -167,7 +167,7 @@ const EmployeeCard = props => {
                   <label className="name--label">Dealership:</label>
                   <input 
                     type="text" 
-                    className="modal--input" 
+                    className="modal--input dealership-search" 
                     onChange={handleDealershipSearch} 
                     placeholder={`${props.employee.business_name}`} 
                     className="inputField"

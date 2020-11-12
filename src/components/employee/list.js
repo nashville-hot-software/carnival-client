@@ -150,25 +150,29 @@ const Employees = props => {
                         <label className="name--label">Phone:</label>
                         <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
 
-                        <label className="name--label">Dealership:</label>
-                        <input className="modal--input" type="text" onChange={handleDealershipSearch} />
-                        {dealerships !== undefined && dealerships.length > 0 ? (
-                            <div className="dealership--dropdown">
-                                {dealerships.map(dealership => {
-                                    return (
-                                    <>
-                                        <div 
-                                            className="dealership--select"
-                                            id={dealership.id}
-                                            onClick={handleDealerSelect}  
-                                        >
-                                            {dealership.business_name}
-                                        </div>
-                                    </>
-                                    )
-                                })}
-                            </div>
-                        ) : null}
+
+                        <label className="name--label dealership--label">Dealership:</label>
+                        <div className="dealership-list--dropdown">
+                            <input className="dealership--search" type="text" onChange={handleDealershipSearch} />
+
+                            {dealerships !== undefined && dealerships.length > 0 ? (
+                                <div className="dealerships-results--container">
+                                    {dealerships.map(dealership => {
+                                        return (
+                                        <>
+                                            <div 
+                                                className="dealership--select"
+                                                id={dealership.id}
+                                                onClick={handleDealerSelect}  
+                                            >
+                                                {dealership.business_name}
+                                            </div>
+                                        </>
+                                        )
+                                    })}
+                                </div>
+                            ) : null}
+                        </div>
                     
                         {employeeTypes !== undefined ? (
                             <>
