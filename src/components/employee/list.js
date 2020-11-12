@@ -39,6 +39,7 @@ const Employees = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleDropdownClose = () => setOpen(false)
   
   const handleEmployeeSearch = evt => {
     if (evt.target.value.length > 0) {
@@ -65,18 +66,20 @@ const Employees = props => {
   }
 
   const handleDealershipSearch = evt => {
-    if (evt.target.value.length > 0) {
-        setQuery(evt.target.value)
+    setQuery(evt.target.value)
+    if (evt.target.value.length > 0 && selectedDealership === "") {
         EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
           .then(matchedDealerships => {
             setDealerships(matchedDealerships);
         });
 
         setOpen(true);
+    } else if ( selectedDealership !== "") {
+        setSelectedDealership(evt.target.value);
     } else {
         setDealerships([]);
 
-        setOpen(false);
+        // setOpen(false);
     }
   }
   
@@ -163,7 +166,7 @@ const Employees = props => {
 
                         {/* This block is for the dealership search dropdown menu (lines 157-184) */}
                         <label className="name--label dealership--label">Dealership:</label>
-                        <div className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                        <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
                             <input 
                                 className="dealership--search" 
                                 type="text" 
