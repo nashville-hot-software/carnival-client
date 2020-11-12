@@ -86,23 +86,7 @@
     flex-direction: column;
 }
 
-.dealership--dropdown {
-    max-width: 200px;
-    max-height: 200px;
-    overflow: scroll;
-    border: 1px solid gray;
-    border-radius: 8px;
-    margin-top: 15px;
-    padding: 10px;
-}
-
-.dealership--select:hover {
-    cursor: pointer;
-    color: lightgray;
-}
-
 .modal--input {
-    width: 200px;
     line-height: 25px;
     border: 2px solid gray;
     border-radius: 4px;
