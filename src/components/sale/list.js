@@ -11,31 +11,10 @@ const SaleList = (props) => {
 //    let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     const [sales, setSales] = useState();
     const [show, setShow] = useState(false);
-    const [dealerships, setDealerships] = useState([]);
     const [vehicles, setVehicles] = useState([]);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [newSale, setNewSale] = useState(      {
-            price: 0.00,
-            deposit: 0,
-            pickup_date: "",
-            invoice_number: "",
-            payment_method: "",
-            returned: false,
-            dealership_id: 0,
-            employee_id: 1,
-            sales_type_id: 0,
-            vehicle_id: 0,
-            first_name: "",
-            last_name: "",
-            email_address: "",
-            phone: "",
-            street: "",
-            city: "",
-            state: "",
-            zipcode: "",
-            company_name: ""
-        })
+    
     const handleSubmit = () => {
         if (newSale.first_name === "" && newSale.last_name === "") {
             window.alert("Please fill out new customer name fields")
