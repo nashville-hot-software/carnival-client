@@ -110,10 +110,16 @@
 .dealership-list--dropdown {
     width: 221px;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     border: 1px solid gray;
     border-radius: 5px;
     height: 30px;
     transition: height .4s ease;
+}
+/* Hide scrollbar for Chrome/Safari/Opera */
+.dealership-list--dropdown::-webkit-scrollbar {
+    display: none;
 }
 
 .dealership-list--dropdown.open {

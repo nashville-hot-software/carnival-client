@@ -91,6 +91,8 @@ const Employees = props => {
         setSelectedDealership(evt.target.value);
     } else {
         setDealerships([]);
+
+        setOpen(false)
     }
   }
   
