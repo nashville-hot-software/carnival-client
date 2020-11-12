@@ -67,6 +67,7 @@ const Employees = props => {
 
   const handleDealershipSearch = evt => {
     setQuery(evt.target.value)
+
     if (evt.target.value.length > 0 && selectedDealership === "") {
         EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
           .then(matchedDealerships => {
@@ -87,8 +88,11 @@ const Employees = props => {
     const stateToChange = {...newEmployee}
     stateToChange.dealership_id = evt.target.id
     setNewEmployee(stateToChange)
-    console.log(evt.target.innerHTML)
+    
     setSelectedDealership(evt.target.innerHTML)
+
+    const dropdownDiv = document.querySelector('.dealership-list--dropdown')
+    dropdownDiv.scrollTop = 0;
   }
 
   const handleSubmit = () => {
@@ -134,6 +138,7 @@ const Employees = props => {
                     <EmployeeCard
                         key={i}
                         employee={employee}
+                        handleDropdownClose={handleDropdownClose}
                         {...props}
                     />
                     );

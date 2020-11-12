@@ -34,6 +34,8 @@ const EmployeeCard = props => {
 
   const [selectedDealership, setSelectedDealership] = useState("");
 
+  const [query, setQuery] = useState("");
+
   // State for modal edit mode
   const [editMode, setEditMode] = useState(false);
 
@@ -41,6 +43,8 @@ const EmployeeCard = props => {
   // Open / close the modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleDropdownClose = () => setOpen(false)
 
   // Turn on edit mode with MUI switch 
   const handleEditMode = () => {
@@ -57,13 +61,17 @@ const EmployeeCard = props => {
 
   // Fetches dealerships for the dropdown menu to select a new dealership
   const handleDealershipSearch = evt => {
-    if (evt.target.value.length > 0) {
+    setQuery(evt.target.value)
+
+    if (evt.target.value.length > 0 && selectedDealership === "") {
       EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
         .then(matchedDealerships => {
           setDealerships(matchedDealerships);
       });
 
       setOpen(true);
+    } else if ( selectedDealership !== "") {
+      setSelectedDealership(evt.target.value);
     } else {
       setDealerships([]);
 
@@ -76,7 +84,11 @@ const EmployeeCard = props => {
     const stateToChange = {...employee}
     stateToChange.dealership_id = parseInt(evt.target.id)
     setEmployee(stateToChange)
+    
     setSelectedDealership(evt.target.innerHTML)
+
+    const dropdownDiv = document.querySelector('.dealership-list--dropdown')
+    dropdownDiv.scrollTop = 0;
   }
 
   // Fetch all employee types for the select menu in modal edit form
@@ -178,12 +190,13 @@ const EmployeeCard = props => {
                   />
               
                   <label className="name--label dealership--label">Dealership:</label>
-                  <div className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                  <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
                     <input 
                       type="text" 
                       className="dealership--search" 
                       onChange={handleDealershipSearch} 
                       placeholder={`${props.employee.business_name}`} 
+                      value={`${selectedDealership !== "" ? selectedDealership : query}`}
                     />
                     
                     {dealerships !== undefined && dealerships.length > 0 ? (
