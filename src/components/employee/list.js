@@ -31,6 +31,10 @@ const Employees = props => {
   
   const [open, setOpen] = useState(false);
 
+  const [selectedDealership, setSelectedDealership] = useState("");
+  
+  const [query, setQuery] = useState("");
+
   // Handlers for showing/hiding modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -62,6 +66,7 @@ const Employees = props => {
 
   const handleDealershipSearch = evt => {
     if (evt.target.value.length > 0) {
+        setQuery(evt.target.value)
         EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
           .then(matchedDealerships => {
             setDealerships(matchedDealerships);
@@ -79,6 +84,8 @@ const Employees = props => {
     const stateToChange = {...newEmployee}
     stateToChange.dealership_id = evt.target.id
     setNewEmployee(stateToChange)
+    console.log(evt.target.innerHTML)
+    setSelectedDealership(evt.target.innerHTML)
   }
 
   const handleSubmit = () => {
@@ -162,6 +169,7 @@ const Employees = props => {
                                 type="text" 
                                 onChange={handleDealershipSearch} 
                                 placeholder="Search Dealerships"
+                                value={`${selectedDealership !== "" ? selectedDealership : query}`}
                             />
 
                             {dealerships.length > 0 ? (

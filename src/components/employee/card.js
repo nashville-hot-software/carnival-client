@@ -32,6 +32,8 @@ const EmployeeCard = props => {
 
   const [open, setOpen] = useState(false);
 
+  const [selectedDealership, setSelectedDealership] = useState("");
+
   // State for modal edit mode
   const [editMode, setEditMode] = useState(false);
 
@@ -74,6 +76,7 @@ const EmployeeCard = props => {
     const stateToChange = {...employee}
     stateToChange.dealership_id = parseInt(evt.target.id)
     setEmployee(stateToChange)
+    setSelectedDealership(evt.target.innerHTML)
   }
 
   // Fetch all employee types for the select menu in modal edit form
@@ -191,7 +194,7 @@ const EmployeeCard = props => {
                                     <div 
                                         className="dealership--select"
                                         id={dealership.id}
-                                        onClick={handleDealerSelect}  
+                                        onClick={handleDealerSelect} 
                                     >
                                         {dealership.business_name}
                                     </div>
