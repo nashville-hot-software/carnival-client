@@ -10,6 +10,28 @@ const SaleList = (props) => {
     // invNum.next(`${incrementedValue}`) 899ZZZ9
 //    let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     const [sales, setSales] = useState();
+    const [newSale, setNewSale] = useState(      {
+        price: 0.00,
+        deposit: 0,
+        pickup_date: "",
+        invoice_number: "",
+        payment_method: "",
+        returned: false,
+        dealership_id: 0,
+        employee_id: 1,
+        sales_type_id: 0,
+        vehicle_id: 0,
+        first_name: "",
+        last_name: "",
+        email_address: "",
+        phone: "",
+        street: "",
+        city: "",
+        state: "",
+        zipcode: "",
+        company_name: ""
+    })
+    const [dealerships, setDealerships] = useState([]);
     const [show, setShow] = useState(false);
     const [vehicles, setVehicles] = useState([]);
     const handleClose = () => setShow(false);
@@ -70,11 +92,7 @@ const SaleList = (props) => {
                 setVehicles(matchedVehicles);
             });
     }
-    const handleDealerSelect = evt => {
-        const stateToChange = { ...newSale }
-        stateToChange.dealership_id = evt.target.id
-        setNewSale(stateToChange)
-    }
+
     const handleVehicleSelect = evt => {
         const stateToChange = { ...newSale }
         stateToChange.vehicle_id = evt.target.id
@@ -84,14 +102,25 @@ const SaleList = (props) => {
         const stateToChange = { ...newSale }
         stateToChange[evt.target.id] = evt.target.value
         setNewSale(stateToChange)
+        console.log(stateToChange)
     }
- 
+
+    const handleDealerSelect = evt => {
+        const stateToChange = {...newSale}
+        stateToChange.dealership_id = evt.target.id
+        setNewSale(stateToChange)
+        
+        // setSelectedDealership(evt.target.innerHTML)
+
+        console.log(stateToChange)
+    
+        const dropdownDiv = document.querySelector('.dealership--dropdown')
+        dropdownDiv.scrollTop = 0;
+      }
+    
     useEffect(() => {
     }, [])
     
-   
-
-
     return (
         <div className="sales-searchlist--container">
             <div className="sales--subContainer">
@@ -115,7 +144,7 @@ const SaleList = (props) => {
                 <div className="btn-hover-zoom">
                     <button onClick={() => handleShow()} className="addSale--btn">
                         Add Sale
-                </button>
+                    </button>
 
                     <Modal className="modal--form" show={show} onHide={handleClose}>
                         <Modal.Header className="modalHeader" closeButton>
@@ -138,6 +167,61 @@ const SaleList = (props) => {
                                 <label className="name--label">Phone:</label>
                                 <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text" />
                             </Modal.Body>
+                            <Modal.Body className="fieldset">
+                                <label className="name--label">Street:</label>
+                                <input onChange={handleInputFieldChange} id="street" className="modal--input" type="text" />
+                            </Modal.Body>
+                            <Modal.Body className="fieldset">
+                                <label className="name--label">City:</label>
+                                <input onChange={handleInputFieldChange} id="city" className="modal--input" type="text" />
+                            </Modal.Body>
+                            <Modal.Body className="fieldset">
+                                <label className="name--label">State:</label>
+                                <input onChange={handleInputFieldChange} id="state" className="modal--input" type="text" />
+                            </Modal.Body>
+                            
+                            <Modal.Body className="fieldset">
+                                <label className="name--label">Zipcode:</label>
+                                <input onChange={handleInputFieldChange} id="zipcode" className="modal--input" type="text" />
+                            </Modal.Body>
+                            <Modal.Body className="fieldset">
+                                <label className="name--label">Company Name:</label>
+                                <input onChange={handleInputFieldChange} id="company_name" className="modal--input" type="text" />
+                            </Modal.Body>
+
+                            <label>Sale Types:</label>
+                            <select onChange={handleInputFieldChange} id="sales_type_id" className="sale-type--select">
+                                <option value="0">Select Type</option>
+                                <option value="1">Purchase</option>
+                                <option value="2">Lease</option>
+                            </select>
+
+                            <label>Deposit:</label>
+                            <input 
+                                type="text" 
+                                placeholder="Deposit" 
+                                id="deposit"
+                                onChange={handleInputFieldChange} 
+                            />
+                            
+                            <label>Pickup Date:</label>
+                            <input 
+                                type="date"
+                                id="pickup_date" 
+                                onChange={handleInputFieldChange} 
+                            />
+
+                            <label>Payment Method:</label>
+                            <select onChange={handleInputFieldChange} id="payment_method" className="sale-type--select">
+                                <option value="">Select Payment Type</option>
+                                <option value="mastercard">Mastercard</option>
+                                <option value="visa">Visa</option>
+                                <option value="americanexpress">American Express</option>
+                                <option value="discover">Discover</option>
+                                <option value="capitalone">Capital One</option>
+                            </select>
+
+
                             {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
                             <Modal.Body className="fieldset">
                                 <label className="name--label">Dealership:</label>

@@ -68,3 +68,8 @@
 .addSale--btn:hover {
     transform: scale(1.07);
 }
+
+.fieldset {
+    padding: 0 !important;
+    margin-bottom: 15px;
+}
