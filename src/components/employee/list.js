@@ -28,6 +28,8 @@ const Employees = props => {
 
   // State for hiding/showing modal
   const [show, setShow] = useState(false);
+  
+  const [open, setOpen] = useState(false);
 
   // Handlers for showing/hiding modal
   const handleClose = () => setShow(false);
@@ -38,11 +40,7 @@ const Employees = props => {
     if (evt.target.value.length > 0) {
         EmployeeManager.getAll("employees","searchTerm",evt.target.value)
         .then(matchedEmployees => {
-            console.log(matchedEmployees)
             setEmployees(matchedEmployees);
-            // REVIEW: this below is highlighting the issue.. cards are lagging behind
-            // this state update after the fetch...
-            console.log(employees)
         });
     } else {
         setEmployees([])
@@ -63,10 +61,18 @@ const Employees = props => {
   }
 
   const handleDealershipSearch = evt => {
-    EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
-      .then(matchedDealerships => {
-        setDealerships(matchedDealerships);
-    });
+    if (evt.target.value.length > 0) {
+        EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
+          .then(matchedDealerships => {
+            setDealerships(matchedDealerships);
+        });
+
+        setOpen(true);
+    } else {
+        setDealerships([]);
+
+        setOpen(false);
+    }
   }
   
   const handleDealerSelect = evt => {
@@ -94,8 +100,6 @@ const Employees = props => {
 
   useEffect(() => {
     fetchEmployeeTypes();
-    console.log(employees)
-    // setUpdatedEmployees(employees)
   }, [employees])
 
   return (
@@ -115,10 +119,10 @@ const Employees = props => {
             <div className="searchResults">
                 {employees.length > 0 ? (
                 <>
-                {employees.map(employee => {
+                {employees.map((employee, i) => {
                     return (
                     <EmployeeCard
-                        // key={i}
+                        key={i}
                         employee={employee}
                         {...props}
                     />
@@ -152,16 +156,21 @@ const Employees = props => {
 
 
                         <label className="name--label dealership--label">Dealership:</label>
-                        <div className="dealership-list--dropdown">
-                            <input className="dealership--search" type="text" onChange={handleDealershipSearch} />
+                        <div className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                            <input 
+                                className="dealership--search" 
+                                type="text" 
+                                onChange={handleDealershipSearch} 
+                                placeholder="Search Dealerships"
+                            />
 
-                            {dealerships !== undefined && dealerships.length > 0 ? (
+                            {dealerships.length > 0 ? (
                                 <div className="dealerships-results--container">
                                     {dealerships.map(dealership => {
                                         return (
                                         <>
                                             <div 
-                                                className="dealership--select"
+                                                className={"dealership--select"}
                                                 id={dealership.id}
                                                 onClick={handleDealerSelect}  
                                             >

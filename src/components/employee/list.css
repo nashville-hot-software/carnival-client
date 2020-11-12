@@ -118,7 +118,7 @@
     transition: height .4s ease;
 }
 
-.dealership-list--dropdown:hover {
+.dealership-list--dropdown.open {
     height: 200px;
     outline: none;
     border-color: #9ecaed;
