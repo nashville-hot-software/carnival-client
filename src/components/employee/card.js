@@ -30,10 +30,15 @@ const EmployeeCard = props => {
   // State for modal show/close
   const [show, setShow] = useState(false);
 
+  // State for expanding/hiding the dealership dropdown menu
   const [open, setOpen] = useState(false);
 
+  // Holds selected dealership from dropdown menu to display as updated value of
+  // dealership input field
   const [selectedDealership, setSelectedDealership] = useState("");
 
+  // Holds dealership query being typed in to show as input field value (before 
+  // dealership selection)
   const [query, setQuery] = useState("");
 
   // State for modal edit mode
@@ -44,6 +49,7 @@ const EmployeeCard = props => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // Handler for closing the dealership dropdown onBlur
   const handleDropdownClose = () => setOpen(false)
 
   // Turn on edit mode with MUI switch 
@@ -84,7 +90,7 @@ const EmployeeCard = props => {
     const stateToChange = {...employee}
     stateToChange.dealership_id = parseInt(evt.target.id)
     setEmployee(stateToChange)
-    
+
     setSelectedDealership(evt.target.innerHTML)
 
     const dropdownDiv = document.querySelector('.dealership-list--dropdown')
