@@ -30,6 +30,17 @@ const EmployeeCard = props => {
   // State for modal show/close
   const [show, setShow] = useState(false);
 
+  // State for expanding/hiding the dealership dropdown menu
+  const [open, setOpen] = useState(false);
+
+  // Holds selected dealership from dropdown menu to display as updated value of
+  // dealership input field
+  const [selectedDealership, setSelectedDealership] = useState("");
+
+  // Holds dealership query being typed in to show as input field value (before 
+  // dealership selection)
+  const [query, setQuery] = useState("");
+
   // State for modal edit mode
   const [editMode, setEditMode] = useState(false);
 
@@ -37,6 +48,9 @@ const EmployeeCard = props => {
   // Open / close the modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // Handler for closing the dealership dropdown onBlur
+  const handleDropdownClose = () => setOpen(false)
 
   // Turn on edit mode with MUI switch 
   const handleEditMode = () => {
@@ -53,10 +67,22 @@ const EmployeeCard = props => {
 
   // Fetches dealerships for the dropdown menu to select a new dealership
   const handleDealershipSearch = evt => {
-    EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
-      .then(matchedDealerships => {
-        setDealerships(matchedDealerships);
-    });
+    setQuery(evt.target.value)
+
+    if (evt.target.value.length > 0 && selectedDealership === "") {
+      EmployeeManager.getAll("dealerships","searchTerm",evt.target.value)
+        .then(matchedDealerships => {
+          setDealerships(matchedDealerships);
+      });
+
+      setOpen(true);
+    } else if ( selectedDealership !== "") {
+      setSelectedDealership(evt.target.value);
+    } else {
+      setDealerships([]);
+
+      setOpen(false);
+    }
   }
   
   // Update employee obj with new dealership selected from expanded dropdown
@@ -64,6 +90,11 @@ const EmployeeCard = props => {
     const stateToChange = {...employee}
     stateToChange.dealership_id = parseInt(evt.target.id)
     setEmployee(stateToChange)
+
+    setSelectedDealership(evt.target.innerHTML)
+
+    const dropdownDiv = document.querySelector('.dealership-list--dropdown')
+    dropdownDiv.scrollTop = 0;
   }
 
   // Fetch all employee types for the select menu in modal edit form
@@ -164,32 +195,34 @@ const EmployeeCard = props => {
                     className="inputField"
                   />
               
-                  <label className="name--label">Dealership:</label>
-                  <input 
-                    type="text" 
-                    className="modal--input" 
-                    onChange={handleDealershipSearch} 
-                    placeholder={`${props.employee.business_name}`} 
-                    className="inputField"
-                  />
-                  
-                  {dealerships !== undefined && dealerships.length > 0 ? (
-                      <div className="dealership--dropdown">
-                          {dealerships.map(dealership => {
-                              return (
-                              <>
-                                  <div 
-                                      className="dealership--select"
-                                      id={dealership.id}
-                                      onClick={handleDealerSelect}  
-                                  >
-                                      {dealership.business_name}
-                                  </div>
-                              </>
-                              )
-                          })}
+                  <label className="name--label dealership--label">Dealership:</label>
+                  <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                    <input 
+                      type="text" 
+                      className="dealership--search" 
+                      onChange={handleDealershipSearch} 
+                      placeholder={`${props.employee.business_name}`} 
+                      value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                    />
+                    
+                    {dealerships !== undefined && dealerships.length > 0 ? (
+                      <div className="dealerships-results--container">
+                            {dealerships.map(dealership => {
+                                return (
+                                <>
+                                    <div 
+                                        className="dealership--select"
+                                        id={dealership.id}
+                                        onClick={handleDealerSelect} 
+                                    >
+                                        {dealership.business_name}
+                                    </div>
+                                </>
+                                )
+                            })}
                       </div>
-                  ) : null}
+                    ) : null}
+                  </div>
               
 
                   {employeeTypes !== undefined ? (
