@@ -101,11 +101,19 @@
     border-radius: 5px;
     height: 45px;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     border: 1px solid gray;
     border-top: none;
     padding: 10px;
     transition: height .4s ease;
 }
+
+/* Hide scrollbar for Chrome/Safari/Opera */
+.dealership--dropdown::-webkit-scrollbar {
+    display: none;
+}
+
 .dealership--dropdown:hover {
     height: 200px;
     outline: none;
