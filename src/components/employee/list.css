@@ -63,6 +63,8 @@
     outline: none;
 }
 
+/* Modal styling below */
+
 .modal--form {
     margin-top: 70px !important;
     border-radius: 8px;
@@ -90,6 +92,7 @@
     overflow: scroll; */
 }
 
+/* #### CUSTOM DEALERSHIP DROPDOWN STARTS HERE #### */
 .dealership--label {
     margin-top: 15px;
 }
@@ -129,6 +132,7 @@
     cursor: pointer;
     color: lightgray;
 }
+/* #### CUSTOM DEALERSHIP DROPDOWN ENDS HERE #### */
 
 .modal--input {
     width: 220px;

@@ -154,7 +154,7 @@ const Employees = props => {
                         <label className="name--label">Phone:</label>
                         <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
 
-
+                        {/* This block is for the dealership search dropdown menu (lines 157-184) */}
                         <label className="name--label dealership--label">Dealership:</label>
                         <div className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
                             <input 
