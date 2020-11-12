@@ -8,7 +8,6 @@ const Employees = props => {
 
   // Holds all employees returned from employee search bar
   const [employees, setEmployees] = useState([]);
-  const [updatedEmployees, setUpdatedEmployees] = useState([]);
 
   // Skeleton for new employee to be POSTed
   const [newEmployee, setNewEmployee] = useState({
@@ -29,18 +28,25 @@ const Employees = props => {
   // State for hiding/showing modal
   const [show, setShow] = useState(false);
   
+  // State for expanding/hiding the dealership dropdown menu
   const [open, setOpen] = useState(false);
 
+  // Holds selected dealership from dropdown menu to display as updated value of
+  // dealership input field
   const [selectedDealership, setSelectedDealership] = useState("");
   
+  // Holds dealership query being typed in to show as input field value (before 
+  // dealership selection)
   const [query, setQuery] = useState("");
 
   // Handlers for showing/hiding modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // Handler for closing the dealership dropdown onBlur
   const handleDropdownClose = () => setOpen(false)
   
+  // Pings API for all employees (basic employee search page, not the modal)
   const handleEmployeeSearch = evt => {
     if (evt.target.value.length > 0) {
         EmployeeManager.getAll("employees","searchTerm",evt.target.value)
@@ -52,6 +58,7 @@ const Employees = props => {
     }
   }
   
+  // Fetching all employee types from DB to populate the employee type dropdown in the form
   const fetchEmployeeTypes = () => {
     EmployeeManager.getAll("employeetypes")
       .then(employeeTypes => {
@@ -59,12 +66,17 @@ const Employees = props => {
     });
   }
 
+  // Building out the new employee obj to be posted
   const handleInputFieldChange = evt => {
     const stateToChange = {...newEmployee}
     stateToChange[evt.target.id] = evt.target.value
     setNewEmployee(stateToChange)
   }
 
+  // Pings API for all dealerships matching dealership input value ,
+  // Setting query state for the input field so we can dynamically set the value of the text input,
+  // Conditionals to either search for dealerships and map the list, OR set a selected dealership
+  // to show as the new input value
   const handleDealershipSearch = evt => {
     setQuery(evt.target.value)
 
@@ -79,11 +91,14 @@ const Employees = props => {
         setSelectedDealership(evt.target.value);
     } else {
         setDealerships([]);
-
-        // setOpen(false);
     }
   }
   
+  // Add new dealership ID to new employee object state,
+  // Set the selected dealership state to display selected
+  // dealership as value in dealership search bar,
+  // then auto-scroll back to top of scrollable div before
+  // contracting the menu
   const handleDealerSelect = evt => {
     const stateToChange = {...newEmployee}
     stateToChange.dealership_id = evt.target.id
