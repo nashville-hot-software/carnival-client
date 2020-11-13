@@ -31,7 +31,20 @@ const SaleList = (props) => {
         zipcode: "",
         company_name: ""
     })
+
+    // Holds dealership query being typed in to show as input field value (before 
+    // dealership selection)
+    const [query, setQuery] = useState("");
+
     const [dealerships, setDealerships] = useState([]);
+
+    // Holds selected dealership from dropdown menu to display as updated value of
+    // dealership input field
+    const [selectedDealership, setSelectedDealership] = useState("");
+
+    // State for expanding/hiding the dealership dropdown menu
+    const [open, setOpen] = useState(false);
+
     const [show, setShow] = useState(false);
     const [showVehicles, setShowVehicles] = useState(false);
     const [vehicles, setVehicles] = useState([]);
@@ -39,6 +52,10 @@ const SaleList = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
+    // Handler for closing the dealership dropdown onBlur
+    const handleDropdownClose = () => setOpen(false)
+    
+    // this won't work until vehicle modal container outside ternary
     const handleCloseVehicleSearch = () => {
         console.log('hello')
         setShowVehicles(false)
@@ -96,6 +113,8 @@ const SaleList = (props) => {
                         zipcode: "",
                         company_name: ""
                     })
+                    setSelectedDealership("")
+                    setQuery("")
                     setShow(false)
                 })
         }
@@ -109,12 +128,26 @@ const SaleList = (props) => {
                 setSales(matchedSales);
             });
     }
+
     const handleDealershipSearch = evt => {
-        DataManager.getAll("dealerships", "searchTerm", evt.target.value)
-            .then(matchedDealerships => {
+        setQuery(evt.target.value)
+    
+        if (evt.target.value.length > 0 && selectedDealership === "") {
+            DataManager.getAll("dealerships","searchTerm",evt.target.value)
+              .then(matchedDealerships => {
                 setDealerships(matchedDealerships);
             });
+    
+            setOpen(true);
+        } else if ( selectedDealership !== "") {
+            setSelectedDealership(evt.target.value);
+        } else {
+            setDealerships([]);
+    
+            setOpen(false)
+        }
     }
+
     const handleVehicleSearch = evt => {
         setShowVehicles(true);
         DataManager.getAll("vehicles", "vehicle", evt.target.value)
@@ -148,11 +181,11 @@ const SaleList = (props) => {
         stateToChange.dealership_id = evt.target.id
         setNewSale(stateToChange)
         
-        // setSelectedDealership(evt.target.innerHTML)
+        setSelectedDealership(evt.target.innerHTML)
 
         console.log(stateToChange)
     
-        const dropdownDiv = document.querySelector('.dealership--dropdown')
+        const dropdownDiv = document.querySelector('.dealership-list--dropdown')
         dropdownDiv.scrollTop = 0;
       }
     
@@ -260,59 +293,68 @@ const SaleList = (props) => {
                             </select>
 
 
-                            {/* TODO: For the dealership, will need a submenu to search dealerships.... */}
-                            <Modal.Body className="fieldset">
-                                <label className="name--label">Dealership:</label>
-                                <input className="modal--input" type="text" onChange={handleDealershipSearch} />
-                                {dealerships !== undefined && dealerships.length > 0 ? (
-                                    <div className="dealership--dropdown">
+                            {/* This block is for the dealership search dropdown menu (lines 157-184) */}
+                            <label className="name--label dealership--label">Dealership:</label>
+                            <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                                <input 
+                                    className="dealership--search" 
+                                    type="text" 
+                                    onChange={handleDealershipSearch} 
+                                    placeholder="Search Dealerships"
+                                    value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                                />
+
+                                {dealerships.length > 0 ? (
+                                    <div className="dealerships-results--container">
                                         {dealerships.map(dealership => {
                                             return (
-                                                <>
-                                                    <div
-                                                        className="dealership--select"
-                                                        id={dealership.id}
-                                                        onClick={handleDealerSelect}
-                                                    >
-                                                        {dealership.business_name}
-                                                    </div>
-                                                </>
+                                            <>
+                                                <div 
+                                                    className={"dealership--select"}
+                                                    id={dealership.id}
+                                                    onClick={handleDealerSelect}  
+                                                >
+                                                    {dealership.business_name}
+                                                </div>
+                                            </>
                                             )
                                         })}
                                     </div>
                                 ) : null}
-                            </Modal.Body>
+                            </div>
+                            
                             {/* <Modal.Body className="fieldset"> */}
                                 <label className="name--label">Select Vehicle:</label>
                                 <input className="modal--input" type="text" onChange={handleVehicleSearch} />
 
                                 {showVehicles === true && vehicles.length > 0 ? (
                                     // <div>Select a Vehicle</div>
+
+                                    // the handle close on blur should close modal but I think this needs
+                                    // to be on a div outside of the ternary..
                                     <div onBlur={handleCloseVehicleSearch} className={`vehicles--dropdown ${showVehicles ? 'open' : ''}`}>
-                                        {vehicles.map(vehicle => {
-                                            if (vehicle.is_sold !== true) {
-                                                return (
-                                                    <>
-                                                        <div
-                                                            className="vehicles--select"
+                                        {vehicles.map(vehicle => {                                            
+                                            return (
+                                                <>
+                                                    <div
+                                                        className="vehicles--select"
+                                                        id={vehicle.id}
+                                                        title={vehicle.floor_price}
+                                                        onClick={handleVehicleSelect}
+                                                    >
+                                                        {`${vehicle.make} ${vehicle.model}`}
+                                                        <span 
+                                                            className="vin"
                                                             id={vehicle.id}
                                                             title={vehicle.floor_price}
-                                                            onClick={handleVehicleSelect}
+                                                            type="button disabled"
+                                                            
                                                         >
-                                                            {`${vehicle.make} ${vehicle.model}`}
-                                                            <span 
-                                                                className="vin"
-                                                                id={vehicle.id}
-                                                                title={vehicle.floor_price}
-                                                                type="button disabled"
-                                                                
-                                                            >
-                                                                    #{vehicle.vin}
-                                                            </span>
-                                                        </div>
-                                                    </>
-                                                )
-                                            }
+                                                                #{vehicle.vin}
+                                                        </span>
+                                                    </div>
+                                                </>
+                                            )
                                         })}
                                     </div>
                                 ) : null}
