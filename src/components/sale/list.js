@@ -68,7 +68,30 @@ const SaleList = (props) => {
             window.alert("Please select a valid vehicle")
         } else {
             DataManager.PostData("sales", newSale)
-                .then(() => setShow(false))
+                .then(() => {
+                    setNewSale({
+                        price: 0.00,
+                        deposit: 0,
+                        pickup_date: "",
+                        invoice_number: "",
+                        payment_method: "",
+                        returned: false,
+                        dealership_id: 0,
+                        employee_id: 1,
+                        sales_type_id: 0,
+                        vehicle_id: 0,
+                        first_name: "",
+                        last_name: "",
+                        email: "",
+                        phone: "",
+                        street: "",
+                        city: "",
+                        state: "",
+                        zipcode: "",
+                        company_name: ""
+                    })
+                    setShow(false)
+                })
         }
     }
 
@@ -261,25 +284,27 @@ const SaleList = (props) => {
                                     // <div>Select a Vehicle</div>
                                     <div className={`vehicles--dropdown ${showVehicles ? 'open' : ''}`}>
                                         {vehicles.map(vehicle => {
-                                            return (
-                                                <>
-                                                    <div
-                                                        className="vehicles--select"
-                                                        id={vehicle.id}
-                                                        title={vehicle.floor_price}
-                                                        onClick={handleVehicleSelect}
-                                                    >
-                                                        {`${vehicle.make} ${vehicle.model}`}
-                                                        <span 
-                                                            className="vin"
+                                            if (vehicle.is_sold !== true) {
+                                                return (
+                                                    <>
+                                                        <div
+                                                            className="vehicles--select"
                                                             id={vehicle.id}
                                                             title={vehicle.floor_price}
+                                                            onClick={handleVehicleSelect}
                                                         >
-                                                                #{vehicle.vin}
-                                                        </span>
-                                                    </div>
-                                                </>
-                                            )
+                                                            {`${vehicle.make} ${vehicle.model}`}
+                                                            <span 
+                                                                className="vin"
+                                                                id={vehicle.id}
+                                                                title={vehicle.floor_price}
+                                                            >
+                                                                    #{vehicle.vin}
+                                                            </span>
+                                                        </div>
+                                                    </>
+                                                )
+                                            }
                                         })}
                                     </div>
                                 ) : null}
