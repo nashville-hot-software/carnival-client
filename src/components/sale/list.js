@@ -39,6 +39,12 @@ const SaleList = (props) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
+    const handleCloseVehicleSearch = () => {
+        console.log('hello')
+        setShowVehicles(false)
+    };
+
+    
     const handleSubmit = () => {
         if (newSale.first_name === "" && newSale.last_name === "") {
             window.alert("Please fill out new customer name fields")
@@ -119,7 +125,7 @@ const SaleList = (props) => {
 
     const handleVehicleSelect = evt => {
         const stateToChange = { ...newSale }
-        stateToChange.vehicle_id = evt.target.id
+        stateToChange.vehicle_id = parseInt(evt.target.id)
         stateToChange.price = parseFloat(evt.target.title)
         setNewSale(stateToChange)
 
@@ -282,7 +288,7 @@ const SaleList = (props) => {
 
                                 {showVehicles === true && vehicles.length > 0 ? (
                                     // <div>Select a Vehicle</div>
-                                    <div className={`vehicles--dropdown ${showVehicles ? 'open' : ''}`}>
+                                    <div onBlur={handleCloseVehicleSearch} className={`vehicles--dropdown ${showVehicles ? 'open' : ''}`}>
                                         {vehicles.map(vehicle => {
                                             if (vehicle.is_sold !== true) {
                                                 return (
@@ -298,6 +304,8 @@ const SaleList = (props) => {
                                                                 className="vin"
                                                                 id={vehicle.id}
                                                                 title={vehicle.floor_price}
+                                                                type="button disabled"
+                                                                
                                                             >
                                                                     #{vehicle.vin}
                                                             </span>
