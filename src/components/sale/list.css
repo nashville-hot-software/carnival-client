@@ -74,18 +74,14 @@
     margin-bottom: 15px;
 }
 
-.vehicles--dropdown {
-    display: none;
-}
 .vehicles--dropdown.open {
     margin-top: 20px;
-    border: 1px solid gray;
-    background-color: #f1f1f1;
-    box-shadow: 1px 3px 11px 7px #696464;
+    background-color: #F5F8FA;
+    box-shadow: 1px 3px 11px 7px #a5a0a0;
     padding: 20px;
     border-radius: 8px;
     overflow: scroll;
-    z-index: 10;
+    z-index: 100000;
     width: 600px;
     max-height: 400px;
     display: flex;

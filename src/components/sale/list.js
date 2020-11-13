@@ -6,9 +6,6 @@ import Moment from 'react-moment';
 import "./list.css";
 
 const SaleList = (props) => {
-    // var invNum = require('invoice-number')
-    // invNum.next(`${incrementedValue}`) 899ZZZ9
-//    let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     const [sales, setSales] = useState();
     const [newSale, setNewSale] = useState(      {
         price: 0.00,
@@ -32,6 +29,8 @@ const SaleList = (props) => {
         company_name: ""
     })
 
+    const [cities, setCities] = useState();
+    
     // Holds dealership query being typed in to show as input field value (before 
     // dealership selection)
     const [query, setQuery] = useState("");
@@ -60,7 +59,6 @@ const SaleList = (props) => {
         console.log('hello')
         setShowVehicles(false)
     };
-
     
     const handleSubmit = () => {
         if (newSale.first_name === "" && newSale.last_name === "") {
@@ -182,15 +180,19 @@ const SaleList = (props) => {
         setNewSale(stateToChange)
         
         setSelectedDealership(evt.target.innerHTML)
-
-        console.log(stateToChange)
     
         const dropdownDiv = document.querySelector('.dealership-list--dropdown')
         dropdownDiv.scrollTop = 0;
       }
     
     useEffect(() => {
-    }, [])
+        if (newSale.state !== "") {
+            DataManager.getCitiesByState(newSale.state)
+                .then(response => {
+                    setCities(response)
+                })
+        }
+    }, [newSale])
     
     return (
         <div className="sales-searchlist--container">
@@ -225,108 +227,166 @@ const SaleList = (props) => {
                             <Modal.Body className="fieldset">
                                 <label className="name--label">First Name:</label>
                                 <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text" />
-                            </Modal.Body>
-                            <Modal.Body className="fieldset">
+                            
                                 <label className="name--label">Last Name:</label>
                                 <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text" />
-                            </Modal.Body>
-                            <Modal.Body className="fieldset">
+                            
                                 <label className="name--label">Email:</label>
                                 <input onChange={handleInputFieldChange} id="email" className="modal--input" type="text" />
-                            </Modal.Body>
-                            <Modal.Body className="fieldset">
+                            
                                 <label className="name--label">Phone:</label>
                                 <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text" />
-                            </Modal.Body>
-                            <Modal.Body className="fieldset">
+                            
                                 <label className="name--label">Street:</label>
                                 <input onChange={handleInputFieldChange} id="street" className="modal--input" type="text" />
-                            </Modal.Body>
-                            <Modal.Body className="fieldset">
-                                <label className="name--label">City:</label>
-                                <input onChange={handleInputFieldChange} id="city" className="modal--input" type="text" />
-                            </Modal.Body>
-                            <Modal.Body className="fieldset">
-                                <label className="name--label">State:</label>
-                                <input onChange={handleInputFieldChange} id="state" className="modal--input" type="text" />
-                            </Modal.Body>
                             
-                            <Modal.Body className="fieldset">
+                                <label className="name--label">State:</label>
+                                <select
+                                    onChange={handleInputFieldChange}
+                                    id="state"
+                                >
+                                    <option value="">Select a State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="DC">District Of Columbia</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="ID">Idaho</option>
+                                    <option value="IL">Illinois</option>
+                                    <option value="IN">Indiana</option>
+                                    <option value="IA">Iowa</option>
+                                    <option value="KS">Kansas</option>
+                                    <option value="KY">Kentucky</option>
+                                    <option value="LA">Louisiana</option>
+                                    <option value="ME">Maine</option>
+                                    <option value="MD">Maryland</option>
+                                    <option value="MA">Massachusetts</option>
+                                    <option value="MI">Michigan</option>
+                                    <option value="MN">Minnesota</option>
+                                    <option value="MS">Mississippi</option>
+                                    <option value="MO">Missouri</option>
+                                    <option value="MT">Montana</option>
+                                    <option value="NE">Nebraska</option>
+                                    <option value="NV">Nevada</option>
+                                    <option value="NH">New Hampshire</option>
+                                    <option value="NJ">New Jersey</option>
+                                    <option value="NM">New Mexico</option>
+                                    <option value="NY">New York</option>
+                                    <option value="NC">North Carolina</option>
+                                    <option value="ND">North Dakota</option>
+                                    <option value="OH">Ohio</option>
+                                    <option value="OK">Oklahoma</option>
+                                    <option value="OR">Oregon</option>
+                                    <option value="PA">Pennsylvania</option>
+                                    <option value="RI">Rhode Island</option>
+                                    <option value="SC">South Carolina</option>
+                                    <option value="SD">South Dakota</option>
+                                    <option value="TN">Tennessee</option>
+                                    <option value="TX">Texas</option>
+                                    <option value="UT">Utah</option>
+                                    <option value="VT">Vermont</option>
+                                    <option value="VA">Virginia</option>
+                                    <option value="WA">Washington</option>
+                                    <option value="WV">West Virginia</option>
+                                    <option value="WI">Wisconsin</option>
+                                    <option value="WY">Wyoming</option>
+                                </select>
+
+                                <label className="name--label">City:</label>
+                                <select onChange={handleInputFieldChange} id="city" >
+                                    <option value="0">Select a City</option>
+                                    {cities !== undefined ? (
+                                        cities.map(city => {
+                                            return (
+                                                <option value={city.value}>{city.value}</option>
+                                            )
+                                        })
+                                    ) : null}
+                                </select>
+                            
+                            
                                 <label className="name--label">Zipcode:</label>
                                 <input onChange={handleInputFieldChange} id="zipcode" className="modal--input" type="text" />
-                            </Modal.Body>
-                            <Modal.Body className="fieldset">
+                            
                                 <label className="name--label">Company Name:</label>
                                 <input onChange={handleInputFieldChange} id="company_name" className="modal--input" type="text" />
-                            </Modal.Body>
-
-                            <label>Sale Types:</label>
-                            <select onChange={handleInputFieldChange} id="sales_type_id" className="sale-type--select">
-                                <option value="0">Select Type</option>
-                                <option value="1">Purchase</option>
-                                <option value="2">Lease</option>
-                            </select>
-
-                            <label>Deposit:</label>
-                            <input 
-                                type="text" 
-                                placeholder="Deposit" 
-                                id="deposit"
-                                onChange={handleInputFieldChange} 
-                            />
                             
-                            <label>Pickup Date:</label>
-                            <input 
-                                type="date"
-                                id="pickup_date" 
-                                onChange={handleInputFieldChange} 
-                            />
 
-                            <label>Payment Method:</label>
-                            <select onChange={handleInputFieldChange} id="payment_method" className="sale-type--select">
-                                <option value="">Select Payment Type</option>
-                                <option value="mastercard">Mastercard</option>
-                                <option value="visa">Visa</option>
-                                <option value="americanexpress">American Express</option>
-                                <option value="discover">Discover</option>
-                                <option value="capitalone">Capital One</option>
-                            </select>
+                                <label>Sale Types:</label>
+                                <select onChange={handleInputFieldChange} id="sales_type_id" className="sale-type--select">
+                                    <option value="0">Select Type</option>
+                                    <option value="1">Purchase</option>
+                                    <option value="2">Lease</option>
+                                </select>
 
-
-                            {/* This block is for the dealership search dropdown menu (lines 157-184) */}
-                            <label className="name--label dealership--label">Dealership:</label>
-                            <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                                <label>Deposit:</label>
                                 <input 
-                                    className="dealership--search" 
                                     type="text" 
-                                    onChange={handleDealershipSearch} 
-                                    placeholder="Search Dealerships"
-                                    value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                                    placeholder="Deposit" 
+                                    id="deposit"
+                                    onChange={handleInputFieldChange} 
+                                />
+                                
+                                <label>Pickup Date:</label>
+                                <input 
+                                    type="date"
+                                    id="pickup_date" 
+                                    onChange={handleInputFieldChange} 
                                 />
 
-                                {dealerships.length > 0 ? (
-                                    <div className="dealerships-results--container">
-                                        {dealerships.map(dealership => {
-                                            return (
-                                            <>
-                                                <div 
-                                                    className={"dealership--select"}
-                                                    id={dealership.id}
-                                                    onClick={handleDealerSelect}  
-                                                >
-                                                    {dealership.business_name}
-                                                </div>
-                                            </>
-                                            )
-                                        })}
-                                    </div>
-                                ) : null}
-                            </div>
+                                <label>Payment Method:</label>
+                                <select onChange={handleInputFieldChange} id="payment_method" className="sale-type--select">
+                                    <option value="">Select Payment Type</option>
+                                    <option value="mastercard">Mastercard</option>
+                                    <option value="visa">Visa</option>
+                                    <option value="americanexpress">American Express</option>
+                                    <option value="discover">Discover</option>
+                                    <option value="capitalone">Capital One</option>
+                                </select>
+
+
+                                {/* This block is for the dealership search dropdown menu (lines 157-184) */}
+                                <label className="name--label dealership--label">Dealership:</label>
+                                <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                                    <input 
+                                        className="dealership--search" 
+                                        type="text" 
+                                        onChange={handleDealershipSearch} 
+                                        placeholder="Search Dealerships"
+                                        value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                                    />
+
+                                    {dealerships.length > 0 ? (
+                                        <div className="dealerships-results--container">
+                                            {dealerships.map(dealership => {
+                                                return (
+                                                <>
+                                                    <div 
+                                                        className={"dealership--select"}
+                                                        id={dealership.id}
+                                                        onClick={handleDealerSelect}  
+                                                    >
+                                                        {dealership.business_name}
+                                                    </div>
+                                                </>
+                                                )
+                                            })}
+                                        </div>
+                                    ) : null}
+                                </div>
+                                </Modal.Body>
                             
-                            {/* <Modal.Body className="fieldset"> */}
                                 <label className="name--label">Select Vehicle:</label>
                                 <input className="modal--input" type="text" onChange={handleVehicleSearch} />
 
+                                <div className="sub-modal--container">
                                 {showVehicles === true && vehicles.length > 0 ? (
                                     // <div>Select a Vehicle</div>
 
@@ -358,14 +418,12 @@ const SaleList = (props) => {
                                         })}
                                     </div>
                                 ) : null}
-                            {/* </Modal.Body> */}
-
-                        
+                                </div>
 
                             <Modal.Body>
                                 <button onClick={handleSubmit} className="addEmployee--btn">
                                     Submit
-                        </button>
+                                </button>
                             </Modal.Body>
                         </div>
                     </Modal>
