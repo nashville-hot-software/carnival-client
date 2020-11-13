@@ -103,7 +103,7 @@
     flex-direction: column;
 }
 
-.dealership--dropdown {
+.vehicleType--dropdown {
     max-width: 200px;
     max-height: 200px;
     overflow: scroll;
@@ -113,7 +113,7 @@
     padding: 10px;
 }
 
-.dealership--select:hover {
+.vehicleType--select:hover {
     cursor: pointer;
     color: lightgray;
 }

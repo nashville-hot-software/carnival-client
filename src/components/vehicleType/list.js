@@ -19,11 +19,6 @@ const VehicleType = props => {
 	
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-
-	const [showVehicle, setShowVehicle] = useState(false);
-	
-	const handleCloseVehicle	 = () => setShowVehicle(false);
-	const handleShowVehicle = () => setShowVehicle(true);
 	
 	const handleFieldChange = evt => {
 		VehicleManager.getAll("vehicletypes","searchTerm",evt.target.value)
@@ -65,6 +60,11 @@ const VehicleType = props => {
 		vehicle_type_id: 0
 	});
 	
+	const [showVehicle, setShowVehicle] = useState(false);
+	
+	const handleCloseVehicle	 = () => setShowVehicle(false);
+	const handleShowVehicle = () => setShowVehicle(true);
+
 	const handleSubmitVehicle = () => {
 		if (newVehicle.vin === "") {
 			window.alert("Please fill out a VIN")
@@ -96,16 +96,22 @@ const VehicleType = props => {
 		setNewVehicle(stateToChange)
 	}
 	
-	const fetchVehicleTypes = () => {
-    VehicleManager.getAll("vehicletypes")
-      .then(vehicleTypes => {
-        setVehicleTypes(vehicleTypes);
-    });
-  }
+	const handleVehicleTypeSelect = evt => {
+    const stateToChange = {...newVehicle}
+    stateToChange.vehicle_type_id = evt.target.id
+    setNewVehicle(stateToChange)
+	}
+	
+	// const fetchVehicleTypes = () => {
+  //   VehicleManager.getAll("vehicletypes")
+  //     .then(vehicleTypes => {
+  //       setVehicleTypes(vehicleTypes);
+  //   });
+	// }
 
-	useEffect(() => {
-    fetchVehicleTypes();
-  }, [])
+	// useEffect(() => {
+  //   fetchVehicleTypes();
+  // }, [])
 
 	return (
 		<>
@@ -209,26 +215,26 @@ const VehicleType = props => {
 											<label className="name--label">Year:</label>
 											<input onChange={handleInputVehicleFieldChange} id="year_of_car" className="modal--input" type="text"/>
 
-											{/* <label className="name--label">Vehicle Type:</label> */}
-											{/* <input onChange={handleInputVehicleFieldChange} id="vehicle_type_id" className="modal--input" type="text"/> */}
-											{vehicleTypes !== undefined ? (
-                            <>
-                                <label className="vehicle_Type--label">Vehicle Type:</label>
-                                <select 
-                                    id="vehicle_type_id" 
-                                    onChange={handleInputVehicleTypeFieldChange}
-                                    className="vehicle_Type--select"
-                                >
-                                    {vehicleTypes.map(type => {
-                                        return (
-                                            <option value={type.id}>
-                                                {type.make} {type.model}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-                            </>
-                        ) : null}
+											<label className="name--label">Vehicle Type:</label>
+											<input className="modal--input" type="text" onChange={handleFieldChange} />
+											{vehicleTypes !== undefined && vehicleTypes.length > 0 ? (
+                            <div className="vehicleType--dropdown">
+														{vehicleTypes.map(vehicleType => {
+															// console.log(vehicleType.id)
+																return (
+																<>
+																		<div 
+																				className="vehicleType--select"
+																				id={vehicleType.id}
+																				onClick={handleVehicleTypeSelect}  
+																		>
+																				{vehicleType.make} {vehicleType.model}
+																		</div>
+																</>
+																)
+														})}
+												</div>
+										) : null}
 
 									</Modal.Body>
 
