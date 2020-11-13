@@ -123,19 +123,19 @@ const VehicleType = props => {
 
 					<input 
 						className="vehicles-searchBar" 
-						placeholder="Search by model type" 
+						placeholder="Search by Make & Model" 
 						type='text' 
 						onChange={handleFieldChange}
 					/>
 					
 					{vehicleTypes !== undefined ? (
 							<div className="searchResults">
-						{vehicleTypes.map(vehicletype => {
+						{vehicleTypes.map((vehicletype, i) => {
 								return (
 										<VehicleTypeCard
-										key={vehicletype.id}
-										vehicletype={vehicletype}
-										{...props}
+											key={i}
+											vehicletype={vehicletype}
+											{...props}
 										/>
 										);
 								})}
