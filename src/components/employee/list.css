@@ -42,13 +42,20 @@
     background-color: #fff;
     height: 400px;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     width: 50%;
     margin-top: 5%;
 }
 
+/* Hide scrollbar for Chrome/Safari/Opera */
+.searchResults::-webkit-scrollbar {
+    display: none;
+}
+
 .addEmployee--btn {
-    line-height: 40px;
     width: 200px;
+    line-height: 40px;
     border-radius: 5px;
     margin-top: 3.5%;
     border: none;
@@ -63,11 +70,20 @@
     outline: none;
 }
 
+/* Modal styling below */
+
 .modal--form {
     margin-top: 70px !important;
     border-radius: 8px;
     max-height: 750px;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome/Safari/Opera */
+.modal--form::-webkit-scrollbar {
+    display: none;
 }
 
 .modalHeader {
@@ -90,12 +106,44 @@
     overflow: scroll; */
 }
 
-.dealership--dropdown {
-    max-width: 230px;
-    overflow: scroll;
-    border: 1px solid gray;
-    border-radius: 8px;
+/* #### CUSTOM DEALERSHIP DROPDOWN STARTS HERE #### */
+.dealership--label {
     margin-top: 15px;
+}
+
+.dealership--search {
+    border: 1px solid white;
+    border-bottom: 1px solid lightgray;
+    width: 220px;
+    line-height: 25px;
+}
+.dealership--search:focus {
+    outline: none;
+}
+
+.dealership-list--dropdown {
+    width: 221px;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 30px;
+    transition: height .4s ease;
+}
+/* Hide scrollbar for Chrome/Safari/Opera */
+.dealership-list--dropdown::-webkit-scrollbar {
+    display: none;
+}
+
+.dealership-list--dropdown.open {
+    height: 200px;
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 8px #9ecaed;
+}
+
+.dealerships-results--container {
     padding: 10px;
 }
 
@@ -103,8 +151,10 @@
     cursor: pointer;
     color: lightgray;
 }
+/* #### CUSTOM DEALERSHIP DROPDOWN ENDS HERE #### */
 
 .modal--input {
+    width: 220px;
     line-height: 25px;
     margin-bottom: 15px;
     border: 2px solid gray;
@@ -125,5 +175,5 @@
 }
 
 .modal--addBtn {
-    margin: 15% 0 10% 0;
+    margin: 15% 0 10% 3.0%;
 }

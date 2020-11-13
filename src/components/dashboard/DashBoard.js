@@ -255,7 +255,7 @@ const DashBoard = (props) => {
                 </div>
 
                 <SalesPieChart saleType={saleType} className="pieChart" />
-                <ArrowForwardIcon className={classes.arrowIcon} onClick={() => handleShow()}/>
+                {/* <ArrowForwardIcon className={classes.arrowIcon} onClick={() => handleShow()}/> */}
               </div>
             </CardContent>
           </Card>
@@ -264,7 +264,7 @@ const DashBoard = (props) => {
         <img src={welcomeImage} className="welcomeImg" />
       </div>
 
-      {sales !== undefined ? (
+      {/* {sales !== undefined ? (
         <Modal centered show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Sale Metric Details </Modal.Title>
@@ -277,10 +277,10 @@ const DashBoard = (props) => {
             </>
           </Modal.Body>
         </Modal>
-      ) : null}
+      ) : null} */}
 
       <div className="dashboard-row--2">
-        <div className="vehicles--container">
+        <div className="dash-vehicles--container">
           <Card className={classes.root}>
             <CardContent>
               <h2>Top Vehicles Sold</h2>
