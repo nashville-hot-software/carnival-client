@@ -15,8 +15,8 @@ const Employees = props => {
     last_name: "",
     email_address: "",
     phone: "",
-    dealership_id: 0,
-    employee_type_id: 0
+    dealership_id: 1,
+    employee_type_id: 1
   })
 
   // Holds all employee types for the sub-select menu in employee creation form
@@ -70,6 +70,7 @@ const Employees = props => {
   const handleInputFieldChange = evt => {
     const stateToChange = {...newEmployee}
     stateToChange[evt.target.id] = evt.target.value
+    console.log(stateToChange)
     setNewEmployee(stateToChange)
   }
 
@@ -124,8 +125,22 @@ const Employees = props => {
     } else if (newEmployee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
     } else {
+        // Make the POST, then clear all data from form
         EmployeeManager.PostData("employees", newEmployee)
-            .then(() => setShow(false))
+            .then(() => {
+                setNewEmployee({
+                    first_name: "",
+                    last_name: "",
+                    email_address: "",
+                    phone: "",
+                    dealership_id: 0,
+                    employee_type_id: 0
+                })
+
+                setSelectedDealership("")
+                setQuery("")
+                setShow(false)
+            })
     }
   } 
 
