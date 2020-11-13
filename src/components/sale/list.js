@@ -266,11 +266,17 @@ const SaleList = (props) => {
                                                     <div
                                                         className="vehicles--select"
                                                         id={vehicle.id}
-                                                        onClick={handleVehicleSelect}
                                                         title={vehicle.floor_price}
+                                                        onClick={handleVehicleSelect}
                                                     >
                                                         {`${vehicle.make} ${vehicle.model}`}
-                                                        <span className="vin">#{vehicle.vin}</span>
+                                                        <span 
+                                                            className="vin"
+                                                            id={vehicle.id}
+                                                            title={vehicle.floor_price}
+                                                        >
+                                                                #{vehicle.vin}
+                                                        </span>
                                                     </div>
                                                 </>
                                             )
