@@ -73,3 +73,55 @@
     padding: 0 !important;
     margin-bottom: 15px;
 }
+
+.vehicles--dropdown {
+    /* margin-top: 20px;
+    border: 1px solid gray;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: scroll;
+    z-index: 10;
+    width: 600px;
+    max-height: 400px;
+    display: flex;
+    flex-flow: wrap; */
+    /* margin-right: 10%; */
+}
+.vehicles--dropdown.open {
+    margin-top: 20px;
+    border: 1px solid gray;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: scroll;
+    z-index: 10;
+    width: 600px;
+    max-height: 400px;
+    display: flex;
+    flex-flow: wrap;
+}
+
+.vehicles--select {
+    display: flex;
+    flex-direction: column;
+    width: 159px;
+    padding: 5px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    overflow: scroll;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+.vehicles--select:nth-of-type(3n) {
+    margin-right: 0;
+}
+.vehicles--select:hover {
+    cursor: pointer;
+    border: 1px solid #FF7A59;
+}
+
+.vin {
+    font-size: 11px;
+    color: gray;
+}

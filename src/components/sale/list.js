@@ -23,7 +23,7 @@ const SaleList = (props) => {
         vehicle_id: 0,
         first_name: "",
         last_name: "",
-        email_address: "",
+        email: "",
         phone: "",
         street: "",
         city: "",
@@ -33,14 +33,16 @@ const SaleList = (props) => {
     })
     const [dealerships, setDealerships] = useState([]);
     const [show, setShow] = useState(false);
+    const [showVehicles, setShowVehicles] = useState(false);
     const [vehicles, setVehicles] = useState([]);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
     const handleSubmit = () => {
         if (newSale.first_name === "" && newSale.last_name === "") {
             window.alert("Please fill out new customer name fields")
-        } else if (newSale.email_address === "") {
+        } else if (newSale.email === "") {
             window.alert("Please enter customers email address")
         } else if (newSale.company_name === "") {
             window.alert("Please enter customers email address")
@@ -64,8 +66,6 @@ const SaleList = (props) => {
             window.alert("Please select a valid vehicle")
         } else if (newSale.price === "") {
             window.alert("Please select a valid vehicle")
-        } else if (newSale.invoice_number === "") {
-            window.alert("Please select a valid vehicle")
         } else {
             DataManager.PostData("sales", newSale)
                 .then(() => setShow(false))
@@ -87,7 +87,8 @@ const SaleList = (props) => {
             });
     }
     const handleVehicleSearch = evt => {
-        DataManager.getAll("vehicles", "searchTerm", evt.target.value)
+        setShowVehicles(true);
+        DataManager.getAll("vehicles", "vehicle", evt.target.value)
             .then(matchedVehicles => {
                 setVehicles(matchedVehicles);
             });
@@ -96,8 +97,16 @@ const SaleList = (props) => {
     const handleVehicleSelect = evt => {
         const stateToChange = { ...newSale }
         stateToChange.vehicle_id = evt.target.id
+        stateToChange.price = parseFloat(evt.target.title)
         setNewSale(stateToChange)
+
+        console.log(stateToChange)
+        // console.dir(evt.target)
+        console.log(evt.target.title)
+
+        setShowVehicles(false)
     }
+
     const handleInputFieldChange = evt => {
         const stateToChange = { ...newSale }
         stateToChange[evt.target.id] = evt.target.value
@@ -161,7 +170,7 @@ const SaleList = (props) => {
                             </Modal.Body>
                             <Modal.Body className="fieldset">
                                 <label className="name--label">Email:</label>
-                                <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text" />
+                                <input onChange={handleInputFieldChange} id="email" className="modal--input" type="text" />
                             </Modal.Body>
                             <Modal.Body className="fieldset">
                                 <label className="name--label">Phone:</label>
@@ -244,11 +253,13 @@ const SaleList = (props) => {
                                     </div>
                                 ) : null}
                             </Modal.Body>
-                            <Modal.Body className="fieldset">
+                            {/* <Modal.Body className="fieldset"> */}
                                 <label className="name--label">Select Vehicle:</label>
                                 <input className="modal--input" type="text" onChange={handleVehicleSearch} />
-                                {vehicles !== undefined && vehicles.length > 0 ? (
-                                    <div className="vehicles--dropdown">
+
+                                {showVehicles === true && vehicles.length > 0 ? (
+                                    // <div>Select a Vehicle</div>
+                                    <div className={`vehicles--dropdown ${showVehicles ? 'open' : ''}`}>
                                         {vehicles.map(vehicle => {
                                             return (
                                                 <>
@@ -256,14 +267,17 @@ const SaleList = (props) => {
                                                         className="vehicles--select"
                                                         id={vehicle.id}
                                                         onClick={handleVehicleSelect}
-                                                    >{vehicle.make,vehicle.model}
+                                                        title={vehicle.floor_price}
+                                                    >
+                                                        {`${vehicle.make} ${vehicle.model}`}
+                                                        <span className="vin">#{vehicle.vin}</span>
                                                     </div>
                                                 </>
                                             )
                                         })}
                                     </div>
                                 ) : null}
-                            </Modal.Body>
+                            {/* </Modal.Body> */}
 
                         
 

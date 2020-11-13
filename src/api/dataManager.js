@@ -41,7 +41,7 @@ let API = {
                 // ...authHeader,
                 "Content-Type": "application/json"
             },
-        }).then(response => response.json())
+        })
     },
 
     deleteUserData:(resource, Id) => {
