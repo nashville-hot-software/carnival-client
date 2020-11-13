@@ -46,7 +46,7 @@ const VehicleType = props => {
 		}
 	} 
 	
-	const [vehicles, setVehicles] = useState([]);
+	// const [vehicles, setVehicles] = useState([]);
 	const [newVehicle, setNewVehicle] = useState({
 		vin: '',
 		engine_type: '',
@@ -131,6 +131,7 @@ const VehicleType = props => {
 					{vehicleTypes !== undefined ? (
 							<div className="searchResults">
 						{vehicleTypes.map((vehicletype, i) => {
+							// console.log(vehicletype)
 								return (
 										<VehicleTypeCard
 											key={i}
