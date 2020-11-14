@@ -6,8 +6,6 @@ import Modal from 'react-bootstrap/Modal';
 
 const CustomerCard = props => {
 
-  const [customer, setCustomer] = useState(props.customer);
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,17 +22,17 @@ const CustomerCard = props => {
   return (
     <>
         <div onClick={() => handleShow()} className="customer-card--container">
-          <h2 className="customer-card--name">{`${customer.customer.first_name} ${customer.customer.last_name}`}</h2>
-          <p className="customer-card--saleInvoice"><span className="label">Invoice:</span> {`#${customer.invoice_number}`}</p>
+          <h2 className="customer-card--name">{`${props.customer.customer.first_name} ${props.customer.customer.last_name}`}</h2>
+          <p className="customer-card--saleInvoice"><span className="label">Invoice:</span> {`#${props.customer.invoice_number}`}</p>
         </div>
 
         <Modal centered show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Customer</Modal.Title>
           </Modal.Header>
-          <Modal.Body><strong>Name:</strong> {`${customer.customer.first_name} ${customer.customer.last_name}`}</Modal.Body>
-          <Modal.Body><strong>Email:</strong> {customer.customer.email}</Modal.Body>
-          <Modal.Body><strong>Phone:</strong> {customer.customer.phone}</Modal.Body>
+          <Modal.Body><strong>Name:</strong> {`${props.customer.customer.first_name} ${props.customer.customer.last_name}`}</Modal.Body>
+          <Modal.Body><strong>Email:</strong> {props.customer.customer.email}</Modal.Body>
+          <Modal.Body><strong>Phone:</strong> {props.customer.customer.phone}</Modal.Body>
         </Modal>
     </>
   );
