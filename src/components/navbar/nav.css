@@ -20,7 +20,7 @@
     z-index: 1;
     top: 0;
     background-color: #6A78D1;
-    border-radius: 8px;
+    border-radius: 0 8px 8px 0;
     margin-right: 10px;
 }
 
