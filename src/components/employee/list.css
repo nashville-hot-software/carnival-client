@@ -118,7 +118,7 @@
     border: 1px solid white;
     border-bottom: 1px solid lightgray;
     width: 220px;
-    line-height: 25px;
+    line-height: 27px;
 }
 .dealership--search:focus {
     outline: none;
@@ -248,4 +248,15 @@
     100% {
         margin-right: -470px;
     }
+}
+
+.closeBtn {
+    border: 2px solid #308ef9;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 15px;
+    width: 100px;
+    background-color: #fff;
+    margin-left: 36%;
+    margin-bottom: 5px;
 }
