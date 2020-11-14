@@ -115,6 +115,7 @@ const SaleList = (props) => {
                     setSelectedDealership("")
                     setQuery("")
                     setShow(false)
+                    
                 })
         }
     }

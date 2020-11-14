@@ -75,8 +75,8 @@ const Sales = (props) => {
                 <Table stickyHeader aria-label="customized table">
                     <TableHead classname={classes.tableHeader}>
                         <TableRow>
-                            <StyledTableCell align="left">invoice number</StyledTableCell>
                             <StyledTableCell align="center">purchase date</StyledTableCell>
+                            <StyledTableCell align="center">invoice number</StyledTableCell>
                             <StyledTableCell align="center">vehicle</StyledTableCell>
                             <StyledTableCell align="center">sale type</StyledTableCell>
                             <StyledTableCell align="center">price</StyledTableCell>
