@@ -87,7 +87,10 @@
 }
 
 .modalHeader {
-    margin: 0 auto;
+    margin: 10px 0 40px 0px;
+    border-bottom: 1px solid gray;
+    width: 100%;
+    font-size: 28px;
 }
 
 .modalBody {
@@ -108,7 +111,7 @@
 
 /* #### CUSTOM DEALERSHIP DROPDOWN STARTS HERE #### */
 .dealership--label {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .dealership--search {
@@ -141,6 +144,7 @@
     outline: none;
     border-color: #9ecaed;
     box-shadow: 0 0 8px #9ecaed;
+    background-color: #fff;
 }
 
 .dealerships-results--container {
@@ -156,7 +160,7 @@
 .modal--input {
     width: 220px;
     line-height: 25px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border: 2px solid gray;
     border-radius: 4px;
     padding-left: 7px;
@@ -171,9 +175,77 @@
 }
 
 .employeeType--label {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .modal--addBtn {
-    margin: 15% 0 10% 3.0%;
+    margin: 10% 0 10% 3.0%;
+}
+
+
+/* CUSTOM MODAL BELOW */
+
+.modal-bg {
+    display: none;
+}
+.modal-box {
+    display: none;
+}
+
+.modal-bg.show {
+    display: block;
+    position: fixed;
+    margin-top: -42px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    transition: background-color .7s linear;
+}
+
+.modal-box.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 470px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #F5F8FA;
+    padding: 20px;
+    z-index: 10;
+    animation: fadein;
+    animation-duration: .5s; 
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+.modal-bg.show.fade-out {
+    background-color: rgba(0, 0, 0, .5);
+    animation: fadeout;
+    animation-duration: .7s; 
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    background-color: transparent;
+}
+.modal-box.show.fade-out {
+    animation: fadeout;
+    animation-duration: .5s; 
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+@keyframes fadein {
+    0% {
+        margin-right: -470px;
+    }
+    100% {
+        margin-right: 0px;
+    }
+}
+@keyframes fadeout {
+    0% {
+        margin-right: 0px;
+    }
+    100% {
+        margin-right: -470px;
+    }
 }

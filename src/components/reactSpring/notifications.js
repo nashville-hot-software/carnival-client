@@ -43,17 +43,6 @@ function MessageHub({ config = { tension: 125, friction: 20, precision: 0.1 }, t
             ))}
         </Container>
     )
-
-    export default function App() {
-        const ref = useRef(null)
-        return (
-            <Main onClick={() => ref.current(lorem())}>
-                <GlobalStyle />
-            Click here to create notifications
-                <MessageHub children={add => (ref.current = add)} />
-            </Main>
-        )
-    }
 }
 
 

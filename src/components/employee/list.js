@@ -40,8 +40,27 @@ const Employees = props => {
   const [query, setQuery] = useState("");
 
   // Handlers for showing/hiding modal
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+      console.log("hello!")
+        // setShow(false)
+
+        document.querySelector('.modal-bg').classList.add('fade-out')
+        document.querySelector('.modal-box').classList.add('fade-out')
+
+        setTimeout(function() {
+            document.querySelector('.modal-box').classList.remove('fade-out')
+            document.querySelector('.modal-bg').classList.remove('fade-out')
+            document.querySelector('.modal-box').classList.toggle('show')
+            document.querySelector('.modal-bg').classList.toggle('show')
+        }, 700)
+    }
+  const handleShow = () => {
+        // setShow(true)
+        document.querySelector('.modal-box').classList.remove('fade-out')
+        document.querySelector('.modal-bg').classList.remove('fade-out')
+        document.querySelector('.modal-box').classList.toggle('show')
+        document.querySelector('.modal-bg').classList.toggle('show')
+    };
 
   // Handler for closing the dealership dropdown onBlur
   const handleDropdownClose = () => setOpen(false)
@@ -149,115 +168,267 @@ const Employees = props => {
   }, [employees])
 
   return (
-    <div className="employees--container">
-        <div className="employees--subContainer">
-            <div className="employees--header">
-                Employees
-            </div>
-
-            <input 
-                className="employees-searchBar" 
-                type='text' 
-                onChange={handleEmployeeSearch} 
-                placeholder="Search for Employees" 
-            />
-            
-            <div className="searchResults">
-                {employees.length > 0 ? (
-                <>
-                {employees.map((employee, i) => {
-                    return (
-                    <EmployeeCard
-                        key={i}
-                        employee={employee}
-                        handleDropdownClose={handleDropdownClose}
-                        {...props}
-                    />
-                    );
-                })}
-                </>
-                ) : null}
-            </div>
-
-            <button onClick={() => handleShow()} className="addEmployee--btn">
-                Add New Employee
-            </button>
-
-            <Modal className="modal--form" show={show} onHide={handleClose}>
-                <Modal.Header className="modalHeader" closeButton>
-                    <Modal.Title>Add Employee</Modal.Title>
-                </Modal.Header>
-                <div className="modalBody">
-                    <Modal.Body className="fieldset">
-                        <label className="name--label">First Name:</label>
-                        <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text"/>
-
-                        <label className="name--label">Last Name:</label>
-                        <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text"/>
-
-                        <label className="name--label">Email:</label>
-                        <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text"/>
-
-                        <label className="name--label">Phone:</label>
-                        <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
-
-                        {/* This block is for the dealership search dropdown menu (lines 157-184) */}
-                        <label className="name--label dealership--label">Dealership:</label>
-                        <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
-                            <input 
-                                className="dealership--search" 
-                                type="text" 
-                                onChange={handleDealershipSearch} 
-                                placeholder="Search Dealerships"
-                                value={`${selectedDealership !== "" ? selectedDealership : query}`}
-                            />
-
-                            {dealerships.length > 0 ? (
-                                <div className="dealerships-results--container">
-                                    {dealerships.map(dealership => {
-                                        return (
-                                        <>
-                                            <div 
-                                                className={"dealership--select"}
-                                                id={dealership.id}
-                                                onClick={handleDealerSelect}  
-                                            >
-                                                {dealership.business_name}
-                                            </div>
-                                        </>
-                                        )
-                                    })}
-                                </div>
-                            ) : null}
-                        </div>
-                    
-                        {employeeTypes !== undefined ? (
-                            <>
-                                <label className="employeeType--label">Employee Type:</label>
-                                <select 
-                                    id="employee_type_id" 
-                                    onChange={handleInputFieldChange}
-                                    className="employeeType--select"
-                                >
-                                    {employeeTypes.map(type => {
-                                        return (
-                                            <option value={type.id}>
-                                                {type.name}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-                            </>
-                        ) : null}
-
-                        <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
-                            Submit
-                        </button>
-                    </Modal.Body>
+      <>
+        <div class="modal-bg">
+            <div class="modal-box">
+                <div className="modalHeader">
+                    Add Employee
+                    <button className="closeBtn" onClick={handleClose}>Close</button>
                 </div>
-            </Modal>
+
+                <label className="name--label">First Name:</label>
+                <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text"/>
+
+                <label className="name--label">Last Name:</label>
+                <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text"/>
+
+                <label className="name--label">Email:</label>
+                <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text"/>
+
+                <label className="name--label">Phone:</label>
+                <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
+
+                {/* This block is for the dealership search dropdown menu (lines 157-184) */}
+                <label className="name--label dealership--label">Dealership:</label>
+                <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                    <input 
+                        className="dealership--search" 
+                        type="text" 
+                        onChange={handleDealershipSearch} 
+                        placeholder="Search Dealerships"
+                        value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                    />
+
+                    {dealerships.length > 0 ? (
+                        <div className="dealerships-results--container">
+                            {dealerships.map(dealership => {
+                                return (
+                                <>
+                                    <div 
+                                        className={"dealership--select"}
+                                        id={dealership.id}
+                                        onClick={handleDealerSelect}  
+                                    >
+                                        {dealership.business_name}
+                                    </div>
+                                </>
+                                )
+                            })}
+                        </div>
+                    ) : null}
+                </div>
+            
+                {employeeTypes !== undefined ? (
+                    <>
+                        <label className="employeeType--label">Employee Type:</label>
+                        <select 
+                            id="employee_type_id" 
+                            onChange={handleInputFieldChange}
+                            className="employeeType--select"
+                        >
+                            {employeeTypes.map(type => {
+                                return (
+                                    <option value={type.id}>
+                                        {type.name}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                    </>
+                ) : null}
+
+                <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
+                    Submit
+                </button>
+                {/* <button onClick={handleClose} class="closeBtn">Close</button> */}
+            </div>
         </div>
-    </div>
+
+
+        <div className="employees--container">
+        
+
+            <div className="employees--subContainer">
+                <div className="employees--header">
+                    Employees
+                </div>
+
+                <input 
+                    className="employees-searchBar" 
+                    type='text' 
+                    onChange={handleEmployeeSearch} 
+                    placeholder="Search for Employees" 
+                />
+                
+                <div className="searchResults">
+                    {employees.length > 0 ? (
+                    <>
+                    {employees.map((employee, i) => {
+                        return (
+                        <EmployeeCard
+                            key={i}
+                            employee={employee}
+                            handleDropdownClose={handleDropdownClose}
+                            {...props}
+                        />
+                        );
+                    })}
+                    </>
+                    ) : null}
+                </div>
+
+                <button onClick={() => handleShow()} className="addEmployee--btn">
+                    Add New Employee
+                </button>
+
+                
+
+                {/* <Modal className="modal--form" show={show} onHide={handleClose}>
+                    <Modal.Header className="modalHeader" closeButton>
+                        <Modal.Title>Add Employee</Modal.Title>
+                    </Modal.Header>
+                    <div className="modalBody">
+                        <Modal.Body className="fieldset">
+                            <label className="name--label">First Name:</label>
+                            <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text"/>
+
+                            <label className="name--label">Last Name:</label>
+                            <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text"/>
+
+                            <label className="name--label">Email:</label>
+                            <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text"/>
+
+                            <label className="name--label">Phone:</label>
+                            <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
+
+                            This block is for the dealership search dropdown menu (lines 157-184)
+                            <label className="name--label dealership--label">Dealership:</label>
+                            <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                                <input 
+                                    className="dealership--search" 
+                                    type="text" 
+                                    onChange={handleDealershipSearch} 
+                                    placeholder="Search Dealerships"
+                                    value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                                />
+
+                                {dealerships.length > 0 ? (
+                                    <div className="dealerships-results--container">
+                                        {dealerships.map(dealership => {
+                                            return (
+                                            <>
+                                                <div 
+                                                    className={"dealership--select"}
+                                                    id={dealership.id}
+                                                    onClick={handleDealerSelect}  
+                                                >
+                                                    {dealership.business_name}
+                                                </div>
+                                            </>
+                                            )
+                                        })}
+                                    </div>
+                                ) : null}
+                            </div>
+                        
+                            {employeeTypes !== undefined ? (
+                                <>
+                                    <label className="employeeType--label">Employee Type:</label>
+                                    <select 
+                                        id="employee_type_id" 
+                                        onChange={handleInputFieldChange}
+                                        className="employeeType--select"
+                                    >
+                                        {employeeTypes.map(type => {
+                                            return (
+                                                <option value={type.id}>
+                                                    {type.name}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                </>
+                            ) : null}
+
+                            <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
+                                Submit
+                            </button>
+                        </Modal.Body>
+                    </div>
+                </Modal> */}
+            </div>
+            {/* <div class="modal-bg">
+                <div class="modal-box">
+
+                    <label className="name--label">First Name:</label>
+                    <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text"/>
+
+                    <label className="name--label">Last Name:</label>
+                    <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text"/>
+
+                    <label className="name--label">Email:</label>
+                    <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text"/>
+
+                    <label className="name--label">Phone:</label>
+                    <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
+
+                    This block is for the dealership search dropdown menu (lines 157-184)
+                    <label className="name--label dealership--label">Dealership:</label>
+                    <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                        <input 
+                            className="dealership--search" 
+                            type="text" 
+                            onChange={handleDealershipSearch} 
+                            placeholder="Search Dealerships"
+                            value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                        />
+
+                        {dealerships.length > 0 ? (
+                            <div className="dealerships-results--container">
+                                {dealerships.map(dealership => {
+                                    return (
+                                    <>
+                                        <div 
+                                            className={"dealership--select"}
+                                            id={dealership.id}
+                                            onClick={handleDealerSelect}  
+                                        >
+                                            {dealership.business_name}
+                                        </div>
+                                    </>
+                                    )
+                                })}
+                            </div>
+                        ) : null}
+                    </div>
+                
+                    {employeeTypes !== undefined ? (
+                        <>
+                            <label className="employeeType--label">Employee Type:</label>
+                            <select 
+                                id="employee_type_id" 
+                                onChange={handleInputFieldChange}
+                                className="employeeType--select"
+                            >
+                                {employeeTypes.map(type => {
+                                    return (
+                                        <option value={type.id}>
+                                            {type.name}
+                                        </option>
+                                    )
+                                })}
+                            </select>
+                        </>
+                    ) : null}
+
+                    <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
+                        Submit
+                    </button>
+                    <button onClick={handleClose} class="closeBtn">Close</button>
+                </div>
+            </div> */}
+        </div>
+    </>
   );
 };
 
