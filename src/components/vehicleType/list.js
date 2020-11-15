@@ -26,6 +26,13 @@ const VehicleType = props => {
 			setVehicleTypes(matchedVehicles);
 		});
 	}
+
+	const handleVTFieldChange = evt => {
+		VehicleManager.getAll("vehicletypes","searchTermVT",evt.target.value)
+		.then(matchedVehicles => {
+			setVehicleTypes(matchedVehicles);
+		});
+	}
 	
 	const handleInputVehicleTypeFieldChange = evt => {
 		const stateToChange = {...newVehicleType}
@@ -217,7 +224,7 @@ const VehicleType = props => {
 											<input onChange={handleInputVehicleFieldChange} id="year_of_car" className="modal--input" type="text"/>
 
 											<label className="name--label">Vehicle Type:</label>
-											<input className="modal--input" type="text" onChange={handleFieldChange} />
+											<input className="modal--input" type="text" onChange={handleVTFieldChange} />
 											{vehicleTypes !== undefined && vehicleTypes.length > 0 ? (
                             <div className="vehicleType--dropdown">
 														{vehicleTypes.map(vehicleType => {
