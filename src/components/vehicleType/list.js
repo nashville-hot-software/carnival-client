@@ -21,7 +21,7 @@ const VehicleType = props => {
 	const handleShow = () => setShow(true);
 	
 	const handleFieldChange = evt => {
-		VehicleManager.getAll("vehicletypes","searchTerm",evt.target.value)
+		VehicleManager.getAll("vehicles","vehicle",evt.target.value)
 		.then(matchedVehicles => {
 			setVehicleTypes(matchedVehicles);
 		});
