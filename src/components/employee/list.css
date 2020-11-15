@@ -70,7 +70,7 @@
     outline: none;
 }
 
-/* Modal styling below */
+/* (Old) Modal styling below */
 
 .modal--form {
     margin-top: 70px !important;
@@ -109,7 +109,9 @@
     overflow: scroll; */
 }
 
-/* #### CUSTOM DEALERSHIP DROPDOWN STARTS HERE #### */
+/* ############ 
+    CUSTOM DEALERSHIP DROPDOWN STARTS HERE 
+############ */
 .dealership--label {
     margin-top: 20px;
 }
@@ -134,7 +136,7 @@
     height: 30px;
     transition: height .4s ease;
 }
-/* Hide scrollbar for Chrome/Safari/Opera */
+    /* Hide scrollbar for Chrome/Safari/Opera */
 .dealership-list--dropdown::-webkit-scrollbar {
     display: none;
 }
@@ -155,7 +157,9 @@
     cursor: pointer;
     color: lightgray;
 }
-/* #### CUSTOM DEALERSHIP DROPDOWN ENDS HERE #### */
+/* ############ 
+    CUSTOM DEALERSHIP DROPDOWN ENDS HERE 
+############ */
 
 .modal--input {
     width: 220px;
@@ -235,11 +239,9 @@
 
 @keyframes fadein {
     0% {
-        /* margin-right: -470px; */
         transform: translateX(200%);
     }
     100% {
-        /* margin-right: 0px; */
         transform: translateX(120%);
     }
 }
@@ -260,5 +262,5 @@
     width: 100px;
     background-color: #fff;
     margin-left: 36%;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
 }

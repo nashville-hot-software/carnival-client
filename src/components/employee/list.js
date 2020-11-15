@@ -52,7 +52,7 @@ const Employees = props => {
             document.querySelector('.modal-bg').classList.remove('fade-out')
             document.querySelector('.modal-box').classList.toggle('show')
             document.querySelector('.modal-bg').classList.toggle('show')
-        }, 700)
+        }, 1400)
     }
   const handleShow = () => {
         // setShow(true)
