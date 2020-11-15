@@ -17,7 +17,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NumberFormat from "react-number-format";
 import Modal from "react-bootstrap/Modal";
-import welcomeImage from "../../images/Welcome1.png";
+import carnivalImage from "../../images/carnival_cars_image.jpg";
 import DashBoardDetailCard from "../dashboard/DashBoardDetailCard";
 
 const useStyles = makeStyles((theme) => ({
@@ -261,10 +261,13 @@ const DashBoard = (props) => {
           </Card>
         </div>
 
-        <img src={welcomeImage} className="welcomeImg" />
+        <div className="welcomeImg--container">
+          <div className="carnival-dashboard--header">Carnival Cars</div>
+          <img src={carnivalImage} className="welcomeImg" />
+        </div>
       </div>
 
-      {/* {sales !== undefined ? (
+      {sales !== undefined ? (
         <Modal centered show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Sale Metric Details </Modal.Title>
@@ -277,7 +280,7 @@ const DashBoard = (props) => {
             </>
           </Modal.Body>
         </Modal>
-      ) : null} */}
+      ) : null}
 
       <div className="dashboard-row--2">
         <div className="dash-vehicles--container">
