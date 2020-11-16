@@ -3,7 +3,7 @@
 }
 
 .employees--subContainer {
-    background-color: #F5F8FA;
+    background-color: #f5f8fa;
     box-shadow: 1px 3px 6px 1px #cacaca;
     border-radius: 7px;
     width: 95%;
@@ -17,10 +17,10 @@
 .employees--header {
     margin-top: 40px;
     margin-bottom: 30px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 300;
     font-size: 2.5rem;
-    color: #33475B;
+    color: #33475b;
 }
 
 .employees-searchBar {
@@ -30,6 +30,7 @@
     border-radius: 4px;
     padding-left: 7px;
 }
+
 .employees-searchBar:focus {
     outline: none;
     border-color: #9ecaed;
@@ -42,8 +43,10 @@
     background-color: #fff;
     height: 400px;
     overflow: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
     width: 50%;
     margin-top: 5%;
 }
@@ -59,13 +62,21 @@
     border-radius: 5px;
     margin-top: 3.5%;
     border: none;
-    background-color: #FF7A59;
+    background-color: #ff7a59;
     color: #252222;
-    transition: transform .5s ease;
+    transition: transform 0.5s ease;
 }
+
+.addEmployee--btn--container {
+    display: flex;
+
+}
+
+
 .addEmployee--btn:hover {
     transform: scale(1.07);
 }
+
 .addEmployee--btn:focus {
     outline: none;
 }
@@ -77,8 +88,10 @@
     border-radius: 8px;
     max-height: 750px;
     overflow: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 /* Hide scrollbar for Chrome/Safari/Opera */
@@ -99,7 +112,6 @@
     flex-direction: column !important;
     align-items: center !important;
 }
-
 
 .fieldset {
     display: flex;
@@ -122,6 +134,7 @@
     width: 220px;
     line-height: 27px;
 }
+
 .dealership--search:focus {
     outline: none;
 }
@@ -129,14 +142,17 @@
 .dealership-list--dropdown {
     width: 221px;
     overflow: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    border: 1px solid gray;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    border: 2px solid #6a78d1 !important;
     border-radius: 5px;
     height: 30px;
-    transition: height .4s ease;
+    transition: height 0.4s ease;
 }
-    /* Hide scrollbar for Chrome/Safari/Opera */
+
+/* Hide scrollbar for Chrome/Safari/Opera */
 .dealership-list--dropdown::-webkit-scrollbar {
     display: none;
 }
@@ -144,8 +160,8 @@
 .dealership-list--dropdown.open {
     height: 200px;
     outline: none;
-    border-color: #9ecaed;
-    box-shadow: 0 0 8px #9ecaed;
+    border-color: #6a78d1 !important;
+    box-shadow: 0 0 8px #6a78d1;
     background-color: #fff;
 }
 
@@ -155,8 +171,9 @@
 
 .dealership--select:hover {
     cursor: pointer;
-    color: lightgray;
+    color: #6a78d1 !important;
 }
+
 /* ############ 
     CUSTOM DEALERSHIP DROPDOWN ENDS HERE 
 ############ */
@@ -165,15 +182,17 @@
     width: 220px;
     line-height: 25px;
     margin-bottom: 20px;
-    border: 2px solid gray;
+    border: 2px solid #6a78d1 !important;
     border-radius: 4px;
     padding-left: 7px;
 }
+
 .modal--input:focus {
     outline: none;
     border-color: #9ecaed;
     box-shadow: 0 0 8px #9ecaed;
 }
+
 .modal--input:last-of-type {
     margin-bottom: 0;
 }
@@ -183,15 +202,15 @@
 }
 
 .modal--addBtn {
-    margin: 10% 0 10% 3.0%;
+    margin: 10% 0 10% 0%;
 }
-
 
 /* CUSTOM MODAL BELOW */
 
 .modal-bg {
     display: none;
 }
+
 .modal-box {
     display: none;
 }
@@ -203,36 +222,36 @@
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
-    transition: background-color .7s linear;
+    transition: background-color 0.7s linear;
 }
 
 .modal-box.show {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 470px;
     height: 100%;
     margin: 0 auto;
-    background-color: #F5F8FA;
+    background-color: #f5f8fa;
     padding: 20px;
     z-index: 10;
     animation: fadein;
-    animation-duration: .6s; 
+    animation-duration: 0.6s;
     animation-fill-mode: forwards;
     animation-timing-function: ease;
 }
 
 .modal-bg.show.fade-out {
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, 0.5);
     animation: fadeout;
-    animation-duration: 1s; 
+    animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
     background-color: transparent;
 }
+
 .modal-box.show.fade-out {
     animation: fadeout;
-    animation-duration: 1s; 
+    animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
 }
@@ -241,26 +260,169 @@
     0% {
         transform: translateX(200%);
     }
+
     100% {
         transform: translateX(120%);
     }
 }
+
 @keyframes fadeout {
     0% {
         transform: translateX(120%);
     }
+
     100% {
         transform: translateX(200%);
     }
 }
 
 .closeBtn {
-    border: 2px solid gray;
+    border: 1px solid #ff7a59;
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 15px;
     width: 100px;
     background-color: #fff;
-    margin-left: 36%;
+    margin-left: 3%;
     margin-bottom: 12px;
+    color: #ff7a59 !important;
+    transition: transform 0.5s ease;
+
+
+}
+
+.closeBtn:hover {
+    transform: scale(1.07);
+    border: 1px solid #bb3333;
+    color: #bb3333 !important;
+}
+
+.closeBtn:active,
+.closeBtn:focus {
+    outline: none;
+}
+
+.ele div.x {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.ele div.x.slow {
+    -webkit-transition-duration: 4s;
+    transition-duration: 3s;
+}
+
+ul {
+    list-style: none;
+    float: left;
+    display: block;
+    width: 100%;
+}
+
+li {
+    display: inline;
+    width: 25%;
+    float: left;
+}
+
+.ele {
+    width: 25%;
+    display: inline;
+}
+
+.x {
+    float: left;
+    position: relative;
+    margin-left: 300px;
+    padding-top: 0;
+    overflow: hidden;
+    background: #6a78d1;
+    border-radius: 5px;
+    border: solid 1px #fff;
+    transition: all 0.8s ease-out;
+    cursor: pointer;
+}
+
+.x.large {
+    width: 30px;
+    height: 30px;
+}
+
+.x.medium {
+    width: 20px;
+    height: 20px;
+}
+
+.x.small {
+    width: 10px;
+    height: 10px;
+}
+
+.x.switch {
+    width: 15px;
+    height: 15px;
+}
+
+.x.grow {}
+
+.x.spin:hover {
+    background: #bb3333;
+    transform: rotate(360deg);
+}
+
+/* .x.flop:hover{
+      background:#BB3333;
+      transform: rotate(90deg);
+    }
+    .x.t:hover{
+      background:#BB3333;
+      transform: rotate(45deg);
+    }
+    .x.shift:hover{
+      background:#BB3333;
+    } */
+
+.x b {
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.x.small b {
+    border: solid 10px rgba(255, 255, 255, 0);
+}
+
+.x.medium b {
+    border: solid 10px rgba(255, 255, 255, 0);
+}
+
+.x.large b {
+    border: solid 14px rgba(255, 255, 255, 0);
+}
+
+.x.switch b {
+    border: solid 10px rgba(255, 255, 255, 0);
+}
+
+.x b:nth-child(1) {
+    border-top-color: #fff;
+    top: -1px;
+}
+
+.x b:nth-child(2) {
+    border-left-color: #fff;
+    left: -1px;
+}
+
+.x b:nth-child(3) {
+    border-bottom-color: #fff;
+    bottom: -1px;
+}
+
+.x b:nth-child(4) {
+    border-right-color: #fff;
+    right: -1px;
 }
