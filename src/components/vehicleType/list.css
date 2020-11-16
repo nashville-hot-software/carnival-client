@@ -87,9 +87,6 @@
     overflow: scroll;
 }
 
-.modalHeader {
-    margin: 0 auto;
-}
 
 .modalBody {
     border-radius: 8px;

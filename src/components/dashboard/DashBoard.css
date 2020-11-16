@@ -81,6 +81,23 @@
     margin-right: 4%;
 }
 
+.carnival-dashboard--header {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    margin-left: 15px;
+    margin-bottom: 2px;
+    color: #33475B;
+}
+
 .welcomeImg {
-    margin-left: 100px;
+    width: 550px;
+    border-radius: 8px;
+    height: 263px;
+    box-shadow: 2px 2px 4px 1px #cacaca;
+}
+
+.welcomeImg--container {
+    margin-left: 8%;
+    margin-top: -25px;
 }

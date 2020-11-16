@@ -23,7 +23,7 @@ const Customers = props => {
   return (
     <>
       <div className="customersContainer">
-        {customers.slice(0,20).map(customer => {
+        {customers.map(customer => {
           return (
             <CustomerCard
               key={customer.id}
