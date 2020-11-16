@@ -40,8 +40,11 @@ const Employees = (props) => {
 
     // Handlers for showing/hiding modal
     const handleClose = () => {
-        console.log("hello!");
-        // setShow(false)
+        const inputs = document.querySelectorAll('input')
+        const selects = document.querySelectorAll('select')
+
+        inputs.forEach(input => input.value = "")
+        selects.forEach(select => select.value = "none")
 
         document.querySelector(".modal-bg").classList.add("fade-out");
         document.querySelector(".modal-box").classList.add("fade-out");
@@ -54,7 +57,6 @@ const Employees = (props) => {
         }, 1400);
     };
     const handleShow = () => {
-        // setShow(true)
         document.querySelector(".modal-box").classList.remove("fade-out");
         document.querySelector(".modal-bg").classList.remove("fade-out");
         document.querySelector(".modal-box").classList.toggle("show");
@@ -224,7 +226,7 @@ const Employees = (props) => {
                         type="text"
                     />
 
-                    {/* DROPDOWN MENU (lines 157-184) */}
+                    {/* DROPDOWN MENU START */}
                     <label className="name--label dealership--label">Dealership:</label>
                     <div
                         onBlur={handleDropdownClose}
@@ -257,6 +259,7 @@ const Employees = (props) => {
                             </div>
                         ) : null}
                     </div>
+                    {/* DROPDOWN MENU END */}
 
                     {employeeTypes !== undefined ? (
                         <>
