@@ -291,7 +291,7 @@
 }
 
 .closeBtn {
-    border: 1px solid #ff7a59;
+    border: 2px solid gray;
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 15px;
