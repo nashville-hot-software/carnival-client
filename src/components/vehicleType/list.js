@@ -201,7 +201,7 @@ const VehicleType = props => {
 											<input onChange={handleInputVehicleFieldChange} id="vin" className="modal--input" type="text"/> */}
 
 											<label className="name--label">Engine Type:</label>
-											<input onChange={handleInputVehicleFieldChange} id="engine_type" className="modal--input" type="text"/>
+											<input onChange={handleInputVehicleFieldChange} id="engine_type" className="modal--input" type="text" maxLength="2"/>
 
 											<label className="name--label">Exterior Color:</label>
 											<input onChange={handleInputVehicleFieldChange} id="exterior_color" className="modal--input" type="text"/>
