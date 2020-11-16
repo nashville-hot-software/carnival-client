@@ -21,7 +21,14 @@ const VehicleType = props => {
 	const handleShow = () => setShow(true);
 	
 	const handleFieldChange = evt => {
-		VehicleManager.getAll("vehicletypes","searchTerm",evt.target.value)
+		VehicleManager.getAll("vehicles","vehicle",evt.target.value)
+		.then(matchedVehicles => {
+			setVehicleTypes(matchedVehicles);
+		});
+	}
+
+	const handleVTFieldChange = evt => {
+		VehicleManager.getAll("vehicletypes","searchTermVT",evt.target.value)
 		.then(matchedVehicles => {
 			setVehicleTypes(matchedVehicles);
 		});
@@ -48,7 +55,7 @@ const VehicleType = props => {
 	
 	// const [vehicles, setVehicles] = useState([]);
 	const [newVehicle, setNewVehicle] = useState({
-		vin: '',
+		// vin: '',
 		engine_type: '',
 		exterior_color: '',
 		interior_color: '',
@@ -66,9 +73,7 @@ const VehicleType = props => {
 	const handleShowVehicle = () => setShowVehicle(true);
 
 	const handleSubmitVehicle = () => {
-		if (newVehicle.vin === "") {
-			window.alert("Please fill out a VIN")
-		} else if (newVehicle.engine_type === "") {
+		if (newVehicle.engine_type === "") {
 			window.alert("Please enter an engine type")
 		} else if (newVehicle.exterior_color === "") {
 			window.alert("Please enter an exterior color")
@@ -192,11 +197,11 @@ const VehicleType = props => {
 							</Modal.Header>
 							<div className='modalBody'>
 								<Modal.Body className="fieldset">
-											<label className="name--label">VIN:</label>
-											<input onChange={handleInputVehicleFieldChange} id="vin" className="modal--input" type="text"/>
+											{/* <label className="name--label">VIN:</label>
+											<input onChange={handleInputVehicleFieldChange} id="vin" className="modal--input" type="text"/> */}
 
 											<label className="name--label">Engine Type:</label>
-											<input onChange={handleInputVehicleFieldChange} id="engine_type" className="modal--input" type="text"/>
+											<input onChange={handleInputVehicleFieldChange} id="engine_type" className="modal--input" type="text" maxLength="2" placeholder="NA for battery powered"/>
 
 											<label className="name--label">Exterior Color:</label>
 											<input onChange={handleInputVehicleFieldChange} id="exterior_color" className="modal--input" type="text"/>
@@ -217,7 +222,7 @@ const VehicleType = props => {
 											<input onChange={handleInputVehicleFieldChange} id="year_of_car" className="modal--input" type="text"/>
 
 											<label className="name--label">Vehicle Type:</label>
-											<input className="modal--input" type="text" onChange={handleFieldChange} />
+											<input className="modal--input" type="text" onChange={handleVTFieldChange} />
 											{vehicleTypes !== undefined && vehicleTypes.length > 0 ? (
                             <div className="vehicleType--dropdown">
 														{vehicleTypes.map(vehicleType => {
