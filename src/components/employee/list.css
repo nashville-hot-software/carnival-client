@@ -67,24 +67,11 @@
     transition: transform 0.5s ease;
 }
 
-.addEmployee--btn--cancel--btn--container {
-    width: 300px
+.addEmployee--btn--container {
+    display: flex;
 
 }
 
-.addEmployee--btn-itemLeft {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.addEmployee--btn-itemRight {
-    display: flex;
-    justify-content: flex-end;
-}
-.itemcenter {
-    display: flex;
-    justify-content: center;
-  }
 
 .addEmployee--btn:hover {
     transform: scale(1.07);
@@ -215,7 +202,7 @@
 }
 
 .modal--addBtn {
-    margin: 10% 0 10% 3%;
+    margin: 10% 0 10% 0%;
 }
 
 /* CUSTOM MODAL BELOW */
@@ -241,7 +228,6 @@
 .modal-box.show {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 470px;
     height: 100%;
     margin: 0 auto;
@@ -291,13 +277,13 @@
 }
 
 .closeBtn {
-    border: 2px solid gray;
+    border: 1px solid #ff7a59;
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 15px;
     width: 100px;
     background-color: #fff;
-    margin-left: 36%;
+    margin-left: 3%;
     margin-bottom: 12px;
     color: #ff7a59 !important;
     transition: transform 0.5s ease;
@@ -347,11 +333,11 @@ li {
 .x {
     float: left;
     position: relative;
-    margin-left: 305px;
-    padding: 0;
+    margin-left: 300px;
+    padding-top: 0;
     overflow: hidden;
     background: #6a78d1;
-    border-radius: 2px;
+    border-radius: 5px;
     border: solid 1px #fff;
     transition: all 0.8s ease-out;
     cursor: pointer;

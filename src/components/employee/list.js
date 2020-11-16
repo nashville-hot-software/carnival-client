@@ -278,23 +278,11 @@ const Employees = (props) => {
                             </select>
                         </>
                     ) : null}
-                    <div classname="addEmployee--btn--cancel--btn--container">
-                        <span classname="addEmployee--btn-itemLeft">
-                            {" "}
-                            <button
-                                onClick={handleSubmit}
-                                className="modal--addBtn addEmployee--btn"
-                            >
-                                Add Employee
-              </button>
-                        </span>
-                        <span class="itemcenter">
-    </span>
-                        <span className="addEmployee--btn-itemRight">
-                            <button className="closeBtn" onClick={handleClose}>
-                                Cancel
-              </button>
-                        </span>
+                    <div classname="addEmployee--btn--container">
+                        <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
+                            Add Employee </button>
+                        <button className="closeBtn" onClick={handleClose}>
+                            Cancel  </button>
                     </div>
 
                     {/* <button onClick={handleClose} class="closeBtn">Close</button> */}
