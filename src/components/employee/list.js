@@ -170,23 +170,27 @@ const Employees = (props) => {
 
     return (
         <>
+            {/* START OF CUSTOM MODAL */}
             <div class="modal-bg">
                 <div class="modal-box">
-                    <ul>
-                        <li class="ele">
-                            <div
-                                type="button"
-                                onClick={handleClose}
-                                className="x spin large "
-                            >
-                                <b></b>
-                                <b></b>
-                                <b></b>
-                                <b></b>
-                            </div>
-                        </li>
-                    </ul>
-                    <div className="modalHeader">Add Employee</div>
+                    <div className="modalHeader">
+                        Add Employee
+
+                        {/* <ul>
+                            <li class="ele">
+                                <div
+                                    type="button"
+                                    onClick={handleClose}
+                                    className="x spin large "
+                                >
+                                    <b></b>
+                                    <b></b>
+                                    <b></b>
+                                    <b></b>
+                                </div>
+                            </li>
+                        </ul> */}
+                    </div>
 
                     <label className="name--label">First Name:</label>
                     <input
@@ -220,7 +224,7 @@ const Employees = (props) => {
                         type="text"
                     />
 
-                    {/* This block is for the dealership search dropdown menu (lines 157-184) */}
+                    {/* DROPDOWN MENU (lines 157-184) */}
                     <label className="name--label dealership--label">Dealership:</label>
                     <div
                         onBlur={handleDropdownClose}
@@ -258,7 +262,7 @@ const Employees = (props) => {
                         <>
                             <label className="employeeType--label">
                                 Select Employee Type
-              </label>
+                            </label>
                             <select
                                 id="employee_type_id"
                                 onChange={handleInputFieldChange}
@@ -267,7 +271,7 @@ const Employees = (props) => {
                                 {" "}
                                 <option value="none" selected disabled hidden>
                                     Select an Option
-                </option>
+                                </option>
                                 {employeeTypes.map((type) => {
                                     return (
                                         <>
@@ -288,6 +292,8 @@ const Employees = (props) => {
                     {/* <button onClick={handleClose} class="closeBtn">Close</button> */}
                 </div>
             </div>
+
+            {/* END OF CUSTOM MODAL */}
 
             <div className="employees--container">
                 <div className="employees--subContainer">

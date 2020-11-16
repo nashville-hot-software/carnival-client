@@ -69,9 +69,7 @@
 
 .addEmployee--btn--container {
     display: flex;
-
 }
-
 
 .addEmployee--btn:hover {
     transform: scale(1.07);
@@ -81,44 +79,15 @@
     outline: none;
 }
 
-/* (Old) Modal styling below */
-
-.modal--form {
-    margin-top: 70px !important;
-    border-radius: 8px;
-    max-height: 750px;
-    overflow: scroll;
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-/* Hide scrollbar for Chrome/Safari/Opera */
-.modal--form::-webkit-scrollbar {
-    display: none;
-}
+/* ##########
+    MODAL STARTS HERE
+##########*/
 
 .modalHeader {
     margin: 10px 0 40px 0px;
     border-bottom: 1px solid gray;
     width: 100%;
     font-size: 28px;
-}
-
-.modalBody {
-    border-radius: 8px;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-}
-
-.fieldset {
-    display: flex;
-    flex-direction: column;
-    max-width: 250px;
-    /* max-height: 450px;
-    overflow: scroll; */
 }
 
 /* ############ 
@@ -131,7 +100,8 @@
 .dealership--search {
     border: 1px solid white;
     border-bottom: 1px solid lightgray;
-    width: 220px;
+    width: 421px;
+    height: 35px;
     line-height: 27px;
 }
 
@@ -140,15 +110,15 @@
 }
 
 .dealership-list--dropdown {
-    width: 221px;
+    width: 421px;
     overflow: scroll;
     -ms-overflow-style: none;
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
-    border: 2px solid #6a78d1 !important;
-    border-radius: 5px;
-    height: 30px;
+    border: 2px solid gray;
+    border-radius: 4px;
+    height: 35px;
     transition: height 0.4s ease;
 }
 
@@ -158,9 +128,9 @@
 }
 
 .dealership-list--dropdown.open {
-    height: 200px;
+    height: 250px;
     outline: none;
-    border-color: #6a78d1 !important;
+    border-color: #6a78d1;
     box-shadow: 0 0 8px #6a78d1;
     background-color: #fff;
 }
@@ -171,7 +141,7 @@
 
 .dealership--select:hover {
     cursor: pointer;
-    color: #6a78d1 !important;
+    color: #6a78d1;
 }
 
 /* ############ 
@@ -179,18 +149,18 @@
 ############ */
 
 .modal--input {
-    width: 220px;
+    width: 420px;
     line-height: 25px;
+    height: 35px;
     margin-bottom: 20px;
-    border: 2px solid #6a78d1 !important;
     border-radius: 4px;
     padding-left: 7px;
 }
 
 .modal--input:focus {
     outline: none;
-    border-color: #9ecaed;
-    box-shadow: 0 0 8px #9ecaed;
+    border-color: #6a78d1;
+    box-shadow: 0 0 8px #6a78d1;
 }
 
 .modal--input:last-of-type {
@@ -201,12 +171,22 @@
     margin-top: 20px;
 }
 
+.employeeType--select {
+    max-width: 420px;
+    height: 35px;
+    border-radius: 4px;
+}
+.employeeType--select:focus {
+    outline: none;
+}
+
 .modal--addBtn {
     margin: 10% 0 10% 0%;
 }
 
-/* CUSTOM MODAL BELOW */
-
+/* ##########
+    MODAL ANIMATIONS START HERE
+##########*/
 .modal-bg {
     display: none;
 }
@@ -275,6 +255,9 @@
         transform: translateX(200%);
     }
 }
+/* ##########
+    MODAL ANIMATIONS END HERE
+##########*/
 
 .closeBtn {
     border: 1px solid #ff7a59;
@@ -293,8 +276,6 @@
 
 .closeBtn:hover {
     transform: scale(1.07);
-    border: 1px solid #bb3333;
-    color: #bb3333 !important;
 }
 
 .closeBtn:active,
@@ -302,7 +283,16 @@
     outline: none;
 }
 
-.ele div.x {
+/* ##########
+    END OF CUSTOM MODAL
+##########*/
+
+
+
+
+/* Rotating X button CSS below */
+
+/* .ele div.x {
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
@@ -363,24 +353,10 @@ li {
     height: 15px;
 }
 
-.x.grow {}
-
 .x.spin:hover {
     background: #bb3333;
     transform: rotate(360deg);
 }
-
-/* .x.flop:hover{
-      background:#BB3333;
-      transform: rotate(90deg);
-    }
-    .x.t:hover{
-      background:#BB3333;
-      transform: rotate(45deg);
-    }
-    .x.shift:hover{
-      background:#BB3333;
-    } */
 
 .x b {
     display: block;
@@ -425,4 +401,4 @@ li {
 .x b:nth-child(4) {
     border-right-color: #fff;
     right: -1px;
-}
+} */
