@@ -55,7 +55,7 @@ const VehicleType = props => {
 	
 	// const [vehicles, setVehicles] = useState([]);
 	const [newVehicle, setNewVehicle] = useState({
-		vin: '',
+		// vin: '',
 		engine_type: '',
 		exterior_color: '',
 		interior_color: '',
@@ -73,9 +73,7 @@ const VehicleType = props => {
 	const handleShowVehicle = () => setShowVehicle(true);
 
 	const handleSubmitVehicle = () => {
-		if (newVehicle.vin === "") {
-			window.alert("Please fill out a VIN")
-		} else if (newVehicle.engine_type === "") {
+		if (newVehicle.engine_type === "") {
 			window.alert("Please enter an engine type")
 		} else if (newVehicle.exterior_color === "") {
 			window.alert("Please enter an exterior color")
@@ -199,8 +197,8 @@ const VehicleType = props => {
 							</Modal.Header>
 							<div className='modalBody'>
 								<Modal.Body className="fieldset">
-											<label className="name--label">VIN:</label>
-											<input onChange={handleInputVehicleFieldChange} id="vin" className="modal--input" type="text"/>
+											{/* <label className="name--label">VIN:</label>
+											<input onChange={handleInputVehicleFieldChange} id="vin" className="modal--input" type="text"/> */}
 
 											<label className="name--label">Engine Type:</label>
 											<input onChange={handleInputVehicleFieldChange} id="engine_type" className="modal--input" type="text"/>
