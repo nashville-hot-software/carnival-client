@@ -158,6 +158,13 @@ const Employees = (props) => {
                     dealership_id: 0,
                     employee_type_id: 0,
                 });
+                
+                // Clearing all form fields on submit
+                const inputs = document.querySelectorAll('input')
+                const selects = document.querySelectorAll('select')
+
+                inputs.forEach(input => input.value = "")
+                selects.forEach(select => select.value = "none")
 
                 setSelectedDealership("");
                 setQuery("");
@@ -298,6 +305,7 @@ const Employees = (props) => {
 
             {/* END OF CUSTOM MODAL */}
 
+            {/* EMPLOYEE SEARCH PAGE */}
             <div className="employees--container">
                 <div className="employees--subContainer">
                     <div className="employees--header">Employees</div>
@@ -325,10 +333,11 @@ const Employees = (props) => {
                             </>
                         ) : null}
                     </div>
+                {/* EMPLOYEE SEARCH PAGE */}
 
                     <button onClick={() => handleShow()} className="addEmployee--btn">
                         Add New Employee
-          </button>
+                    </button>
 
                     {/* <Modal className="modal--form" show={show} onHide={handleClose}>
                     <Modal.Header className="modalHeader" closeButton>
@@ -404,77 +413,7 @@ const Employees = (props) => {
                     </div>
                 </Modal> */}
                 </div>
-                {/* <div class="modal-bg">
-                <div class="modal-box">
-
-                    <label className="name--label">First Name:</label>
-                    <input onChange={handleInputFieldChange} id="first_name" className="modal--input" type="text"/>
-
-                    <label className="name--label">Last Name:</label>
-                    <input onChange={handleInputFieldChange} id="last_name" className="modal--input" type="text"/>
-
-                    <label className="name--label">Email:</label>
-                    <input onChange={handleInputFieldChange} id="email_address" className="modal--input" type="text"/>
-
-                    <label className="name--label">Phone:</label>
-                    <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
-
-                    This block is for the dealership search dropdown menu (lines 157-184)
-                    <label className="name--label dealership--label">Dealership:</label>
-                    <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
-                        <input 
-                            className="dealership--search" 
-                            type="text" 
-                            onChange={handleDealershipSearch} 
-                            placeholder="Search Dealerships"
-                            value={`${selectedDealership !== "" ? selectedDealership : query}`}
-                        />
-
-                        {dealerships.length > 0 ? (
-                            <div className="dealerships-results--container">
-                                {dealerships.map(dealership => {
-                                    return (
-                                    <>
-                                        <div 
-                                            className={"dealership--select"}
-                                            id={dealership.id}
-                                            onClick={handleDealerSelect}  
-                                        >
-                                            {dealership.business_name}
-                                        </div>
-                                    </>
-                                    )
-                                })}
                             </div>
-                        ) : null}
-                    </div>
-                
-                    {employeeTypes !== undefined ? (
-                        <>
-                            <label className="employeeType--label">Employee Type:</label>
-                            <select 
-                                id="employee_type_id" 
-                                onChange={handleInputFieldChange}
-                                className="employeeType--select"
-                            >
-                                {employeeTypes.map(type => {
-                                    return (
-                                        <option value={type.id}>
-                                            {type.name}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                        </>
-                    ) : null}
-
-                    <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
-                        Submit
-                    </button>
-                    <button onClick={handleClose} class="closeBtn">Close</button>
-                </div>
-            </div> */}
-            </div>
         </>
     );
 };
