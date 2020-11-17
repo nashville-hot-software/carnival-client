@@ -13,10 +13,6 @@ const Employees = (props) => {
     const [employees, setEmployees] = useState([]);
     
     const [detailsView, setDetailsView] = useState(false);
-    const [creationView, setCreationView] = useState(false);
-
-    const [filteredEmployee, setFilteredEmployee] = useState();
-
     const showDetailsModal = employeeArg => {
         setDetailsView(true);
 

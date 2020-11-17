@@ -1,8 +1,8 @@
 import React from "react";
 import "./list.css";
 
-import EmployeeDetailModal from "./modalEditForm"
-import AddEmployeeModal from "./modalAddForm"
+import EmployeeDetailModal from "../employee/modalEditForm"
+import AddEmployeeModal from "../employee/modalAddForm"
 
 const ModalWrapper = (props) => {
 
