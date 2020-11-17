@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./list.css";
 
 import EmployeeDetailModal from "./modalEditForm"
 import AddEmployeeModal from "./modalAddForm"
-import CircularIndeterminate from "./spinner"
 
 const ModalWrapper = (props) => {
 
