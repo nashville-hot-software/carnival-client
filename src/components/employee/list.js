@@ -68,7 +68,8 @@ const Employees = (props) => {
         <>
             <ModalWrapper 
                 filteredEmployee={filteredEmployee} 
-                setCreationView={setCreationView} 
+                setCreationView={setCreationView}
+                creationView={creationView}
             />
                 
             {/* EMPLOYEE SEARCH PAGE */}
