@@ -32,6 +32,7 @@ const EmployeeDetailModal = props => {
   const [editMode, setEditMode] = useState(false);
 
   const handleClose = () => {
+    setEditMode(false);
     const inputs = document.querySelectorAll('input')
     const selects = document.querySelectorAll('select')
 
