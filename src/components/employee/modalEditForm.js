@@ -9,7 +9,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-const EmployeeCard = props => {
+const EmployeeDetailModal = props => {
 
   // employee obj to update (passed down from parent list component)
   const [employee, setEmployee] = useState({
@@ -19,35 +19,26 @@ const EmployeeCard = props => {
     "phone": props.employee.phone,
     "dealership_id": props.employee.dealership_id,
     "employee_type_id": props.employee.employee_type_id
-  });
-
-  // populating the dealership select dropdown
-  const [dealerships, setDealerships] = useState([]);
+  });  
 
   // populating the employee types select dropdown
   const [employeeTypes, setEmployeeTypes] = useState([]);
 
   // State for modal show/close
-  const [show, setShow] = useState(false);
+//   const [show, setShow] = useState(false);
 
   // State for expanding/hiding the dealership dropdown menu
   const [open, setOpen] = useState(false);
-
-  // Holds selected dealership from dropdown menu to display as updated value of
-  // dealership input field
   const [selectedDealership, setSelectedDealership] = useState("");
-
-  // Holds dealership query being typed in to show as input field value (before 
-  // dealership selection)
   const [query, setQuery] = useState("");
+  const [dealerships, setDealerships] = useState([]);
 
   // State for modal edit mode
   const [editMode, setEditMode] = useState(false);
-
  
   // Open / close the modal
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+//   const handleClose = () => setShow(false);
+//   const handleShow = () => setShow(true);
 
   // Handler for closing the dealership dropdown onBlur
   const handleDropdownClose = () => setOpen(false)
@@ -136,9 +127,152 @@ const EmployeeCard = props => {
 
   return (
     <>
-        <div onClick={() => props.showDetailsModal(props.employee)} className="employee-card--container">
+        {/* <div onClick={handleShow} className="employee-card--container">
             <h2 className="employee-card--name">{`${props.employee.first_name} ${props.employee.last_name}`}</h2>
-        </div>
+        </div> */}
+
+        {/* <div class="modal-bg"> */}
+            {/* <div class="modal-box"> */}
+                <div className="modalHeader">
+                    Employee
+
+                    {/* <ul>
+                        <li class="ele">
+                            <div
+                                type="button"
+                                onClick={handleClose}
+                                className="x spin large "
+                            >
+                                <b></b>
+                                <b></b>
+                                <b></b>
+                                <b></b>
+                            </div>
+                        </li>
+                    </ul> */}
+                </div>
+
+                {editMode === false ? (
+                <div className="modal-details--body">
+                    <strong>Name:</strong> {`${props.employee.first_name} ${props.employee.last_name}`}
+                    <strong>Email:</strong> {`${props.employee.email_address}`}
+                    <strong>Phone:</strong> {`${props.employee.phone}`}
+                    <strong>Dealership:</strong> {`${props.employee.business_name}`}
+                    <strong>Employee Type:</strong> {`${props.employee.employee_type}`}
+                </div>
+                ) : (
+                    <div className="modal-edit--body">
+                        <label><strong>First Name:</strong></label> 
+                        <input 
+                        type="text"
+                        id="first_name"
+                        placeholder={`${props.employee.first_name}`}
+                        onChange={handleFieldChange}
+                        className="inputField"
+                        />
+                    
+                    
+                        <label><strong>Last Name:</strong></label> 
+                        <input 
+                        type="text"
+                        id="last_name"
+                        placeholder={`${props.employee.last_name}`}
+                        onChange={handleFieldChange}
+                        className="inputField"
+                        />
+                    
+                    
+                        <label><strong>Email:</strong></label> 
+                        <input 
+                        type="text"
+                        id="email_address"
+                        placeholder={`${props.employee.email_address}`}
+                        onChange={handleFieldChange}
+                        className="inputField"
+                        />
+                    
+                    
+                        <label><strong>Phone:</strong></label> 
+                        <input 
+                            type="text"
+                            id="phone"
+                            placeholder={`${props.employee.phone}`}
+                            onChange={handleFieldChange}
+                            className="inputField"
+                        />
+                    
+                        <label className="name--label dealership--label">Dealership:</label>
+                        <div onBlur={handleDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                            <input 
+                            type="text" 
+                            className="dealership--search" 
+                            onChange={handleDealershipSearch} 
+                            placeholder={`${props.employee.business_name}`} 
+                            value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                            />
+                            
+                            {dealerships !== undefined && dealerships.length > 0 ? (
+                            <div className="dealerships-results--container">
+                                    {dealerships.map(dealership => {
+                                        return (
+                                        <>
+                                            <div 
+                                                className="dealership--select"
+                                                id={dealership.id}
+                                                onClick={handleDealerSelect} 
+                                            >
+                                                {dealership.business_name}
+                                            </div>
+                                        </>
+                                        )
+                                    })}
+                            </div>
+                            ) : null}
+                        </div>
+                    
+
+                        {employeeTypes !== undefined ? (
+                            <>
+                                <label className="employeeType--label">Employee Type:</label>
+                                <select 
+                                    id="employee_type_id" 
+                                    onChange={handleEmployeeTypeSelect}
+                                    className="employeeType--select"
+                                >
+                                    <option defaultValue={props.employee.employee_type}>{props.employee.employee_type}</option>
+                                    {employeeTypes.map(type => {
+                                        return (
+                                            <option value={type.id}>
+                                                {type.name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                                </>
+                        ) : null}
+
+                        <button onClick={handleSubmit} className="updateEmployee--btn">
+                            Update
+                        </button>
+
+                    </div>
+
+                )}
+                <div className="edit--switch">
+                    <FormControl component="fieldset">
+                    <FormGroup aria-label="position" row>
+                    <FormControlLabel
+                        
+                        value="Edit"
+                        control={<Switch onClick={handleEditMode} color="primary" />}
+                        label="Update"
+                        labelPlacement="top"
+                    />
+                    </FormGroup>
+                    </FormControl>
+                </div>
+            {/* </div> */}
+        {/* </div> */}
 
         {/* <Modal className="modal-details--form" show={show} onHide={handleClose}>
           <Modal.Header className="modalHeader" closeButton>
@@ -270,4 +404,4 @@ const EmployeeCard = props => {
   );
 };
 
-export default EmployeeCard;
+export default EmployeeDetailModal;

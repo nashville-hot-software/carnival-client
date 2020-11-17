@@ -2,65 +2,46 @@ import React, { useState, useEffect } from "react";
 import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
+import AddEmployeeModal from "./modalAddForm"
+import EmployeeDetailModal from "./modalEditForm"
+import ModalWrapper from "./modalWrapper"
+import CircularIndeterminate from "./spinner"
 import Modal from "react-bootstrap/Modal";
 
 const Employees = (props) => {
     // Holds all employees returned from employee search bar
     const [employees, setEmployees] = useState([]);
+    
+    const [detailsView, setDetailsView] = useState(false);
+    const [creationView, setCreationView] = useState(false);
 
-    // Skeleton for new employee to be POSTed
-    const [newEmployee, setNewEmployee] = useState({
-        first_name: "",
-        last_name: "",
-        email_address: "",
-        phone: "",
-        dealership_id: 1,
-        employee_type_id: 1,
-    });
+    const [filteredEmployee, setFilteredEmployee] = useState();
 
-    // Holds all employee types for the sub-select menu in employee creation form
-    const [employeeTypes, setEmployeeTypes] = useState([]);
+    const showDetailsModal = employeeArg => {
+        setDetailsView(true);
 
-    // Holds all dealerships for the sub-select menu in employee creation form
-    const [dealerships, setDealerships] = useState([]);
+        const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
 
-    // State for hiding/showing modal
-    const [show, setShow] = useState(false);
+        // document.querySelector(".modal-box").classList.remove("fade-out");
+        // document.querySelector(".modal-bg").classList.remove("fade-out");
+        document.querySelector(".modal-box").classList.add("show");
+        document.querySelector(".modal-bg").classList.add("show");
+
+        console.log(foundEmployee);
+
+        setFilteredEmployee(foundEmployee[0]);
+    }
 
     // State for expanding/hiding the dealership dropdown menu
     const [open, setOpen] = useState(false);
 
-    // Holds selected dealership from dropdown menu to display as updated value of
-    // dealership input field
-    const [selectedDealership, setSelectedDealership] = useState("");
-
-    // Holds dealership query being typed in to show as input field value (before
-    // dealership selection)
-    const [query, setQuery] = useState("");
-
-    // Handlers for showing/hiding modal
-    const handleClose = () => {
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
-
-        document.querySelector(".modal-bg").classList.add("fade-out");
-        document.querySelector(".modal-box").classList.add("fade-out");
-
-        setTimeout(function () {
-            document.querySelector(".modal-box").classList.remove("fade-out");
-            document.querySelector(".modal-bg").classList.remove("fade-out");
-            document.querySelector(".modal-box").classList.toggle("show");
-            document.querySelector(".modal-bg").classList.toggle("show");
-        }, 1400);
-    };
     const handleShow = () => {
+        setCreationView(true)
+
         document.querySelector(".modal-box").classList.remove("fade-out");
         document.querySelector(".modal-bg").classList.remove("fade-out");
-        document.querySelector(".modal-box").classList.toggle("show");
-        document.querySelector(".modal-bg").classList.toggle("show");
+        document.querySelector(".modal-box").classList.add("show");
+        document.querySelector(".modal-bg").classList.add("show");
     };
 
     // Handler for closing the dealership dropdown onBlur
@@ -79,126 +60,17 @@ const Employees = (props) => {
         }
     };
 
-    // Fetching all employee types from DB to populate the employee type dropdown in the form
-    const fetchEmployeeTypes = () => {
-        EmployeeManager.getAll("employeetypes").then((employeeTypes) => {
-            setEmployeeTypes(employeeTypes);
-        });
-    };
-
-    // Building out the new employee obj to be posted
-    const handleInputFieldChange = (evt) => {
-        const stateToChange = { ...newEmployee };
-        stateToChange[evt.target.id] = evt.target.value;
-        console.log(stateToChange);
-        setNewEmployee(stateToChange);
-    };
-
-    // Pings API for all dealerships matching dealership input value ,
-    // Setting query state for the input field so we can dynamically set the value of the text input,
-    // Conditionals to either search for dealerships and map the list, OR set a selected dealership
-    // to show as the new input value
-    const handleDealershipSearch = (evt) => {
-        setQuery(evt.target.value);
-
-        if (evt.target.value.length > 0 && selectedDealership === "") {
-            EmployeeManager.getAll(
-                "dealerships",
-                "searchTerm",
-                evt.target.value
-            ).then((matchedDealerships) => {
-                setDealerships(matchedDealerships);
-            });
-
-            setOpen(true);
-        } else if (selectedDealership !== "") {
-            setSelectedDealership(evt.target.value);
-        } else {
-            setDealerships([]);
-
-            setOpen(false);
-        }
-    };
-
-    // Add new dealership ID to new employee object state,
-    // Set the selected dealership state to display selected
-    // dealership as value in dealership search bar,
-    // then auto-scroll back to top of scrollable div before
-    // contracting the menu
-    const handleDealerSelect = (evt) => {
-        const stateToChange = { ...newEmployee };
-        stateToChange.dealership_id = evt.target.id;
-        setNewEmployee(stateToChange);
-
-        setSelectedDealership(evt.target.innerHTML);
-
-        const dropdownDiv = document.querySelector(".dealership-list--dropdown");
-        dropdownDiv.scrollTop = 0;
-    };
-
-    const handleSubmit = () => {
-        if (newEmployee.first_name === "" || newEmployee.last_name === "") {
-            window.alert("Please fill out employee name fields");
-        } else if (newEmployee.email_address === "") {
-            window.alert("Please enter an email address");
-        } else if (newEmployee.phone === "") {
-            window.alert("Please enter a phone number");
-        } else if (newEmployee.dealership_id === 0) {
-            window.alert("Please select a valid dealership");
-        } else if (newEmployee.employee_type_id === 0) {
-            window.alert("Please select a valid employee type");
-        } else {
-            // Make the POST, then clear all data from form
-            EmployeeManager.PostData("employees", newEmployee).then(() => {
-                setNewEmployee({
-                    first_name: "",
-                    last_name: "",
-                    email_address: "",
-                    phone: "",
-                    dealership_id: 0,
-                    employee_type_id: 0,
-                });
-                
-                // Clearing all form fields on submit
-                const inputs = document.querySelectorAll('input')
-                const selects = document.querySelectorAll('select')
-
-                inputs.forEach(input => input.value = "")
-                selects.forEach(select => select.value = "none")
-
-                setSelectedDealership("");
-                setQuery("");
-                setShow(false);
-            });
-        }
-    };
-
     useEffect(() => {
-        fetchEmployeeTypes();
-    }, [employees]);
+        
+    }, [employees,detailsView, filteredEmployee]);
 
     return (
         <>
             {/* START OF CUSTOM MODAL */}
-            <div class="modal-bg">
+            {/* <div class="modal-bg">
                 <div class="modal-box">
                     <div className="modalHeader">
                         Add Employee
-
-                        {/* <ul>
-                            <li class="ele">
-                                <div
-                                    type="button"
-                                    onClick={handleClose}
-                                    className="x spin large "
-                                >
-                                    <b></b>
-                                    <b></b>
-                                    <b></b>
-                                    <b></b>
-                                </div>
-                            </li>
-                        </ul> */}
                     </div>
 
                     <label className="name--label">First Name:</label>
@@ -231,10 +103,10 @@ const Employees = (props) => {
                         id="phone"
                         className="modal--input"
                         type="text"
-                    />
+                    /> */}
 
                     {/* DROPDOWN MENU START */}
-                    <label className="name--label dealership--label">Dealership:</label>
+                    {/* <label className="name--label dealership--label">Dealership:</label>
                     <div
                         onBlur={handleDropdownClose}
                         className={`dealership-list--dropdown ${open ? "open" : ""}`}
@@ -265,10 +137,10 @@ const Employees = (props) => {
                                 })}
                             </div>
                         ) : null}
-                    </div>
+                    </div> */}
                     {/* DROPDOWN MENU END */}
 
-                    {employeeTypes !== undefined ? (
+                    {/* {employeeTypes !== undefined ? (
                         <>
                             <label className="employeeType--label">
                                 Select Employee Type
@@ -301,10 +173,17 @@ const Employees = (props) => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/* END OF CUSTOM MODAL */}
 
+            {/* The double-click issue is b/c on first click the modal changes from 'AddEmployee' to
+            'EmployeeDetail' ... Then on second click the ternary opens the 'EmployeeDetail' modal.  */}
 
+            <ModalWrapper 
+                filteredEmployee={filteredEmployee} 
+                setCreationView={setCreationView} 
+            />
+                
             {/* EMPLOYEE SEARCH PAGE */}
             <div className="employees--container">
                 <div className="employees--subContainer">
@@ -328,6 +207,7 @@ const Employees = (props) => {
                                             key={i}
                                             employee={employee}
                                             handleDropdownClose={handleDropdownClose}
+                                            showDetailsModal={showDetailsModal}
                                             {...props}
                                         />
                                     );
