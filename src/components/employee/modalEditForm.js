@@ -25,42 +25,41 @@ const EmployeeDetailModal = props => {
   const [editMode, setEditMode] = useState(false);
 
   const handleModalClose = () => {
-    setEditMode(false);
+      setEditMode(false);
 
-    const inputs = document.querySelectorAll('input')
-    const selects = document.querySelectorAll('select')
-    inputs.forEach(input => input.value = "")
-    selects.forEach(select => select.value = "none")
+      const inputs = document.querySelectorAll('input')
+      const selects = document.querySelectorAll('select')
+      inputs.forEach(input => input.value = "")
+      selects.forEach(select => select.value = "none")
 
-    document.querySelector(".modal-bg").classList.add("fade-out");
-    document.querySelector(".modal-box").classList.add("fade-out");
+      document.querySelector(".modal-bg").classList.add("fade-out");
+      document.querySelector(".modal-box").classList.add("fade-out");
 
-    setTimeout(function () {
-        document.querySelector(".modal-box").classList.remove("fade-out");
-        document.querySelector(".modal-bg").classList.remove("fade-out");
-        document.querySelector(".modal-box").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
-    }, 500);
+      setTimeout(function () {
+          document.querySelector(".modal-box").classList.remove("fade-out");
+          document.querySelector(".modal-bg").classList.remove("fade-out");
+          document.querySelector(".modal-box").classList.remove("show");
+          document.querySelector(".modal-bg").classList.remove("show");
+      }, 500);
 
-    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
-    if (muiSwitch.classList.contains('Mui-checked')) {
-      muiSwitch.click();
-    }
+      if (muiSwitch.classList.contains('Mui-checked')) {
+        muiSwitch.click();
+      }
   };
 
   const handleEditMode = () => {
-    setEditMode(!editMode);
+      setEditMode(!editMode);
 
-    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-    muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2')
-    console.log(muiSwitch)
+      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2')
   };
 
   const handleFieldChange = evt => {
-    const stateToChange = {...employee};
-    stateToChange[evt.target.id] = evt.target.value;
-    setEmployee(stateToChange);
+      const stateToChange = {...employee};
+      stateToChange[evt.target.id] = evt.target.value;
+      setEmployee(stateToChange);
   };
 
   const handleSubmit = () => {
@@ -77,17 +76,20 @@ const EmployeeDetailModal = props => {
     } else {
         EmployeeManager.update("employees", employee, props.employee.id)
             .then(() => {
-              setEditMode(false)
+              setEditMode(false);
+
+              const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+
+              if (muiSwitch.classList.contains('Mui-checked')) {
+                muiSwitch.click();
+              }
             })
             .then(() => {
-              // console.log(props.employee.id)
               EmployeeManager.getOne("employees", props.employee.id)
                 .then(resp => {
-                  setUpdatedEmployee(resp)
-                  console.log(resp)
+                  setUpdatedEmployee(resp);
                 })
             })
-            
     }
   } 
 
@@ -133,23 +135,38 @@ const EmployeeDetailModal = props => {
         <div className="modal-details--body">
             <div>
               <strong>Name:</strong> 
-              <span>{`${props.employee.first_name} ${props.employee.last_name}`}</span>
+              <span>
+                    {updatedEmployee !== undefined ? (`${updatedEmployee.first_name} ${updatedEmployee.last_name}`) 
+                    : (`${props.employee.first_name} ${props.employee.last_name}`)} 
+              </span>
             </div>
             <div>
               <strong>Email:</strong> 
-              <span>{`${props.employee.email_address}`}</span>
+              <span>
+                {updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
+                : (`${props.employee.email_address}`)}
+              </span>
             </div>
             <div>
               <strong>Phone:</strong> 
-              <span>{`${props.employee.phone}`}</span>
+              <span>
+                {updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
+                : (`${props.employee.phone}`)}
+              </span>
             </div>
             <div>
               <strong>Dealership:</strong> 
-              <span>{`${props.employee.business_name}`}</span>
+              <span>
+                {updatedEmployee !== undefined ? (`${updatedEmployee.dealership.business_name}`) 
+                  : (`${props.employee.business_name}`)}
+              </span>
             </div>
             <div>
               <strong>Employee Type:</strong> 
-              <span>{`${props.employee.employee_type}`}</span>
+              <span>
+                  {updatedEmployee !== undefined ? (`${updatedEmployee.employee_type.name}`) 
+                  : (`${props.employee.employee_type}`)}
+              </span>
             </div>
             <button className="closeBtn-details" onClick={handleModalClose}>
                 Close  
@@ -161,7 +178,8 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="first_name"
-                placeholder={`${props.employee.first_name}`}
+                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.first_name}`) 
+                            : (`${props.employee.first_name}`)} 
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
@@ -171,7 +189,8 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="last_name"
-                placeholder={`${props.employee.last_name}`}
+                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.last_name}`) 
+                            : (`${props.employee.last_name}`)} 
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
@@ -181,7 +200,8 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="email_address"
-                placeholder={`${props.employee.email_address}`}
+                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
+                            : (`${props.employee.email_address}`)}
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
@@ -191,7 +211,8 @@ const EmployeeDetailModal = props => {
                 <input 
                     type="text"
                     id="phone"
-                    placeholder={`${props.employee.phone}`}
+                    placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
+                                : (`${props.employee.phone}`)}
                     onChange={handleFieldChange}
                     className="modal--input"
                 />
