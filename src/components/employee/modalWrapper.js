@@ -1,11 +1,9 @@
 import React from "react";
 import "./list.css";
-
 import EmployeeDetailModal from "./modalEditForm"
 import AddEmployeeModal from "./modalAddForm"
 
 const ModalWrapper = (props) => {
-
 
     return (
             <div class="modal-bg">

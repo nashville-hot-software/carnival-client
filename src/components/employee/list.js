@@ -27,13 +27,10 @@ const Employees = (props) => {
         document.querySelector(".modal-box").classList.add("show");
         document.querySelector(".modal-bg").classList.add("show");
 
-        console.log(foundEmployee);
-
         setFilteredEmployee(foundEmployee[0]);
     }
 
-    // State for expanding/hiding the dealership dropdown menu
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
 
     const handleShow = () => {
         setCreationView(true)
@@ -44,10 +41,8 @@ const Employees = (props) => {
         document.querySelector(".modal-bg").classList.add("show");
     };
 
-    // Handler for closing the dealership dropdown onBlur
-    const handleDropdownClose = () => setOpen(false);
+    // const handleDropdownClose = () => setOpen(false);
 
-    // Pings API for all employees (basic employee search page, not the modal)
     const handleEmployeeSearch = (evt) => {
         if (evt.target.value.length > 0) {
             EmployeeManager.getAll("employees", "searchTerm", evt.target.value).then(
@@ -90,7 +85,7 @@ const Employees = (props) => {
                                         <EmployeeCard
                                             key={i}
                                             employee={employee}
-                                            handleDropdownClose={handleDropdownClose}
+                                            // handleDropdownClose={handleDropdownClose}
                                             showDetailsModal={showDetailsModal}
                                             {...props}
                                         />

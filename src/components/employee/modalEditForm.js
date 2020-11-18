@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./card.css"
 import "./editForm.css"
