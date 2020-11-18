@@ -58,10 +58,6 @@ const Employees = (props) => {
         }
     };
 
-    useEffect(() => {
-        
-    }, [employees]);
-
     return (
         <>
             <ModalWrapper 
@@ -84,7 +80,7 @@ const Employees = (props) => {
                         placeholder="Search for Employees"
                     />
 
-                    <div className="searchResults">
+                    <div className="searchResults employee">
                         {employees.length > 0 ? (
                             <>
                                 {employees.map((employee, i) => {

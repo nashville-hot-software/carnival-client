@@ -1,0 +1,16 @@
+.employee-details--header {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.employee-id {
+    font-size: 18px;
+    color: lightgray;
+}
+
+.modal-edit--body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
