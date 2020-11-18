@@ -30,34 +30,38 @@
     display: none;
 }
 
-.modalHeader {
-    margin: 0 auto;
+.modal-details--body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 10%;
+}
+.modal-details--body div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.modal-details--body {
-    border-radius: 8px;
-    display: flex !important;
-    flex-direction: column !important;
-    margin-top: 20px;
-    margin-left: 25%;
-    margin-right: 25%;
+.modal-details--body div strong {
+    font-size: 16px;
+}
+
+.modal-details--body div span {
+    font-size: 20px;
+    color: #4a4a4a;
 }
 
 .modal-edit--body {
     border-radius: 8px;
-    display: flex !important;
-    flex-direction: column !important;
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
-    margin-left: 25%;
-    margin-right: 25%;
 }
 
 .fieldset {
     display: flex;
     flex-direction: column;
     max-width: 250px;
-    /* max-height: 450px;
-    overflow: scroll; */
 }
 
 .inputField {
@@ -76,14 +80,15 @@
 }
 
 .edit--switch {
-    margin-left: 10%;
-    margin-bottom: 5%;
+    margin-top: 15px;
+    margin-left: 40%;
 }
 
 .updateEmployee--btn {
     line-height: 40px;
     width: 200px;
-    margin: 15% 0 0 3.0%;
+    height: 40px;
+    margin-right: 3.5%;
     border-radius: 5px;
     border: none;
     background-color: #FF7A59;
@@ -123,4 +128,25 @@
 
 .employeeType--label {
     margin-top: 15px;
+}
+
+.closeBtn-details {
+    border: 1px solid #ff7a59;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 15px;
+    width: 100px;
+    background-color: #fff;
+    margin-top: 10px;
+    margin-left: 0%;
+    margin-bottom: 12px;
+    color: #ff7a59 !important;
+    transition: transform 0.5s ease;
+}
+.closeBtn-details:hover {
+    transform: scale(1.07);
+}
+.closeBtn-details:active,
+.closeBtn-details:focus {
+    outline: none;
 }

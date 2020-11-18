@@ -1,0 +1,56 @@
+/* ############ 
+    CUSTOM DEALERSHIP DROPDOWN STARTS HERE 
+############ */
+.dealership--label {
+    margin-top: 20px;
+}
+
+.dealership--search {
+    border: 1px solid white;
+    border-bottom: 1px solid lightgray;
+    width: 421px;
+    height: 35px;
+    line-height: 27px;
+}
+
+.dealership--search:focus {
+    outline: none;
+}
+
+.dealership-list--dropdown {
+    width: 421px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    border: 2px solid gray;
+    border-radius: 4px;
+    height: 35px;
+    transition: height 0.4s ease;
+}
+
+.dealership-list--dropdown::-webkit-scrollbar {
+    display: none;
+}
+
+.dealership-list--dropdown.open {
+    height: 220px;
+    outline: none;
+    border-color: #6a78d1;
+    box-shadow: 0 0 8px #6a78d1;
+    background-color: #fff;
+}
+
+.dealerships-results--container {
+    padding: 10px;
+}
+
+.dealership--select:hover {
+    cursor: pointer;
+    color: #6a78d1;
+}
+
+/* ############ 
+    CUSTOM DEALERSHIP DROPDOWN ENDS HERE 
+############ */
