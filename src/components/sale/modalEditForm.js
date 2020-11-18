@@ -10,25 +10,25 @@ import FormControl from "@material-ui/core/FormControl";
 const SaleDetailModal = (props) => {
     // employee obj to update (passed down from parent list component)
     const [sale, setSale] = useState({
-        price: props.sale.price.price,
-        deposit: props.sale.deposit,
-        pickup_date: props.sale.pickup_date,
-        invoice_number: props.sale.invoice_number,
-        payment_method: props.sale.payment_method,
-        returned: props.sale.returned,
-        dealership_id: props.sale.dealership_id,
-        employee_id: props.sale.employee_id,
-        sales_type_id: props.sale.sales_type_id,
-        vehicle_id: props.sale.vehicle_id,
-        first_name: props.sale.first_name,
-        last_name: props.sale.last_name,
-        email: props.sale.email,
-        phone: props.sale.phone,
-        street: props.sale.street,
-        city: props.sale.city,
-        state: props.sale.state,
-        zipcode: props.sale.zipcode,
-        company_name: props.sale.company_name,
+        "price": props.sale.price.price,
+        "deposit": props.sale.deposit,
+        "pickup_date": props.sale.pickup_date,
+        "invoice_number": props.sale.invoice_number,
+        "payment_method": props.sale.payment_method,
+        "returned": props.sale.returned,
+        "dealership_id": props.sale.dealership_id,
+        "employee_id": props.sale.employee_id,
+        "sales_type_id": props.sale.sales_type_id,
+        "vehicle_id": props.sale.vehicle_id,
+        "first_name": props.sale.first_name,
+        "last_name": props.sale.last_name,
+        "email": props.sale.email,
+        "phone": props.sale.phone,
+        "street": props.sale.street,
+        "city": props.sale.city,
+        "state": props.sale.state,
+        "zipcode": props.sale.zipcode,
+        "company_name": props.sale.company_name,
     });
     // State for expanding/hiding the dealership dropdown menu
     const [open, setOpen] = useState(false);
@@ -66,15 +66,14 @@ const SaleDetailModal = (props) => {
         const handleDealershipDropdownClose = () => setOpen(false);
 
         const handleEditMode = () => {
-            fetchEmployeeTypes();
             setEditMode(!editMode);
         };
 
         // (For edit mode)
-        const handleFieldChange = (evt) => {
-            const stateToChange = { ...employee };
+        const handleInputFieldChange = (evt) => {
+            const stateToChange = { ...sale };
             stateToChange[evt.target.id] = evt.target.value;
-            setEmployee(stateToChange);
+            setSale(stateToChange);
         };
 
         const handleDealershipSearch = (evt) => {
@@ -117,31 +116,31 @@ const SaleDetailModal = (props) => {
         // };
 
         const handleEditSubmit = () => {
-            if (newSale.first_name === "" && newSale.last_name === "") {
+            if (sale.first_name === "" && sale.last_name === "") {
                 window.alert("Please fill out new customer name fields")
-            } else if (newSale.email === "") {
+            } else if (sale.email === "") {
                 window.alert("Please enter customers email address")
-            } else if (newSale.company_name === "") {
+            } else if (sale.company_name === "") {
                 window.alert("Please enter customers email address")
-            } else if (newSale.phone === "") {
+            } else if (sale.phone === "") {
                 window.alert("Please enter a valid phone number")
-            } else if (newSale.dealership_id === 0) {
+            } else if (sale.dealership_id === 0) {
                 window.alert("Please select a valid dealership")
-            } else if (newSale.sales_type_id === 0) {
+            } else if (sale.sales_type_id === 0) {
                 window.alert("Please select a valid employee type")
-            } else if (newSale.vehicle_id === 0) {
+            } else if (sale.vehicle_id === 0) {
                 window.alert("Please select a valid vehicle")
-            } else if (newSale.street === 0) {
+            } else if (sale.street === 0) {
                 window.alert("Please select a valid vehicle")
-            } else if (newSale.city === 0) {
+            } else if (sale.city === 0) {
                 window.alert("Please select a valid vehicle")
-            } else if (newSale.state === "") {
+            } else if (sale.state === "") {
                 window.alert("Please select a valid vehicle")
-            } else if (newSale.zipcode === "") {
+            } else if (sale.zipcode === "") {
                 window.alert("Please select a valid vehicle")
-            } else if (newSale.price === "") {
+            } else if (sale.price === "") {
                 window.alert("Please select a valid vehicle")
-            } else if (newSale.price === "") {
+            } else if (sale.price === "") {
                 window.alert("Please select a valid vehicle")
             } else {
                 EmployeeManager.update("sales", employee, props.employee.id).then(
@@ -255,33 +254,34 @@ const SaleDetailModal = (props) => {
 
                     {/* This block is for the dealership search dropdown menu (lines 157-184) */}
                     <label className="name--label dealership--label">Dealership:</label>
-                    <div onBlur={handleDropdownClose} className={`modal--input dealership-list--dropdown ${open ? 'open' : ''}`}>
-                        <input
-                            className="dealership--search"
-                            type="text"
-                            onChange={handleDealershipSearch}
-                            placeholder="Search Dealerships"
-                            value={`${selectedDealership !== "" ? selectedDealership : query}`}
-                        />
-                        {dealerships.length > 0 ? (
-                            <div className="dealerships-results--container">
-                                {dealerships.map(dealership => {
-                                    return (
-                                        <>
-                                            <div
-                                                className={"dealership--select"}
-                                                id={dealership.id}
-                                                onClick={handleDealerSelect}
-                                            >
-                                                {dealership.business_name}
-                                            </div>
-                                        </>
-                                    )
-                                })}
-                            </div>
-                        ) : null}
+                    <div onBlur={handleDealershipDropdownClose} className={`dealership-list--dropdown ${open ? 'open' : ''}`}>
+                    <input 
+                    type="text" 
+                    className="dealership--search" 
+                    onChange={handleDealershipSearch} 
+                    placeholder={`${props.sale.business_name}`} 
+                    value={`${selectedDealership !== "" ? selectedDealership : query}`}
+                    />
+                    
+                    {dealerships !== undefined && dealerships.length > 0 ? (
+                    <div className="dealerships-results--container">
+                            {dealerships.map(dealership => {
+                                return (
+                                <>
+                                    <div 
+                                        className="dealership--select"
+                                        id={dealership.id}
+                                        onClick={handleDealerSelect} 
+                                    >
+                                        {dealership.business_name}
+                                    </div>
+                                </>
+                                )
+                            })}
                     </div>
-                    {/* </Modal.Body> */}
+                    ) : null}
+                </div>
+                  
 
                     <label className="name--label">Select Vehicle:</label>
                     <input className="modal--input" type="text" onChange={handleVehicleSearch} />
