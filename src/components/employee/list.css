@@ -139,7 +139,7 @@
 }
 
 .dealership-list--dropdown.open {
-    height: 250px;
+    height: 220px;
     outline: none;
     border-color: #6a78d1;
     box-shadow: 0 0 8px #6a78d1;
@@ -192,7 +192,19 @@
 }
 
 .modal--addBtn {
-    margin: 10% 0 10% 0%;
+    margin-top: none;
+    margin-right: 3.5%;
+    width: 200px;
+    line-height: 40px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ff7a59;
+    color: #252222;
+    transition: transform 0.5s ease;
+}
+
+.modal--addBtn:hover {
+    transform: scale(1.07);
 }
 
 /* ##########

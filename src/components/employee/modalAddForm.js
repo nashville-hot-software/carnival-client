@@ -33,7 +33,7 @@ const AddEmployeeModal = (props) => {
             document.querySelector(".modal-bg").classList.remove("fade-out");
             document.querySelector(".modal-box").classList.remove("show");
             document.querySelector(".modal-bg").classList.remove("show");
-        }, 1000);
+        }, 500);
     };
 
     const handleInputFieldChange = (evt) => {
@@ -139,7 +139,7 @@ const AddEmployeeModal = (props) => {
                 />
 
                 <div className="addEmployee--btn--container">
-                    <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
+                    <button onClick={handleSubmit} className="modal--addBtn">
                         Add Employee 
                     </button>
                     <button className="closeBtn" onClick={handleClose}>

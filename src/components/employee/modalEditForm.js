@@ -38,7 +38,7 @@ const EmployeeDetailModal = props => {
         document.querySelector(".modal-bg").classList.remove("fade-out");
         document.querySelector(".modal-box").classList.remove("show");
         document.querySelector(".modal-bg").classList.remove("show");
-    }, 1000);
+    }, 500);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
