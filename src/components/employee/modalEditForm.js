@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./card.css"
 import "./editForm.css"
@@ -19,6 +19,8 @@ const EmployeeDetailModal = props => {
     "dealership_id": props.employee.dealership_id,
     "employee_type_id": props.employee.employee_type_id
   });  
+
+  const [updatedEmployee, setUpdatedEmployee] = useState();
 
   const [editMode, setEditMode] = useState(false);
 
@@ -77,6 +79,15 @@ const EmployeeDetailModal = props => {
             .then(() => {
               setEditMode(false)
             })
+            .then(() => {
+              // console.log(props.employee.id)
+              EmployeeManager.getOne("employees", props.employee.id)
+                .then(resp => {
+                  setUpdatedEmployee(resp)
+                  console.log(resp)
+                })
+            })
+            
     }
   } 
 

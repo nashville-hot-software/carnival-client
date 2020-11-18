@@ -35,13 +35,13 @@ const EmployeeTypeSelect = (props) => {
                     className="employeeType--select"
                 >
                     {" "}
-                    <option value="none" selected disabled hidden>
+                    <option defaultValue="none" disabled hidden>
                         Select an Option
                     </option>
-                    {employeeTypes.map((type) => {
+                    {employeeTypes.map((type, i) => {
                         return (
                             <>
-                                <option value={type.id}>{type.name}</option>
+                                <option key={i} value={type.id}>{type.name}</option>
                             </>
                         );
                     })}
