@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import DataManager from "../../api/dataManager";
 import "./list.css";
+import USAStatesArray from "./stateList";
+
 
 const AddSaleModal = (props) => {
     const [sales, setSales] = useState();

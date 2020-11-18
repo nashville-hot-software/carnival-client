@@ -36,10 +36,8 @@ const SaleDetailModal = (props) => {
     const [query, setQuery] = useState("");
     const [dealerships, setDealerships] = useState([]);
     const [editMode, setEditMode] = useState(false);
-    const [employee, setEmployee] = useState(props.employee);
-    const [dealerships, setDealerships] = useState([]);
+    const [employee, setEmployee] = useState()
     const [show, setShow] = useState(false);
-    const [editMode, setEditMode] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 

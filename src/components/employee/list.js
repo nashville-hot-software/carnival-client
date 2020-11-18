@@ -11,8 +11,10 @@ import Modal from "react-bootstrap/Modal";
 const Employees = (props) => {
     // Holds all employees returned from employee search bar
     const [employees, setEmployees] = useState([]);
-    
     const [detailsView, setDetailsView] = useState(false);
+    const [creationView, setCreationView] = useState(false);
+    const [filteredEmployee, setFilteredEmployee] = useState();
+
     const showDetailsModal = employeeArg => {
         setDetailsView(true);
 

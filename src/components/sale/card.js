@@ -7,15 +7,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-const SaleCard = props => {
+const SaleCard = (props) => {
 
-  
-  
-      };
     return (
         <>
-            <div onClick={handleShow} className="sale-card--container">
-                <h2 className="sale-card--name">{`${sale.first_name} ${sale.last_name}`}</h2>
+            <div onClick={() => props.showDetailsModal(props.sale)} className="sale-card--container">
+                <h2 className="sale-card--name">{`${props.sale.first_name} ${props.sale.last_name}`}</h2>
             </div>
         </>
     );
