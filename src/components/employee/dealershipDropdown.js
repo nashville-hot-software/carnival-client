@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EmployeeManager from "../../api/dataManager";
-import "./list.css";
+import "./dealershipDropdown.css";
 
 const DealershipDropdown = (props) => {
 
