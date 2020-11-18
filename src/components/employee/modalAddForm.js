@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
 import DealershipDropdown from "./dealershipDropdown"
+import EmployeeTypeSelect from "./employeeTypesMenu"
 
 const AddEmployeeModal = (props) => {
 
@@ -14,8 +15,6 @@ const AddEmployeeModal = (props) => {
         dealership_id: 1,
         employee_type_id: 1,
     });
-
-    const [employeeTypes, setEmployeeTypes] = useState([]);
 
     const handleClose = () => {
         props.setCreationView(false)
@@ -35,12 +34,6 @@ const AddEmployeeModal = (props) => {
             document.querySelector(".modal-box").classList.remove("show");
             document.querySelector(".modal-bg").classList.remove("show");
         }, 1000);
-    };
-
-    const fetchEmployeeTypes = () => {
-        EmployeeManager.getAll("employeetypes").then((employeeTypes) => {
-            setEmployeeTypes(employeeTypes);
-        });
     };
 
     const handleInputFieldChange = (evt) => {
@@ -80,10 +73,6 @@ const AddEmployeeModal = (props) => {
             });
         }
     };
-
-    useEffect(() => {
-        fetchEmployeeTypes();
-    }, []);
 
     return (
         <>
@@ -144,30 +133,11 @@ const AddEmployeeModal = (props) => {
                     setState={setNewEmployee}
                 />
 
-                {employeeTypes !== undefined ? (
-                    <>
-                        <label className="employeeType--label">
-                            Select Employee Type
-                        </label>
-                        <select
-                            id="employee_type_id"
-                            onChange={handleInputFieldChange}
-                            className="employeeType--select"
-                        >
-                            {" "}
-                            <option value="none" selected disabled hidden>
-                                Select an Option
-                            </option>
-                            {employeeTypes.map((type) => {
-                                return (
-                                    <>
-                                        <option value={type.id}>{type.name}</option>
-                                    </>
-                                );
-                            })}
-                        </select>
-                    </>
-                ) : null}
+                <EmployeeTypeSelect
+                    state={newEmployee}
+                    setState={setNewEmployee}
+                />
+
                 <div className="addEmployee--btn--container">
                     <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
                         Add Employee 
