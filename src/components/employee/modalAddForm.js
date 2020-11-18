@@ -134,7 +134,7 @@ const AddEmployeeModal = (props) => {
 
     return (
         <>
-            <div className="modalHeader">
+            <div className="modalHeader addEmployee">
                 Add Employee
 
                 {/* <ul>
@@ -152,105 +152,107 @@ const AddEmployeeModal = (props) => {
                     </li>
                 </ul> */}
             </div>
-
-            <label className="name--label">First Name:</label>
-            <input
-                onChange={handleInputFieldChange}
-                id="first_name"
-                className="modal--input"
-                type="text"
-            />
-
-            <label className="name--label">Last Name:</label>
-            <input
-                onChange={handleInputFieldChange}
-                id="last_name"
-                className="modal--input"
-                type="text"
-            />
-
-            <label className="name--label">Email:</label>
-            <input
-                onChange={handleInputFieldChange}
-                id="email_address"
-                className="modal--input"
-                type="text"
-            />
-
-            <label className="name--label">Phone:</label>
-            <input
-                onChange={handleInputFieldChange}
-                id="phone"
-                className="modal--input"
-                type="text"
-            />
-
-            {/* DROPDOWN MENU START */}
-            <label className="name--label dealership--label">Dealership:</label>
-            <div
-                onBlur={handleDealershipDropdownClose}
-                className={`dealership-list--dropdown ${open ? "open" : ""}`}
-            >
+                
+            <div className="modal-add--body">
+                <label className="name--label">First Name:</label>
                 <input
-                    className="dealership--search"
+                    onChange={handleInputFieldChange}
+                    id="first_name"
+                    className="modal--input"
                     type="text"
-                    onChange={handleDealershipSearch}
-                    placeholder="Search Dealerships"
-                    value={`${selectedDealership !== "" ? selectedDealership : query
-                        }`}
                 />
 
-                {dealerships.length > 0 ? (
-                    <div className="dealerships-results--container">
-                        {dealerships.map((dealership) => {
-                            return (
-                                <>
-                                    <div
-                                        className={"dealership--select"}
-                                        id={dealership.id}
-                                        onClick={handleDealerSelect}
-                                    >
-                                        {dealership.business_name}
-                                    </div>
-                                </>
-                            );
-                        })}
-                    </div>
-                ) : null}
-            </div>
-            {/* DROPDOWN MENU END */}
+                <label className="name--label">Last Name:</label>
+                <input
+                    onChange={handleInputFieldChange}
+                    id="last_name"
+                    className="modal--input"
+                    type="text"
+                />
 
-            {employeeTypes !== undefined ? (
-                <>
-                    <label className="employeeType--label">
-                        Select Employee Type
-                    </label>
-                    <select
-                        id="employee_type_id"
-                        onChange={handleInputFieldChange}
-                        className="employeeType--select"
-                    >
-                        {" "}
-                        <option value="none" selected disabled hidden>
-                            Select an Option
-                        </option>
-                        {employeeTypes.map((type) => {
-                            return (
-                                <>
-                                    <option value={type.id}>{type.name}</option>
-                                </>
-                            );
-                        })}
-                    </select>
-                </>
-            ) : null}
-            <div classname="addEmployee--btn--container">
-                <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
-                    Add Employee 
-                </button>
-                <button className="closeBtn" onClick={handleClose}>
-                    Close  
-                </button>
+                <label className="name--label">Email:</label>
+                <input
+                    onChange={handleInputFieldChange}
+                    id="email_address"
+                    className="modal--input"
+                    type="text"
+                />
+
+                <label className="name--label">Phone:</label>
+                <input
+                    onChange={handleInputFieldChange}
+                    id="phone"
+                    className="modal--input"
+                    type="text"
+                />
+
+                {/* DROPDOWN MENU START */}
+                <label className="name--label dealership--label">Dealership:</label>
+                <div
+                    onBlur={handleDealershipDropdownClose}
+                    className={`dealership-list--dropdown ${open ? "open" : ""}`}
+                >
+                    <input
+                        className="dealership--search"
+                        type="text"
+                        onChange={handleDealershipSearch}
+                        placeholder="Search Dealerships"
+                        value={`${selectedDealership !== "" ? selectedDealership : query
+                            }`}
+                    />
+
+                    {dealerships.length > 0 ? (
+                        <div className="dealerships-results--container">
+                            {dealerships.map((dealership) => {
+                                return (
+                                    <>
+                                        <div
+                                            className={"dealership--select"}
+                                            id={dealership.id}
+                                            onClick={handleDealerSelect}
+                                        >
+                                            {dealership.business_name}
+                                        </div>
+                                    </>
+                                );
+                            })}
+                        </div>
+                    ) : null}
+                </div>
+                {/* DROPDOWN MENU END */}
+
+                {employeeTypes !== undefined ? (
+                    <>
+                        <label className="employeeType--label">
+                            Select Employee Type
+                        </label>
+                        <select
+                            id="employee_type_id"
+                            onChange={handleInputFieldChange}
+                            className="employeeType--select"
+                        >
+                            {" "}
+                            <option value="none" selected disabled hidden>
+                                Select an Option
+                            </option>
+                            {employeeTypes.map((type) => {
+                                return (
+                                    <>
+                                        <option value={type.id}>{type.name}</option>
+                                    </>
+                                );
+                            })}
+                        </select>
+                    </>
+                ) : null}
+                <div classname="addEmployee--btn--container">
+                    <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
+                        Add Employee 
+                    </button>
+                    <button className="closeBtn" onClick={handleClose}>
+                        Close  
+                    </button>
+                </div>
             </div>
         </>
     );

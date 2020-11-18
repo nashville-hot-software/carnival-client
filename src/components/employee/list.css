@@ -93,6 +93,14 @@
     background-color: #6a78d1;
 }
 
+.modalHeader.addEmployee {
+    padding: 10px 0 10px 20px;
+}
+
+.modal-add--body {
+    padding-left: 20px;
+}
+
 /* ############ 
     CUSTOM DEALERSHIP DROPDOWN STARTS HERE 
 ############ */
@@ -125,7 +133,6 @@
     transition: height 0.4s ease;
 }
 
-/* Hide scrollbar for Chrome/Safari/Opera */
 .dealership-list--dropdown::-webkit-scrollbar {
     display: none;
 }
