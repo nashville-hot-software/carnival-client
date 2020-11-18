@@ -4,7 +4,7 @@ import EmployeeManager from "../../api/dataManager";
 import "./list.css";
 import AddEmployeeModal from "./modalAddForm"
 import EmployeeDetailModal from "./modalEditForm"
-import ModalWrapper from "./modalWrapper"
+import ModalWrapper from "../modal/modalWrapper.js"
 import CircularIndeterminate from "./spinner"
 import Modal from "react-bootstrap/Modal";
 

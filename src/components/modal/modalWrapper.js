@@ -1,5 +1,5 @@
 import React from "react";
-import "./list.css";
+import "../employee/list.css";
 
 import EmployeeDetailModal from "../employee/modalEditForm"
 import AddEmployeeModal from "../employee/modalAddForm"

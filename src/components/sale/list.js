@@ -3,7 +3,7 @@ import SaleCard from "./card";
 import DataManager from "../../api/dataManager";
 import Modal from 'react-bootstrap/Modal';
 import Moment from 'react-moment';
-import ModalWrapper from "./modalWrapper"
+import ModalWrapper from "../modal/modalWrapper"
 
 import "./list.css";
 

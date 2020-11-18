@@ -110,17 +110,11 @@ const SaleDetailModal = (props) => {
             dropdownDiv.scrollTop = 0;
         };
 
-        const fetchEmployeeTypes = () => {
-            EmployeeManager.getAll("employeetypes").then((employeeTypes) => {
-                setEmployeeTypes(employeeTypes);
-            });
-        };
-
-        const handleEmployeeTypeSelect = (evt) => {
-            const stateToChange = { ...employee };
-            stateToChange.employee_type_id = parseInt(evt.target.value);
-            setEmployee(stateToChange);
-        };
+        // const fetchEmployeeTypes = () => {
+        //     EmployeeManager.getAll("employeetypes").then((employeeTypes) => {
+        //         setEmployeeTypes(employeeTypes);
+        //     });
+        // };
 
         const handleEditSubmit = () => {
             if (newSale.first_name === "" && newSale.last_name === "") {
@@ -489,5 +483,5 @@ const SaleDetailModal = (props) => {
             </>
         );
     };
-
+}
     export default SaleDetailModal;
