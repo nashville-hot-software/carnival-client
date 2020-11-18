@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./card.css"
+import "./editForm.css"
 
 import Modal from 'react-bootstrap/Modal';
 
@@ -129,7 +130,24 @@ const EmployeeDetailModal = props => {
   return (
     <>
         <div className="modalHeader">
-            Employee
+            <div className="employee-details--header">
+              <span>Employee</span>
+              <span className="employee-id">#{props.employee.id}</span>
+            </div>
+
+            <div className="edit--switch">
+                <FormControl component="fieldset">
+                <FormGroup aria-label="position" row>
+                <FormControlLabel
+                    
+                    value="Edit"
+                    control={<Switch onClick={handleEditMode} color="#ced5f7" />}
+                    label="Update"
+                    labelPlacement="top"
+                />
+                </FormGroup>
+                </FormControl>
+            </div>
 
             {/* <ul>
                 <li class="ele">
@@ -149,11 +167,29 @@ const EmployeeDetailModal = props => {
 
         {editMode === false ? (
         <div className="modal-details--body">
-            <strong>Name:</strong> {`${props.employee.first_name} ${props.employee.last_name}`}
-            <strong>Email:</strong> {`${props.employee.email_address}`}
-            <strong>Phone:</strong> {`${props.employee.phone}`}
-            <strong>Dealership:</strong> {`${props.employee.business_name}`}
-            <strong>Employee Type:</strong> {`${props.employee.employee_type}`}
+            <div>
+              <strong>Name:</strong> 
+              <span>{`${props.employee.first_name} ${props.employee.last_name}`}</span>
+            </div>
+            <div>
+              <strong>Email:</strong> 
+              <span>{`${props.employee.email_address}`}</span>
+            </div>
+            <div>
+              <strong>Phone:</strong> 
+              <span>{`${props.employee.phone}`}</span>
+            </div>
+            <div>
+              <strong>Dealership:</strong> 
+              <span>{`${props.employee.business_name}`}</span>
+            </div>
+            <div>
+              <strong>Employee Type:</strong> 
+              <span>{`${props.employee.employee_type}`}</span>
+            </div>
+            <button className="closeBtn-details" onClick={handleClose}>
+                Close  
+            </button>
         </div>
         ) : (
             <div className="modal-edit--body">
@@ -163,7 +199,7 @@ const EmployeeDetailModal = props => {
                 id="first_name"
                 placeholder={`${props.employee.first_name}`}
                 onChange={handleFieldChange}
-                className="inputField"
+                className="modal--input"
                 />
             
             
@@ -173,7 +209,7 @@ const EmployeeDetailModal = props => {
                 id="last_name"
                 placeholder={`${props.employee.last_name}`}
                 onChange={handleFieldChange}
-                className="inputField"
+                className="modal--input"
                 />
             
             
@@ -183,7 +219,7 @@ const EmployeeDetailModal = props => {
                 id="email_address"
                 placeholder={`${props.employee.email_address}`}
                 onChange={handleFieldChange}
-                className="inputField"
+                className="modal--input"
                 />
             
             
@@ -193,7 +229,7 @@ const EmployeeDetailModal = props => {
                     id="phone"
                     placeholder={`${props.employee.phone}`}
                     onChange={handleFieldChange}
-                    className="inputField"
+                    className="modal--input"
                 />
             
                 <label className="name--label dealership--label">Dealership:</label>
@@ -246,29 +282,18 @@ const EmployeeDetailModal = props => {
                         </>
                 ) : null}
 
-                <button onClick={handleSubmit} className="updateEmployee--btn">
-                    Update
-                </button>
+                <div classname="addEmployee--btn--container">
+                    <button onClick={handleSubmit} className="updateEmployee--btn">
+                        Update
+                    </button>
+                    <button className="closeBtn" onClick={handleClose}>
+                        Cancel  
+                    </button>
+                </div>
 
             </div>
 
         )}
-        <button className="closeBtn" onClick={handleClose}>
-            Cancel  
-        </button>
-        <div className="edit--switch">
-            <FormControl component="fieldset">
-            <FormGroup aria-label="position" row>
-            <FormControlLabel
-                
-                value="Edit"
-                control={<Switch onClick={handleEditMode} color="primary" />}
-                label="Update"
-                labelPlacement="top"
-            />
-            </FormGroup>
-            </FormControl>
-        </div>
     </>
   );
 };

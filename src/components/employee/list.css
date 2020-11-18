@@ -26,19 +26,20 @@
 .employees-searchBar {
     width: 400px;
     line-height: 35px;
-    border: 2px solid gray;
+    border: 2px solid lightgray;
     border-radius: 4px;
     padding-left: 7px;
 }
 
 .employees-searchBar:focus {
     outline: none;
-    border-color: #9ecaed;
-    box-shadow: 0 0 8px #9ecaed;
+    border-color: #6a78d1;
+    box-shadow: 0 0 8px #6a78d1;
 }
 
-.searchResults {
-    border: 2px solid gray;
+.searchResults.employee {
+    border: 2px solid lightgray;
+    box-shadow: 1px 5px 10px 1px lightgrey;
     border-radius: 5px;
     background-color: #fff;
     height: 400px;
@@ -84,10 +85,12 @@
 ##########*/
 
 .modalHeader {
-    margin: 10px 0 40px 0px;
+    display: flex;
+    margin: 0 0 40px 0px;
     border-bottom: 1px solid gray;
     width: 100%;
     font-size: 28px;
+    background-color: #6a78d1;
 }
 
 /* ############ 
@@ -172,7 +175,7 @@
 }
 
 .employeeType--select {
-    max-width: 420px;
+    width: 420px;
     height: 35px;
     border-radius: 4px;
 }
@@ -212,7 +215,8 @@
     height: 100%;
     margin: 0 auto;
     background-color: #f5f8fa;
-    padding: 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
     z-index: 10;
     animation: fadein;
     animation-duration: 0.6s;
@@ -270,8 +274,6 @@
     margin-bottom: 12px;
     color: #ff7a59 !important;
     transition: transform 0.5s ease;
-
-
 }
 
 .closeBtn:hover {

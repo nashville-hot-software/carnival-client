@@ -31,8 +31,6 @@
     display: flex !important;
     flex-direction: column !important;
     margin-top: 20px;
-    margin-left: 25%;
-    margin-right: 25%;
 }
 
 .modal-edit--body {
@@ -40,8 +38,6 @@
     display: flex !important;
     flex-direction: column !important;
     margin-top: 20px;
-    margin-left: 25%;
-    margin-right: 25%;
 }
 
 .fieldset {
@@ -49,11 +45,6 @@
     flex-direction: column;
     max-width: 250px;
     /* overflow: scroll; */
-}
-
-.edit--switch {
-    margin-left: 10%;
-    margin-bottom: 5%;
 }
 
 .updateEmployee--btn {
