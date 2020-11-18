@@ -49,13 +49,20 @@ const EmployeeDetailModal = props => {
         document.querySelector(".modal-box").classList.remove("show");
         document.querySelector(".modal-bg").classList.remove("show");
     }, 1000);
+
+    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+    muiSwitch.classList.remove('Mui-checked')
   };
 
   const handleDealershipDropdownClose = () => setOpen(false)
 
   const handleEditMode = () => {
     fetchEmployeeTypes();
-    setEditMode(!editMode)
+    setEditMode(!editMode);
+
+    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+    muiSwitch.classList.add('Mui-checked')
+    console.log(muiSwitch)
   };
 
   // (For edit mode)
