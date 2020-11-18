@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./card.css"
 import "./editForm.css"
-
-import Modal from 'react-bootstrap/Modal';
-
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -32,7 +29,7 @@ const EmployeeDetailModal = props => {
 
   const [editMode, setEditMode] = useState(false);
 
-  const handleClose = () => {
+  const handleModalClose = () => {
     setEditMode(false);
     const inputs = document.querySelectorAll('input')
     const selects = document.querySelectorAll('select')
@@ -51,7 +48,10 @@ const EmployeeDetailModal = props => {
     }, 1000);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-    muiSwitch.classList.remove('Mui-checked')
+
+    if (muiSwitch.classList.contains('Mui-checked')) {
+      muiSwitch.click();
+    }
   };
 
   const handleDealershipDropdownClose = () => setOpen(false)
@@ -61,11 +61,10 @@ const EmployeeDetailModal = props => {
     setEditMode(!editMode);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-    muiSwitch.classList.add('Mui-checked')
+    muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2')
     console.log(muiSwitch)
   };
 
-  // (For edit mode)
   const handleFieldChange = evt => {
     const stateToChange = {...employee};
     stateToChange[evt.target.id] = evt.target.value;
@@ -160,7 +159,7 @@ const EmployeeDetailModal = props => {
                 <li class="ele">
                     <div
                         type="button"
-                        onClick={handleClose}
+                        onClick={handleModalClose}
                         className="x spin large "
                     >
                         <b></b>
@@ -194,7 +193,7 @@ const EmployeeDetailModal = props => {
               <strong>Employee Type:</strong> 
               <span>{`${props.employee.employee_type}`}</span>
             </div>
-            <button className="closeBtn-details" onClick={handleClose}>
+            <button className="closeBtn-details" onClick={handleModalClose}>
                 Close  
             </button>
         </div>
@@ -289,17 +288,16 @@ const EmployeeDetailModal = props => {
                         </>
                 ) : null}
 
-                <div classname="addEmployee--btn--container">
+                <div className="addEmployee--btn--container">
                     <button onClick={handleSubmit} className="updateEmployee--btn">
                         Update
                     </button>
-                    <button className="closeBtn" onClick={handleClose}>
+                    <button className="closeBtn" onClick={handleModalClose}>
                         Cancel  
                     </button>
                 </div>
 
             </div>
-
         )}
     </>
   );

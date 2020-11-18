@@ -245,7 +245,7 @@ const AddEmployeeModal = (props) => {
                         </select>
                     </>
                 ) : null}
-                <div classname="addEmployee--btn--container">
+                <div className="addEmployee--btn--container">
                     <button onClick={handleSubmit} className="modal--addBtn addEmployee--btn">
                         Add Employee 
                     </button>
