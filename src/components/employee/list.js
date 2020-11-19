@@ -22,6 +22,8 @@ const Employees = (props) => {
 
         const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
 
+        console.log(foundEmployee)
+
         // document.querySelector(".modal-box").classList.remove("fade-out");
         // document.querySelector(".modal-bg").classList.remove("fade-out");
         document.querySelector(".modal-box").classList.add("show");

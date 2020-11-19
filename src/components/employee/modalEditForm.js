@@ -11,58 +11,23 @@ import EmployeeTypeSelect from "./employeeTypesMenu"
 
 const EmployeeDetailModal = props => {
 
-  const [employee, setEmployee] = useState({
-    "first_name": props.employee.first_name,
-    "last_name": props.employee.last_name,
-    "email_address": props.employee.email_address,
-    "phone": props.employee.phone,
-    "dealership_id": props.employee.dealership_id,
-    "employee_type_id": props.employee.employee_type_id
-  });  
+  const [employee, setEmployee] = useState();  
 
   const [updatedEmployee, setUpdatedEmployee] = useState();
 
   const [editMode, setEditMode] = useState(false);
 
-  const handleModalClose = () => {
-      setEditMode(false);
-      setUpdatedEmployee();
-
-      const inputs = document.querySelectorAll('input')
-      const selects = document.querySelectorAll('select')
-      inputs.forEach(input => input.value = "")
-      selects.forEach(select => select.value = "none")
-
-      document.querySelector(".modal-bg").classList.add("fade-out");
-      document.querySelector(".modal-box").classList.add("fade-out");
-
-      setTimeout(function () {
-          document.querySelector(".modal-box").classList.remove("fade-out");
-          document.querySelector(".modal-bg").classList.remove("fade-out");
-          document.querySelector(".modal-box").classList.remove("show");
-          document.querySelector(".modal-bg").classList.remove("show");
-      }, 500);
-
-      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-      if (muiSwitch.classList.contains('Mui-checked')) {
-        muiSwitch.click();
-      }
-  };
-
   const handleEditMode = () => {
       setEditMode(!editMode);
 
       const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2')
+      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
   const handleFieldChange = evt => {
-      const stateToChange = {...employee};
+      const stateToChange = {...props.employee};
       stateToChange[evt.target.id] = evt.target.value;
       setEmployee(stateToChange);
-
-      console.log(stateToChange);
   };
 
   const handleSubmit = () => {
@@ -90,12 +55,37 @@ const EmployeeDetailModal = props => {
             .then(() => {
               EmployeeManager.getOne("employees", props.employee.id)
                 .then(resp => {
-                  console.log(resp);
                   setUpdatedEmployee(resp);
                 })
             })
     }
   } 
+
+  const handleModalClose = () => {
+    setEditMode(false);
+    setUpdatedEmployee();
+
+    const inputs = document.querySelectorAll('input')
+    const selects = document.querySelectorAll('select')
+    inputs.forEach(input => input.value = "")
+    selects.forEach(select => select.value = "none")
+
+    document.querySelector(".modal-bg").classList.add("fade-out");
+    document.querySelector(".modal-box").classList.add("fade-out");
+
+    setTimeout(function () {
+        document.querySelector(".modal-box").classList.remove("fade-out");
+        document.querySelector(".modal-bg").classList.remove("fade-out");
+        document.querySelector(".modal-box").classList.remove("show");
+        document.querySelector(".modal-bg").classList.remove("show");
+    }, 500);
+
+    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+
+    if (muiSwitch.classList.contains('Mui-checked')) {
+      muiSwitch.click();
+    }
+  };
 
   return (
     <>
