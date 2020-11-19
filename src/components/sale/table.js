@@ -69,8 +69,6 @@ const Sales = (props) => {
 
     return (
         <>
-            {/* <div className="salesContainer"> */}
-
             <TableContainer className={classes.root} component={Paper}>
                 <Table stickyHeader aria-label="customized table">
                     <TableHead classname={classes.tableHeader}>
@@ -82,18 +80,15 @@ const Sales = (props) => {
                             <StyledTableCell align="center">price</StyledTableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody className={classes2.tableBody}>
+                    <TableBody classname={classes2.tableBody}>
                         {sales.map((row) => (
                             <>
-                                <SaleTableCard row={row} {...props} />
+                                <SaleTableCard key={row.id} row={row} {...props} />
                             </>
                         ))}
-
                     </TableBody>
                 </Table>
             </TableContainer>
-
-            {/* </div> */}
         </>
     );
 };
