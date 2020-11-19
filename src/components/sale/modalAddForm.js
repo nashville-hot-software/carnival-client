@@ -174,54 +174,7 @@ const AddSaleModal = (props) => {
         const dropdownDiv = document.querySelector('.dealership-list--dropdown')
         dropdownDiv.scrollTop = 0;
       }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     return (
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <>
         <div className="modalHeader">
         Add Sale
