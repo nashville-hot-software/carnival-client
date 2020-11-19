@@ -26,6 +26,7 @@ const EmployeeDetailModal = props => {
 
   const handleModalClose = () => {
       setEditMode(false);
+      setUpdatedEmployee();
 
       const inputs = document.querySelectorAll('input')
       const selects = document.querySelectorAll('select')
@@ -60,6 +61,8 @@ const EmployeeDetailModal = props => {
       const stateToChange = {...employee};
       stateToChange[evt.target.id] = evt.target.value;
       setEmployee(stateToChange);
+
+      console.log(stateToChange);
   };
 
   const handleSubmit = () => {
@@ -87,6 +90,7 @@ const EmployeeDetailModal = props => {
             .then(() => {
               EmployeeManager.getOne("employees", props.employee.id)
                 .then(resp => {
+                  console.log(resp);
                   setUpdatedEmployee(resp);
                 })
             })
