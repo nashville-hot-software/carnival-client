@@ -5,13 +5,19 @@
 
 .employee-card--container:hover {
     cursor: pointer;
+    color: lightgray;
 }
 
 .employee-card--name {
     font-size: 20px;
+    margin-bottom: 3px;
 }
-.employee-card--name:hover {
-    color: lightgray;
+
+.employeeDealership {
+    color: gray;
+    font-weight: 100;
+    font-size: 15px;
+    padding-bottom: 3px;
 }
 
 /* Modal styling below */

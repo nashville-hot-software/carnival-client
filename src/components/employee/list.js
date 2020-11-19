@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
-import AddEmployeeModal from "./modalAddForm"
-import EmployeeDetailModal from "./modalEditForm"
 import ModalWrapper from "./modalWrapper"
-import CircularIndeterminate from "./spinner"
-import Modal from "react-bootstrap/Modal";
 
 const Employees = (props) => {
     // Holds all employees returned from employee search bar
