@@ -11,7 +11,14 @@ import EmployeeTypeSelect from "./employeeTypesMenu"
 
 const EmployeeDetailModal = props => {
 
-  const [employee, setEmployee] = useState();  
+  const [employee, setEmployee] = useState({
+    "first_name": "",
+    "last_name": "",
+    "email_address": "",
+    "phone": "",
+    "dealership_id": "",
+    "employee_type_id": ""
+  });  
 
   const [updatedEmployee, setUpdatedEmployee] = useState();
 
@@ -28,6 +35,7 @@ const EmployeeDetailModal = props => {
       const stateToChange = {...props.employee};
       stateToChange[evt.target.id] = evt.target.value;
       setEmployee(stateToChange);
+      console.log(stateToChange)
   };
 
   const handleSubmit = () => {
@@ -44,6 +52,7 @@ const EmployeeDetailModal = props => {
     } else {
         EmployeeManager.update("employees", employee, props.employee.id)
             .then(() => {
+              console.log(employee)
               setEditMode(false);
 
               const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
@@ -55,11 +64,19 @@ const EmployeeDetailModal = props => {
             .then(() => {
               EmployeeManager.getOne("employees", props.employee.id)
                 .then(resp => {
+                  console.log(resp)
                   setUpdatedEmployee(resp);
                 })
             })
     }
   } 
+
+  const handleDelete = () => {
+    window.confirm(`Are you sure you want to delete Employee #${props.employee.id}?`)
+    if (window.confirm) {
+      EmployeeManager.deleteUserData("employees", props.employee.id)
+    }
+  }
 
   const handleModalClose = () => {
     setEditMode(false);
@@ -126,46 +143,53 @@ const EmployeeDetailModal = props => {
         </div>
 
         {editMode === false ? (
-        <div className="modal-details--body">
-            <div>
-              <strong>Name:</strong> 
-              <span>
-                    {updatedEmployee !== undefined ? (`${updatedEmployee.first_name} ${updatedEmployee.last_name}`) 
-                    : (`${props.employee.first_name} ${props.employee.last_name}`)} 
-              </span>
-            </div>
-            <div>
-              <strong>Email:</strong> 
-              <span>
-                {updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
-                : (`${props.employee.email_address}`)}
-              </span>
-            </div>
-            <div>
-              <strong>Phone:</strong> 
-              <span>
-                {updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
-                : (`${props.employee.phone}`)}
-              </span>
-            </div>
-            <div>
-              <strong>Dealership:</strong> 
-              <span>
-                {updatedEmployee !== undefined ? (`${updatedEmployee.dealership.business_name}`) 
-                  : (`${props.employee.business_name}`)}
-              </span>
-            </div>
-            <div>
-              <strong>Employee Type:</strong> 
-              <span>
-                  {updatedEmployee !== undefined ? (`${updatedEmployee.employee_type.name}`) 
-                  : (`${props.employee.employee_type}`)}
-              </span>
-            </div>
-            <button className="closeBtn-details" onClick={handleModalClose}>
-                Close  
-            </button>
-        </div>
+        <>
+          <div className="modal-details--body">
+              <div>
+                <strong>Name:</strong> 
+                <span>
+                      {updatedEmployee !== undefined ? (`${updatedEmployee.first_name} ${updatedEmployee.last_name}`) 
+                      : (`${props.employee.first_name} ${props.employee.last_name}`)} 
+                </span>
+              </div>
+              <div>
+                <strong>Email:</strong> 
+                <span>
+                  {updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
+                  : (`${props.employee.email_address}`)}
+                </span>
+              </div>
+              <div>
+                <strong>Phone:</strong> 
+                <span>
+                  {updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
+                  : (`${props.employee.phone}`)}
+                </span>
+              </div>
+              <div>
+                <strong>Dealership:</strong> 
+                <span>
+                  {updatedEmployee !== undefined ? (`${updatedEmployee.dealership.business_name}`) 
+                    : (`${props.employee.business_name}`)}
+                </span>
+              </div>
+              <div>
+                <strong>Employee Type:</strong> 
+                <span>
+                    {updatedEmployee !== undefined ? (`${updatedEmployee.employee_type.name}`) 
+                    : (`${props.employee.employee_type}`)}
+                </span>
+              </div>
+          </div>
+          <div className="employee--btn--container">
+              <button onClick={handleDelete} className="removeEmployee--btn">
+                  Remove
+              </button>
+              <button className="closeBtn" onClick={handleModalClose}>
+                  Cancel  
+              </button>
+          </div>
+        </>
         ) : (
             <div className="modal-edit--body">
                 <label><strong>First Name:</strong></label> 
