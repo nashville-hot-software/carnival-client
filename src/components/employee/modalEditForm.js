@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./card.css"
 import "./editForm.css"
@@ -11,14 +11,7 @@ import EmployeeTypeSelect from "./employeeTypesMenu"
 
 const EmployeeDetailModal = props => {
 
-  const [employee, setEmployee] = useState({
-    "first_name": "",
-    "last_name": "",
-    "email_address": "",
-    "phone": "",
-    "dealership_id": "",
-    "employee_type_id": ""
-  });  
+  const [employee, setEmployee] = useState();  
 
   const [updatedEmployee, setUpdatedEmployee] = useState();
 
@@ -31,14 +24,18 @@ const EmployeeDetailModal = props => {
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
+  var stateToChange = {...employee};
+
   const handleFieldChange = evt => {
-      const stateToChange = {...props.employee};
+      
       stateToChange[evt.target.id] = evt.target.value;
-      setEmployee(stateToChange);
+      
       console.log(stateToChange)
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = evt => {
+    evt.preventDefault()
+
     if (employee.first_name === "" || employee.last_name === "") {
         window.alert("Please fill out employee name fields")
     } else if (employee.email_address === "") {
@@ -49,32 +46,43 @@ const EmployeeDetailModal = props => {
         window.alert("Please select a valid dealership")
     } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
-    } else {
-        EmployeeManager.update("employees", employee, props.employee.id)
-            .then(() => {
-              console.log(employee)
-              setEditMode(false);
+    } else if (stateToChange !== undefined) {
+        setUpdatedEmployee(stateToChange);
 
-              const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+        const inputs = document.querySelectorAll('input')
+        const selects = document.querySelectorAll('select')
 
-              if (muiSwitch.classList.contains('Mui-checked')) {
-                muiSwitch.click();
-              }
-            })
-            .then(() => {
-              EmployeeManager.getOne("employees", props.employee.id)
-                .then(resp => {
-                  console.log(resp)
-                  setUpdatedEmployee(resp);
-                })
-            })
+        inputs.forEach(input => input.value = "")
+        selects.forEach(select => select.value = "none")
+
+        // if (updatedEmployee !== undefined) {
+        //   EmployeeManager.update("employees", updatedEmployee, props.employee.id)
+        //     .then(() => {
+        //       // console.log(updatedEmployee)
+        //       setEditMode(false);
+
+        //       const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+
+        //       if (muiSwitch.classList.contains('Mui-checked')) {
+        //         muiSwitch.click();
+        //       }
+        //     })
+        //     .then(() => {
+        //       EmployeeManager.getOne("employees", props.employee.id)
+        //         .then(resp => {
+        //           console.log(resp)
+        //           setUpdatedEmployee(resp);
+        //         })
+        //     })
+        // }
+        
     }
   } 
 
   const handleDelete = () => {
-    window.confirm(`Are you sure you want to delete Employee #${props.employee.id}?`)
-    if (window.confirm) {
+    if (window.confirm(`Are you sure you want to delete Employee #${props.employee.id}?`)) {
       EmployeeManager.deleteUserData("employees", props.employee.id)
+        .then(handleModalClose());
     }
   }
 
@@ -102,7 +110,43 @@ const EmployeeDetailModal = props => {
     if (muiSwitch.classList.contains('Mui-checked')) {
       muiSwitch.click();
     }
+
+    props.history.push('/employees');
   };
+
+  useEffect(() => {
+    EmployeeManager.getOne("employees", props.employee.id)
+      .then(data => {
+        // console.log(data);
+        setEmployee(data)
+      });
+  }, [])
+  
+  useEffect(() => {
+    if (updatedEmployee !== undefined) {
+      EmployeeManager.update("employees", updatedEmployee, props.employee.id)
+        .then(() => {
+          // console.log(updatedEmployee)
+          setEditMode(false);
+
+          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+
+          if (muiSwitch.classList.contains('Mui-checked')) {
+            muiSwitch.click();
+          }
+        })
+        .then(() => {
+          EmployeeManager.getOne("employees", props.employee.id)
+            .then(resp => {
+              console.log(resp)
+              setUpdatedEmployee();
+              setEmployee();
+            })
+        })
+    }
+  }, [updatedEmployee])
+
+
 
   return (
     <>

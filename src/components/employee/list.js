@@ -53,12 +53,18 @@ const Employees = (props) => {
         }
     };
 
+    useEffect(() => {
+        EmployeeManager.getAll("employees")
+            .then(data => setEmployees(data));
+    }, [])
+
     return (
         <>
             <ModalWrapper 
                 filteredEmployee={filteredEmployee} 
                 setCreationView={setCreationView}
                 creationView={creationView}
+                {...props}
             />
                 
             {/* EMPLOYEE SEARCH PAGE */}

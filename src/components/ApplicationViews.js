@@ -19,7 +19,7 @@ const ApplicationViews = props => {
                 return <CustomerDetails customerId={parseInt(props.match.params.customerId)} {...props} />
             }} /> */}
 
-            <Route path="/employees" render={props => {
+            <Route exact path="/employees" render={props => {
                 return <EmployeeList {...props} />
             }} />
 
