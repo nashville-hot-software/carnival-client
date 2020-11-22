@@ -25,7 +25,7 @@ const SaleTableCard = (props) => {
     body: {
         fontSize: 14,
     },
-}))(TableCell);
+  }))(TableCell);
 
   const StyledTableRow = withStyles((theme) => ({
     root: {
@@ -39,7 +39,7 @@ const SaleTableCard = (props) => {
         color: "#000000"
       },  
     },
-}))(TableRow);
+  }))(TableRow);
 
   return (
     <>
@@ -50,7 +50,7 @@ const SaleTableCard = (props) => {
         <StyledTableCell align="center">{props.row.sales_type.name}</StyledTableCell>
         <StyledTableCell align="center">
           <NumberFormat value={props.row.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-          </StyledTableCell>
+        </StyledTableCell>
       </StyledTableRow>
 
       <Modal centered show={show} onHide={handleClose}>

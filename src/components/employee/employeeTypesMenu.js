@@ -13,9 +13,8 @@ const EmployeeTypeSelect = (props) => {
     };
 
     const handleEmployeeTypeSelect = (evt) => {
-        const stateToChange = { ...props.state };
-        stateToChange[evt.target.id] = evt.target.value;
-        props.setState(stateToChange);
+        const stateToChange = props.state;
+        stateToChange.employee_type_id = parseInt(evt.target.value);
     };
 
     useEffect(() => {
@@ -33,15 +32,16 @@ const EmployeeTypeSelect = (props) => {
                     id="employee_type_id"
                     onChange={handleEmployeeTypeSelect}
                     className="employeeType--select"
+                    defaultValue={'DEFAULT'}
                 >
                     {" "}
-                    <option value="none" selected disabled hidden>
+                    <option value="DEFAULT" disabled hidden>
                         Select an Option
                     </option>
-                    {employeeTypes.map((type) => {
+                    {employeeTypes.map((type, i) => {
                         return (
                             <>
-                                <option value={type.id}>{type.name}</option>
+                                <option key={i} value={type.id}>{type.name}</option>
                             </>
                         );
                     })}

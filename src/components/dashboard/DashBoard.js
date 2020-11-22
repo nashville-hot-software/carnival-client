@@ -244,7 +244,7 @@ const DashBoard = (props) => {
                     <Select
                       className={classes.selectSaleType}
                       id="stateId"
-                      // value={usaState}
+                      value={saleType}
                       onChange={handleSaleType}
                     >
                       <MenuItem value="Total">Total</MenuItem>

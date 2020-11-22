@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./card.css"
 import "./editForm.css"
@@ -11,19 +11,63 @@ import EmployeeTypeSelect from "./employeeTypesMenu"
 
 const EmployeeDetailModal = props => {
 
-  const [employee, setEmployee] = useState({
-    "first_name": props.employee.first_name,
-    "last_name": props.employee.last_name,
-    "email_address": props.employee.email_address,
-    "phone": props.employee.phone,
-    "dealership_id": props.employee.dealership_id,
-    "employee_type_id": props.employee.employee_type_id
-  });  
+  const [employee, setEmployee] = useState();  
+
+  const [updatedEmployee, setUpdatedEmployee] = useState();
 
   const [editMode, setEditMode] = useState(false);
 
+  const handleEditMode = () => {
+      setEditMode(!editMode);
+
+      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
+  };
+
+  var stateToChange = {...employee};
+
+  const handleFieldChange = evt => {
+      
+      stateToChange[evt.target.id] = evt.target.value;
+      
+      console.log(stateToChange)
+  };
+
+  const handleSubmit = evt => {
+    evt.preventDefault()
+
+    if (employee.first_name === "" || employee.last_name === "") {
+        window.alert("Please fill out employee name fields")
+    } else if (employee.email_address === "") {
+        window.alert("Please enter an email address")
+    } else if (employee.phone === "") {
+        window.alert("Please enter a phone number")
+    } else if (employee.dealership_id === 0) {
+        window.alert("Please select a valid dealership")
+    } else if (employee.employee_type_id === 0) {
+        window.alert("Please select a valid employee type")
+    } else if (stateToChange !== undefined) {
+        setUpdatedEmployee(stateToChange);
+
+        // NOTE: may need to move these guys to after the PUT (could be clearing form 
+        // before the PUT... not sure if that will change stateToChange back to null...)
+        const inputs = document.querySelectorAll('input')
+        const selects = document.querySelectorAll('select')
+        inputs.forEach(input => input.value = "")
+        selects.forEach(select => select.value = "none")
+    }
+  } 
+
+  const handleDelete = () => {
+    if (window.confirm(`Are you sure you want to delete Employee #${props.employee.id}?`)) {
+      EmployeeManager.deleteUserData("employees", props.employee.id)
+        .then(handleModalClose());
+    }
+  }
+
   const handleModalClose = () => {
     setEditMode(false);
+    setUpdatedEmployee();
 
     const inputs = document.querySelectorAll('input')
     const selects = document.querySelectorAll('select')
@@ -47,38 +91,40 @@ const EmployeeDetailModal = props => {
     }
   };
 
-  const handleEditMode = () => {
-    setEditMode(!editMode);
-
-    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-    muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2')
-    console.log(muiSwitch)
-  };
-
-  const handleFieldChange = evt => {
-    const stateToChange = {...employee};
-    stateToChange[evt.target.id] = evt.target.value;
-    setEmployee(stateToChange);
-  };
-
-  const handleSubmit = () => {
-    if (employee.first_name === "" || employee.last_name === "") {
-        window.alert("Please fill out employee name fields")
-    } else if (employee.email_address === "") {
-        window.alert("Please enter an email address")
-    } else if (employee.phone === "") {
-        window.alert("Please enter a phone number")
-    } else if (employee.dealership_id === 0) {
-        window.alert("Please select a valid dealership")
-    } else if (employee.employee_type_id === 0) {
-        window.alert("Please select a valid employee type")
-    } else {
-        EmployeeManager.update("employees", employee, props.employee.id)
-            .then(() => {
-              setEditMode(false)
+  useEffect(() => {
+    EmployeeManager.getOne("employees", props.employee.id)
+      .then(data => {
+        setEmployee(data)
+      });
+  }, [props.employee])
+  
+  // Only runs when an employee's been edited (updatedEmployee defined on 'Update' btn click)
+  useEffect(() => {
+    if (updatedEmployee !== undefined) {
+      EmployeeManager.update("employees", updatedEmployee, props.employee.id)
+        // Later update API to return updated obj on the PUT response instead of re-fetching
+        .then(() => {
+          EmployeeManager.getOne("employees", props.employee.id)
+            .then(resp => {
+              console.log(resp)
+              setUpdatedEmployee();
+              setEmployee(resp);
             })
+        })
+        .then(() => {
+          setEditMode(false);
+
+          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+
+          if (muiSwitch.classList.contains('Mui-checked')) {
+            muiSwitch.click();
+          }
+        })
+        
     }
-  } 
+  }, [updatedEmployee])
+
+
 
   return (
     <>
@@ -119,38 +165,61 @@ const EmployeeDetailModal = props => {
         </div>
 
         {editMode === false ? (
-        <div className="modal-details--body">
-            <div>
-              <strong>Name:</strong> 
-              <span>{`${props.employee.first_name} ${props.employee.last_name}`}</span>
-            </div>
-            <div>
-              <strong>Email:</strong> 
-              <span>{`${props.employee.email_address}`}</span>
-            </div>
-            <div>
-              <strong>Phone:</strong> 
-              <span>{`${props.employee.phone}`}</span>
-            </div>
-            <div>
-              <strong>Dealership:</strong> 
-              <span>{`${props.employee.business_name}`}</span>
-            </div>
-            <div>
-              <strong>Employee Type:</strong> 
-              <span>{`${props.employee.employee_type}`}</span>
-            </div>
-            <button className="closeBtn-details" onClick={handleModalClose}>
-                Close  
-            </button>
-        </div>
+        <>
+          <div className="modal-details--body">
+              <div>
+                <strong>Name:</strong> 
+                <span>
+                      {employee !== undefined ? (`${employee.first_name} ${employee.last_name}`) 
+                      : (`${props.employee.first_name} ${props.employee.last_name}`)} 
+                </span>
+              </div>
+              <div>
+                <strong>Email:</strong> 
+                <span>
+                  {updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
+                  : (`${props.employee.email_address}`)}
+                </span>
+              </div>
+              <div>
+                <strong>Phone:</strong> 
+                <span>
+                  {updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
+                  : (`${props.employee.phone}`)}
+                </span>
+              </div>
+              <div>
+                <strong>Dealership:</strong> 
+                <span>
+                  {updatedEmployee !== undefined ? (`${updatedEmployee.dealership.business_name}`) 
+                    : (`${props.employee.business_name}`)}
+                </span>
+              </div>
+              <div>
+                <strong>Employee Type:</strong> 
+                <span>
+                    {updatedEmployee !== undefined ? (`${updatedEmployee.employee_type.name}`) 
+                    : (`${props.employee.employee_type}`)}
+                </span>
+              </div>
+          </div>
+          <div className="employee--btn--container">
+              <button onClick={handleDelete} className="removeEmployee--btn">
+                  Remove
+              </button>
+              <button className="closeBtn" onClick={handleModalClose}>
+                  Cancel  
+              </button>
+          </div>
+        </>
         ) : (
             <div className="modal-edit--body">
                 <label><strong>First Name:</strong></label> 
                 <input 
                 type="text"
                 id="first_name"
-                placeholder={`${props.employee.first_name}`}
+                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.first_name}`) 
+                            : (`${props.employee.first_name}`)} 
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
@@ -160,7 +229,8 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="last_name"
-                placeholder={`${props.employee.last_name}`}
+                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.last_name}`) 
+                            : (`${props.employee.last_name}`)} 
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
@@ -170,7 +240,8 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="email_address"
-                placeholder={`${props.employee.email_address}`}
+                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
+                            : (`${props.employee.email_address}`)}
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
@@ -180,19 +251,18 @@ const EmployeeDetailModal = props => {
                 <input 
                     type="text"
                     id="phone"
-                    placeholder={`${props.employee.phone}`}
+                    placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
+                                : (`${props.employee.phone}`)}
                     onChange={handleFieldChange}
                     className="modal--input"
                 />
 
                 <DealershipDropdown 
-                    state={employee} 
-                    setState={setEmployee}
+                    state={stateToChange} 
                 />
 
                 <EmployeeTypeSelect
-                    state={employee}
-                    setState={setEmployee}
+                    state={stateToChange}
                 />
 
                 <div className="addEmployee--btn--container">

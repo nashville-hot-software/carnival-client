@@ -6,7 +6,6 @@ import EmployeeTypeSelect from "./employeeTypesMenu"
 
 const AddEmployeeModal = (props) => {
 
-    // Skeleton for new employee to be POSTed
     const [newEmployee, setNewEmployee] = useState({
         first_name: "",
         last_name: "",

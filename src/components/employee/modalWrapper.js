@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./list.css";
-
 import EmployeeDetailModal from "./modalEditForm"
 import AddEmployeeModal from "./modalAddForm"
 
 const ModalWrapper = (props) => {
 
-
     return (
-            <div class="modal-bg">
-                <div class="modal-box">
+            <div className="modal-bg">
+                <div className="modal-box">
                     {props.filteredEmployee !== undefined && props.creationView === false? (
-                        <EmployeeDetailModal employee={props.filteredEmployee} />
+                        <EmployeeDetailModal employee={props.filteredEmployee} {...props} />
                     ) : null}
                     
                     {props.creationView !== false ? (
