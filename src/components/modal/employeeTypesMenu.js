@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EmployeeManager from "../../api/dataManager";
-import "./list.css";
+import "../employee/list.css";
 
 const EmployeeTypeSelect = (props) => {
 
@@ -13,8 +13,9 @@ const EmployeeTypeSelect = (props) => {
     };
 
     const handleEmployeeTypeSelect = (evt) => {
-        const stateToChange = props.state;
-        stateToChange.employee_type_id = parseInt(evt.target.value);
+        const stateToChange = { ...props.state };
+        stateToChange[evt.target.id] = evt.target.value;
+        props.setState(stateToChange);
     };
 
     useEffect(() => {
@@ -35,13 +36,16 @@ const EmployeeTypeSelect = (props) => {
                     defaultValue={'DEFAULT'}
                 >
                     {" "}
-                    <option value="DEFAULT" disabled hidden>
+                    <option defaultValue="DEFAULT"  disabled hidden>
                         Select an Option
                     </option>
-                    {employeeTypes.map((type, i) => {
+                    {employeeTypes.map((type,i) => {
                         return (
                             <>
-                                <option key={i} value={type.id}>{type.name}</option>
+                                <option 
+                                key={i} 
+                                value={type.id}>
+                                {type.name}</option>
                             </>
                         );
                     })}

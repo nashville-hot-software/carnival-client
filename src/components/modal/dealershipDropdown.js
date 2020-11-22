@@ -1,3 +1,6 @@
+//move Dealership Dropdown and Employee Type Select menu out of 'employees' folder and into the new 'modal' folder 
+
+
 import React, { useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./dealershipDropdown.css";
