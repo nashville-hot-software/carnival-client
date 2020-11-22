@@ -45,12 +45,9 @@ let API = {
     },
 
     deleteUserData:(resource, Id) => {
-        const authHeader = createAuthHeaders()
         return fetch(`${baseUrl}/${resource}/${Id}`, {
             method: "DELETE",
-            // headers: authHeader
-        }).then(response => response.json())
-
+        })
     },
     update:(resource, editedObject, id) => {
         const authHeader = createAuthHeaders()

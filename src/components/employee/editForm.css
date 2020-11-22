@@ -14,3 +14,25 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.removeEmployee--btn {
+    border: 1px solid #fd1c0c;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 15px;
+    width: 100px;
+    height: 40px;
+    background-color: #fff;
+    margin-right: 7%;
+    color: #fd1c0c;
+    transition: transform 0.4s ease;   
+}
+.removeEmployee--btn:hover {
+    transform: scale(1.07);
+}
+
+.employee--btn--container {
+    display: flex;
+    margin-left: 7%;
+    margin-top: 4%;
+}

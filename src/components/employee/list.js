@@ -2,50 +2,14 @@ import React, { useState, useEffect } from "react";
 import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
-import AddEmployeeModal from "./modalAddForm"
-import EmployeeDetailModal from "./modalEditForm"
-import ModalWrapper from "../modal/modalWrapper.js"
-import CircularIndeterminate from "./spinner"
-import Modal from "react-bootstrap/Modal";
+import ModalWrapper from "../modal/modalWrapper"
 
 const Employees = (props) => {
-    // Holds all employees returned from employee search bar
     const [employees, setEmployees] = useState([]);
-    const [detailsView, setDetailsView] = useState(false);
+    
     const [creationView, setCreationView] = useState(false);
     const [filteredEmployee, setFilteredEmployee] = useState();
 
-    const showDetailsModal = employeeArg => {
-        setDetailsView(true);
-
-        const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
-
-        // document.querySelector(".modal-box").classList.remove("fade-out");
-        // document.querySelector(".modal-bg").classList.remove("fade-out");
-        document.querySelector(".modal-box").classList.add("show");
-        document.querySelector(".modal-bg").classList.add("show");
-
-        console.log(foundEmployee);
-
-        setFilteredEmployee(foundEmployee[0]);
-    }
-
-    // State for expanding/hiding the dealership dropdown menu
-    const [open, setOpen] = useState(false);
-
-    const handleShow = () => {
-        setCreationView(true)
-
-        document.querySelector(".modal-box").classList.remove("fade-out");
-        document.querySelector(".modal-bg").classList.remove("fade-out");
-        document.querySelector(".modal-box").classList.add("show");
-        document.querySelector(".modal-bg").classList.add("show");
-    };
-
-    // Handler for closing the dealership dropdown onBlur
-    const handleDropdownClose = () => setOpen(false);
-
-    // Pings API for all employees (basic employee search page, not the modal)
     const handleEmployeeSearch = (evt) => {
         if (evt.target.value.length > 0) {
             EmployeeManager.getAll("employees", "searchTerm", evt.target.value).then(
@@ -58,12 +22,40 @@ const Employees = (props) => {
         }
     };
 
+    // Runs when you click on employee card for details
+    const showDetailsModal = employeeArg => {
+        const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
+
+        console.log(foundEmployee)
+
+        // document.querySelector(".modal-box").classList.remove("fade-out");
+        // document.querySelector(".modal-bg").classList.remove("fade-out");
+        document.querySelector(".modal-box").classList.add("show");
+        document.querySelector(".modal-bg").classList.add("show");
+
+        // NOTE: thinking if we can get editModal useEffect to watch for this to update when
+        // different employee is clicked, that could re-render the modal correctly....
+        setFilteredEmployee(foundEmployee[0]);
+    }
+
+    // Probably don't need this guy... Just one to open modal and the different clicks
+    // will update different states for the modal create/details/edit modes
+    const handleShow = () => {
+        setCreationView(true)
+
+        document.querySelector(".modal-box").classList.remove("fade-out");
+        document.querySelector(".modal-bg").classList.remove("fade-out");
+        document.querySelector(".modal-box").classList.add("show");
+        document.querySelector(".modal-bg").classList.add("show");
+    };
+
     return (
         <>
             <ModalWrapper 
                 filteredEmployee={filteredEmployee} 
                 setCreationView={setCreationView}
                 creationView={creationView}
+                {...props}
             />
                 
             {/* EMPLOYEE SEARCH PAGE */}
@@ -88,7 +80,7 @@ const Employees = (props) => {
                                         <EmployeeCard
                                             key={i}
                                             employee={employee}
-                                            handleDropdownClose={handleDropdownClose}
+                                            // handleDropdownClose={handleDropdownClose}
                                             showDetailsModal={showDetailsModal}
                                             {...props}
                                         />

@@ -41,7 +41,7 @@ const SaleDetailModal = (props) => {
     const handleEditMode = () => {
         setEditMode(!editMode);
     }
-        const handleClose = () => {
+        const handleCloseModel = () => {
             setEditMode(false);
             const inputs = document.querySelectorAll("input");
             const selects = document.querySelectorAll("select");
@@ -303,7 +303,7 @@ const SaleDetailModal = (props) => {
                         <button onClick={handleEditSubmit} className="updateEmployee--btn">
                             Update
                         </button>
-                        <button className="closeBtn" onClick={handleClose}>
+                        <button className="closeBtn" onClick={handleCloseModel}>
                             Cancel
                         </button>
                     </div>

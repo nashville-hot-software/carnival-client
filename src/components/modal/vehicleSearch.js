@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import DataManager from "../../api/dataManager";
-import DataManager from "../../api/dataManager";
 
 const VehicleSearch = (props) => {
 
