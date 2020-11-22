@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../employee/list.css";
 import EmployeeDetailModal from "../employee/modalEditForm"
 import AddEmployeeModal from "../employee/modalAddForm"

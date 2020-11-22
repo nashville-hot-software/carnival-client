@@ -19,12 +19,7 @@ const CustomerDetailModal = props => {
         document.querySelector(".modal-bg").classList.remove("show");
     }, 500);
   };
-
-  useEffect(() => {
-    console.log(props.customer)
-  }, [])
-
-
+  
   return (
     <>
         <div className="modalHeader">

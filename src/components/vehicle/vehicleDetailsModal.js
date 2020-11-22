@@ -26,7 +26,6 @@ const VehicleDetailModal = props => {
         <div className="modalHeader">
             <div className="employee-details--header">
               <span>Vehicle</span>
-              {/* <span className="employee-id">#{props.filteredVehicle}</span> */}
             </div>
         </div>
 
