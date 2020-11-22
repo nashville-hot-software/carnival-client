@@ -49,6 +49,8 @@ const EmployeeDetailModal = props => {
     } else if (stateToChange !== undefined) {
         setUpdatedEmployee(stateToChange);
 
+        // NOTE: may need to move these guys to after the PUT (could be clearing form 
+        // before the PUT... not sure if that will change stateToChange back to null...)
         const inputs = document.querySelectorAll('input')
         const selects = document.querySelectorAll('select')
 
