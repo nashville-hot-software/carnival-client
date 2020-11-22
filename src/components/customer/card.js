@@ -21,19 +21,19 @@ const CustomerCard = props => {
 
   return (
     <>
-        <div onClick={() => handleShow()} className="customer-card--container">
+        <div onClick={() => props.showCustomersModal(props.customer)} className="customer-card--container">
           <h2 className="customer-card--name">{`${props.customer.customer.first_name} ${props.customer.customer.last_name}`}</h2>
           <p className="customer-card--saleInvoice"><span className="label">Invoice:</span> {`#${props.customer.invoice_number}`}</p>
         </div>
 
-        <Modal centered show={show} onHide={handleClose}>
+        {/* <Modal centered show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Customer</Modal.Title>
           </Modal.Header>
           <Modal.Body><strong>Name:</strong> {`${props.customer.customer.first_name} ${props.customer.customer.last_name}`}</Modal.Body>
           <Modal.Body><strong>Email:</strong> {props.customer.customer.email}</Modal.Body>
           <Modal.Body><strong>Phone:</strong> {props.customer.customer.phone}</Modal.Body>
-        </Modal>
+        </Modal> */}
     </>
   );
 };

@@ -92,6 +92,15 @@ const DashBoard = (props) => {
     );
   };
 
+  const [customers, setCustomers] = useState([]);
+  const [filteredCustomer, setFilteredCustomer] = useState();
+
+  const getAllCustomers = () => {
+    DataManager.getAll("sales", "limit", 20).then(sales => {
+      setCustomers(sales);
+    });
+  };
+
   const showVehiclesModal = vehicle => {
     const foundVehicle = vehicles.filter(matchedVehicle => matchedVehicle.id === vehicle.id);
     console.log(foundVehicle[0])
@@ -100,16 +109,30 @@ const DashBoard = (props) => {
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   }
+  
+  const showCustomersModal = customer => {
+    console.log(customer)
+    const foundCustomer = customers.filter(matchedCustomer => matchedCustomer.customer_id === customer.customer_id);
+    console.log(foundCustomer[0])
+    setFilteredCustomer(foundCustomer[0]);
+
+    document.querySelector(".modal-box").classList.add("show");
+    document.querySelector(".modal-bg").classList.add("show");
+  }
 
   useEffect(() => {
     getSales();
     getVehicles();
+    getAllCustomers();
   }, []);
 
   return (
     <>
     <ModalWrapper 
       filteredVehicle={filteredVehicle}
+      setFilteredVehicle={setFilteredVehicle}
+      filteredCustomer={filteredCustomer}
+      setFilteredCustomer={setFilteredCustomer}
     />
     <div className="dashboard">
 
@@ -262,7 +285,14 @@ const DashBoard = (props) => {
           <Card className={classes.root}>
             <CardContent>
               <h2>Recent Customers</h2>
-              <Customers {...props} />
+
+              {customers !== undefined ? (
+                <Customers 
+                  customers={customers}
+                  showCustomersModal={showCustomersModal} 
+                  {...props} 
+                />
+              ) : null}
             </CardContent>
           </Card>
         </div>

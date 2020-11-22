@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./card.css"
 import "../employee/list.css"
 import "../employee/card.css"
 
 
-const VehicleDetailModal = props => {
+const CustomerDetailModal = props => {
 
   const handleModalClose = () => {
-    props.setFilteredVehicle();
+    props.setFilteredCustomer();
 
     document.querySelector(".modal-bg").classList.add("fade-out");
     document.querySelector(".modal-box").classList.add("fade-out");
@@ -20,28 +20,40 @@ const VehicleDetailModal = props => {
     }, 500);
   };
 
+  useEffect(() => {
+    console.log(props.customer)
+  }, [])
+
 
   return (
     <>
         <div className="modalHeader">
             <div className="employee-details--header">
-              <span>Vehicle</span>
-              {/* <span className="employee-id">#{props.filteredVehicle}</span> */}
+              <span>Customer</span>
+              <span className="employee-id">Customer ID #{props.customer.customer_id}</span>
             </div>
         </div>
 
         <div className="modal-details--body">
             <div>
-                <strong>Make:</strong> 
-                {props.vehicle.make}
+                <strong>Name:</strong> 
+                {`${props.customer.customer.first_name} ${props.customer.customer.last_name}`}
             </div>
             <div>
-                <strong>Modal:</strong> 
-                {props.vehicle.model}
+                <strong>Email:</strong> 
+                {props.customer.customer.email}
             </div>
             <div>
-                <strong>Vehicles Sold:</strong> 
-                {props.vehicle.vehicles_sold}
+                <strong>Phone:</strong> 
+                {props.customer.customer.phone}
+            </div>
+            <div>
+                <strong>Work:</strong> 
+                {props.customer.customer.company_name}
+            </div>
+            <div>
+                <strong>Location:</strong> 
+                {`${props.customer.customer.street} ${props.customer.customer.city}, ${props.customer.customer.state}, ${props.customer.customer.zipcode}`}
             </div>
         </div>
         
@@ -54,4 +66,4 @@ const VehicleDetailModal = props => {
   );
 };
 
-export default VehicleDetailModal;
+export default CustomerDetailModal;

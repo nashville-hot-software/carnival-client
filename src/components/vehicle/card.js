@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./card.css"
-import Modal from 'react-bootstrap/Modal';
 
 const VehicleCard = props => {
 
   const [vehicle, setVehicle] = useState(props.vehicle);
-
 
   return (
     <>

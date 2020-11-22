@@ -3,6 +3,7 @@ import "../employee/list.css";
 import EmployeeDetailModal from "../employee/modalEditForm"
 import AddEmployeeModal from "../employee/modalAddForm"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
+import CustomerDetailModal from "../customer/customerDetailsModal"
 
 const ModalWrapper = (props) => {
 
@@ -18,7 +19,17 @@ const ModalWrapper = (props) => {
                     ) : null}
 
                     {props.filteredVehicle !== undefined ? (
-                        <VehicleDetailModal filteredVehicle={props.filteredVehicle} />
+                        <VehicleDetailModal 
+                            vehicle={props.filteredVehicle} 
+                            setFilteredVehicle={props.setFilteredVehicle}
+                        />
+                    ) : null}
+                    
+                    {props.filteredCustomer !== undefined ? (
+                        <CustomerDetailModal 
+                            customer={props.filteredCustomer} 
+                            setFilteredCustomer={props.setFilteredCustomer}
+                        />
                     ) : null}
                 </div>
             </div>
