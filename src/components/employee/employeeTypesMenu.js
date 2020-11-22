@@ -32,9 +32,10 @@ const EmployeeTypeSelect = (props) => {
                     id="employee_type_id"
                     onChange={handleEmployeeTypeSelect}
                     className="employeeType--select"
+                    defaultValue={'DEFAULT'}
                 >
                     {" "}
-                    <option defaultValue="none" disabled hidden>
+                    <option value="DEFAULT" disabled hidden>
                         Select an Option
                     </option>
                     {employeeTypes.map((type, i) => {
