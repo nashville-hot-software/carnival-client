@@ -111,17 +111,26 @@ const EmployeeDetailModal = props => {
       muiSwitch.click();
     }
 
+    // NOTE: Issue with re-rendering search list to re-render this modal with
+    // new data is the route never changes from list to modal so useEffect never re-runs
+    // to fetch new employee
     props.history.push('/employees');
   };
 
+  // This guy is what will re-set employee state to be edited & prevent from
+  // holding on to old employee state .... I think what was happening was after
+  // the first employee was viewed, the filteredEmployee state from list component
+  // was always true, so this edit modal was rendering before state updated with the
+  // next employee viewed, which is why old data was persisting
   useEffect(() => {
     EmployeeManager.getOne("employees", props.employee.id)
       .then(data => {
         // console.log(data);
         setEmployee(data)
       });
-  }, [])
+  }, [props.employee])
   
+  // Only runs when an employee's been edited (updatedEmployee defined on 'Update' btn click)
   useEffect(() => {
     if (updatedEmployee !== undefined) {
       EmployeeManager.update("employees", updatedEmployee, props.employee.id)
@@ -135,6 +144,7 @@ const EmployeeDetailModal = props => {
             muiSwitch.click();
           }
         })
+        // Later update API to return updated obj on the PUT response instead of re-fetching
         .then(() => {
           EmployeeManager.getOne("employees", props.employee.id)
             .then(resp => {

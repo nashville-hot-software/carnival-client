@@ -25,11 +25,15 @@ const Employees = (props) => {
         document.querySelector(".modal-box").classList.add("show");
         document.querySelector(".modal-bg").classList.add("show");
 
+        // NOTE: thinking if we can get editModal useEffect to watch for this to update when
+        // different employee is clicked, that could re-render the modal correctly....
         setFilteredEmployee(foundEmployee[0]);
     }
 
     // const [open, setOpen] = useState(false);
 
+    // Probably don't need this guy... Just one to open modal and the different clicks
+    // will update different states for the modal create/details/edit modes
     const handleShow = () => {
         setCreationView(true)
 
@@ -53,10 +57,10 @@ const Employees = (props) => {
         }
     };
 
-    useEffect(() => {
-        EmployeeManager.getAll("employees")
-            .then(data => setEmployees(data));
-    }, [])
+    // useEffect(() => {
+    //     EmployeeManager.getAll("employees")
+    //         .then(data => setEmployees(data));
+    // }, [])
 
     return (
         <>
