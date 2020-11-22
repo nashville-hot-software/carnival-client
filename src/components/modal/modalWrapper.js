@@ -13,11 +13,11 @@ const ModalWrapper = (props) => {
                         <EmployeeDetailModal employee={props.filteredEmployee} {...props} />
                     ) : null}
                     
-                    {props.creationView !== false ? (
+                    {props.creationView === true ? (
                         <AddEmployeeModal setCreationView={props.setCreationView} />
                     ) : null}
 
-                    {props.filteredVehicle ? (
+                    {props.filteredVehicle !== undefined ? (
                         <VehicleDetailModal filteredVehicle={props.filteredVehicle} />
                     ) : null}
                 </div>

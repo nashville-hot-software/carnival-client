@@ -70,7 +70,7 @@ const SalesTable = (props) => {
     return (
         <>
             <TableContainer className={classes.root} component={Paper}>
-                <Table stickyHeader aria-label="customized table">
+                <Table aria-label="customized table">
                     <TableHead classname={classes.tableHeader}>
                         <TableRow>
                             <StyledTableCell align="center">purchase date</StyledTableCell>

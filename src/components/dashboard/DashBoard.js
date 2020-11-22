@@ -8,71 +8,15 @@ import Sales from "../sale/table.js";
 import Vehicles from "../vehicle/list.js";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import { makeStyles } from "@material-ui/core/styles";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NumberFormat from "react-number-format";
-import Modal from "react-bootstrap/Modal";
 import carnivalImage from "../../images/carnival_cars_image.jpg";
-import DashBoardDetailCard from "../dashboard/DashBoardDetailCard";
-import modalWrapper from "../modal/modalWrapper"
+import useStyles from "./muiStyles"
+import ModalWrapper from "../modal/modalWrapper"
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minWidth: 275,
-    color: "#33475B",
-    backgroundColor: "#F5F8FA",
-    boxShadow: "2px 2px 4px 1px #cacaca",
-  },
-  content: {
-    // '&:last-child': {
-    //   paddingBottom: 0
-    // }
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 30,
-    fontFamily: "Roboto",
-    fontWeight: 500,
-    color: "#33475B",
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  formControl: {
-    marginTop: 10,
-    minWidth: 120,
-    marginLeft: 0,
-  },
-  selectSaleType: {
-    minWidth: "150px",
-    "&.MuiInput-underline:after": {
-      borderBottom: "1px solid gray",
-    },
-  },
-  selectLabel: {
-    color: "gray",
-    fontSize: "14px",
-    "&.MuiFormLabel-root.Mui-focused": {
-      color: "gray",
-    },
-  },
-  arrowIcon: {
-    marginRight: "10px",
-    marginTop: "240px",
-    "&:hover": {
-      cursor: "pointer",
-    },
-  },
-}));
 
 const DashBoard = (props) => {
   const classes = useStyles();
@@ -135,11 +79,10 @@ const DashBoard = (props) => {
     });
   };
 
-  //----------------------------------------------
-  // State for Modal in the sales metric details
-  //----------------------------------------------
   const [sales, setSales] = useState([]);
   const [vehicles, setVehicles] = useState([]);
+  const [filteredVehicle, setFilteredVehicle] = useState();
+
   const getVehicles = () => {
     DataManager.getAll("vehicles", "popular_models", "True").then(
       (response) => {
@@ -149,13 +92,27 @@ const DashBoard = (props) => {
     );
   };
 
+  const showVehiclesModal = vehicle => {
+    const foundVehicle = vehicles.filter(matchedVehicle => matchedVehicle.id === vehicle.id);
+    console.log(foundVehicle[0])
+    setFilteredVehicle(foundVehicle[0]);
+
+    document.querySelector(".modal-box").classList.add("show");
+    document.querySelector(".modal-bg").classList.add("show");
+  }
+
   useEffect(() => {
     getSales();
     getVehicles();
   }, []);
 
   return (
+    <>
+    <ModalWrapper 
+      filteredVehicle={filteredVehicle}
+    />
     <div className="dashboard">
+
       <div className="dashboard--header">Dashboard</div>
 
       <div className="dashboard-row--1">
@@ -288,7 +245,15 @@ const DashBoard = (props) => {
           <Card className={classes.root}>
             <CardContent>
               <h2>Top Vehicles Sold</h2>
-              <Vehicles {...props} />
+
+              {vehicles !== undefined ? (
+                <Vehicles 
+                  vehicles={vehicles} 
+                  showVehiclesModal={showVehiclesModal}
+                  filteredVehicle={filteredVehicle}
+                  {...props} 
+                />
+              ) : null}
             </CardContent>
           </Card>
         </div>
@@ -312,6 +277,7 @@ const DashBoard = (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 export default DashBoard;
