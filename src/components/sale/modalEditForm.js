@@ -8,7 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import USAStatesArray from "./stateList";
 import DealershipDropdown from "../modal/dealershipDropdown";
 import VehicleSearch from "../modal/vehicleSearch"
-
+import DataManager from '../../api/dataManager'
 const SaleDetailModal = (props) => {
     // employee obj to update (passed down from parent list component)
     const [sale, setSale] = useState({
@@ -34,13 +34,8 @@ const SaleDetailModal = (props) => {
     });
     // State for expanding/hiding the dealership dropdown menu
     const [editMode, setEditMode] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [states, setStates] = useState(USAStatesArray);
 
-    const handleEditMode = () => {
-        setEditMode(!editMode);
-    }
         const handleCloseModel = () => {
             setEditMode(false);
             const inputs = document.querySelectorAll("input");
@@ -79,10 +74,6 @@ const SaleDetailModal = (props) => {
                 stateToChange[evt.target.id] = evt.target.value;
                 setSale(stateToChange);
             };
-
-           
-            const handleDropdownClose = () => setOpen(false);
-
             const handleEditSubmit = () => {
                 if (sale.first_name === "" && sale.last_name === "") {
                     window.alert("Please fill out new customer name fields");

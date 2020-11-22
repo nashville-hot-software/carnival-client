@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "./list.css";
-import EmployeeDetailModal from "./modalEditForm"
-import AddEmployeeModal from "./modalAddForm"
+import "../employee/list.css";
+import EmployeeDetailModal from "../employee/modalEditForm"
+import AddEmployeeModal from "../employee/modalAddForm"
 
 const ModalWrapper = (props) => {
 
