@@ -20,7 +20,8 @@ const Vehicles = props => {
 
   const showVehiclesModal = vehicle => {
     const foundVehicle = vehicles.filter(matchedVehicle => matchedVehicle.id === vehicle.id);
-    setFilteredVehicle(foundVehicle);
+    console.log(foundVehicle[0])
+    setFilteredVehicle(foundVehicle[0]);
 
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
@@ -35,6 +36,7 @@ const Vehicles = props => {
       <ModalWrapper 
         filteredVehicle={filteredVehicle}
       />
+
       <div className="vehiclesContainer">
         {vehicles.slice(0,20).map(vehicle => {
           return (
