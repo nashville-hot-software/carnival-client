@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
-import DealershipDropdown from "./dealershipDropdown"
-import EmployeeTypeSelect from "./employeeTypesMenu"
+import DealershipDropdown from "../modal/dealershipDropdown"
+import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 
 const AddEmployeeModal = (props) => {
 

@@ -6,8 +6,8 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import DealershipDropdown from "./dealershipDropdown"
-import EmployeeTypeSelect from "./employeeTypesMenu"
+import DealershipDropdown from "../modal/dealershipDropdown"
+import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 
 const EmployeeDetailModal = props => {
 

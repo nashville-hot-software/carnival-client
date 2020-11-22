@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
-import ModalWrapper from "./modalWrapper"
+import ModalWrapper from "../modal/modalWrapper"
 
 const Employees = (props) => {
     const [employees, setEmployees] = useState([]);
     
     const [creationView, setCreationView] = useState(false);
-
     const [filteredEmployee, setFilteredEmployee] = useState();
 
     const handleEmployeeSearch = (evt) => {
