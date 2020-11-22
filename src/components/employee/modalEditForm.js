@@ -297,7 +297,7 @@ const EmployeeDetailModal = props => {
                 />
 
                 <EmployeeTypeSelect
-                    state={employee}
+                    state={stateToChange}
                     setState={setEmployee}
                 />
 
