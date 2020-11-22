@@ -53,31 +53,8 @@ const EmployeeDetailModal = props => {
         // before the PUT... not sure if that will change stateToChange back to null...)
         const inputs = document.querySelectorAll('input')
         const selects = document.querySelectorAll('select')
-
         inputs.forEach(input => input.value = "")
         selects.forEach(select => select.value = "none")
-
-        // if (updatedEmployee !== undefined) {
-        //   EmployeeManager.update("employees", updatedEmployee, props.employee.id)
-        //     .then(() => {
-        //       // console.log(updatedEmployee)
-        //       setEditMode(false);
-
-        //       const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-        //       if (muiSwitch.classList.contains('Mui-checked')) {
-        //         muiSwitch.click();
-        //       }
-        //     })
-        //     .then(() => {
-        //       EmployeeManager.getOne("employees", props.employee.id)
-        //         .then(resp => {
-        //           console.log(resp)
-        //           setUpdatedEmployee(resp);
-        //         })
-        //     })
-        // }
-        
     }
   } 
 
@@ -112,22 +89,11 @@ const EmployeeDetailModal = props => {
     if (muiSwitch.classList.contains('Mui-checked')) {
       muiSwitch.click();
     }
-
-    // NOTE: Issue with re-rendering search list to re-render this modal with
-    // new data is the route never changes from list to modal so useEffect never re-runs
-    // to fetch new employee
-    props.history.push('/employees');
   };
 
-  // This guy is what will re-set employee state to be edited & prevent from
-  // holding on to old employee state .... I think what was happening was after
-  // the first employee was viewed, the filteredEmployee state from list component
-  // was always true, so this edit modal was rendering before state updated with the
-  // next employee viewed, which is why old data was persisting
   useEffect(() => {
     EmployeeManager.getOne("employees", props.employee.id)
       .then(data => {
-        // console.log(data);
         setEmployee(data)
       });
   }, [props.employee])
@@ -136,8 +102,16 @@ const EmployeeDetailModal = props => {
   useEffect(() => {
     if (updatedEmployee !== undefined) {
       EmployeeManager.update("employees", updatedEmployee, props.employee.id)
+        // Later update API to return updated obj on the PUT response instead of re-fetching
         .then(() => {
-          // console.log(updatedEmployee)
+          EmployeeManager.getOne("employees", props.employee.id)
+            .then(resp => {
+              console.log(resp)
+              setUpdatedEmployee();
+              setEmployee(resp);
+            })
+        })
+        .then(() => {
           setEditMode(false);
 
           const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
@@ -146,15 +120,7 @@ const EmployeeDetailModal = props => {
             muiSwitch.click();
           }
         })
-        // Later update API to return updated obj on the PUT response instead of re-fetching
-        .then(() => {
-          EmployeeManager.getOne("employees", props.employee.id)
-            .then(resp => {
-              console.log(resp)
-              setUpdatedEmployee();
-              setEmployee();
-            })
-        })
+        
     }
   }, [updatedEmployee])
 
@@ -204,7 +170,7 @@ const EmployeeDetailModal = props => {
               <div>
                 <strong>Name:</strong> 
                 <span>
-                      {updatedEmployee !== undefined ? (`${updatedEmployee.first_name} ${updatedEmployee.last_name}`) 
+                      {employee !== undefined ? (`${employee.first_name} ${employee.last_name}`) 
                       : (`${props.employee.first_name} ${props.employee.last_name}`)} 
                 </span>
               </div>
@@ -293,12 +259,10 @@ const EmployeeDetailModal = props => {
 
                 <DealershipDropdown 
                     state={stateToChange} 
-                    setState={setEmployee}
                 />
 
                 <EmployeeTypeSelect
                     state={stateToChange}
-                    setState={setEmployee}
                 />
 
                 <div className="addEmployee--btn--container">

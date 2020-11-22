@@ -5,17 +5,26 @@ import "./list.css";
 import ModalWrapper from "./modalWrapper"
 
 const Employees = (props) => {
-    // Holds all employees returned from employee search bar
     const [employees, setEmployees] = useState([]);
     
-    const [detailsView, setDetailsView] = useState(false);
     const [creationView, setCreationView] = useState(false);
 
     const [filteredEmployee, setFilteredEmployee] = useState();
 
-    const showDetailsModal = employeeArg => {
-        setDetailsView(true);
+    const handleEmployeeSearch = (evt) => {
+        if (evt.target.value.length > 0) {
+            EmployeeManager.getAll("employees", "searchTerm", evt.target.value).then(
+                (matchedEmployees) => {
+                    setEmployees(matchedEmployees);
+                }
+            );
+        } else {
+            setEmployees([]);
+        }
+    };
 
+    // Runs when you click on employee card for details
+    const showDetailsModal = employeeArg => {
         const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
 
         console.log(foundEmployee)
@@ -30,8 +39,6 @@ const Employees = (props) => {
         setFilteredEmployee(foundEmployee[0]);
     }
 
-    // const [open, setOpen] = useState(false);
-
     // Probably don't need this guy... Just one to open modal and the different clicks
     // will update different states for the modal create/details/edit modes
     const handleShow = () => {
@@ -42,25 +49,6 @@ const Employees = (props) => {
         document.querySelector(".modal-box").classList.add("show");
         document.querySelector(".modal-bg").classList.add("show");
     };
-
-    // const handleDropdownClose = () => setOpen(false);
-
-    const handleEmployeeSearch = (evt) => {
-        if (evt.target.value.length > 0) {
-            EmployeeManager.getAll("employees", "searchTerm", evt.target.value).then(
-                (matchedEmployees) => {
-                    setEmployees(matchedEmployees);
-                }
-            );
-        } else {
-            setEmployees([]);
-        }
-    };
-
-    // useEffect(() => {
-    //     EmployeeManager.getAll("employees")
-    //         .then(data => setEmployees(data));
-    // }, [])
 
     return (
         <>

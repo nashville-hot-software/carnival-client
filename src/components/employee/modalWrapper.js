@@ -5,10 +5,6 @@ import AddEmployeeModal from "./modalAddForm"
 
 const ModalWrapper = (props) => {
 
-    // useEffect(() => {
-
-    // }, [props.filteredEmployee])
-
     return (
             <div className="modal-bg">
                 <div className="modal-box">

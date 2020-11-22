@@ -16,10 +16,6 @@ const ApplicationViews = props => {
                 return <DashBoard {...props} />
             }} />
 
-            {/* <Route exact path="/customers/:customerId(\d+)" render={props => {
-                return <CustomerDetails customerId={parseInt(props.match.params.customerId)} {...props} />
-            }} /> */}
-
             <Route exact path="/employees" render={props => {
                 return <EmployeeList {...props} />
             }} />
