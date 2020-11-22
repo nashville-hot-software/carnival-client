@@ -11,7 +11,7 @@ const VehicleDropdown = (props) => {
                 // the handle close on blur should close modal but I think this needs
                 // to be on a div outside of the ternary..
                 <div
-                    onBlur={handleCloseVehicleSearch}
+                    onBlur={props.handleCloseVehicleSearch}
                     className={`vehicles--dropdown ${props.showVehicles ? "open" : ""}`}
                 >
                     <button onClick={props.handleCloseVehicleSearch()}>Close</button>

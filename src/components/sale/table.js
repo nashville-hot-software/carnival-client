@@ -11,7 +11,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-const Sales = (props) => {
+const SalesTable = (props) => {
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -97,6 +97,6 @@ const Sales = (props) => {
         </>
     );
 };
-export default Sales
+export default SalesTable
 
 

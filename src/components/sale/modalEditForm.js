@@ -8,6 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import USAStatesArray from "./stateList";
 import DealershipDropdown from "../modal/dealershipDropdown";
 import VehicleSearch from "../modal/vehicleSearch"
+
 const SaleDetailModal = (props) => {
     // employee obj to update (passed down from parent list component)
     const [sale, setSale] = useState({
