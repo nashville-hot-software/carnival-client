@@ -19,6 +19,7 @@ import NumberFormat from "react-number-format";
 import Modal from "react-bootstrap/Modal";
 import carnivalImage from "../../images/carnival_cars_image.jpg";
 import DashBoardDetailCard from "../dashboard/DashBoardDetailCard";
+import modalWrapper from "../modal/modalWrapper"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -267,7 +268,7 @@ const DashBoard = (props) => {
         </div>
       </div>
 
-      {sales !== undefined ? (
+      {/* {sales !== undefined ? (
         <Modal centered show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Sale Metric Details </Modal.Title>
@@ -280,7 +281,7 @@ const DashBoard = (props) => {
             </>
           </Modal.Body>
         </Modal>
-      ) : null}
+      ) : null} */}
 
       <div className="dashboard-row--2">
         <div className="dash-vehicles--container">

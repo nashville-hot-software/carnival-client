@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import "./list.css";
-import EmployeeDetailModal from "./modalEditForm"
-import AddEmployeeModal from "./modalAddForm"
+import "../employee/list.css";
+import EmployeeDetailModal from "../employee/modalEditForm"
+import AddEmployeeModal from "../employee/modalAddForm"
+import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
 
 const ModalWrapper = (props) => {
 
@@ -14,6 +15,10 @@ const ModalWrapper = (props) => {
                     
                     {props.creationView !== false ? (
                         <AddEmployeeModal setCreationView={props.setCreationView} />
+                    ) : null}
+
+                    {props.filteredVehicle ? (
+                        <VehicleDetailModal filteredVehicle={props.filteredVehicle} />
                     ) : null}
                 </div>
             </div>
