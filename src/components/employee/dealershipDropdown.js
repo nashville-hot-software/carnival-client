@@ -39,9 +39,9 @@ const DealershipDropdown = (props) => {
     };
 
     const handleDealerSelect = (evt) => {
-        const stateToChange = { ...props.state };
-        stateToChange.dealership_id = evt.target.id;
-        props.setState(stateToChange);
+        const stateToChange = props.state;
+        stateToChange.dealership_id = parseInt(evt.target.id);
+        console.log(stateToChange)
 
         setSelectedDealership(evt.target.innerHTML);
 

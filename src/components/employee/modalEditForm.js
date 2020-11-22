@@ -292,7 +292,7 @@ const EmployeeDetailModal = props => {
                 />
 
                 <DealershipDropdown 
-                    state={employee} 
+                    state={stateToChange} 
                     setState={setEmployee}
                 />
 
