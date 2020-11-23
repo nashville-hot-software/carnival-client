@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import SaleManager from "../../api/dataManager.js";
+import React from "react";
 import SaleTableCard from "./tableCard.js";
 import "./sale.css";
 import Table from "@material-ui/core/Table";
@@ -51,26 +50,10 @@ const SalesTable = (props) => {
         },
     }))(TableCell);
 
-    // State variable that handles storing the list of sales
-    const [sales, setSales] = useState([]);
-
-    // Function that calls the (SalesManager) datamanager to fetch sales data from the database
-    const getSales = () => {
-        SaleManager.getAll("sales", "limit", 20).then((response) => {
-            setSales(response);
-            console.log(response);
-        });
-    };
-
-    useEffect(() => {
-        getSales();
-    }, []);
-
-
     return (
         <>
             <TableContainer className={classes.root} component={Paper}>
-                <Table stickyHeader aria-label="customized table">
+                <Table aria-label="customized table">
                     <TableHead classname={classes.tableHeader}>
                         <TableRow>
                             <StyledTableCell align="center">purchase date</StyledTableCell>
@@ -81,9 +64,14 @@ const SalesTable = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody classname={classes2.tableBody}>
-                        {sales.map((row,i) => (
+                        {props.sales.map((row) => (
                             <>
-                                <SaleTableCard key={i} row={row} {...props} />
+                                <SaleTableCard 
+                                    key={row.id} 
+                                    row={row} 
+                                    showSalesModal={props.showSalesModal}
+                                    {...props} 
+                                />
                             </>
                         ))}
                     </TableBody>
