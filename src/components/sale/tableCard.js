@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -41,9 +41,13 @@ const SaleTableCard = (props) => {
     },
   }))(TableRow);
 
+  useEffect(() => {
+    console.log(props.row)
+  }, [])
+
   return (
     <>
-      <StyledTableRow onClick={() => handleShow()} className={props.classes} key={props.row.name}>
+      <StyledTableRow onClick={() => props.showSalesModal(props.row)} className={props.classes} key={props.row.name}>
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
         <StyledTableCell align="center">#{props.row.invoice_number}</StyledTableCell>
         <StyledTableCell align="center">{props.row.vehicle.vehicle_type.make} {props.row.vehicle.vehicle_type.model}</StyledTableCell>
@@ -52,21 +56,6 @@ const SaleTableCard = (props) => {
           <NumberFormat value={props.row.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         </StyledTableCell>
       </StyledTableRow>
-
-      <Modal centered show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-        <Modal.Title><strong>Invoice</strong> {""}#{props.row.invoice_number}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body><strong>Customer Name:{"   "}</strong> {`${props.row.customer.first_name} ${props.row.customer.last_name}`}</Modal.Body>
-        <Modal.Body><strong>Dealership:</strong> {`${props.row.dealership.business_name}`}</Modal.Body>
-        <Modal.Body><strong>State:</strong> {`${props.row.dealership.state}`}</Modal.Body>
-        <Modal.Body><strong>Car Purchased:</strong> {`${props.row.vehicle.vehicle_type.make}`}{  " "} {`${props.row.vehicle.vehicle_type.model}`}</Modal.Body>
-        <Modal.Body><strong>Price:</strong>{"   "}<NumberFormat value={props.row.price} displayType={'text'} thousandSeparator={true} prefix={'$'} /> </Modal.Body>
-        <Modal.Body><strong>Deposit:</strong>{"   "}<NumberFormat value={props.row.deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} /></Modal.Body>
-        <Modal.Body><strong>Payment Method:</strong>{"   "} {`${props.row.payment_method}`}</Modal.Body>
-        <Modal.Body><strong>Purchase Date:</strong>{"   "} {`${props.row.purchase_date}`}</Modal.Body>
-        <Modal.Body><strong>Pickup Date:</strong> {"   "}{`${props.row.pickup_date}`}</Modal.Body>
-      </Modal>{" "}
     </>
   );
 };

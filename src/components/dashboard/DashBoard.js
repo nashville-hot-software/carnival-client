@@ -21,6 +21,7 @@ import ModalWrapper from "../modal/modalWrapper"
 const DashBoard = (props) => {
   const classes = useStyles();
 
+  const [sales, setSales] = useState([]);
   const [saleCount, setSaleCount] = useState();
   const [totalLeaseCount, setTotalLeaseCount] = useState();
   const [totalPurchaseCount, setTotalPurchaseCount] = useState();
@@ -46,6 +47,8 @@ const DashBoard = (props) => {
   const getSales = () => {
     DataManager.getAll("sales", "limit", "20").then((response) => {
       console.log(response);
+
+      setSales(response);
 
       setSaleCount(response.length);
 
@@ -79,7 +82,6 @@ const DashBoard = (props) => {
     });
   };
 
-  const [sales, setSales] = useState([]);
   const [vehicles, setVehicles] = useState([]);
   const [filteredVehicle, setFilteredVehicle] = useState();
 
@@ -103,7 +105,6 @@ const DashBoard = (props) => {
 
   const showVehiclesModal = vehicle => {
     const foundVehicle = vehicles.filter(matchedVehicle => matchedVehicle.id === vehicle.id);
-    console.log(foundVehicle[0])
     setFilteredVehicle(foundVehicle[0]);
 
     document.querySelector(".modal-box").classList.add("show");
@@ -115,6 +116,18 @@ const DashBoard = (props) => {
     const foundCustomer = customers.filter(matchedCustomer => matchedCustomer.customer_id === customer.customer_id);
     console.log(foundCustomer[0])
     setFilteredCustomer(foundCustomer[0]);
+
+    document.querySelector(".modal-box").classList.add("show");
+    document.querySelector(".modal-bg").classList.add("show");
+  }
+  
+  const [filteredSale, setFilteredSale] = useState();
+
+  const showSalesModal = sale => {
+    console.log(sale)
+    const foundSale = sales.filter(matchedSale => matchedSale.id === sale.id);
+    console.log(foundSale[0])
+    setFilteredSale(foundSale[0]);
 
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
@@ -133,7 +146,10 @@ const DashBoard = (props) => {
       setFilteredVehicle={setFilteredVehicle}
       filteredCustomer={filteredCustomer}
       setFilteredCustomer={setFilteredCustomer}
+      filteredSale={filteredSale}
+      setFilteredSale={setFilteredSale}
     />
+
     <div className="dashboard">
 
       <div className="dashboard--header">Dashboard</div>
@@ -301,7 +317,13 @@ const DashBoard = (props) => {
           <Card className={classes.root}>
             <CardContent>
               <h2 className={classes.title}>Recent Sales</h2>
-              <Sales {...props} />
+              {sales !== undefined ? (
+                <Sales 
+                  sales={sales}
+                  showSalesModal={showSalesModal}
+                  {...props} 
+                />
+              ) : null}
             </CardContent>
           </Card>
         </div>
