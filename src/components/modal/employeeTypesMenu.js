@@ -21,7 +21,7 @@ const EmployeeTypeSelect = (props) => {
     useEffect(() => {
         fetchEmployeeTypes();
     }, []);
-
+let uniqueID = "unique--ID"
     return (
         <>
         {employeeTypes !== undefined ? (
@@ -36,7 +36,7 @@ const EmployeeTypeSelect = (props) => {
                     defaultValue={'DEFAULT'}
                 >
                     {" "}
-                    <option defaultValue="DEFAULT"  disabled hidden>
+                    <option key={uniqueID} defaultValue="DEFAULT"  disabled hidden>
                         Select an Option
                     </option>
                     {employeeTypes.map((type,i) => {

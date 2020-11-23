@@ -10,34 +10,13 @@ import DealershipDropdown from "../modal/dealershipDropdown";
 import VehicleSearch from "../modal/vehicleSearch"
 import DataManager from '../../api/dataManager'
 const SaleDetailModal = (props) => {
-    // employee obj to update (passed down from parent list component)
-    const [sale, setSale] = useState({
-        price: props.sale.price.price,
-        deposit: props.sale.deposit,
-        pickup_date: props.sale.pickup_date,
-        invoice_number: props.sale.invoice_number,
-        payment_method: props.sale.payment_method,
-        returned: props.sale.returned,
-        dealership_id: props.sale.dealership_id,
-        employee_id: props.sale.employee_id,
-        sales_type_id: props.sale.sales_type_id,
-        vehicle_id: props.sale.vehicle_id,
-        first_name: props.sale.first_name,
-        last_name: props.sale.last_name,
-        email: props.sale.email,
-        phone: props.sale.phone,
-        street: props.sale.street,
-        city: props.sale.city,
-        state: props.sale.state,
-        zipcode: props.sale.zipcode,
-        company_name: props.sale.company_name,
-    });
-    // State for expanding/hiding the dealership dropdown menu
+    const [sale, setSale] = useState();
+    const [updatedSale, setUpdatedSale] = useState();
     const [editMode, setEditMode] = useState(false);
     const [states, setStates] = useState(USAStatesArray);
 
         const handleCloseModel = () => {
-            setEditMode(false);
+            setEditMode(!editMode);
             const inputs = document.querySelectorAll("input");
             const selects = document.querySelectorAll("select");
 

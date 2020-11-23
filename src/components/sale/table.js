@@ -81,9 +81,9 @@ const SalesTable = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody classname={classes2.tableBody}>
-                        {sales.map((row) => (
+                        {sales.map((row,i) => (
                             <>
-                                <SaleTableCard key={row.id} row={row} {...props} />
+                                <SaleTableCard key={i} row={row} {...props} />
                             </>
                         ))}
                     </TableBody>
