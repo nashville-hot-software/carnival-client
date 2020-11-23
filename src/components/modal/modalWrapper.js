@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
-import "./list.css";
-import EmployeeDetailModal from "./modalEditForm"
-import AddEmployeeModal from "./modalAddForm"
+import React from "react";
+import "../employee/list.css";
+import EmployeeDetailModal from "../employee/modalEditForm"
+import AddEmployeeModal from "../employee/modalAddForm"
+import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
+import CustomerDetailModal from "../customer/customerDetailsModal"
+import SaleDetailModal from "../sale/saleDetailsModal"
 
 const ModalWrapper = (props) => {
 
@@ -12,8 +15,29 @@ const ModalWrapper = (props) => {
                         <EmployeeDetailModal employee={props.filteredEmployee} {...props} />
                     ) : null}
                     
-                    {props.creationView !== false ? (
+                    {props.creationView === true ? (
                         <AddEmployeeModal setCreationView={props.setCreationView} />
+                    ) : null}
+
+                    {props.filteredVehicle !== undefined ? (
+                        <VehicleDetailModal 
+                            vehicle={props.filteredVehicle} 
+                            setFilteredVehicle={props.setFilteredVehicle}
+                        />
+                    ) : null}
+                    
+                    {props.filteredCustomer !== undefined ? (
+                        <CustomerDetailModal 
+                            customer={props.filteredCustomer} 
+                            setFilteredCustomer={props.setFilteredCustomer}
+                        />
+                    ) : null}
+                    
+                    {props.filteredSale !== undefined ? (
+                        <SaleDetailModal 
+                            sale={props.filteredSale} 
+                            setFilteredSale={props.setFilteredSale}
+                        />
                     ) : null}
                 </div>
             </div>
