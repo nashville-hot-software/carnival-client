@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import SaleManager from "../../api/dataManager.js";
+import React from "react";
 import SaleTableCard from "./tableCard.js";
 import "./sale.css";
 import Table from "@material-ui/core/Table";
@@ -50,22 +49,6 @@ const SalesTable = (props) => {
             fontSize: 14,
         },
     }))(TableCell);
-
-    // State variable that handles storing the list of sales
-    // const [sales, setSales] = useState([]);
-
-    // Function that calls the (SalesManager) datamanager to fetch sales data from the database
-    // const getSales = () => {
-    //     SaleManager.getAll("sales", "limit", 20).then((response) => {
-    //         setSales(response);
-    //         console.log(response);
-    //     });
-    // };
-
-    // useEffect(() => {
-    //     getSales();
-    // }, []);
-
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./card.css"
 import "../employee/list.css"
 import "../employee/card.css"
@@ -73,21 +73,6 @@ const SaleDetailModal = props => {
             </div>
         </div>
 
-        {/* <Modal centered show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title><strong>Invoice</strong> {""}#{props.row.invoice_number}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body><strong>Customer Name:{"   "}</strong> {`${props.row.customer.first_name} ${props.row.customer.last_name}`}</Modal.Body>
-            <Modal.Body><strong>Dealership:</strong> {`${props.row.dealership.business_name}`}</Modal.Body>
-            <Modal.Body><strong>State:</strong> {`${props.row.dealership.state}`}</Modal.Body>
-            <Modal.Body><strong>Car Purchased:</strong> {`${props.row.vehicle.vehicle_type.make}`}{  " "} {`${props.row.vehicle.vehicle_type.model}`}</Modal.Body>
-            <Modal.Body><strong>Price:</strong>{"   "}<NumberFormat value={props.row.price} displayType={'text'} thousandSeparator={true} prefix={'$'} /> </Modal.Body>
-            <Modal.Body><strong>Deposit:</strong>{"   "}<NumberFormat value={props.row.deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} /></Modal.Body>
-            <Modal.Body><strong>Payment Method:</strong>{"   "} {`${props.row.payment_method}`}</Modal.Body>
-            <Modal.Body><strong>Purchase Date:</strong>{"   "} {`${props.row.purchase_date}`}</Modal.Body>
-            <Modal.Body><strong>Pickup Date:</strong> {"   "}{`${props.row.pickup_date}`}</Modal.Body>
-        </Modal> */}
-        
         <div className="employee--btn--container">
             <button className="closeBtn" onClick={handleModalClose}>
                 Close  

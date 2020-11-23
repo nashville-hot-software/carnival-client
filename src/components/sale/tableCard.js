@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
-import TableBody from "@material-ui/core/TableBody";
+import React from "react";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Modal from "react-bootstrap/Modal";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import NumberFormat from 'react-number-format';
 
-
 const SaleTableCard = (props) => {
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -40,10 +29,6 @@ const SaleTableCard = (props) => {
       },  
     },
   }))(TableRow);
-
-  useEffect(() => {
-    console.log(props.row)
-  }, [])
 
   return (
     <>
