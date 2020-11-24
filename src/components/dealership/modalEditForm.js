@@ -6,15 +6,11 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import DealershipDropdown from "../modal/dealershipDropdown"
-import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 
 const DealershipDetailModal = props => {
 
   const [dealership, setDealership] = useState();  
-
   const [updatedDealership, setUpdatedDealership] = useState();
-
   const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
@@ -44,8 +40,6 @@ const DealershipDetailModal = props => {
         window.alert("Please enter a phone number")
     } else if (dealership.website === "") {
         window.alert("Please enter a website")
-    } else if (dealership.tax_id === "") {
-      window.alert("Please enter a tax id")
     } else if (stateToChange !== undefined) {
         setUpdatedDealership(stateToChange);
 
@@ -166,39 +160,32 @@ const DealershipDetailModal = props => {
         <>
           <div className="modal-details--body">
               <div>
-                <strong>Name:</strong> 
-                {/* <span>
-                      {employee !== undefined ? (`${employee.first_name} ${employee.last_name}`) 
-                      : (`${props.employee.first_name} ${props.employee.last_name}`)} 
-                </span> */}
+                <strong>Dealership Name:</strong> 
+                <span>
+                      {dealership !== undefined ? (`${dealership.business_name}`) 
+                      : (`${props.dealership.business_name}`)} 
+                </span>
               </div>
               <div>
-                <strong>Email:</strong> 
-                {/* <span>
-                  {updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
-                  : (`${props.employee.email_address}`)}
-                </span> */}
+                <strong>Location:</strong> 
+                <span>
+                  {dealership !== undefined ? (`${dealership.city} ${dealership.state}`) 
+                  : (`${props.dealership.city} ${props.dealership.state}`)}
+                </span>
               </div>
               <div>
                 <strong>Phone:</strong> 
-                {/* <span>
-                  {updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
-                  : (`${props.employee.phone}`)}
-                </span> */}
+                <span>
+                  {dealership !== undefined ? (`${dealership.phone}`) 
+                  : (`${props.dealership.phone}`)}
+                </span>
               </div>
               <div>
-                <strong>Dealership:</strong> 
-                {/* <span>
-                  {updatedEmployee !== undefined ? (`${updatedEmployee.dealership.business_name}`) 
-                    : (`${props.employee.business_name}`)}
-                </span> */}
-              </div>
-              <div>
-                <strong>Employee Type:</strong> 
-                {/* <span>
-                    {updatedEmployee !== undefined ? (`${updatedEmployee.employee_type.name}`) 
-                    : (`${props.employee.employee_type}`)}
-                </span> */}
+                <strong>Website:</strong> 
+                <span>
+                  {dealership !== undefined ? (`${dealership.website}`) 
+                    : (`${props.dealership.website}`)}
+                </span>
               </div>
           </div>
           <div className="employee--btn--container">
@@ -212,55 +199,57 @@ const DealershipDetailModal = props => {
         </>
         ) : (
             <div className="modal-edit--body">
-                <label><strong>First Name:</strong></label> 
-                {/* <input 
+                <label><strong>Dealership Name:</strong></label> 
+                <input 
                 type="text"
-                id="first_name"
-                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.first_name}`) 
-                            : (`${props.employee.first_name}`)} 
+                id="business_name"
+                placeholder={dealership !== undefined ? (`${dealership.business_name}`) 
+                            : (`${props.dealership.business_name}`)}
                 onChange={handleFieldChange}
                 className="modal--input"
-                /> */}
+                />
             
             
-                <label><strong>Last Name:</strong></label> 
-                {/* <input 
+                <label><strong>City:</strong></label> 
+                <input 
                 type="text"
-                id="last_name"
-                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.last_name}`) 
-                            : (`${props.employee.last_name}`)} 
+                id="city"
+                placeholder={dealership !== undefined ? (`${dealership.city}`) 
+                            : (`${props.dealership.city}`)}
                 onChange={handleFieldChange}
                 className="modal--input"
-                /> */}
-            
-            
-                <label><strong>Email:</strong></label> 
-                {/* <input 
+                />
+                
+                <label><strong>State:</strong></label> 
+                <input 
                 type="text"
-                id="email_address"
-                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
-                            : (`${props.employee.email_address}`)}
+                id="state"
+                placeholder={dealership !== undefined ? (`${dealership.state}`) 
+                            : (`${props.dealership.state}`)}
                 onChange={handleFieldChange}
                 className="modal--input"
-                /> */}
+                />
             
             
                 <label><strong>Phone:</strong></label> 
-                {/* <input 
+                <input 
+                type="text"
+                id="phone"
+                placeholder={dealership !== undefined ? (`${dealership.phone}`) 
+                            : (`${props.dealership.phone}`)}
+                onChange={handleFieldChange}
+                className="modal--input"
+                />
+            
+            
+                <label><strong>Website:</strong></label> 
+                <input 
                     type="text"
-                    id="phone"
-                    placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
-                                : (`${props.employee.phone}`)}
+                    id="website"
+                    placeholder={dealership !== undefined ? (`${dealership.website}`) 
+                                : (`${props.dealership.website}`)}
                     onChange={handleFieldChange}
                     className="modal--input"
-                /> */}
-
-                <DealershipDropdown 
-                    state={stateToChange} 
-                />
-
-                <EmployeeTypeSelect
-                    state={stateToChange}
                 />
 
                 <div className="addEmployee--btn--container">
