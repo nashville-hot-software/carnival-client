@@ -11,8 +11,8 @@
 .dashboard-row--1 {
     display: flex;
     border-radius: 8px;
-    margin-top: 80px;
-    margin-bottom: 40px;
+    margin-top: 60px;
+    margin-bottom: 50px;
     margin-left: 13%;
     max-height: 300px;
 }
@@ -71,6 +71,10 @@
     font-size: 18px;
 }
 
+.selectMenu {
+    margin-top: 5px;
+}
+
 .saleMetric--container {
     display: flex;
     margin-right: 0 !important;
@@ -78,7 +82,7 @@
 
 .saleMetricDetails--container {
     min-width: 200px;
-    margin-right: 4%;
+    /* margin-right: 4%; */
 }
 
 .carnival-dashboard--header {
