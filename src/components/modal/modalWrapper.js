@@ -5,7 +5,9 @@ import AddEmployeeModal from "../employee/modalAddForm"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
 import SaleDetailModal from "../sale/saleDetailsModal"
-import SaleEditModal from '../sale/modalEditForm'
+import DealershipDetailModal from "../dealership/modalEditForm"
+import AddDealershipModal from "../dealership/modalAddForm"
+
 const ModalWrapper = (props) => {
 
     return (
@@ -15,7 +17,7 @@ const ModalWrapper = (props) => {
                         <EmployeeDetailModal employee={props.filteredEmployee} {...props} />
                     ) : null}
                     
-                    {props.creationView === true ? (
+                    {props.employeeCreationView === true ? (
                         <AddEmployeeModal setCreationView={props.setCreationView} />
                     ) : null}
 
@@ -39,12 +41,26 @@ const ModalWrapper = (props) => {
                             setFilteredSale={props.setFilteredSale}
                         />
                     ) : null}
+<<<<<<< HEAD
                     {props.matchedSale !== undefined ? (
                         <SaleEditModal 
                             sale={props.matchedSale} 
                             setMatchedSale={props.setMatchedSale}
                         />
                     ) : null}
+=======
+                    
+                    {props.filteredDealership !== undefined && props.dealershipCreationView === false ? (
+                        <DealershipDetailModal 
+                            dealership={props.filteredDealership} 
+                            setFilteredDealership={props.setFilteredDealership}
+                        />
+                    ) : null}
+
+                    {props.dealershipCreationView === true ? (
+                        <AddDealershipModal setCreationView={props.setCreationView} />
+                    ) : null}
+>>>>>>> main
                 </div>
             </div>
     );

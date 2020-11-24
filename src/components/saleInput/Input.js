@@ -6,13 +6,13 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 const useStyles = makeStyles((theme) => ({
     searchBarStyle: {
-        height: "40px",
-        width: "300px",
+        height: "25px",
+        width: "350px",
         margin: "0 0 0 0",
         float: "center",
         "& .MuiOutlinedInput-root": {
             "& fieldset": {
-                borderRadius: "2px",
+                borderRadius: "5px",
                 borderColor: "#6a78d1",
             },
             "&.Mui-focused fieldset": {
