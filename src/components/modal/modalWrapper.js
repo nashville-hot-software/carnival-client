@@ -41,14 +41,6 @@ const ModalWrapper = (props) => {
                             setFilteredSale={props.setFilteredSale}
                         />
                     ) : null}
-<<<<<<< HEAD
-                    {props.matchedSale !== undefined ? (
-                        <SaleEditModal 
-                            sale={props.matchedSale} 
-                            setMatchedSale={props.setMatchedSale}
-                        />
-                    ) : null}
-=======
                     
                     {props.filteredDealership !== undefined && props.dealershipCreationView === false ? (
                         <DealershipDetailModal 
@@ -60,7 +52,6 @@ const ModalWrapper = (props) => {
                     {props.dealershipCreationView === true ? (
                         <AddDealershipModal setCreationView={props.setCreationView} />
                     ) : null}
->>>>>>> main
                 </div>
             </div>
     );
