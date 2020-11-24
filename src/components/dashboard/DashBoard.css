@@ -50,7 +50,7 @@
 
 .totalRevenue--container {
     max-width: 200px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .totalSales--label {
@@ -72,7 +72,7 @@
 }
 
 .selectMenu {
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .saleMetric--container {
