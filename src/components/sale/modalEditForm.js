@@ -5,21 +5,26 @@ import Switch from "@material-ui/core/Switch";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import USAStatesArray from "./stateList";
 import DealershipDropdown from "../modal/dealershipDropdown";
 import VehicleSearch from "../modal/vehicleSearch";
 import DataManager from "../../api/dataManager";
-const SaleDetailModal = (props) => {
+import StateSelectDropdown from '../modal/StateSelect'
+import PaymentTypeSelectDropdown from '../modal/PaymentTypeSelect'
+const SaleEditModal = (props) => {
   const [sale, setSale] = useState();
   const [updatedSale, setUpdatedSale] = useState();
   const [editMode, setEditMode] = useState(false);
-  const [states, setStates] = useState(USAStatesArray);
+  const [selectedState, setSelectedState] = useState();
+  const [selectedPaymentType, setSelectedPaymentType] = useState();
+  const [selectedVehicle, setSelectedVehicle] = useState();
 
+  
   const handleEditMode = () => {
     setEditMode(!editMode);
     const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
     muiSwitch.classList.add("Mui-checked", "PrivateSwitchBase-checked-2");
   };
+  
 
   var stateToChange = { ...sale };
   // (For edit mode)
@@ -98,6 +103,9 @@ const SaleDetailModal = (props) => {
   useEffect(() => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
       setSale(data);
+      console.log(data)
+      setSelectedState(data.customer.state)
+      setSelectedPaymentType(data.payment_method)
     });
   }, [props.sale]);
 
@@ -161,10 +169,10 @@ const SaleDetailModal = (props) => {
         <div className="modal-details--body">
           <strong>Name:</strong>{" "}
           {`${props.sale.first_name} ${props.sale.last_name}`}
-          <strong>Price:</strong> {`${props.sale.price.price}`}
+          <strong>Price:</strong> {`${props.sale.price}`}
           <strong>Deposit:</strong> {`${props.sale.deposit}`}
           <strong>Pickup Date:</strong> {`${props.sale.pickup_date}`}
-          <strong>Email:</strong> {`${props.sale.email_address}`}
+          <strong>Email:</strong> {`${props.sale.email}`}
           <strong>InvoiceNumber:</strong> {`${props.sale.invoice_number}`}
           <strong>Payment Method:</strong> {`${props.sale.payment_method}`}
           <strong>returned:</strong> {`${props.sale.returned}`}
@@ -188,6 +196,8 @@ const SaleDetailModal = (props) => {
               id="first_name"
               className="modal--input"
               type="text"
+              placeholder={props.sale.first_name}
+
             />
 
             <label className="name--label">Last Name:</label>
@@ -196,6 +206,7 @@ const SaleDetailModal = (props) => {
               id="last_name"
               className="modal--input"
               type="text"
+              placeholder={props.sale.last_name}
             />
 
             <label className="name--label">Email:</label>
@@ -204,6 +215,7 @@ const SaleDetailModal = (props) => {
               id="email"
               className="modal--input"
               type="text"
+              placeholder={props.sale.email}
             />
 
             <label className="name--label">Phone:</label>
@@ -212,6 +224,7 @@ const SaleDetailModal = (props) => {
               id="phone"
               className="modal--input"
               type="text"
+              placeholder={props.sale.phone}
             />
 
             <label className="name--label">Street:</label>
@@ -220,21 +233,19 @@ const SaleDetailModal = (props) => {
               id="street"
               className="modal--input"
               type="text"
+              placeholder={props.sale.street}
             />
 
             <label className="name--label">State:</label>
-            <select onChange={handleInputFieldChange} id="state">
-              <option value="">Select a State</option>
-              {states !== undefined
-                ? states.map((state) => {
-                    return <option value={state.id}>{state.name}</option>;
-                  })
-                : null}
-            </select>
+            <StateSelectDropdown 
+            sale={sale} 
+            selectedState={selectedState} 
+            setSale={setSale}/>
 
             <label className="name--label">City:</label>
             <input
               type="text"
+              placeholder={props.sale.city}
               id="city"
               onChange={handleInputFieldChange}
               className="modal--input"
@@ -246,6 +257,7 @@ const SaleDetailModal = (props) => {
               id="zipcode"
               className="modal--input"
               type="text"
+              placeholder={props.sale.zipcode}
             />
 
             <label className="name--label">Company Name:</label>
@@ -254,6 +266,7 @@ const SaleDetailModal = (props) => {
               id="company_name"
               className="modal--input"
               type="text"
+              placeholder={props.sale.company_name}
             />
 
             <label>Sale Types:</label>
@@ -270,6 +283,7 @@ const SaleDetailModal = (props) => {
             <label>Deposit:</label>
             <input
               type="text"
+              placeholder={props.sale.deposit}
               placeholder="Deposit"
               id="deposit"
               onChange={handleInputFieldChange}
@@ -284,19 +298,10 @@ const SaleDetailModal = (props) => {
             />
 
             <label>Payment Method:</label>
-            <select
-              onChange={handleInputFieldChange}
-              id="payment_method"
-              className="sale-type--select"
-            >
-              <option value="">Select Payment Type</option>
-              <option value="mastercard">Mastercard</option>
-              <option value="visa">Visa</option>
-              <option value="americanexpress">American Express</option>
-              <option value="discover">Discover</option>
-              <option value="capitalone">Capital One</option>
-            </select>
-
+            <PaymentTypeSelectDropdown
+            selectedPaymentType={selectedPaymentType}
+            sale={sale}
+            setSale={setSale}/>
             {/* This block is for the dealership search dropdown menu (lines 157-184) */}
             <DealershipDropdown state={sale} setState={setSale} />
             <VehicleSearch />
@@ -314,4 +319,4 @@ const SaleDetailModal = (props) => {
     </>
   );
 };
-export default SaleDetailModal;
+export default SaleEditModal;

@@ -106,7 +106,7 @@
 
 
 .modal--input {
-    width: 420px;
+    max-width: 420px;
     line-height: 25px;
     height: 35px;
     margin-bottom: 20px;

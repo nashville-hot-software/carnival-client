@@ -50,7 +50,7 @@ const DealershipDropdown = (props) => {
         const dropdownDiv = document.querySelector(".dealership-list--dropdown");
         dropdownDiv.scrollTop = 0;
     };
-
+    let uniqueID = "unique--ID"
     return (
         <>
         <label className="name--label dealership--label">Dealership:</label>
@@ -73,6 +73,7 @@ const DealershipDropdown = (props) => {
                         return (
                             <>
                                 <div
+                                    key={uniqueID} 
                                     className={"dealership--select"}
                                     id={dealership.id}
                                     onClick={handleDealerSelect}
