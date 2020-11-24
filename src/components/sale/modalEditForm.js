@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./card.css";
 import Modal from "react-bootstrap/Modal";
 import Switch from "@material-ui/core/Switch";
@@ -10,6 +10,8 @@ import VehicleSearch from "../modal/vehicleSearch";
 import DataManager from "../../api/dataManager";
 import StateSelectDropdown from '../modal/StateSelect'
 import PaymentTypeSelectDropdown from '../modal/PaymentTypeSelect'
+import Input from '../saleInput/Input'
+
 const SaleEditModal = (props) => {
   const [sale, setSale] = useState();
   const [updatedSale, setUpdatedSale] = useState();
@@ -18,17 +20,19 @@ const SaleEditModal = (props) => {
   const [selectedPaymentType, setSelectedPaymentType] = useState();
   const [selectedVehicle, setSelectedVehicle] = useState();
 
-  
+
   const handleEditMode = () => {
     setEditMode(!editMode);
     const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
     muiSwitch.classList.add("Mui-checked", "PrivateSwitchBase-checked-2");
   };
-  
+
 
   var stateToChange = { ...sale };
+
   // (For edit mode)
   const handleInputFieldChange = (evt) => {
+    console.log(stateToChange)
     stateToChange[evt.target.id] = evt.target.value;
   };
 
@@ -188,134 +192,61 @@ const SaleEditModal = (props) => {
           <strong>Dealership:</strong> {`${props.sale.dealership_id}`}
         </div>
       ) : (
-        <>
-          <div className="modal-details--body">
-            <label className="name--label">First Name:</label>
-            <input
-              onChange={handleInputFieldChange}
-              id="first_name"
-              className="modal--input"
-              type="text"
-              placeholder={props.sale.first_name}
+          <>
+            <div className="modal-details--body">
+              <Input.FirstName handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
+              <Input.LastName handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
+              <Input.Email handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
+              <Input.Phone handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
+              <Input.Street handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
+              <Input.City handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
+              <Input.ZipCode handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
+              <Input.CompanyName handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
+              <Input.Deposit handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
+              <Input.Price handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
+              <Input.Phone handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
+              <StateSelectDropdown
+                sale={sale}
+                selectedState={selectedState}
+                setSale={setSale} />
+              <label>Sale Types:</label>
+              <select
+                onChange={handleInputFieldChange}
+                id="sales_type_id"
+                className="sale-type--select"
+              >
+                <option value="0">Select Type</option>
+                <option value="1">Purchase</option>
+                <option value="2">Lease</option>
+              </select>
 
-            />
+            
 
-            <label className="name--label">Last Name:</label>
-            <input
-              onChange={handleInputFieldChange}
-              id="last_name"
-              className="modal--input"
-              type="text"
-              placeholder={props.sale.last_name}
-            />
+              <label>Pickup Date:</label>
+              <input
+                type="date"
+                id="pickup_date"
+                onChange={handleInputFieldChange}
+              />
+              <PaymentTypeSelectDropdown
+                selectedPaymentType={selectedPaymentType}
+                sale={sale}
+                setSale={setSale} />
+              {/* This block is for the dealership search dropdown menu (lines 157-184) */}
+              <DealershipDropdown state={sale} setState={setSale} />
+              <VehicleSearch />
+            </div>
 
-            <label className="name--label">Email:</label>
-            <input
-              onChange={handleInputFieldChange}
-              id="email"
-              className="modal--input"
-              type="text"
-              placeholder={props.sale.email}
-            />
-
-            <label className="name--label">Phone:</label>
-            <input
-              onChange={handleInputFieldChange}
-              id="phone"
-              className="modal--input"
-              type="text"
-              placeholder={props.sale.phone}
-            />
-
-            <label className="name--label">Street:</label>
-            <input
-              onChange={handleInputFieldChange}
-              id="street"
-              className="modal--input"
-              type="text"
-              placeholder={props.sale.street}
-            />
-
-            <label className="name--label">State:</label>
-            <StateSelectDropdown 
-            sale={sale} 
-            selectedState={selectedState} 
-            setSale={setSale}/>
-
-            <label className="name--label">City:</label>
-            <input
-              type="text"
-              placeholder={props.sale.city}
-              id="city"
-              onChange={handleInputFieldChange}
-              className="modal--input"
-            />
-
-            <label className="name--label">Zipcode:</label>
-            <input
-              onChange={handleInputFieldChange}
-              id="zipcode"
-              className="modal--input"
-              type="text"
-              placeholder={props.sale.zipcode}
-            />
-
-            <label className="name--label">Company Name:</label>
-            <input
-              onChange={handleInputFieldChange}
-              id="company_name"
-              className="modal--input"
-              type="text"
-              placeholder={props.sale.company_name}
-            />
-
-            <label>Sale Types:</label>
-            <select
-              onChange={handleInputFieldChange}
-              id="sales_type_id"
-              className="sale-type--select"
-            >
-              <option value="0">Select Type</option>
-              <option value="1">Purchase</option>
-              <option value="2">Lease</option>
-            </select>
-
-            <label>Deposit:</label>
-            <input
-              type="text"
-              placeholder={props.sale.deposit}
-              placeholder="Deposit"
-              id="deposit"
-              onChange={handleInputFieldChange}
-              className="modal--input"
-            />
-
-            <label>Pickup Date:</label>
-            <input
-              type="date"
-              id="pickup_date"
-              onChange={handleInputFieldChange}
-            />
-
-            <label>Payment Method:</label>
-            <PaymentTypeSelectDropdown
-            selectedPaymentType={selectedPaymentType}
-            sale={sale}
-            setSale={setSale}/>
-            {/* This block is for the dealership search dropdown menu (lines 157-184) */}
-            <DealershipDropdown state={sale} setState={setSale} />
-            <VehicleSearch />
-          </div>
-          <div className="addEmployee--btn--container">
-            <button onClick={handleEditSubmit} className="updateEmployee--btn">
-              Update
+            <div className="addEmployee--btn--container">
+              <button onClick={handleEditSubmit} className="updateEmployee--btn">
+                Update
             </button>
-            <button className="closeBtn" onClick={handleModalClose}>
-              Cancel
+              <button className="closeBtn" onClick={handleModalClose}>
+                Cancel
             </button>
-          </div>
-        </>
-      )}
+            </div>
+          </>
+        )}
     </>
   );
 };

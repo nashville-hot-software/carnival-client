@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-
 import "../employee/list.css";
 
 const PaymentTypeSelectDropdown = (props) => {
@@ -11,10 +9,15 @@ const PaymentTypeSelectDropdown = (props) => {
         stateToChange[evt.target.id] = evt.target.value;
         props.setSale(stateToChange);
     };
-    let paymentTypes =["mastercard","visa","americanexpress","discover","capitalone"]
+
+    let paymentTypes = 
+    ["mastercard", 
+    "visa", 
+    "americanexpress", 
+    "discover", 
+    "capitalone"]
 
     useEffect(() => {
-
     }, [props.selectedPaymentType]);
 
     return (
@@ -22,7 +25,7 @@ const PaymentTypeSelectDropdown = (props) => {
             {props.selectedPaymentType !== undefined ? (
                 <>
 
-
+                    <label className="name--label">Payment Method</label>
                     <select
                         onChange={handlePaymentTypeSelect}
                         id="payment_method"
