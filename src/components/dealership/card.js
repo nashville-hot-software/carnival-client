@@ -61,11 +61,11 @@ const DealershipCard = props => {
 
   return (
     <>
-        <div onClick={handleShow} className="dealership-card--container">
+        <div onClick={() => props.showDetailsModal(props.dealership)} className="dealership-card--container">
             <h2 className="dealership-card--name">{`${dealership.business_name}`}</h2>
         </div>
 
-        <Modal className="modal-details--form" show={show} onHide={handleClose}>
+        {/* <Modal className="modal-details--form" show={show} onHide={handleClose}>
           <Modal.Header className="modalHeader" closeButton>
             <Modal.Title>Dealership</Modal.Title>
           </Modal.Header>
@@ -160,7 +160,7 @@ const DealershipCard = props => {
               </FormGroup>
             </FormControl>
           </div>
-        </Modal>
+        </Modal> */}
     </>
   );
 };

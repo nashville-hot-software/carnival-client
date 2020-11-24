@@ -5,6 +5,7 @@ import AddEmployeeModal from "../employee/modalAddForm"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
 import SaleDetailModal from "../sale/saleDetailsModal"
+import DealershipDetailModal from "../dealership/modalEditForm"
 
 const ModalWrapper = (props) => {
 
@@ -37,6 +38,13 @@ const ModalWrapper = (props) => {
                         <SaleDetailModal 
                             sale={props.filteredSale} 
                             setFilteredSale={props.setFilteredSale}
+                        />
+                    ) : null}
+                    
+                    {props.filteredDealership !== undefined ? (
+                        <DealershipDetailModal 
+                            dealership={props.filteredDealership} 
+                            setFilteredDealership={props.setFilteredDealership}
                         />
                     ) : null}
                 </div>
