@@ -187,6 +187,13 @@ const DealershipDetailModal = props => {
                     : (`${props.dealership.website}`)}
                 </span>
               </div>
+              <div>
+                <strong>Tax ID:</strong> 
+                <span>
+                  {dealership !== undefined ? (`${dealership.tax_id}`) 
+                    : (`${props.dealership.tax_id}`)}
+                </span>
+              </div>
           </div>
           <div className="employee--btn--container">
               <button onClick={handleDelete} className="removeEmployee--btn">
