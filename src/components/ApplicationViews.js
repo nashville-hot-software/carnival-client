@@ -4,7 +4,7 @@ import DashBoard from "../components/dashboard/DashBoard.js"
 import DealershipList from "./dealership/list"
 import EmployeeList from "./employee/list"
 import ModalWrapper from "./modal/modalWrapper"
-import VehicleTypeList from "./vehicleType/list"
+import VehiclesList from "./vehicle/list"
 import SaleList from "./sale/list"
 
 
@@ -25,7 +25,7 @@ const ApplicationViews = props => {
             }} />
 
             <Route path="/vehicles" render={props => {
-                return <VehicleTypeList {...props} />
+                return <VehiclesList {...props} />
             }} />
 
             <Route path="/sales" render={props => {
