@@ -134,7 +134,7 @@ const VehicleType = props => {
 					/>
 					
 					{vehicleTypes !== undefined ? (
-							<div className="searchResults">
+							<div className="searchResults vehicles">
 						{vehicleTypes.map((vehicletype, i) => {
 							// console.log(vehicletype)
 								return (

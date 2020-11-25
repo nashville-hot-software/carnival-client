@@ -68,7 +68,7 @@ const SaleList = (props) => {
                         onChange={handleSalesSearch}
                         placeholder="Search for Sales"
                     />
-                    <div className="searchResults">
+                    <div className="searchResults sales">
                         {sales !== undefined ? (
                             <>
                                 {sales.map((sale) => {
@@ -82,11 +82,9 @@ const SaleList = (props) => {
                             </>
                         ) : null}
                     </div>
-                    <div className="btn-hover-zoom">
-                        <button onClick={() => handleShow()} className="addSale--btn">
-                            Add Sale
+                    <button onClick={() => handleShow()} className="addSale--btn">
+                        Add Sale
                     </button>
-                    </div>
                 </div>
             </div>
         </>
