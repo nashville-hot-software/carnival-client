@@ -97,6 +97,19 @@ const AddVehicleModal = (props) => {
 
     const handleAddNewVehicleType = () => {
         setAddVehicleTypeMode(!addVehicleTypeMode);
+
+        const inputs = document.querySelectorAll('input');
+        const selects = document.querySelectorAll('select');
+
+        inputs.forEach(input => input.value = "");
+        selects.forEach(select => select.value = "none");
+    }
+    
+    const handleVehicleTypeFieldChange = evt => {
+        const stateToChange = {...newVehicleType}
+        stateToChange[evt.target.id] = evt.target.value;
+        console.log(stateToChange);
+        setNewVehicleType(stateToChange);
     }
     
     const handleVehicleTypeSubmit = () => {
@@ -105,7 +118,20 @@ const AddVehicleModal = (props) => {
             newVehicleType.model === "" 
            ) {
             window.alert("Please fill out all fields");
-        } else {console.log('great success!!!')}
+        } else {
+            VehicleManager.PostData("vehicletypes", newVehicleType)
+                .then(resp => {
+                    console.log(`New vehicletype from DB! --> ${resp}`);
+                    setAddVehicleTypeMode(false);
+                    document.querySelector('input[type=checkbox').checked = false;
+
+                    const inputs = document.querySelectorAll('input');
+                    const selects = document.querySelectorAll('select');
+
+                    inputs.forEach(input => input.value = "");
+                    selects.forEach(select => select.value = "none");
+                });
+        }
     }
 
     const handleSubmit = () => {
@@ -150,7 +176,7 @@ const AddVehicleModal = (props) => {
                 console.log(resp);
                 setVehicleTypes(resp);
             })
-    }, [])
+    }, [addVehicleTypeMode])
 
     return (
         <>
@@ -159,67 +185,80 @@ const AddVehicleModal = (props) => {
             </div>
                 
             <div className="modal-add--body">
-                <label className="name--label">Body Type:</label>
-                <select 
-                    onChange={handleInputFieldChange} 
-                    id="body_type" 
-                    className="modal--input" 
-                >
-                    <option>Select One</option>
-                    {uniqueBodyTypes !== undefined ? (
-                        uniqueBodyTypes.map(body_type => {
-                        return <option>{body_type}</option>
-                    })
-                    ) : null}
-                </select>
+                
 
-                <label className="name--label">Make:</label>
-                <select
-                    id="make"
-                    onChange={handleInputFieldChange}
-                    className="modal--input"
-                >
-                    <option>Select One</option>
-                    {filteredMakes !== undefined ? (
-                        filteredMakes.map(vehicle => {
-                        return <option>{vehicle.make}</option>
-                    })
-                    ) : null}
-                </select>
-                <label className="name--label">Model:</label>
-                <select
-                    id="model"
-                    onChange={handleInputFieldChange}
-                    className="modal--input"
-                >
-                    <option>Select One</option>
-                    {filteredModels !== undefined ? (
-                        filteredModels.map(vehicle => {
-                        return <option>{vehicle.model}</option>
-                    })
-                    ) : null}
-                </select>
+                
+                {addVehicleTypeMode === false ? (
+                    <>
+                    <label className="name--label">Body Type:</label>
+                    <select 
+                        onChange={handleInputFieldChange} 
+                        id="body_type" 
+                        className="modal--input" 
+                    >
+                        <option>Select One</option>
+                        {uniqueBodyTypes !== undefined ? (
+                            uniqueBodyTypes.map(body_type => {
+                            return <option>{body_type}</option>
+                        })
+                        ) : null}
+                    </select>
+                    <label className="name--label">Make:</label>
+                    <select
+                        id="make"
+                        onChange={handleInputFieldChange}
+                        className="modal--input"
+                    >
+                        <option>Select One</option>
+                        {filteredMakes !== undefined ? (
+                            filteredMakes.map(vehicle => {
+                            return <option>{vehicle.make}</option>
+                        })
+                        ) : null}
+                    </select>
+                    <label className="name--label">Model:</label>
+                    <select
+                        id="model"
+                        onChange={handleInputFieldChange}
+                        className="modal--input"
+                    >
+                        <option>Select One</option>
+                        {filteredModels !== undefined ? (
+                            filteredModels.map(vehicle => {
+                            return <option>{vehicle.model}</option>
+                        })
+                        ) : null}
+                    </select>
+                    </>
+                ) : (
+                    <>   
+                    <label className="name--label">Body Type:</label>
+                    <select 
+                        onChange={handleVehicleTypeFieldChange} 
+                        id="body_type" 
+                        className="modal--input" 
+                    >
+                        <option>Select One</option>
+                        {uniqueBodyTypes !== undefined ? (
+                            uniqueBodyTypes.map(body_type => {
+                            return <option>{body_type}</option>
+                        })
+                        ) : null}
+                    </select> 
+                    <label className="name--label">Make:</label>
+                    <input onChange={handleVehicleTypeFieldChange} id="make" className="modal--input" type="text"/>
+    
+                    <label className="name--label">Model:</label>
+                    <input onChange={handleVehicleTypeFieldChange} id="model" className="modal--input" type="text"/>
+
+                    <button onClick={handleVehicleTypeSubmit}>Submit</button>
+                    </>
+                )}
 
                 <div>
                     <label>Don't see the vehicle you're adding?</label>
                     <input onChange={handleAddNewVehicleType} type="checkbox" />
                 </div>
-                
-                {/* NOTE: Below 3 will be to add new vehicle type to DB */}
-                {addVehicleTypeMode ? (
-                    <>
-                    <label className="name--label">Body Type:</label>
-                    <input onChange={handleInputFieldChange} id="body_type" className="modal--input" type="text"/>
-    
-                    <label className="name--label">Make:</label>
-                    <input onChange={handleInputFieldChange} id="make" className="modal--input" type="text"/>
-    
-                    <label className="name--label">Model:</label>
-                    <input onChange={handleInputFieldChange} id="model" className="modal--input" type="text"/>
-
-                    <button onClick={handleVehicleTypeSubmit}>Submit</button>
-                    </>
-                ) : null}
 
                 <label className="name--label">Engine Type:</label>
                 <input onChange={handleInputFieldChange} id="engine_type" className="modal--input" type="text"/>
