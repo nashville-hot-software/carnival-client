@@ -15,6 +15,8 @@ const AddVehicleModal = (props) => {
     const [filteredMakes, setFilteredMakes] = useState()
     const [filteredModels, setFilteredModels] = useState()
     
+    const [addVehicleTypeMode, setAddVehicleTypeMode] = useState(false)
+    
     // Get unique body types for first dropdown
     let uniqueBodyTypes;
     if (vehicleTypes !== undefined) {
@@ -22,18 +24,21 @@ const AddVehicleModal = (props) => {
     }
 
     const [newVehicle, setNewVehicle] = useState({
-        // body_type: "",
         engine_type: "",
         exterior_color: "",
         floor_price: 0,
         interior_color: "",
         is_sold: false,
-        // make: "",
         miles_count: 0,
-        // model: "",
         msr_price: 0,
-        vehicle_type_id: 10,
+        vehicle_type_id: 0,
         year_of_car: 0
+      })
+    
+      const [newVehicleType, setNewVehicleType] = useState({
+        body_type: "",
+        make: "",
+        model: ""
       })
 
     const handleClose = () => {
@@ -73,22 +78,36 @@ const AddVehicleModal = (props) => {
             }
 
             stateToChange[evt.target.id] = parseInt(value);
-            // console.log(stateToChange)
             setNewVehicle(stateToChange);
         } else if (evt.target.id === 'body_type') {
             const filtered_makes = vehicleTypes.filter(vehicleType => vehicleType.body_type === evt.target.value);
             setFilteredMakes(filtered_makes);
-        } else if (evt.target.id === 'make') {
-            const filtered_models = vehicleTypes.filter(vehicleType => vehicleType.make === evt.target.value);
+        } else if (evt.target.id === 'make' && filteredMakes !== undefined) {
+            const filtered_models = filteredMakes.filter(vehicleType => vehicleType.make === evt.target.value);
             setFilteredModels(filtered_models);
+        } else if (evt.target.id === 'model') {
+            const filteredVehicleType = vehicleTypes.filter(vehicleType => vehicleType.model === evt.target.value);
+            stateToChange.vehicle_type_id = filteredVehicleType[0].id;
+            setNewVehicle(stateToChange);
         } else {
             stateToChange[evt.target.id] = evt.target.value;
             setNewVehicle(stateToChange);
-            // console.log(stateToChange)
         }  
     };
 
-    // newVehicle.body_type === "", newVehicle.make === "", newVehicle.model === ""
+    const handleAddNewVehicleType = () => {
+        setAddVehicleTypeMode(!addVehicleTypeMode);
+    }
+    
+    const handleVehicleTypeSubmit = () => {
+        if (
+            newVehicleType.body_type === "" || newVehicleType.make === "" || 
+            newVehicleType.model === "" 
+           ) {
+            window.alert("Please fill out all fields");
+        } else {console.log('great success!!!')}
+    }
+
     const handleSubmit = () => {
         if (
             newVehicle.engine_type === "" || newVehicle.exterior_color === "" || 
@@ -99,30 +118,29 @@ const AddVehicleModal = (props) => {
             window.alert("Please fill out all fields");
         } else {
             // Make the POST, then clear all data from form
-            console.log(newVehicle);
+            console.log(`New vehicle before DB POST --> ${newVehicle}`)
 
-            // VehicleManager.PostData("vehicles", newVehicle).then(() => {
+            VehicleManager.PostData("vehicles", newVehicle).then(resp => {
+                console.log(`New vehicle from DB! --> ${resp}`)
+                
                 setNewVehicle({
-                    // body_type: "",
                     engine_type: "",
                     exterior_color: "",
                     floor_price: 0,
                     interior_color: "",
                     is_sold: false,
-                    // make: "",
                     miles_count: 0,
-                    // model: "",
                     msr_price: 0,
-                    vin: "",
+                    vehicle_type_id: 0,
                     year_of_car: 0
                 });
                 
                 const inputs = document.querySelectorAll('input')
-            //     const selects = document.querySelectorAll('select')
+                const selects = document.querySelectorAll('select')
 
                 inputs.forEach(input => input.value = "")
-            //     selects.forEach(select => select.value = "none")
-            // });
+                selects.forEach(select => select.value = "none")
+            });
         }
     };
 
@@ -181,16 +199,27 @@ const AddVehicleModal = (props) => {
                     })
                     ) : null}
                 </select>
+
+                <div>
+                    <label>Don't see the vehicle you're adding?</label>
+                    <input onChange={handleAddNewVehicleType} type="checkbox" />
+                </div>
                 
                 {/* NOTE: Below 3 will be to add new vehicle type to DB */}
-                {/* <label className="name--label">Body Type:</label>
-                <input onChange={handleInputFieldChange} id="body_type" className="modal--input" type="text"/>
+                {addVehicleTypeMode ? (
+                    <>
+                    <label className="name--label">Body Type:</label>
+                    <input onChange={handleInputFieldChange} id="body_type" className="modal--input" type="text"/>
+    
+                    <label className="name--label">Make:</label>
+                    <input onChange={handleInputFieldChange} id="make" className="modal--input" type="text"/>
+    
+                    <label className="name--label">Model:</label>
+                    <input onChange={handleInputFieldChange} id="model" className="modal--input" type="text"/>
 
-                <label className="name--label">Make:</label>
-                <input onChange={handleInputFieldChange} id="make" className="modal--input" type="text"/>
-
-                <label className="name--label">Model:</label>
-                <input onChange={handleInputFieldChange} id="model" className="modal--input" type="text"/> */}
+                    <button onClick={handleVehicleTypeSubmit}>Submit</button>
+                    </>
+                ) : null}
 
                 <label className="name--label">Engine Type:</label>
                 <input onChange={handleInputFieldChange} id="engine_type" className="modal--input" type="text"/>
