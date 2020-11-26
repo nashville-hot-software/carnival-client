@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import VehicleManager from "../../api/dataManager";
 import "./list.css";
 import "./modalAddForm.css";
 
@@ -58,29 +57,25 @@ const AddVehicleModal = (props) => {
             }
 
             stateToChange[evt.target.id] = parseInt(value);
-            console.log(stateToChange)
+            // console.log(stateToChange)
             setNewVehicle(stateToChange);
         } else {
             stateToChange[evt.target.id] = evt.target.value;
             setNewVehicle(stateToChange);
-            console.log(stateToChange)
+            // console.log(stateToChange)
         }  
     };
 
     const handleSubmit = () => {
-        // if (newVehicle.first_name === "" || newVehicle.last_name === "") {
-        //     window.alert("Please fill out employee name fields");
-        // } else if (newVehicle.email_address === "") {
-        //     window.alert("Please enter an email address");
-        // } else if (newVehicle.phone === "") {
-        //     window.alert("Please enter a phone number");
-        // } else if (newVehicle.dealership_id === 0) {
-        //     window.alert("Please select a valid dealership");
-        // } else if (newVehicle.employee_type_id === 0) {
-        //     window.alert("Please select a valid employee type");
-        // } else {
+        if (newVehicle.body_type === "" || newVehicle.engine_type === "" ||
+            newVehicle.exterior_color === "" || newVehicle.floor_price === "" ||
+            newVehicle.interior_color === "" || newVehicle.make === "" ||
+            newVehicle.miles_count === 0 || newVehicle.model === "" ||
+            newVehicle.msr_price === 0 || newVehicle.vin === "" ||
+            newVehicle.year_of_car === 0) {
+            window.alert("Please fill out all fields");
+        } else {
             // Make the POST, then clear all data from form
-
             console.log(newVehicle);
 
             // VehicleManager.PostData("vehicles", newVehicle).then(() => {
@@ -105,7 +100,7 @@ const AddVehicleModal = (props) => {
                 inputs.forEach(input => input.value = "")
             //     selects.forEach(select => select.value = "none")
             // });
-        // }
+        }
     };
 
     return (
