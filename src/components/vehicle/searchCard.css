@@ -1,0 +1,22 @@
+.vehicle-searchCard--container {
+    border-bottom: 1px solid lightgray;
+    padding: 10px 10px 5px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-searchCard--container:hover {
+    cursor: pointer;
+    color: gray;
+}
+
+.employee-card--name {
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.employeeDealership {
+    color: gray;
+    font-weight: 100;
+    font-size: 16px;
+}
