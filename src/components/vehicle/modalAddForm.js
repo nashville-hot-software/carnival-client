@@ -22,6 +22,11 @@ const AddVehicleModal = (props) => {
     if (vehicleTypes !== undefined) {
         uniqueBodyTypes = [...new Set(vehicleTypes.map(item => item.body_type))]
     }
+    
+    let uniqueMakes;
+    if (filteredMakes !== undefined) {
+        uniqueMakes = [...new Set(filteredMakes.map(item => item.make))]
+    }
 
     const [newVehicle, setNewVehicle] = useState({
         engine_type: "",
@@ -210,9 +215,9 @@ const AddVehicleModal = (props) => {
                         className="modal--input"
                     >
                         <option>Select One</option>
-                        {filteredMakes !== undefined ? (
-                            filteredMakes.map(vehicle => {
-                            return <option>{vehicle.make}</option>
+                        {uniqueMakes !== undefined ? (
+                            uniqueMakes.map(make => {
+                            return <option>{make}</option>
                         })
                         ) : null}
                     </select>
