@@ -5,15 +5,12 @@ import "./modalAddForm.css";
 
 const AddVehicleModal = (props) => {
 
-    // Will need a dropdown with current vehicle types, and if the
-    // vehicle employee is trying to add does not exist, will give
-    // them option to add new vehicle type
-
     // (First, select menu for body types --> filter makes for next
     // select menu --> select make --> filter models for next select)
     const [vehicleTypes, setVehicleTypes] = useState()
     const [filteredMakes, setFilteredMakes] = useState()
     const [filteredModels, setFilteredModels] = useState()
+    const [filteredVehicle, setFilteredVehicle] = useState()
     
     const [addVehicleTypeMode, setAddVehicleTypeMode] = useState(false)
     
@@ -22,7 +19,7 @@ const AddVehicleModal = (props) => {
     if (vehicleTypes !== undefined) {
         uniqueBodyTypes = [...new Set(vehicleTypes.map(item => item.body_type))]
     }
-    
+
     let uniqueMakes;
     if (filteredMakes !== undefined) {
         uniqueMakes = [...new Set(filteredMakes.map(item => item.make))]
@@ -46,7 +43,7 @@ const AddVehicleModal = (props) => {
         model: ""
       })
 
-    const handleClose = () => {
+    const handleModalClose = () => {
         props.setCreationView(false)
 
         const inputs = document.querySelectorAll('input')
@@ -94,6 +91,11 @@ const AddVehicleModal = (props) => {
             const filteredVehicleType = vehicleTypes.filter(vehicleType => vehicleType.model === evt.target.value);
             stateToChange.vehicle_type_id = filteredVehicleType[0].id;
             setNewVehicle(stateToChange);
+
+            VehicleManager.getAll("vehicles", "vehicle_type", filteredVehicleType[0].id)
+                .then(resp => {
+                    setFilteredVehicle(resp[0]);
+                })
         } else {
             stateToChange[evt.target.id] = evt.target.value;
             setNewVehicle(stateToChange);
@@ -139,7 +141,7 @@ const AddVehicleModal = (props) => {
         }
     }
 
-    const handleSubmit = () => {
+    const handleVehicleSubmit = () => {
         if (
             newVehicle.engine_type === "" || newVehicle.exterior_color === "" || 
             newVehicle.floor_price === "" || newVehicle.interior_color === "" || 
@@ -261,12 +263,25 @@ const AddVehicleModal = (props) => {
                 )}
 
                 <div>
-                    <label>Don't see the vehicle you're adding?</label>
+                    <label>Don't see the right vehicle?</label>
                     <input onChange={handleAddNewVehicleType} type="checkbox" />
                 </div>
 
                 <label className="name--label">Engine Type:</label>
-                <input onChange={handleInputFieldChange} id="engine_type" className="modal--input" type="text"/>
+                <select 
+                    id="engine_type"
+                    className="modal--input"
+                    onChange={handleInputFieldChange} 
+                    defaultValue={filteredVehicle !== undefined ? filteredVehicle.engine_type : null}
+                >
+                    <option value={filteredVehicle !== undefined ? filteredVehicle.engine_type : null}>
+                        {filteredVehicle !== undefined ? filteredVehicle.engine_type : null}
+                    </option>
+                    <option value="V4">V4</option>
+                    <option value="V6">V6</option>
+                    <option value="V8">V8</option>
+                    <option value="EV">Electric Vehicle</option>
+                </select>
 
                 <label className="name--label">Year:</label>
                 <input onChange={handleInputFieldChange} id="year_of_car" className="modal--input" type="text"/>
@@ -274,14 +289,23 @@ const AddVehicleModal = (props) => {
                 <label className="name--label">Miles:</label>
                 <input onChange={handleInputFieldChange} id="miles_count" className="modal--input" type="text"/>
                 
-                {/* <label className="name--label">VIN #:</label>
-                <input onChange={handleInputFieldChange} id="vin" className="modal--input" type="text"/> */}
-                
                 <label className="name--label">MSR Price:</label>
-                <input onChange={handleInputFieldChange} id="msr_price" className="modal--input" type="text"/>
+                <input 
+                    onChange={handleInputFieldChange} 
+                    id="msr_price" 
+                    className="modal--input" 
+                    type="text"
+                    placeholder={filteredVehicle !== undefined ? filteredVehicle.msr_price : null}
+                />
                 
                 <label className="name--label">Floor Price:</label>
-                <input onChange={handleInputFieldChange} id="floor_price" className="modal--input" type="text"/>
+                <input 
+                    onChange={handleInputFieldChange} 
+                    id="floor_price" 
+                    className="modal--input" 
+                    type="text"
+                    placeholder={filteredVehicle !== undefined ? filteredVehicle.floor_price : null}
+                />
                 
                 <label className="name--label">Exterior Color:</label>
                 <input onChange={handleInputFieldChange} id="exterior_color" className="modal--input" type="text"/>
@@ -293,10 +317,10 @@ const AddVehicleModal = (props) => {
                 <input onChange={handleInputFieldChange} id="is_sold" className="modal--input" type="checkbox"/>
 
                 <div className="addEmployee--btn--container">
-                    <button onClick={handleSubmit} className="modal--addBtn">
+                    <button onClick={handleVehicleSubmit} className="modal--addBtn">
                         Submit 
                     </button>
-                    <button className="closeBtn" onClick={handleClose}>
+                    <button className="closeBtn" onClick={handleModalClose}>
                         Close  
                     </button>
                 </div>
