@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import VehicleManager from "../../api/dataManager"
 import "./list.css";
 import "./modalAddForm.css";
 
 const AddVehicleModal = (props) => {
 
+    // Will need a dropdown with current vehicle types, and if the
+    // vehicle employee is trying to add does not exist, will give
+    // them option to add new vehicle type
+
+    // (First, select menu for body types --> filter makes for next
+    // select menu --> select make --> filter models for next select)
+    const [vehicleTypes, setVehicleTypes] = useState()
+    
+    // Get unique body types for first dropdown
+    let uniqueBodyTypes;
+    if (vehicleTypes !== undefined) {
+        uniqueBodyTypes = [...new Set(vehicleTypes.map(item => item.body_type))]
+    }
+
     const [newVehicle, setNewVehicle] = useState({
-        body_type: "",
+        // body_type: "",
         engine_type: "",
         exterior_color: "",
         floor_price: 0,
         interior_color: "",
         is_sold: false,
-        make: "",
+        // make: "",
         miles_count: 0,
-        model: "",
+        // model: "",
         msr_price: 0,
-        // vehicle_type_id: 10,
-        vin: "",
+        vehicle_type_id: 10,
         year_of_car: 0
       })
 
@@ -66,13 +80,14 @@ const AddVehicleModal = (props) => {
         }  
     };
 
+    // newVehicle.body_type === "", newVehicle.make === "", newVehicle.model === ""
     const handleSubmit = () => {
-        if (newVehicle.body_type === "" || newVehicle.engine_type === "" ||
-            newVehicle.exterior_color === "" || newVehicle.floor_price === "" ||
-            newVehicle.interior_color === "" || newVehicle.make === "" ||
-            newVehicle.miles_count === 0 || newVehicle.model === "" ||
-            newVehicle.msr_price === 0 || newVehicle.vin === "" ||
-            newVehicle.year_of_car === 0) {
+        if (
+            newVehicle.engine_type === "" || newVehicle.exterior_color === "" || 
+            newVehicle.floor_price === "" || newVehicle.interior_color === "" || 
+            newVehicle.miles_count === 0 || newVehicle.msr_price === 0 || 
+            newVehicle.year_of_car === 0
+           ) {
             window.alert("Please fill out all fields");
         } else {
             // Make the POST, then clear all data from form
@@ -80,15 +95,15 @@ const AddVehicleModal = (props) => {
 
             // VehicleManager.PostData("vehicles", newVehicle).then(() => {
                 setNewVehicle({
-                    body_type: "",
+                    // body_type: "",
                     engine_type: "",
                     exterior_color: "",
                     floor_price: 0,
                     interior_color: "",
                     is_sold: false,
-                    make: "",
+                    // make: "",
                     miles_count: 0,
-                    model: "",
+                    // model: "",
                     msr_price: 0,
                     vin: "",
                     year_of_car: 0
@@ -103,6 +118,14 @@ const AddVehicleModal = (props) => {
         }
     };
 
+    useEffect(() => {
+        VehicleManager.getAll("vehicletypes")
+            .then(resp => {
+                console.log(resp);
+                setVehicleTypes(resp);
+            })
+    }, [])
+
     return (
         <>
             <div className="modalHeader addEmployee">
@@ -111,13 +134,45 @@ const AddVehicleModal = (props) => {
                 
             <div className="modal-add--body">
                 <label className="name--label">Body Type:</label>
+                <select 
+                    onChange={handleInputFieldChange} 
+                    id="body_type" 
+                    className="modal--input" 
+                >
+                    <option>Body Types</option>
+                    {uniqueBodyTypes !== undefined ? (
+                        uniqueBodyTypes.map(body_type => {
+                        return <option>{body_type}</option>
+                    })
+                    ) : null}
+                </select>
+
+                <label className="name--label">Make:</label>
+                <select
+                    id="make"
+                    onChange={handleInputFieldChange}
+                    className="modal--input"
+                >
+                    <option></option>
+                </select>
+                <label className="name--label">Model:</label>
+                <select
+                    id="model"
+                    onChange={handleInputFieldChange}
+                    className="modal--input"
+                >
+                    <option></option>
+                </select>
+                
+                {/* NOTE: Below 3 will be to add new vehicle type to DB */}
+                {/* <label className="name--label">Body Type:</label>
                 <input onChange={handleInputFieldChange} id="body_type" className="modal--input" type="text"/>
 
                 <label className="name--label">Make:</label>
                 <input onChange={handleInputFieldChange} id="make" className="modal--input" type="text"/>
 
                 <label className="name--label">Model:</label>
-                <input onChange={handleInputFieldChange} id="model" className="modal--input" type="text"/>
+                <input onChange={handleInputFieldChange} id="model" className="modal--input" type="text"/> */}
 
                 <label className="name--label">Engine Type:</label>
                 <input onChange={handleInputFieldChange} id="engine_type" className="modal--input" type="text"/>
@@ -128,8 +183,8 @@ const AddVehicleModal = (props) => {
                 <label className="name--label">Miles:</label>
                 <input onChange={handleInputFieldChange} id="miles_count" className="modal--input" type="text"/>
                 
-                <label className="name--label">VIN #:</label>
-                <input onChange={handleInputFieldChange} id="vin" className="modal--input" type="text"/>
+                {/* <label className="name--label">VIN #:</label>
+                <input onChange={handleInputFieldChange} id="vin" className="modal--input" type="text"/> */}
                 
                 <label className="name--label">MSR Price:</label>
                 <input onChange={handleInputFieldChange} id="msr_price" className="modal--input" type="text"/>
