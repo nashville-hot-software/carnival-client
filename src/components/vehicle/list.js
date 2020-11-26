@@ -49,7 +49,7 @@ const VehiclesList = props => {
   return (
     <>
       <ModalWrapper 
-          filteredVehicle={filteredVehicle} 
+          matchedVehicle={filteredVehicle} 
           setFilteredVehicle={setFilteredVehicle}
           setCreationView={setCreationView}
           vehicleCreationView={creationView}
