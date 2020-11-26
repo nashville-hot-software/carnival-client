@@ -43,8 +43,28 @@ const AddVehicleModal = (props) => {
 
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newVehicle };
-        stateToChange[evt.target.id] = evt.target.value;
-        setNewVehicle(stateToChange);
+
+        if (
+            evt.target.id === 'floor_price' || 
+            evt.target.id === 'msr_price' ||
+            evt.target.id === 'miles_count' ||
+            evt.target.id === 'year_of_car'
+           ) {
+            let value = evt.target.value;
+
+            if (value.includes(',')) {
+                const split_price = value.split(',');
+                value = split_price.join('');
+            }
+
+            stateToChange[evt.target.id] = parseInt(value);
+            console.log(stateToChange)
+            setNewVehicle(stateToChange);
+        } else {
+            stateToChange[evt.target.id] = evt.target.value;
+            setNewVehicle(stateToChange);
+            console.log(stateToChange)
+        }  
     };
 
     const handleSubmit = () => {
@@ -60,7 +80,10 @@ const AddVehicleModal = (props) => {
         //     window.alert("Please select a valid employee type");
         // } else {
             // Make the POST, then clear all data from form
-            VehicleManager.PostData("vehicles", newVehicle).then(() => {
+
+            console.log(newVehicle);
+
+            // VehicleManager.PostData("vehicles", newVehicle).then(() => {
                 setNewVehicle({
                     body_type: "",
                     engine_type: "",
@@ -77,11 +100,11 @@ const AddVehicleModal = (props) => {
                 });
                 
                 const inputs = document.querySelectorAll('input')
-                const selects = document.querySelectorAll('select')
+            //     const selects = document.querySelectorAll('select')
 
                 inputs.forEach(input => input.value = "")
-                selects.forEach(select => select.value = "none")
-            });
+            //     selects.forEach(select => select.value = "none")
+            // });
         // }
     };
 
