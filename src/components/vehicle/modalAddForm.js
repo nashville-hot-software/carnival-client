@@ -12,6 +12,8 @@ const AddVehicleModal = (props) => {
     // (First, select menu for body types --> filter makes for next
     // select menu --> select make --> filter models for next select)
     const [vehicleTypes, setVehicleTypes] = useState()
+    const [filteredMakes, setFilteredMakes] = useState()
+    const [filteredModels, setFilteredModels] = useState()
     
     // Get unique body types for first dropdown
     let uniqueBodyTypes;
@@ -73,6 +75,12 @@ const AddVehicleModal = (props) => {
             stateToChange[evt.target.id] = parseInt(value);
             // console.log(stateToChange)
             setNewVehicle(stateToChange);
+        } else if (evt.target.id === 'body_type') {
+            const filtered_makes = vehicleTypes.filter(vehicleType => vehicleType.body_type === evt.target.value);
+            setFilteredMakes(filtered_makes);
+        } else if (evt.target.id === 'make') {
+            const filtered_models = vehicleTypes.filter(vehicleType => vehicleType.make === evt.target.value);
+            setFilteredModels(filtered_models);
         } else {
             stateToChange[evt.target.id] = evt.target.value;
             setNewVehicle(stateToChange);
@@ -139,7 +147,7 @@ const AddVehicleModal = (props) => {
                     id="body_type" 
                     className="modal--input" 
                 >
-                    <option>Body Types</option>
+                    <option>Select One</option>
                     {uniqueBodyTypes !== undefined ? (
                         uniqueBodyTypes.map(body_type => {
                         return <option>{body_type}</option>
@@ -153,7 +161,12 @@ const AddVehicleModal = (props) => {
                     onChange={handleInputFieldChange}
                     className="modal--input"
                 >
-                    <option></option>
+                    <option>Select One</option>
+                    {filteredMakes !== undefined ? (
+                        filteredMakes.map(vehicle => {
+                        return <option>{vehicle.make}</option>
+                    })
+                    ) : null}
                 </select>
                 <label className="name--label">Model:</label>
                 <select
@@ -161,7 +174,12 @@ const AddVehicleModal = (props) => {
                     onChange={handleInputFieldChange}
                     className="modal--input"
                 >
-                    <option></option>
+                    <option>Select One</option>
+                    {filteredModels !== undefined ? (
+                        filteredModels.map(vehicle => {
+                        return <option>{vehicle.model}</option>
+                    })
+                    ) : null}
                 </select>
                 
                 {/* NOTE: Below 3 will be to add new vehicle type to DB */}
