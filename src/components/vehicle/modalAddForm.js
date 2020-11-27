@@ -6,7 +6,7 @@
 //         function, which handles input values, state updates, and pre-populating /
 //         clearing form fields.
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import VehicleManager from "../../api/dataManager"
 import "./list.css";
 import "./modalAddForm.css";
@@ -54,6 +54,8 @@ const AddVehicleModal = (props) => {
         model: ""
       })
 
+    //   const textInput = useRef();
+
     const handleModalClose = () => {
         props.setCreationView(false)
 
@@ -85,10 +87,12 @@ const AddVehicleModal = (props) => {
             evt.target.id === 'year_of_car'
            ) {
             let value = evt.target.value;
-
-            if (value.includes(',')) {
-                const split_price = value.split(',');
-                value = split_price.join('');
+            if (value.includes(',') || value.includes('$') 
+                || (value.includes(',') && value.includes('$'))) {
+                const splitPrice = value.split(',');
+                const removeDollarSign = splitPrice[0].split('$')[1]
+                console.log(removeDollarSign, splitPrice[1])
+                value = splitPrice.join('');
             }
 
             stateToChange[evt.target.id] = parseInt(value);
@@ -347,7 +351,9 @@ const AddVehicleModal = (props) => {
                     id="msr_price" 
                     className="modal--input" 
                     type="text"
-                    value={filteredVehicle !== undefined ? filteredVehicle.msr_price : null}
+                    value={`$${filteredVehicle !== undefined ? filteredVehicle.msr_price : ""}`}
+                    readOnly
+                    // ref={textInput}
                 />
                 
                 <label className="name--label">Floor Price:</label>
@@ -356,7 +362,7 @@ const AddVehicleModal = (props) => {
                     id="floor_price" 
                     className="modal--input" 
                     type="text"
-                    value={filteredVehicle !== undefined ? filteredVehicle.floor_price : null}
+                    placeholder={`$${filteredVehicle !== undefined ? filteredVehicle.floor_price : ""}`}
                 />
                 
                 <label className="name--label">Exterior Color:</label>

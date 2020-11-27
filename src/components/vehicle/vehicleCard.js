@@ -11,10 +11,13 @@ const VehicleCard = props => {
               {`${props.vehicle.make} ${props.vehicle.model}`}
             </h2>
             <span>
+              Floor Price: <NumberFormat value={props.vehicle.floor_price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+            </span>
+            <span>
               {`Exterior Color: ${props.vehicle.exterior_color}, Interior Color: ${props.vehicle.interior_color}`}
             </span>
             <span>
-              <NumberFormat value={props.vehicle.floor_price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+              Mileage: {props.vehicle.miles_count}
             </span>
         </div>
     </>
