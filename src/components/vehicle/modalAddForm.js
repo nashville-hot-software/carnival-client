@@ -1,3 +1,11 @@
+// REVIEW: - This component right now handles creating a new vehicle using pre-set
+//         data from vehicle type and vehicle objects from DB. 
+//         - We can also add new vehicle types here if the type we're looking for
+//         doesn't exist.
+//         - Most of the legwork here is being done by the handleInputFieldChange
+//         function, which handles input values, state updates, and pre-populating /
+//         clearing form fields.
+
 import React, { useEffect, useState } from "react";
 import VehicleManager from "../../api/dataManager"
 import "./list.css";
@@ -69,6 +77,7 @@ const AddVehicleModal = (props) => {
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newVehicle };
 
+        // parsing certain fields to ints, removing commas from price fields
         if (
             evt.target.id === 'floor_price' || 
             evt.target.id === 'msr_price' ||
@@ -86,7 +95,9 @@ const AddVehicleModal = (props) => {
             stateToChange[evt.target.id] = parseInt(value);
             setNewVehicle(stateToChange);
 
-        } else if (evt.target.id === 'body_type') {
+        } 
+        // clear fields, then get/set filtered vehicle makes based on body type selected
+        else if (evt.target.id === 'body_type') {
             document.querySelector('#make').value="none";
             document.querySelector('#engine_type').value="none";
             
@@ -97,7 +108,9 @@ const AddVehicleModal = (props) => {
             const filtered_makes = vehicleTypes.filter(vehicleType => vehicleType.body_type === evt.target.value);
             setFilteredMakes(filtered_makes);
 
-        } else if (evt.target.id === 'make' && filteredMakes !== undefined) {
+        } 
+        // clear fields, then get/set filtered vehicle models based on make selected
+        else if (evt.target.id === 'make' && filteredMakes !== undefined) {
             document.querySelector('#model').value="none";
             document.querySelector('#engine_type').value="none";
             setFilteredVehicle();
@@ -105,7 +118,10 @@ const AddVehicleModal = (props) => {
             const filtered_models = filteredMakes.filter(vehicleType => vehicleType.make === evt.target.value);
             setFilteredModels(filtered_models);
 
-        } else if (evt.target.id === 'model' && evt.target.value !== "none") {
+        } 
+        // pre-set form fields based on model selected via fetching one from DB,
+        // update newVehicle object with pre-set vehicle data
+        else if (evt.target.id === 'model' && evt.target.value !== "none") {
             document.querySelector('#engine_type').value="filtered-engine-type";
 
             const filteredVehicleType = vehicleTypes.filter(vehicleType => vehicleType.model === evt.target.value);
@@ -116,7 +132,6 @@ const AddVehicleModal = (props) => {
                 .then(resp => {
 
                     if (resp[0] !== undefined) {
-                        // pre-populate certain input fields w/ vehicle data
                         setFilteredVehicle(resp[0]);
     
                         stateToChange.engine_type = resp[0].engine_type;
@@ -129,13 +144,14 @@ const AddVehicleModal = (props) => {
                 })
 
         } else {
-
+            // add rest of data to newVehicle object to be POSTed
             stateToChange[evt.target.id] = evt.target.value;
             setNewVehicle(stateToChange);
 
         }  
     };
 
+    // Switches VT selects to input fields to add new VT
     const handleAddNewVehicleType = () => {
         setAddVehicleTypeMode(!addVehicleTypeMode);
 
@@ -146,12 +162,14 @@ const AddVehicleModal = (props) => {
         selects.forEach(select => select.value = "none");
     }
     
+    // builds new vehicleType object to be POSTed to vehicletypes table
     const handleVehicleTypeFieldChange = evt => {
         const stateToChange = {...newVehicleType}
         stateToChange[evt.target.id] = evt.target.value;
         setNewVehicleType(stateToChange);
     }
     
+    // If form data is good, POST new vehicleType then clear form fields
     const handleVehicleTypeSubmit = () => {
         if (
             newVehicleType.body_type === "" || newVehicleType.make === "" || 
@@ -160,10 +178,7 @@ const AddVehicleModal = (props) => {
             window.alert("Please fill out all fields");
         } else {
             VehicleManager.PostData("vehicletypes", newVehicleType)
-                .then(resp => {
-                    console.log(`New vehicletype from DB! VV`);
-                    console.log(resp);
-
+                .then(() => {
                     setAddVehicleTypeMode(false);
                     document.querySelector('input[type=checkbox').checked = false;
 
@@ -176,6 +191,8 @@ const AddVehicleModal = (props) => {
         }
     }
 
+    // If form data is good, POST new vehicle,
+    // then clear newEmployee object and all form fields
     const handleVehicleSubmit = () => {
         if (
             newVehicle.engine_type === "" || newVehicle.exterior_color === "" || 
@@ -185,9 +202,6 @@ const AddVehicleModal = (props) => {
            ) {
             window.alert("Please fill out all fields");
         } else {
-            console.log(`New vehicle before DB POST VV`)
-            console.log(newVehicle)
-
             VehicleManager.PostData("vehicles", newVehicle).then(resp => {
                 console.log(`New vehicle from DB! VV`);
                 console.log(resp);
@@ -213,6 +227,8 @@ const AddVehicleModal = (props) => {
         }
     };
 
+    // fetches data for vehicletype select menus to be filtered, 
+    // re-renders when mode is switched to add new vehicleType
     useEffect(() => {
         VehicleManager.getAll("vehicletypes")
             .then(resp => {
