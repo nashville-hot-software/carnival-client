@@ -84,6 +84,7 @@ const AddVehicleModal = (props) => {
             evt.target.id === 'miles_count' ||
             evt.target.id === 'year_of_car'
            ) {
+            // document.getElementById(evt.target.id).value = evt.target.value;
 
             let value = evt.target.value;
 
