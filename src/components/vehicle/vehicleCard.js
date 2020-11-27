@@ -4,10 +4,6 @@ import NumberFormat from 'react-number-format';
 
 const VehicleCard = props => {
 
-  useEffect(() => {
-    console.log(props.vehicle)
-  }, [])
-
   return (
     <>
         <div onClick={() => props.showDetailsModal(props.vehicle)} className="vehicle-searchCard--container">
@@ -15,7 +11,7 @@ const VehicleCard = props => {
               {`${props.vehicle.make} ${props.vehicle.model}`}
             </h2>
             <span>
-              {`Exterior: ${props.vehicle.exterior_color}, Interior: ${props.vehicle.interior_color}`}
+              {`Exterior Color: ${props.vehicle.exterior_color}, Interior Color: ${props.vehicle.interior_color}`}
             </span>
             <span>
               <NumberFormat value={props.vehicle.floor_price} displayType={'text'} thousandSeparator={true} prefix={'$'} />

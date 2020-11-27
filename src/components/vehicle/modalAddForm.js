@@ -5,26 +5,28 @@ import "./modalAddForm.css";
 
 const AddVehicleModal = (props) => {
 
-    // (First, select menu for body types --> filter makes for next
-    // select menu --> select make --> filter models for next select)
+    // Filters down to specific model for select menus
     const [vehicleTypes, setVehicleTypes] = useState()
     const [filteredMakes, setFilteredMakes] = useState()
     const [filteredModels, setFilteredModels] = useState()
+    
+    // pre-populates form data based on vehicle type selected
     const [filteredVehicle, setFilteredVehicle] = useState()
     
+    // triggers ternary to add new vehicle type instead of selecting existing
     const [addVehicleTypeMode, setAddVehicleTypeMode] = useState(false)
     
-    // Get unique body types for first dropdown
+    // Get unique body types and makes for select menus
     let uniqueBodyTypes;
     if (vehicleTypes !== undefined) {
         uniqueBodyTypes = [...new Set(vehicleTypes.map(item => item.body_type))]
     }
-
     let uniqueMakes;
     if (filteredMakes !== undefined) {
         uniqueMakes = [...new Set(filteredMakes.map(item => item.make))]
     }
 
+    // for new vehicle POST
     const [newVehicle, setNewVehicle] = useState({
         engine_type: "",
         exterior_color: "",
@@ -37,6 +39,7 @@ const AddVehicleModal = (props) => {
         year_of_car: 0
       })
     
+      // for new vehicletype POST   
       const [newVehicleType, setNewVehicleType] = useState({
         body_type: "",
         make: "",
@@ -72,6 +75,7 @@ const AddVehicleModal = (props) => {
             evt.target.id === 'miles_count' ||
             evt.target.id === 'year_of_car'
            ) {
+
             let value = evt.target.value;
 
             if (value.includes(',')) {
@@ -81,24 +85,54 @@ const AddVehicleModal = (props) => {
 
             stateToChange[evt.target.id] = parseInt(value);
             setNewVehicle(stateToChange);
+
         } else if (evt.target.id === 'body_type') {
+            document.querySelector('#make').value="none";
+            document.querySelector('#engine_type').value="none";
+            
+            setFilteredMakes();
+            setFilteredModels();
+            setFilteredVehicle();
+
             const filtered_makes = vehicleTypes.filter(vehicleType => vehicleType.body_type === evt.target.value);
             setFilteredMakes(filtered_makes);
+
         } else if (evt.target.id === 'make' && filteredMakes !== undefined) {
+            document.querySelector('#model').value="none";
+            document.querySelector('#engine_type').value="none";
+            setFilteredVehicle();
+
             const filtered_models = filteredMakes.filter(vehicleType => vehicleType.make === evt.target.value);
             setFilteredModels(filtered_models);
-        } else if (evt.target.id === 'model') {
+
+        } else if (evt.target.id === 'model' && evt.target.value !== "none") {
+            document.querySelector('#engine_type').value="filtered-engine-type";
+
             const filteredVehicleType = vehicleTypes.filter(vehicleType => vehicleType.model === evt.target.value);
             stateToChange.vehicle_type_id = filteredVehicleType[0].id;
             setNewVehicle(stateToChange);
 
             VehicleManager.getAll("vehicles", "vehicle_type", filteredVehicleType[0].id)
                 .then(resp => {
-                    setFilteredVehicle(resp[0]);
+
+                    if (resp[0] !== undefined) {
+                        // pre-populate certain input fields w/ vehicle data
+                        setFilteredVehicle(resp[0]);
+    
+                        stateToChange.engine_type = resp[0].engine_type;
+                        stateToChange.msr_price = resp[0].msr_price;
+                        stateToChange.floor_price = resp[0].floor_price;
+    
+                        setNewVehicle(stateToChange);
+                    }
+
                 })
+
         } else {
+
             stateToChange[evt.target.id] = evt.target.value;
             setNewVehicle(stateToChange);
+
         }  
     };
 
@@ -115,7 +149,6 @@ const AddVehicleModal = (props) => {
     const handleVehicleTypeFieldChange = evt => {
         const stateToChange = {...newVehicleType}
         stateToChange[evt.target.id] = evt.target.value;
-        console.log(stateToChange);
         setNewVehicleType(stateToChange);
     }
     
@@ -128,7 +161,9 @@ const AddVehicleModal = (props) => {
         } else {
             VehicleManager.PostData("vehicletypes", newVehicleType)
                 .then(resp => {
-                    console.log(`New vehicletype from DB! --> ${resp}`);
+                    console.log(`New vehicletype from DB! VV`);
+                    console.log(resp);
+
                     setAddVehicleTypeMode(false);
                     document.querySelector('input[type=checkbox').checked = false;
 
@@ -150,11 +185,12 @@ const AddVehicleModal = (props) => {
            ) {
             window.alert("Please fill out all fields");
         } else {
-            // Make the POST, then clear all data from form
-            console.log(`New vehicle before DB POST --> ${newVehicle}`)
+            console.log(`New vehicle before DB POST VV`)
+            console.log(newVehicle)
 
             VehicleManager.PostData("vehicles", newVehicle).then(resp => {
-                console.log(`New vehicle from DB! --> ${resp}`)
+                console.log(`New vehicle from DB! VV`);
+                console.log(resp);
                 
                 setNewVehicle({
                     engine_type: "",
@@ -180,10 +216,9 @@ const AddVehicleModal = (props) => {
     useEffect(() => {
         VehicleManager.getAll("vehicletypes")
             .then(resp => {
-                console.log(resp);
                 setVehicleTypes(resp);
-            })
-    }, [addVehicleTypeMode])
+            });
+    }, [addVehicleTypeMode]);
 
     return (
         <>
@@ -193,8 +228,7 @@ const AddVehicleModal = (props) => {
                 
             <div className="modal-add--body">
                 
-
-                
+                {/* This ternary flips between vehicle type select form & vehicle type add form */}
                 {addVehicleTypeMode === false ? (
                     <>
                     <label className="name--label">Body Type:</label>
@@ -203,7 +237,7 @@ const AddVehicleModal = (props) => {
                         id="body_type" 
                         className="modal--input" 
                     >
-                        <option>Select One</option>
+                        <option value="none">Select One</option>
                         {uniqueBodyTypes !== undefined ? (
                             uniqueBodyTypes.map(body_type => {
                             return <option>{body_type}</option>
@@ -216,7 +250,7 @@ const AddVehicleModal = (props) => {
                         onChange={handleInputFieldChange}
                         className="modal--input"
                     >
-                        <option>Select One</option>
+                        <option value="none">Select One</option>
                         {uniqueMakes !== undefined ? (
                             uniqueMakes.map(make => {
                             return <option>{make}</option>
@@ -229,7 +263,7 @@ const AddVehicleModal = (props) => {
                         onChange={handleInputFieldChange}
                         className="modal--input"
                     >
-                        <option>Select One</option>
+                        <option value="none">Select One</option>
                         {filteredModels !== undefined ? (
                             filteredModels.map(vehicle => {
                             return <option>{vehicle.model}</option>
@@ -272,11 +306,12 @@ const AddVehicleModal = (props) => {
                     id="engine_type"
                     className="modal--input"
                     onChange={handleInputFieldChange} 
-                    defaultValue={filteredVehicle !== undefined ? filteredVehicle.engine_type : null}
+                    defaultValue="none"
                 >
-                    <option value={filteredVehicle !== undefined ? filteredVehicle.engine_type : null}>
+                    <option value="filtered-engine-type">
                         {filteredVehicle !== undefined ? filteredVehicle.engine_type : null}
                     </option>
+                    <option value="none">Select an Engine Type</option>
                     <option value="V4">V4</option>
                     <option value="V6">V6</option>
                     <option value="V8">V8</option>
@@ -295,7 +330,7 @@ const AddVehicleModal = (props) => {
                     id="msr_price" 
                     className="modal--input" 
                     type="text"
-                    placeholder={filteredVehicle !== undefined ? filteredVehicle.msr_price : null}
+                    value={filteredVehicle !== undefined ? filteredVehicle.msr_price : ""}
                 />
                 
                 <label className="name--label">Floor Price:</label>
@@ -304,7 +339,7 @@ const AddVehicleModal = (props) => {
                     id="floor_price" 
                     className="modal--input" 
                     type="text"
-                    placeholder={filteredVehicle !== undefined ? filteredVehicle.floor_price : null}
+                    value={filteredVehicle !== undefined ? filteredVehicle.floor_price : ""}
                 />
                 
                 <label className="name--label">Exterior Color:</label>

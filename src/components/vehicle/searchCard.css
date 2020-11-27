@@ -10,8 +10,9 @@
     color: gray;
 }
 
-.employee-card--name {
-    font-size: 20px;
+.vehicle-card--name {
+    font-size: 18px;
+    font-weight: 400;
     margin-bottom: 3px;
 }
 
@@ -19,4 +20,8 @@
     color: gray;
     font-weight: 100;
     font-size: 16px;
+}
+
+.vehicle-searchCard--container.span {
+    /* font-weight: 100; */
 }
