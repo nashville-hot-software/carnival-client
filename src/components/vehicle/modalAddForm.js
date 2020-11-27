@@ -84,8 +84,6 @@ const AddVehicleModal = (props) => {
             evt.target.id === 'miles_count' ||
             evt.target.id === 'year_of_car'
            ) {
-            // document.getElementById(evt.target.id).value = evt.target.value;
-
             let value = evt.target.value;
 
             if (value.includes(',')) {
@@ -195,6 +193,7 @@ const AddVehicleModal = (props) => {
     // If form data is good, POST new vehicle,
     // then clear newEmployee object and all form fields
     const handleVehicleSubmit = () => {
+        console.log(newVehicle);
         if (
             newVehicle.engine_type === "" || newVehicle.exterior_color === "" || 
             newVehicle.floor_price === "" || newVehicle.interior_color === "" || 
@@ -218,6 +217,7 @@ const AddVehicleModal = (props) => {
                     vehicle_type_id: 0,
                     year_of_car: 0
                 });
+                setFilteredVehicle();
                 
                 const inputs = document.querySelectorAll('input')
                 const selects = document.querySelectorAll('select')
@@ -347,7 +347,7 @@ const AddVehicleModal = (props) => {
                     id="msr_price" 
                     className="modal--input" 
                     type="text"
-                    value={filteredVehicle !== undefined ? filteredVehicle.msr_price : ""}
+                    value={filteredVehicle !== undefined ? filteredVehicle.msr_price : null}
                 />
                 
                 <label className="name--label">Floor Price:</label>
@@ -356,7 +356,7 @@ const AddVehicleModal = (props) => {
                     id="floor_price" 
                     className="modal--input" 
                     type="text"
-                    value={filteredVehicle !== undefined ? filteredVehicle.floor_price : ""}
+                    value={filteredVehicle !== undefined ? filteredVehicle.floor_price : null}
                 />
                 
                 <label className="name--label">Exterior Color:</label>
