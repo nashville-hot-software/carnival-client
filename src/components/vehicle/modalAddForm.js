@@ -79,7 +79,7 @@ const AddVehicleModal = (props) => {
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newVehicle };
 
-        // parsing certain fields to ints, removing commas from price fields
+        // parsing certain fields to ints, removing commas and $ signs from price fields
         if (
             evt.target.id === 'floor_price' || 
             evt.target.id === 'msr_price' ||
@@ -87,13 +87,16 @@ const AddVehicleModal = (props) => {
             evt.target.id === 'year_of_car'
            ) {
             let value = evt.target.value;
-            if (value.includes(',') || value.includes('$') 
-                || (value.includes(',') && value.includes('$'))) {
+            
+            if (value.includes('$') && value.includes(',')) {
+                const splitPrice = value.split('$');
+                value = splitPrice[1];
+                const secondSplitPrice = value.split(',');
+                value = secondSplitPrice.join('');
+            } else if (value.includes(',')) {
                 const splitPrice = value.split(',');
-                const removeDollarSign = splitPrice[0].split('$')[1]
-                console.log(removeDollarSign, splitPrice[1])
                 value = splitPrice.join('');
-            }
+            } 
 
             stateToChange[evt.target.id] = parseInt(value);
             setNewVehicle(stateToChange);
@@ -104,6 +107,7 @@ const AddVehicleModal = (props) => {
             document.querySelector('#make').value="none";
             document.querySelector('#engine_type').value="none";
             
+            // so when you re-select first dropdown, the other dependent dropdowns reset as well
             setFilteredMakes();
             setFilteredModels();
             setFilteredVehicle();
