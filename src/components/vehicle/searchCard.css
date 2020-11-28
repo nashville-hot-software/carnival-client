@@ -8,7 +8,7 @@
 .vehicle-searchCard--container:hover {
     cursor: pointer;
     /* color: gray; */
-    background-color: #f3f7f9;
+    background-color: #f3f7f9d9;
 }
 
 .vehicle-card--name {
