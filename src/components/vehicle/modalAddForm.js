@@ -352,7 +352,18 @@ const AddVehicleModal = (props) => {
                 <input onChange={handleInputFieldChange} id="miles_count" className="modal--input" type="text"/>
                 
                 <label className="name--label">MSR Price:</label>
-                {filteredVehicle === undefined ? (
+                {filteredVehicle !== undefined ? (
+                    // <input 
+                    //     onChange={handleInputFieldChange} 
+                    //     id="msr_price" 
+                    //     className="modal--input" 
+                    //     type="text"
+                    //     value={`$${filteredVehicle.msr_price}`}
+                    //     readOnly
+                    //     // ref={textInput}
+                    // />
+                    <div className="modal--input msrp-div" >{`$${filteredVehicle.msr_price}`}</div>
+                ) : (
                     <input 
                         onChange={handleInputFieldChange} 
                         id="msr_price" 
@@ -360,16 +371,6 @@ const AddVehicleModal = (props) => {
                         type="text"
                         placeholder="$"
                     />
-                    ) : (
-                        <input 
-                            onChange={handleInputFieldChange} 
-                            id="msr_price" 
-                            className="modal--input" 
-                            type="text"
-                            value={`$${filteredVehicle.msr_price}`}
-                            readOnly
-                            // ref={textInput}
-                        />
                 )}
                 
                 <label className="name--label">Floor Price:</label>
