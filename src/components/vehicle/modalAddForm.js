@@ -118,9 +118,10 @@ const AddVehicleModal = (props) => {
         } 
         // clear fields, then get/set filtered vehicle models based on make selected
         else if (evt.target.id === 'make' && filteredMakes !== undefined) {
+            setFilteredVehicle();
+
             document.querySelector('#model').value="none";
             document.querySelector('#engine_type').value="none";
-            setFilteredVehicle();
 
             const filtered_models = filteredMakes.filter(vehicleType => vehicleType.make === evt.target.value);
             setFilteredModels(filtered_models);
@@ -160,6 +161,7 @@ const AddVehicleModal = (props) => {
 
     // Switches VT selects to input fields to add new VT
     const handleAddNewVehicleType = () => {
+        setFilteredVehicle();
         setAddVehicleTypeMode(!addVehicleTypeMode);
 
         const inputs = document.querySelectorAll('input');
@@ -350,15 +352,25 @@ const AddVehicleModal = (props) => {
                 <input onChange={handleInputFieldChange} id="miles_count" className="modal--input" type="text"/>
                 
                 <label className="name--label">MSR Price:</label>
-                <input 
-                    onChange={handleInputFieldChange} 
-                    id="msr_price" 
-                    className="modal--input" 
-                    type="text"
-                    value={`$${filteredVehicle !== undefined ? filteredVehicle.msr_price : ""}`}
-                    readOnly
-                    // ref={textInput}
-                />
+                {filteredVehicle === undefined ? (
+                    <input 
+                        onChange={handleInputFieldChange} 
+                        id="msr_price" 
+                        className="modal--input" 
+                        type="text"
+                        placeholder="$"
+                    />
+                    ) : (
+                        <input 
+                            onChange={handleInputFieldChange} 
+                            id="msr_price" 
+                            className="modal--input" 
+                            type="text"
+                            value={`$${filteredVehicle.msr_price}`}
+                            readOnly
+                            // ref={textInput}
+                        />
+                )}
                 
                 <label className="name--label">Floor Price:</label>
                 <input 
