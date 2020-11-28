@@ -18,7 +18,7 @@ const SaleEditModal = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [selectedState, setSelectedState] = useState();
   const [selectedPaymentType, setSelectedPaymentType] = useState();
-  const [selectedVehicle, setSelectedVehicle] = useState();
+
 
 
   const handleEditMode = () => {
@@ -108,17 +108,17 @@ const SaleEditModal = (props) => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
       setSale(data);
       console.log(data)
-      setSelectedState(data.customer.state)
+      setSelectedState(data.state)
       setSelectedPaymentType(data.payment_method)
     });
   }, [props.sale]);
-
+  
   useEffect(() => {
     if (updatedSale !== undefined) {
       DataManager.update("sales", updatedSale, props.sale.id)
         // Later update API to return updated obj on the PUT response instead of re-fetching
         .then(() => {
-          DataManager.getOne("sales", props.sales.id).then((data) => {
+          DataManager.getOne("sales", props.sale.id).then((data) => {
             console.log(data);
             setUpdatedSale();
             setSale(data);
@@ -204,7 +204,8 @@ const SaleEditModal = (props) => {
               <Input.CompanyName handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
               <Input.Deposit handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
               <Input.Price handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
-              <Input.Phone handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
+              <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
+              <Input.PickupDate handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
               <StateSelectDropdown
                 sale={sale}
                 selectedState={selectedState}
@@ -219,22 +220,12 @@ const SaleEditModal = (props) => {
                 <option value="1">Purchase</option>
                 <option value="2">Lease</option>
               </select>
-
-            
-
-              <label>Pickup Date:</label>
-              <input
-                type="date"
-                id="pickup_date"
-                onChange={handleInputFieldChange}
-              />
               <PaymentTypeSelectDropdown
                 selectedPaymentType={selectedPaymentType}
                 sale={sale}
                 setSale={setSale} />
               {/* This block is for the dealership search dropdown menu (lines 157-184) */}
-              <DealershipDropdown state={sale} setState={setSale} />
-              <VehicleSearch />
+
             </div>
 
             <div className="addEmployee--btn--container">

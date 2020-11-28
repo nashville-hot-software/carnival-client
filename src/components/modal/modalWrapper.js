@@ -5,15 +5,16 @@ import AddEmployeeModal from "../employee/modalAddForm"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
 import SaleDetailModal from "../sale/saleDetailsModal"
+import SaleEditModal from '../sale/SaleEditModal'
 import DealershipDetailModal from "../dealership/modalEditForm"
 import AddDealershipModal from "../dealership/modalAddForm"
 
 const ModalWrapper = (props) => {
-
+    // debugger;
     return (
             <div className="modal-bg">
                 <div className="modal-box">
-                    {props.filteredEmployee !== undefined && props.creationView === false? (
+                    {props.filteredEmployee !== undefined && props.employeeCreationView === false ? (
                         <EmployeeDetailModal employee={props.filteredEmployee} {...props} />
                     ) : null}
                     
@@ -39,6 +40,12 @@ const ModalWrapper = (props) => {
                         <SaleDetailModal 
                             sale={props.filteredSale} 
                             setFilteredSale={props.setFilteredSale}
+                        />
+                    ) : null}
+                    {props.matchedSale !== undefined ? (
+                        <SaleEditModal 
+                            sale={props.matchedSale} 
+                            setMatchedSale={props.setMatchedSale}
                         />
                     ) : null}
                     

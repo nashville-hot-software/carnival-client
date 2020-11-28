@@ -1,7 +1,16 @@
+import react from 'react'
 const VehicleDropdown = (props) => {
 
 
-
+    const handleVehicleSelect = (evt) => {
+        const stateToChange = props.state 
+        stateToChange.vehicle_id = parseInt(evt.target.id);
+        stateToChange.price = parseFloat(evt.target.title);
+        console.log(stateToChange);
+        // console.dir(evt.target)
+        console.log(evt.target.title);
+        // props.setShowVehicles(false);
+    };
 
     return (
         <>
@@ -14,7 +23,7 @@ const VehicleDropdown = (props) => {
                     onBlur={props.handleCloseVehicleSearch}
                     className={`vehicles--dropdown ${props.showVehicles ? "open" : ""}`}
                 >
-                    <button onClick={props.handleCloseVehicleSearch()}>Close</button>
+                    <button onClick={()=>props.handleCloseVehicleSearch()}>Close</button>
                     {props.vehicles.map((vehicle) => {
                         return (
                             <>
@@ -22,7 +31,7 @@ const VehicleDropdown = (props) => {
                                     className="vehicles--select"
                                     id={vehicle.id}
                                     title={vehicle.floor_price}
-                                    onClick={props.handleVehicleSelect()}
+                                    onClick={handleVehicleSelect}
                                 >
                                     {`${vehicle.make} ${vehicle.model}`}
                                     <span

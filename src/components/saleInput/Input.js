@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
+import NumberFormat from 'react-number-format';
+
 const useStyles = makeStyles((theme) => ({
     searchBarStyle: {
         height: "25px",
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
                 borderColor: "#6a78d1",
             },
             "&.Mui-focused fieldset": {
-                borderColor: "#FF7A59;",
+                borderColor: "#6a78d1;",
                 borderWidth: "1px",
             },
         },
@@ -31,7 +33,7 @@ const Input = {
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
-                        id="first_name"
+                        id="firstName"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.first_name}
@@ -51,7 +53,7 @@ const Input = {
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
-                        id="last_name"
+                        id="lastName"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.last_name}
@@ -165,7 +167,7 @@ const Input = {
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
-                        id="company_name"
+                        id="companyName"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.company_name}
@@ -178,15 +180,16 @@ const Input = {
     },
     Deposit: (props) => {
         const classes = useStyles();
+        let depositFormat = <NumberFormat value={props.sale.deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         return (
             <>
+
                 <InputLabel shrink>Deposit:</InputLabel>
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
                         type="text"
-                        label={props.sale.deposit}
-                        label="Deposit"
+                        label={depositFormat}
                         id="deposit"
                         className={classes.searchBarStyle}
                         autoFocus
@@ -198,6 +201,7 @@ const Input = {
     },
     Price: (props) => {
         const classes = useStyles();
+        let priceFormat = <NumberFormat value={props.sale.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         return (
             <>
                 <InputLabel shrink>Price:</InputLabel>
@@ -207,7 +211,7 @@ const Input = {
                         id="phone"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.price}
+                        label={priceFormat}
                         autoFocus
                         variant="outlined"
                     />
@@ -227,6 +231,42 @@ const Input = {
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.phone}
+                        autoFocus
+                        variant="outlined"
+                    />
+                </FormControl>
+            </>
+        );
+    },
+    PurchaseDate: (props) => {
+        const classes = useStyles();
+        return (
+            <>
+                <InputLabel shrink>{props.sale.purchase_date}:</InputLabel>
+                <FormControl>
+                    <TextField
+                        onChange={props.handleInputFieldChange}
+                        id="purchase_date"
+                        className={classes.searchBarStyle}
+                        type="date"
+                        autoFocus
+                        variant="outlined"
+                    />
+                </FormControl>
+            </>
+        );
+    },
+    PickupDate: (props) => {
+        const classes = useStyles();
+        return (
+            <>
+                <InputLabel shrink>{props.sale.pickup_date}:</InputLabel>
+                <FormControl>
+                    <TextField
+                        onChange={props.handleInputFieldChange}
+                        id="pickup_date"
+                        className={classes.searchBarStyle}
+                        type="date"
                         autoFocus
                         variant="outlined"
                     />

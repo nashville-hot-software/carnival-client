@@ -26,7 +26,7 @@
     /* Firefox */
     border: 2px solid gray;
     border-radius: 4px;
-    min-height: 35px;
+    height: 35px;
     transition: height 0.4s ease;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .dealership-list--dropdown.open {
-    min-height: 220px;
+    height: 220px;
     outline: none;
     border-color: #6a78d1;
     box-shadow: 0 0 8px #6a78d1;
