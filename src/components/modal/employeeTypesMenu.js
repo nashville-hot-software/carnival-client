@@ -13,9 +13,8 @@ const EmployeeTypeSelect = (props) => {
     };
 
     const handleEmployeeTypeSelect = (evt) => {
-        const stateToChange = { ...props.state };
+        const stateToChange = props.state;
         stateToChange[evt.target.id] = evt.target.value;
-        props.setState(stateToChange);
     };
 
     useEffect(() => {

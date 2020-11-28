@@ -33,7 +33,7 @@ const DashBoard = (props) => {
   // purchase, and lease types sales revenues...
   // set states for total, purchase, and lease types sale counts
   const getSales = () => {
-    DataManager.getAll("sales", "limit", "20").then((response) => {
+    DataManager.getAll("sales").then((response) => {
 
       setSales(response);
 
@@ -84,7 +84,7 @@ const DashBoard = (props) => {
   const [filteredCustomer, setFilteredCustomer] = useState();
 
   const getAllCustomers = () => {
-    DataManager.getAll("sales", "limit", 20).then(sales => {
+    DataManager.getAll("sales").then(sales => {
       setCustomers(sales);
     });
   };
