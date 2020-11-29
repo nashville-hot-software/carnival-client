@@ -1,17 +1,16 @@
 .vehicle-searchCard--container {
     border-bottom: 1px solid lightgray;
-    padding: 11px 10px 8px 10px;
+    padding: 11px 10px 8px 14px;
     display: flex;
     flex-direction: column;
 }
 
 .vehicle-searchCard--container:hover {
     cursor: pointer;
-    /* color: gray; */
     background-color: #f3f7f9d9;
 }
 
-.vehicle-card--name {
+.vehicle-card--name .search {
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 3px;

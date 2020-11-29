@@ -7,7 +7,7 @@ const VehicleCard = props => {
   return (
     <>
         <div onClick={() => props.showDetailsModal(props.vehicle)} className="vehicle-searchCard--container">
-            <h2 className="vehicle-card--name">
+            <h2 className="vehicle-card--name search">
               {`${props.vehicle.make} ${props.vehicle.model}`}
             </h2>
             <span>
