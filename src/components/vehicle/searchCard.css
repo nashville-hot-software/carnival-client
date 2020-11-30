@@ -1,0 +1,31 @@
+.vehicle-searchCard--container {
+    border-bottom: 1px solid lightgray;
+    padding: 11px 10px 8px 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-searchCard--container:hover {
+    cursor: pointer;
+    background-color: #f3f7f9d9;
+}
+
+.vehicle-card--name .search {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+
+.employeeDealership {
+    color: gray;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+.vehicle-searchCard--container span {
+    font-weight: 100;
+}
+
+.vehicle-searchCard--container span:first-of-type {
+    font-weight: 400;
+}

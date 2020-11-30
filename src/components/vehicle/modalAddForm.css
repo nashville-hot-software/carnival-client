@@ -1,0 +1,9 @@
+.modal-add--body {
+    overflow: scroll;
+
+}
+
+.modal--input.msrp-div {
+    background-color: #FFF;
+    padding: 3px 0 3px 6px;
+}
