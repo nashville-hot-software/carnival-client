@@ -74,15 +74,8 @@ const EmployeeDetailModal = props => {
     inputs.forEach(input => input.value = "")
     selects.forEach(select => select.value = "none")
 
-    document.querySelector(".modal-bg").classList.add("fade-out");
-    document.querySelector(".modal-box").classList.add("fade-out");
-
-    setTimeout(function () {
-        document.querySelector(".modal-box").classList.remove("fade-out");
-        document.querySelector(".modal-bg").classList.remove("fade-out");
-        document.querySelector(".modal-box").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
-    }, 500);
+    document.querySelector(".modal-box").classList.remove("show");
+    document.querySelector(".modal-bg").classList.remove("show");
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
@@ -177,28 +170,28 @@ const EmployeeDetailModal = props => {
               <div>
                 <strong>Email:</strong> 
                 <span>
-                  {updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
+                  {employee !== undefined ? (`${employee.email_address}`) 
                   : (`${props.employee.email_address}`)}
                 </span>
               </div>
               <div>
                 <strong>Phone:</strong> 
                 <span>
-                  {updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
+                  {employee !== undefined ? (`${employee.phone}`) 
                   : (`${props.employee.phone}`)}
                 </span>
               </div>
               <div>
                 <strong>Dealership:</strong> 
                 <span>
-                  {updatedEmployee !== undefined ? (`${updatedEmployee.dealership.business_name}`) 
+                  {employee !== undefined ? (`${employee.dealership.business_name}`) 
                     : (`${props.employee.business_name}`)}
                 </span>
               </div>
               <div>
                 <strong>Employee Type:</strong> 
                 <span>
-                    {updatedEmployee !== undefined ? (`${updatedEmployee.employee_type.name}`) 
+                    {employee !== undefined ? (`${employee.employee_type.name}`) 
                     : (`${props.employee.employee_type}`)}
                 </span>
               </div>

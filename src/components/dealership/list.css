@@ -16,33 +16,38 @@
 
 .dealership--header {
     margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #33475B;
 }
 
 .dealerships-searchBar {
     width: 400px;
     line-height: 35px;
-    border: 2px solid gray;
+    border: 2px solid lightgray;
     border-radius: 4px;
     padding-left: 7px;
 }
 
 .dealerships-searchBar:focus {
     outline: none;
-    border-color: #9ecaed;
-    box-shadow: 0 0 8px #9ecaed;
+    border-color: #6a78d1;
+    box-shadow: 0 0 8px #6a78d1;
 }
 
-.searchResults {
-    border: 2px solid gray;
+.searchResults.dealerships {
+    border: 2px solid lightgray;
+    box-shadow: 1px 5px 10px 1px lightgrey;
     border-radius: 5px;
     background-color: #fff;
     height: 400px;
     overflow: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
     width: 50%;
     margin-top: 5%;
 }

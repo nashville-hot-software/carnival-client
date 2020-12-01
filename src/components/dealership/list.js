@@ -64,7 +64,7 @@ const Dealerships = props => {
           />
           
           {dealerships !== undefined ? (
-            <div className="searchResults">
+            <div className="searchResults dealerships">
               {dealerships.map(dealership => {
                 return (
                   <DealershipCard

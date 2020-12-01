@@ -15,7 +15,7 @@ const SaleMetrics = props => {
             <CardContent className={props.classes.content}>
             <div className="saleMetric--container">
                 <div className="saleMetricDetails--container">
-                    <h2>Sales Metrics</h2>
+                    <h2>Monthly Sales Metrics</h2>
 
                     {props.saleType === "Total" && props.saleCount !== undefined 
                     && props.revenue !== undefined ? (
@@ -87,7 +87,7 @@ const SaleMetrics = props => {
                         </div>
                         </>
                     ) : null}
-
+                    <div className="selectMenu">
                     <FormControl className={props.classes.formControl}>
                     <InputLabel className={props.classes.selectLabel}>
                         Sale Types
@@ -103,6 +103,7 @@ const SaleMetrics = props => {
                         <MenuItem value="Lease">Lease</MenuItem>
                     </Select>
                     </FormControl>
+                    </div>
                 </div>
 
                 <SalesPieChart saleType={props.saleType} className="pieChart" />

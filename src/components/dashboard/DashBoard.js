@@ -4,7 +4,7 @@ import "./DashBoard.css";
 import SaleMetrics from "./saleMetrics"
 import Customers from "../customer/list.js";
 import Sales from "../sale/table.js";
-import Vehicles from "../vehicle/list.js";
+import Vehicles from "../vehicle/dashList.js";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import carnivalImage from "../../images/carnival_cars_image.jpg";
@@ -33,7 +33,7 @@ const DashBoard = (props) => {
   // purchase, and lease types sales revenues...
   // set states for total, purchase, and lease types sale counts
   const getSales = () => {
-    DataManager.getAll("sales", "limit", "20").then((response) => {
+    DataManager.getAll("sales").then((response) => {
 
       setSales(response);
 
@@ -84,7 +84,7 @@ const DashBoard = (props) => {
   const [filteredCustomer, setFilteredCustomer] = useState();
 
   const getAllCustomers = () => {
-    DataManager.getAll("sales", "limit", 20).then(sales => {
+    DataManager.getAll("sales").then(sales => {
       setCustomers(sales);
     });
   };
@@ -99,6 +99,7 @@ const DashBoard = (props) => {
   
   const showCustomersModal = customer => {
     const foundCustomer = customers.filter(matchedCustomer => matchedCustomer.customer_id === customer.customer_id);
+    console.log(foundCustomer[0])
     setFilteredCustomer(foundCustomer[0]);
 
     document.querySelector(".modal-box").classList.add("show");
