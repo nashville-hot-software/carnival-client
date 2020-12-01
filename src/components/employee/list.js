@@ -26,12 +26,8 @@ const Employees = (props) => {
     const showDetailsModal = employeeArg => {
         const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
 
-        console.log(foundEmployee)
-
-        // document.querySelector(".modal-box").classList.remove("fade-out");
-        // document.querySelector(".modal-bg").classList.remove("fade-out");
         document.querySelector(".modal-box").classList.add("show");
-        // document.querySelector(".modal-bg").classList.add("show");
+        document.querySelector(".modal-bg").classList.add("show");
 
         // NOTE: thinking if we can get editModal useEffect to watch for this to update when
         // different employee is clicked, that could re-render the modal correctly....
@@ -43,10 +39,8 @@ const Employees = (props) => {
     const handleShow = () => {
         setCreationView(true)
 
-        // document.querySelector(".modal-box").classList.remove("fade-out");
-        // document.querySelector(".modal-bg").classList.remove("fade-out");
         document.querySelector(".modal-box").classList.add("show");
-        // document.querySelector(".modal-bg").classList.add("show");
+        document.querySelector(".modal-bg").classList.add("show");
     };
 
     return (

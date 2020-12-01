@@ -157,7 +157,7 @@
 /* ##########
     MODAL ANIMATIONS START HERE
 ##########*/
-.modal-bg {
+/* .modal-bg {
     display: none;
 }
 
@@ -191,43 +191,7 @@
     transition: transform 300ms linear;
 
     z-index: 10;
-}
-
-.modal-bg.show.fade-out {
-    background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeout;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
-    background-color: transparent;
-}
-
-.modal-box.show.fade-out {
-    animation: fadeout;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
-}
-
-@keyframes fadein {
-    0% {
-        transform: translateX(200%);
-    }
-
-    100% {
-        transform: translateX(120%);
-    }
-}
-
-@keyframes fadeout {
-    0% {
-        transform: translateX(120%);
-    }
-
-    100% {
-        transform: translateX(200%);
-    }
-}
+} */
 /* ##########
     MODAL ANIMATIONS END HERE
 ##########*/

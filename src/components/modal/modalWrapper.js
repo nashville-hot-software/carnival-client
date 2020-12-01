@@ -1,5 +1,5 @@
 import React from "react";
-import "../employee/list.css";
+import "./modalWrapper.css";
 import EmployeeDetailModal from "../employee/modalEditForm"
 import AddEmployeeModal from "../employee/modalAddForm"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
@@ -14,8 +14,8 @@ const ModalWrapper = (props) => {
 
     return (
         <>
-            {/* <div className="modal-bg">
-            </div> */}
+            <div className="modal-bg">
+            </div>
             <div className="modal-box">
                 {props.filteredEmployee !== undefined && props.employeeCreationView === false? (
                     <EmployeeDetailModal employee={props.filteredEmployee} {...props} />

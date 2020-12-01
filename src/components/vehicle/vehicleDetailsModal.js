@@ -6,19 +6,20 @@ import "../employee/card.css"
 
 const VehicleDetailModal = props => {
 
-  const handleModalClose = () => {
-    props.setFilteredVehicle();
+    const handleModalClose = () => {
+        const inputs = document.querySelectorAll('input')
+        const selects = document.querySelectorAll('select')
 
-    document.querySelector(".modal-bg").classList.add("fade-out");
-    document.querySelector(".modal-box").classList.add("fade-out");
+        inputs.forEach(input => input.value = "")
+        selects.forEach(select => select.value = "none")
 
-    setTimeout(function () {
-        document.querySelector(".modal-box").classList.remove("fade-out");
-        document.querySelector(".modal-bg").classList.remove("fade-out");
         document.querySelector(".modal-box").classList.remove("show");
         document.querySelector(".modal-bg").classList.remove("show");
-    }, 500);
-  };
+
+        setTimeout(function () {
+            props.setFilteredVehicle(false)
+        }, 700);
+    };
 
 
   return (
