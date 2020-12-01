@@ -74,15 +74,8 @@ const EmployeeDetailModal = props => {
     inputs.forEach(input => input.value = "")
     selects.forEach(select => select.value = "none")
 
-    document.querySelector(".modal-bg").classList.add("fade-out");
-    document.querySelector(".modal-box").classList.add("fade-out");
-
-    setTimeout(function () {
-        document.querySelector(".modal-box").classList.remove("fade-out");
-        document.querySelector(".modal-bg").classList.remove("fade-out");
-        document.querySelector(".modal-box").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
-    }, 500);
+    document.querySelector(".modal-box").classList.remove("show");
+    document.querySelector(".modal-bg").classList.remove("show");
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
