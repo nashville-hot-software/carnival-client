@@ -3,6 +3,7 @@ import EmployeeManager from "../../api/dataManager";
 import "./list.css";
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
+import SuccessSnackbar from "../modal/snackbar"
 
 const AddEmployeeModal = (props) => {
 
@@ -14,6 +15,8 @@ const AddEmployeeModal = (props) => {
         dealership_id: 1,
         employee_type_id: 1,
     });
+
+    const [postedEmployee, setPostedEmployee] = useState();
 
     const handleClose = () => {
 
@@ -50,7 +53,10 @@ const AddEmployeeModal = (props) => {
             window.alert("Please select a valid employee type");
         } else {
             // Make the POST, then clear all data from form
-            EmployeeManager.PostData("employees", newEmployee).then(() => {
+            EmployeeManager.PostData("employees", newEmployee).then(resp => {
+                console.log(resp);
+                setPostedEmployee(resp);
+
                 setNewEmployee({
                     first_name: "",
                     last_name: "",
@@ -65,6 +71,8 @@ const AddEmployeeModal = (props) => {
 
                 inputs.forEach(input => input.value = "")
                 selects.forEach(select => select.value = "none")
+
+                
             });
         }
     };
@@ -142,6 +150,11 @@ const AddEmployeeModal = (props) => {
                     </button>
                 </div>
             </div>
+
+            <SuccessSnackbar 
+                postedEmployee={postedEmployee} 
+                setPostedEmployee={setPostedEmployee}
+            />
         </>
     );
 };
