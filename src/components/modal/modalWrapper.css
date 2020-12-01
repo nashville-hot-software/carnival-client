@@ -1,0 +1,35 @@
+.modal-bg {
+    display: none;
+}
+
+.modal-box {
+    position: fixed;
+
+    transform: translateX(400%);
+    transition: transform 400ms linear;
+
+    display: flex;
+    flex-direction: column;
+    width: 470px;
+    height: 100%;
+    background-color: #f5f8fa;
+    margin-top: -42px;
+
+}
+
+.modal-bg.show {
+    display: block;
+    position: fixed;
+    margin-top: -42px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.7s linear;
+}
+
+.modal-box.show {
+    transform: translateX(241%);
+    transition: transform 300ms linear;
+
+    z-index: 10;
+}

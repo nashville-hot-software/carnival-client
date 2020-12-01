@@ -2,6 +2,7 @@ import {
     createAuthHeaders,
     baseUrl
 } from './userManager';
+import {rapidApiKey} from "./apiKeys"
 
 let API = {
 
@@ -64,7 +65,7 @@ let API = {
         return fetch("https://referential.p.rapidapi.com/v1/state?iso_a2=us&lang=en", {
             "method": "GET",
             "headers": {
-                "x-rapidapi-key": "9d213102b1msh91dd17808707f7bp1a4615jsn261b45eab4e7",
+                "x-rapidapi-key": `${rapidApiKey}`,
                 "x-rapidapi-host": "referential.p.rapidapi.com"
             }
         }).then(data => data.json())
@@ -75,7 +76,7 @@ let API = {
         return fetch(`https://referential.p.rapidapi.com/v1/city?fields=iso_a2%2Cstate_code%2Cstate_hasc%2Ctimezone%2Ctimezone_offset&iso_a2=us&state_hasc=US.${stateVal}&lang=en`, {
             method: "GET",
             headers: {
-                "x-rapidapi-key": "9d213102b1msh91dd17808707f7bp1a4615jsn261b45eab4e7",
+                "x-rapidapi-key": `${rapidApiKey}`,
                 "x-rapidapi-host": "referential.p.rapidapi.com"
             }
         }).then(data => data.json())
