@@ -99,6 +99,7 @@ const DashBoard = (props) => {
   
   const showCustomersModal = customer => {
     const foundCustomer = customers.filter(matchedCustomer => matchedCustomer.customer_id === customer.customer_id);
+    console.log(foundCustomer[0])
     setFilteredCustomer(foundCustomer[0]);
 
     document.querySelector(".modal-box").classList.add("show");

@@ -11,7 +11,7 @@ const CustomerDetailModal = props => {
         document.querySelector(".modal-bg").classList.remove("show");
 
         setTimeout(function () {
-            props.setFilteredCustomer(false)
+            props.setFilteredCustomer();
         }, 700);
     };
   

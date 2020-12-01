@@ -7,17 +7,11 @@ import "../employee/card.css"
 const VehicleDetailModal = props => {
 
     const handleModalClose = () => {
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
-
         document.querySelector(".modal-box").classList.remove("show");
         document.querySelector(".modal-bg").classList.remove("show");
 
         setTimeout(function () {
-            props.setFilteredVehicle(false)
+            props.setFilteredVehicle();
         }, 700);
     };
 

@@ -7,19 +7,14 @@ import NumberFormat from 'react-number-format';
 
 const SaleDetailModal = props => {
 
-  const handleModalClose = () => {
-    props.setFilteredSale();
-
-    document.querySelector(".modal-bg").classList.add("fade-out");
-    document.querySelector(".modal-box").classList.add("fade-out");
-
-    setTimeout(function () {
-        document.querySelector(".modal-box").classList.remove("fade-out");
-        document.querySelector(".modal-bg").classList.remove("fade-out");
+    const handleModalClose = () => {
         document.querySelector(".modal-box").classList.remove("show");
         document.querySelector(".modal-bg").classList.remove("show");
-    }, 500);
-  };
+
+        setTimeout(function () {
+            props.setFilteredSale();
+        }, 700);
+    };
   
   return (
     <>
