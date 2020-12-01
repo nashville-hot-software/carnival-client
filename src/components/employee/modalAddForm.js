@@ -16,7 +16,6 @@ const AddEmployeeModal = (props) => {
     });
 
     const handleClose = () => {
-        props.setCreationView(false)
 
         const inputs = document.querySelectorAll('input')
         const selects = document.querySelectorAll('select')
@@ -24,15 +23,16 @@ const AddEmployeeModal = (props) => {
         inputs.forEach(input => input.value = "")
         selects.forEach(select => select.value = "none")
 
-        document.querySelector(".modal-bg").classList.add("fade-out");
-        document.querySelector(".modal-box").classList.add("fade-out");
+        // document.querySelector(".modal-bg").classList.add("fade-out");
+        // document.querySelector(".modal-box").classList.add("fade-out");
 
+        document.querySelector(".modal-box").classList.remove("show");
         setTimeout(function () {
-            document.querySelector(".modal-box").classList.remove("fade-out");
-            document.querySelector(".modal-bg").classList.remove("fade-out");
-            document.querySelector(".modal-box").classList.remove("show");
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 500);
+            props.setCreationView(false)
+            // document.querySelector(".modal-box").classList.remove("fade-out");
+            // document.querySelector(".modal-bg").classList.remove("fade-out");
+            // document.querySelector(".modal-bg").classList.remove("show");
+        }, 1000);
     };
 
     const handleInputFieldChange = (evt) => {
