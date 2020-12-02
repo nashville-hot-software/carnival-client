@@ -27,6 +27,9 @@ const EmployeeDetailModal = props => {
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
+  // NOTE: So the problem here is when I'm passing this down as a prop to 
+  //       dealershipDropdown it's holding on to the old employee state
+  //       before field updates...
   var stateToChange = {...employee};
 
   const handleFieldChange = evt => {
