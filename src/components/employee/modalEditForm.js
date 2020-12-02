@@ -17,6 +17,9 @@ const EmployeeDetailModal = props => {
 
   const [editMode, setEditMode] = useState(false);
 
+  // for dealership dropdown component
+  const [selectedDealership, setSelectedDealership] = useState("");
+
   const handleEditMode = () => {
       setEditMode(!editMode);
 
@@ -252,6 +255,8 @@ const EmployeeDetailModal = props => {
 
                 <DealershipDropdown 
                     state={stateToChange} 
+                    selectedDealership={selectedDealership}
+                    setSelectedDealership={setSelectedDealership}
                 />
 
                 <EmployeeTypeSelect

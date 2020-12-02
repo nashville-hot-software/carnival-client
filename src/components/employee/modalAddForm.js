@@ -57,11 +57,14 @@ const AddEmployeeModal = (props) => {
         } else if (newEmployee.employee_type_id === 0) {
             window.alert("Please select a valid employee type");
         } else {
-            // Make the POST, then clear all data from form
+            // POST
             EmployeeManager.PostData("employees", newEmployee).then(resp => {
                 console.log(resp);
+
+                // this is for the success snackbar to know a successful POST was made
                 setPostedEmployee(resp);
 
+                // reset field values for next form POST
                 setNewEmployee({
                     first_name: "",
                     last_name: "",
@@ -73,6 +76,7 @@ const AddEmployeeModal = (props) => {
                 
                 
                 clearForm();
+
                 // below clears the dealershipDropdown input
                 setSelectedDealership("");
             });
@@ -119,8 +123,8 @@ const AddEmployeeModal = (props) => {
                 />
 
                 <DealershipDropdown 
-                    newEmployee={newEmployee} 
-                    setNewEmployee={setNewEmployee}
+                    state={newEmployee} 
+                    setState={setNewEmployee}
                     selectedDealership={selectedDealership}
                     setSelectedDealership={setSelectedDealership}
                 />
@@ -134,7 +138,11 @@ const AddEmployeeModal = (props) => {
                     <button onClick={handleSubmit} className="modal--addBtn">
                         Add Employee 
                     </button>
-                    <button className="closeBtn" onClick={handleClose}>
+                    <button 
+                        className={`closeBtn ${postedEmployee !== undefined ? "disabled" : ""}`} 
+                        disabled={postedEmployee !== undefined ? true : false}
+                        onClick={handleClose} 
+                    >
                         Close  
                     </button>
                 </div>

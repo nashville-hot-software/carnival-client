@@ -168,6 +168,19 @@
     transition: transform 0.4s ease;
 }
 
+.closeBtn.disabled {
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 15px;
+    width: 100px;
+    height: 40px;
+    background-color: #fff;
+    margin-left: 3%;
+    color: gray !important;
+    transition: transform 0.4s ease;
+}
+
 .closeBtn:hover {
     transform: scale(1.07);
 }
