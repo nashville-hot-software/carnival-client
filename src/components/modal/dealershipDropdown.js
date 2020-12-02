@@ -38,10 +38,12 @@ const DealershipDropdown = (props) => {
     const handleDealerSelect = (evt) => {
         const stateToChange = props.state;
         stateToChange.dealership_id = parseInt(evt.target.id);
+        console.log(stateToChange);
 
+        // for search input value
         props.setSelectedDealership(evt.target.innerHTML);
         
-        // resets query to empty string so when POST is finished the query value will be ""
+        // resets query to empty string so when request is finished the query value will be reset
         setQuery("");
 
         document.querySelector(".dealership-list--dropdown").scrollTop = 0;
