@@ -8,6 +8,7 @@ const SuccessSnackbar = (props) => {
 
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
+            
             props.setPostedEmployee();
         }, 3000)
     }

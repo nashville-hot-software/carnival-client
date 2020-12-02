@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
 import DealershipDropdown from "../modal/dealershipDropdown"
@@ -17,14 +17,11 @@ const AddEmployeeModal = (props) => {
     });
 
     const [postedEmployee, setPostedEmployee] = useState();
+    const [selectedDealership, setSelectedDealership] = useState("");
 
     const handleClose = () => {
 
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
+        clearForm();
 
         document.querySelector(".modal-box").classList.remove("show");
         document.querySelector(".modal-bg").classList.remove("show");
@@ -39,6 +36,14 @@ const AddEmployeeModal = (props) => {
         stateToChange[evt.target.id] = evt.target.value;
         setNewEmployee(stateToChange);
     };
+
+    const clearForm = () => {
+        const inputs = document.querySelectorAll('input')
+        const selects = document.querySelectorAll('select')
+
+        inputs.forEach(input => input.value = "")
+        selects.forEach(select => select.value = "none")
+    }
 
     const handleSubmit = () => {
         if (newEmployee.first_name === "" || newEmployee.last_name === "") {
@@ -66,13 +71,10 @@ const AddEmployeeModal = (props) => {
                     employee_type_id: 0,
                 });
                 
-                const inputs = document.querySelectorAll('input')
-                const selects = document.querySelectorAll('select')
-
-                inputs.forEach(input => input.value = "")
-                selects.forEach(select => select.value = "none")
-
                 
+                clearForm();
+                // below clears the dealershipDropdown input
+                setSelectedDealership("");
             });
         }
     };
@@ -81,21 +83,6 @@ const AddEmployeeModal = (props) => {
         <>
             <div className="modalHeader addEmployee">
                 Add Employee
-
-                {/* <ul>
-                    <li class="ele">
-                        <div
-                            type="button"
-                            onClick={handleClose}
-                            className="x spin large "
-                        >
-                            <b></b>
-                            <b></b>
-                            <b></b>
-                            <b></b>
-                        </div>
-                    </li>
-                </ul> */}
             </div>
                 
             <div className="modal-add--body">
@@ -132,8 +119,10 @@ const AddEmployeeModal = (props) => {
                 />
 
                 <DealershipDropdown 
-                    state={newEmployee} 
-                    setState={setNewEmployee}
+                    newEmployee={newEmployee} 
+                    setNewEmployee={setNewEmployee}
+                    selectedDealership={selectedDealership}
+                    setSelectedDealership={setSelectedDealership}
                 />
 
                 <EmployeeTypeSelect
