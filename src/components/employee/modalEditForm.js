@@ -14,13 +14,13 @@ const EmployeeDetailModal = props => {
 
   const [employee, setEmployee] = useState();  
 
+  // updated employee for the PUT 
   const [updatedEmployee, setUpdatedEmployee] = useState();
+
+  // for success snackbar
   const [employeeUpdated, setEmployeeUpdated] = useState(false);
 
   const [editMode, setEditMode] = useState(false);
-
-  // for dealership dropdown component
-  const [selectedDealership, setSelectedDealership] = useState("");
 
   const handleEditMode = () => {
       setEditMode(!editMode);
@@ -55,6 +55,10 @@ const EmployeeDetailModal = props => {
     } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
     } else if (stateToChange !== undefined) {
+
+        // NOTE: this stateToChange is not the updated one after handleFieldChange runs...
+        console.log(stateToChange);
+        
         setUpdatedEmployee(stateToChange);
 
         // NOTE: may need to move these guys to after the PUT (could be clearing form 
@@ -263,9 +267,8 @@ const EmployeeDetailModal = props => {
                 />
 
                 <DealershipDropdown 
-                    state={stateToChange} 
-                    selectedDealership={selectedDealership}
-                    setSelectedDealership={setSelectedDealership}
+                    state={stateToChange}
+                    employeeUpdated={employeeUpdated}
                 />
 
                 <EmployeeTypeSelect

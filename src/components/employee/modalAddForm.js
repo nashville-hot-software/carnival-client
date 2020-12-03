@@ -130,6 +130,7 @@ const AddEmployeeModal = (props) => {
                     setState={setNewEmployee}
                     selectedDealership={selectedDealership}
                     setSelectedDealership={setSelectedDealership}
+                    postedEmployee={postedEmployee}
                 />
 
                 <EmployeeTypeSelect
