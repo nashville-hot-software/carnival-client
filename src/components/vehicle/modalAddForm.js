@@ -125,17 +125,19 @@ const AddVehicleModal = (props) => {
         // pre-set form fields based on model selected via fetching one from DB,
         // update newVehicle object with pre-set vehicle data
         else if (evt.target.id === 'model' && evt.target.value !== "none") {
-            document.querySelector('#engine_type').value="filtered-engine-type";
+            
 
             const filteredVehicleType = vehicleTypes.filter(vehicleType => vehicleType.model === evt.target.value);
             stateToChange.vehicle_type_id = filteredVehicleType[0].id;
             setNewVehicle(stateToChange);
 
+            // get a vehicle matching the filtered vehicle to update form fields
             VehicleManager.getAll("vehicles", "vehicle_type", filteredVehicleType[0].id)
                 .then(resp => {
 
                     if (resp[0] !== undefined) {
                         setFilteredVehicle(resp[0]);
+                        document.querySelector('#engine_type').value="filtered-engine-type";
     
                         stateToChange.engine_type = resp[0].engine_type;
                         stateToChange.msr_price = resp[0].msr_price;
