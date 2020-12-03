@@ -344,7 +344,11 @@ const AddVehicleModal = (props) => {
                     <button onClick={handleVehicleSubmit} className="modal--addBtn">
                         Submit 
                     </button>
-                    <button className="closeBtn" onClick={handleModalClose}>
+                    <button 
+                        className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
+                        disabled={vehiclePosted === true ? true : false}
+                        onClick={handleModalClose}
+                    >
                         Close  
                     </button>
                 </div>

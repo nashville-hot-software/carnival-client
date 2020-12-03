@@ -99,7 +99,11 @@ const AddDealershipModal = (props) => {
                     <button onClick={handleSubmit} className="modal--addBtn">
                         Submit 
                     </button>
-                    <button className="closeBtn" onClick={handleClose}>
+                    <button 
+                        className={`closeBtn ${dealershipPosted === true ? "disabled" : ""}`} 
+                        disabled={dealershipPosted === true ? true : false}
+                        onClick={handleClose}
+                    >
                         Close  
                     </button>
                 </div>
