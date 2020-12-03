@@ -35,6 +35,9 @@ const DealershipDropdown = (props) => {
         }
     };
 
+    // NOTE: So the bug is happening because of passing selectedDealership state down... Wasn't able
+    //       to replicate it again on different branch until moved that state up to parent and passed
+    //       it down.
     const handleDealerSelect = (evt) => {
         const stateToChange = props.state;
         stateToChange.dealership_id = parseInt(evt.target.id);
