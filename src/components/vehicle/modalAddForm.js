@@ -64,7 +64,7 @@ const AddVehicleModal = (props) => {
         
         setTimeout(() => {
             document.querySelector(".modal-bg").classList.remove("show");
-        }, 400);
+        }, 300);
 
         setTimeout(function () {
             props.setCreationView(false)

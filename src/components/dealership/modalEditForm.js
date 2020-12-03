@@ -73,7 +73,7 @@ const DealershipDetailModal = props => {
     
     setTimeout(() => {
       document.querySelector(".modal-bg").classList.remove("show");
-    }, 400);
+    }, 300);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
