@@ -9,7 +9,10 @@ const SaleDetailModal = props => {
 
     const handleModalClose = () => {
         document.querySelector(".modal-box").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
+        
+        setTimeout(() => {
+            document.querySelector(".modal-bg").classList.remove("show");
+        }, 400);
 
         setTimeout(function () {
             props.setFilteredSale();
