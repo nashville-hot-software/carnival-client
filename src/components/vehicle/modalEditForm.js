@@ -63,7 +63,10 @@ const VehicleEditModal = props => {
     selects.forEach(select => select.value = "none")
 
     document.querySelector(".modal-box").classList.remove("show");
-    document.querySelector(".modal-bg").classList.remove("show");
+    
+    setTimeout(() => {
+      document.querySelector(".modal-bg").classList.remove("show");
+    }, 400);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
