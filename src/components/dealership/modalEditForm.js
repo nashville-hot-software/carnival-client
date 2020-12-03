@@ -6,12 +6,14 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import SuccessSnackbar from "../modal/snackbar"
 
 const DealershipDetailModal = props => {
 
   const [dealership, setDealership] = useState();  
   const [updatedDealership, setUpdatedDealership] = useState();
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(false); 
+  const [dealershipEdited, setDealershipEdited] = useState(false);
 
   const handleEditMode = () => {
       setEditMode(!editMode);
@@ -94,6 +96,7 @@ const DealershipDetailModal = props => {
               console.log(resp)
               setUpdatedDealership();
               setDealership(resp);
+              setDealershipEdited(true);
             })
         })
         .then(() => {
@@ -262,6 +265,10 @@ const DealershipDetailModal = props => {
 
             </div>
         )}
+        <SuccessSnackbar 
+            dealershipEdited={dealershipEdited} 
+            setDealershipEdited={setDealershipEdited}
+        />
     </>
   );
 };

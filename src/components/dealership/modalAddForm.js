@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DealershipManager from "../../api/dataManager";
 import "./list.css";
+import SuccessSnackbar from "../modal/snackbar"
 
 const AddDealershipModal = (props) => {
 
@@ -11,6 +12,8 @@ const AddDealershipModal = (props) => {
         phone: "",
         website: ""
       })
+    
+    const [dealershipPosted, setDealershipPosted] = useState(false);
 
     const handleClose = () => {
         const inputs = document.querySelectorAll('input')
@@ -56,6 +59,8 @@ const AddDealershipModal = (props) => {
                     tax_id: ""
                 });
                 
+                setDealershipPosted(true);
+                
                 const inputs = document.querySelectorAll('input')
                 const selects = document.querySelectorAll('select')
 
@@ -95,6 +100,11 @@ const AddDealershipModal = (props) => {
                         Close  
                     </button>
                 </div>
+                
+                <SuccessSnackbar 
+                    dealershipPosted={dealershipPosted} 
+                    setDealershipPosted={setDealershipPosted}
+                />
             </div>
         </>
     );

@@ -35,6 +35,22 @@ const SuccessSnackbar = (props) => {
 
             props.setVehicleEdited();
         }, 2500)
+    } else if (props.dealershipPosted === true) {
+        document.querySelector('.snackbar').classList.add('show');
+
+        setTimeout(() => {
+            document.querySelector('.snackbar').classList.remove('show');
+
+            props.setDealershipPosted();
+        }, 2500)
+    } else if (props.dealershipEdited === true) {
+        document.querySelector('.snackbar').classList.add('show');
+
+        setTimeout(() => {
+            document.querySelector('.snackbar').classList.remove('show');
+
+            props.setDealershipEdited();
+        }, 2500)
     }
 
     return (
