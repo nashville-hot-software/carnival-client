@@ -10,7 +10,7 @@
     background-color: #f3f7f9d9;
 }
 
-.vehicle-card--name .search {
+.vehicle-card--name.search {
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 3px;

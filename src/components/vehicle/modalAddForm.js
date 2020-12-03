@@ -11,6 +11,7 @@ import VehicleManager from "../../api/dataManager"
 import "./list.css";
 import "./modalAddForm.css";
 import AddVehicleTypeForm from "./modalAddVTForm"
+import SuccessSnackbar from "../modal/snackbar"
 
 const AddVehicleModal = (props) => {
 
@@ -47,6 +48,8 @@ const AddVehicleModal = (props) => {
         vehicle_type_id: 0,
         year_of_car: 0
       })
+
+      const [vehiclePosted, setVehiclePosted] = useState(false);
 
     //   const textInput = useRef();
 
@@ -188,6 +191,7 @@ const AddVehicleModal = (props) => {
                     year_of_car: 0
                 });
                 setFilteredVehicle();
+                setVehiclePosted(true);
                 
                 const inputs = document.querySelectorAll('input')
                 const selects = document.querySelectorAll('select')
@@ -341,6 +345,11 @@ const AddVehicleModal = (props) => {
                         Close  
                     </button>
                 </div>
+
+                <SuccessSnackbar 
+                    vehiclePosted={vehiclePosted} 
+                    setVehiclePosted={setVehiclePosted}
+                />
             </div>
         </>
     );
