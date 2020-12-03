@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DealershipManager from "../../api/dataManager";
 import "./list.css";
+import SuccessSnackbar from "../modal/snackbar"
 
 const AddDealershipModal = (props) => {
 
@@ -11,6 +12,8 @@ const AddDealershipModal = (props) => {
         phone: "",
         website: ""
       })
+    
+    const [dealershipPosted, setDealershipPosted] = useState(false);
 
     const handleClose = () => {
         const inputs = document.querySelectorAll('input')
@@ -20,7 +23,10 @@ const AddDealershipModal = (props) => {
         selects.forEach(select => select.value = "none")
 
         document.querySelector(".modal-box").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
+        
+        setTimeout(() => {
+            document.querySelector(".modal-bg").classList.remove("show");
+        }, 400);
 
         setTimeout(function () {
             props.setCreationView(false)
@@ -55,6 +61,8 @@ const AddDealershipModal = (props) => {
                     website: "",
                     tax_id: ""
                 });
+                
+                setDealershipPosted(true);
                 
                 const inputs = document.querySelectorAll('input')
                 const selects = document.querySelectorAll('select')
@@ -91,10 +99,19 @@ const AddDealershipModal = (props) => {
                     <button onClick={handleSubmit} className="modal--addBtn">
                         Submit 
                     </button>
-                    <button className="closeBtn" onClick={handleClose}>
+                    <button 
+                        className={`closeBtn ${dealershipPosted === true ? "disabled" : ""}`} 
+                        disabled={dealershipPosted === true ? true : false}
+                        onClick={handleClose}
+                    >
                         Close  
                     </button>
                 </div>
+                
+                <SuccessSnackbar 
+                    dealershipPosted={dealershipPosted} 
+                    setDealershipPosted={setDealershipPosted}
+                />
             </div>
         </>
     );

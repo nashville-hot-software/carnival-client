@@ -8,14 +8,19 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
+import SuccessSnackbar from "../modal/snackbar"
 
 const EmployeeDetailModal = props => {
 
   const [employee, setEmployee] = useState();  
 
   const [updatedEmployee, setUpdatedEmployee] = useState();
+  const [employeeUpdated, setEmployeeUpdated] = useState(false);
 
   const [editMode, setEditMode] = useState(false);
+
+  // for dealership dropdown component
+  const [selectedDealership, setSelectedDealership] = useState("");
 
   const handleEditMode = () => {
       setEditMode(!editMode);
@@ -24,6 +29,9 @@ const EmployeeDetailModal = props => {
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
+  // NOTE: So the problem here is when I'm passing this down as a prop to 
+  //       dealershipDropdown it's holding on to the old employee state
+  //       before field updates...
   var stateToChange = {...employee};
 
   const handleFieldChange = evt => {
@@ -75,7 +83,10 @@ const EmployeeDetailModal = props => {
     selects.forEach(select => select.value = "none")
 
     document.querySelector(".modal-box").classList.remove("show");
-    document.querySelector(".modal-bg").classList.remove("show");
+    
+    setTimeout(() => {
+      document.querySelector(".modal-bg").classList.remove("show");
+    }, 400);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
@@ -102,6 +113,7 @@ const EmployeeDetailModal = props => {
               console.log(resp)
               setUpdatedEmployee();
               setEmployee(resp);
+              setEmployeeUpdated(true);
             })
         })
         .then(() => {
@@ -211,7 +223,7 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="first_name"
-                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.first_name}`) 
+                placeholder={employee !== undefined ? (`${employee.first_name}`) 
                             : (`${props.employee.first_name}`)} 
                 onChange={handleFieldChange}
                 className="modal--input"
@@ -222,7 +234,7 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="last_name"
-                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.last_name}`) 
+                placeholder={employee !== undefined ? (`${employee.last_name}`) 
                             : (`${props.employee.last_name}`)} 
                 onChange={handleFieldChange}
                 className="modal--input"
@@ -233,7 +245,7 @@ const EmployeeDetailModal = props => {
                 <input 
                 type="text"
                 id="email_address"
-                placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.email_address}`) 
+                placeholder={employee !== undefined ? (`${employee.email_address}`) 
                             : (`${props.employee.email_address}`)}
                 onChange={handleFieldChange}
                 className="modal--input"
@@ -244,7 +256,7 @@ const EmployeeDetailModal = props => {
                 <input 
                     type="text"
                     id="phone"
-                    placeholder={updatedEmployee !== undefined ? (`${updatedEmployee.phone}`) 
+                    placeholder={employee !== undefined ? (`${employee.phone}`) 
                                 : (`${props.employee.phone}`)}
                     onChange={handleFieldChange}
                     className="modal--input"
@@ -252,6 +264,8 @@ const EmployeeDetailModal = props => {
 
                 <DealershipDropdown 
                     state={stateToChange} 
+                    selectedDealership={selectedDealership}
+                    setSelectedDealership={setSelectedDealership}
                 />
 
                 <EmployeeTypeSelect
@@ -267,8 +281,13 @@ const EmployeeDetailModal = props => {
                     </button>
                 </div>
 
+
             </div>
         )}
+        <SuccessSnackbar 
+            employeeUpdated={employeeUpdated} 
+            setEmployeeUpdated={setEmployeeUpdated}
+        />
     </>
   );
 };

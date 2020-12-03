@@ -1,39 +1,33 @@
 //move Dealership Dropdown and Employee Type Select menu out of 'employees' folder and into the new 'modal' folder 
 
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./dealershipDropdown.css";
 
 const DealershipDropdown = (props) => {
 
-    // Below 4 are for dealership dropdown (opening/closing, searched dealerships, selected, and search query)
+    // (searched dealership results, opening/closing dropdown, 
+    // and search query to show in input field value)
     const [dealerships, setDealerships] = useState([]);
     const [open, setOpen] = useState(false);
-    const [selectedDealership, setSelectedDealership] = useState("");
     const [query, setQuery] = useState("");
 
-    const handleDealershipDropdownClose = () => setOpen(false);
-
-    // Pings API for all dealerships matching dealership input value ,
-    // Setting query state for the input field so we can dynamically set the value of the text input,
-    // Conditionals to either search for dealerships and map the list, OR set a selected dealership
-    // to show as the new input value
+    // Conditionals to either search for dealerships and map the list, 
+    // OR update selectedDealership state to allow user to change input 
+    // value to a new value, OR close the dropdown if no search value
     const handleDealershipSearch = (evt) => {
         setQuery(evt.target.value);
 
-        if (evt.target.value.length > 0 && selectedDealership === "") {
-            EmployeeManager.getAll(
-                "dealerships",
-                "searchTerm",
-                evt.target.value
-            ).then((matchedDealerships) => {
+        if (evt.target.value.length > 0 && props.selectedDealership === "") {
+            EmployeeManager.getAll("dealerships", "searchTerm", evt.target.value)
+                .then((matchedDealerships) => {
                 setDealerships(matchedDealerships);
             });
 
             setOpen(true);
-        } else if (selectedDealership !== "") {
-            setSelectedDealership(evt.target.value);
+        } else if (props.selectedDealership !== "") {
+            props.setSelectedDealership(evt.target.value);
         } else {
             setDealerships([]);
 
@@ -41,15 +35,26 @@ const DealershipDropdown = (props) => {
         }
     };
 
+    // NOTE: So the bug is happening because of passing selectedDealership state down... Wasn't able
+    //       to replicate it again on different branch until moved that state up to parent and passed
+    //       it down.
+
+    // NOTE: And it's only happening on 2nd dealership update. Bet that's because 
     const handleDealerSelect = (evt) => {
         const stateToChange = props.state;
         stateToChange.dealership_id = parseInt(evt.target.id);
+        console.log(stateToChange);
 
-        setSelectedDealership(evt.target.innerHTML);
+        // for search input value
+        props.setSelectedDealership(evt.target.innerHTML);
+        
+        // resets query to empty string so when request is finished the query value will be reset
+        setQuery("");
 
-        const dropdownDiv = document.querySelector(".dealership-list--dropdown");
-        dropdownDiv.scrollTop = 0;
+        document.querySelector(".dealership-list--dropdown").scrollTop = 0;
     };
+
+    const handleDealershipDropdownClose = () => setOpen(false);
 
     return (
         <>
@@ -63,8 +68,7 @@ const DealershipDropdown = (props) => {
                 type="text"
                 onChange={handleDealershipSearch}
                 placeholder="Search Dealerships"
-                value={`${selectedDealership !== "" ? selectedDealership : query
-                    }`}
+                value={`${props.selectedDealership !== "" ? props.selectedDealership : query}`}
             />
 
             {dealerships.length > 0 ? (
