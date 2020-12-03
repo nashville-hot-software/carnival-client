@@ -17,7 +17,7 @@ const SuccessSnackbar = (props) => {
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
 
-            props.setEmployeeUpdated();
+            props.setEmployeeUpdated(false);
         }, 2500)
     } else if (props.vehiclePosted === true) {
         document.querySelector('.snackbar').classList.add('show');
