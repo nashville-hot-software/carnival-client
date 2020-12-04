@@ -4,15 +4,22 @@ import VehicleManager from "../../api/dataManager";
 import "./list.css"
 import ModalWrapper from "../modal/modalWrapper"
 
-
 const VehiclesList = props => {
 
   const [vehicles, setVehicles] = useState([]);
   const [filteredVehicle, setFilteredVehicle] = useState();
   const [creationView, setCreationView] = useState(false);
 
+  // below 3 states are for useEffect to re-render search page with user's query
+  // to reflect realtime updates/deletes from the modal form
+  const [vehicleEdited, setVehicleEdited] = useState(false);
+  const [vehicleDeleted, setVehicleDeleted] = useState(false);
+  const [query, setQuery] = useState();
+
   const handleVehicleSearch = evt => {
     if (evt.target.value.length > 0) {
+        setQuery(evt.target.value);
+
         VehicleManager.getAll("vehicles","vehicle",evt.target.value)
           .then(matchedVehicles => {
             setVehicles(matchedVehicles);
@@ -22,14 +29,12 @@ const VehiclesList = props => {
     }
   }
 
-  // Runs when you click on dealership card for details
   const showDetailsModal = vehicle => {
+    // so we can reset state to watch for n deletes after the first delete
+    setVehicleDeleted(false);
+
     const foundVehicle = vehicles.filter(filteredVehicle => filteredVehicle.id === vehicle.id);
 
-    console.log(foundVehicle)
-
-    // document.querySelector(".modal-box").classList.remove("fade-out");
-    // document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
 
@@ -40,20 +45,29 @@ const VehiclesList = props => {
   const handleShow = () => {
     setCreationView(true)
 
-    document.querySelector(".modal-box").classList.remove("fade-out");
-    document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   };
+
+  // this reflects the vehicle update in the search list realtime by re-searching for the
+  // vehicle after edit/delete
+    useEffect(() => {
+      VehicleManager.getAll("vehicles", "vehicle", query)
+          .then(matchedVehicles => {
+            setVehicles(matchedVehicles);
+        });
+    }, [vehicleEdited, vehicleDeleted])
 
   return (
     <>
       <ModalWrapper 
           matchedVehicle={filteredVehicle} 
           setFilteredVehicle={setFilteredVehicle}
-          setCreationView={setCreationView}
           vehicleCreationView={creationView}
-          {...props}
+          setCreationView={setCreationView}
+          vehicleEdited={vehicleEdited}
+          setVehicleEdited={setVehicleEdited}
+          setVehicleDeleted={setVehicleDeleted}
       />
 
       <div className="vehicles--container">
