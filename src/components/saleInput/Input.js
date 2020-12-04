@@ -1,9 +1,6 @@
 import React from "react";
 import InputLabel from "@material-ui/core/InputLabel";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
 import NumberFormat from 'react-number-format';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,18 +26,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>First Name:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>First Name:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
-                        id="first_name"
+                        id="firstName"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.first_name}
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -49,18 +44,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>Last Name:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Last Name:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
-                        id="last_name"
+                        id="lastName"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.last_name}
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -68,9 +61,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>Email:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Email:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         id="email"
                         className={classes.searchBarStyle}
@@ -79,7 +71,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -87,9 +78,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>Phone:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Phone:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         id="phone"
                         className={classes.searchBarStyle}
@@ -98,7 +88,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -106,9 +95,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>Street:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Street:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         id="street"
                         className={classes.searchBarStyle}
@@ -117,7 +105,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -125,9 +112,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>City:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>City:</label>
+                    <input
                         type="text"
                         label={props.sale.city}
                         id="city"
@@ -136,7 +122,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -144,9 +129,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>Zipcode:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Zipcode:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         id="zipcode"
                         className={classes.searchBarStyle}
@@ -155,7 +139,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -163,18 +146,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>Company Name:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Company Name:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
-                        id="company_name"
+                        id="companyName"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.company_name}
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -184,9 +165,8 @@ const Input = {
         return (
             <>
 
-                <InputLabel shrink>Deposit:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Deposit:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         type="text"
                         label={depositFormat}
@@ -195,7 +175,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -204,18 +183,16 @@ const Input = {
         let priceFormat = <NumberFormat value={props.sale.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         return (
             <>
-                <InputLabel shrink>Price:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Price:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
-                        id="price"
+                        id="phone"
                         className={classes.searchBarStyle}
                         type="text"
                         label={priceFormat}
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -223,9 +200,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>Phone:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>Phone:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         id="phone"
                         className={classes.searchBarStyle}
@@ -234,7 +210,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -242,9 +217,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>{props.sale.purchase_date}:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>{props.sale.purchase_date}:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         id="purchase_date"
                         className={classes.searchBarStyle}
@@ -252,7 +226,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
@@ -260,9 +233,8 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <InputLabel shrink>{props.sale.pickup_date}:</InputLabel>
-                <FormControl>
-                    <TextField
+                <label shrink>{props.sale.pickup_date}:</label>
+                    <input
                         onChange={props.handleInputFieldChange}
                         id="pickup_date"
                         className={classes.searchBarStyle}
@@ -270,7 +242,6 @@ const Input = {
                         autoFocus
                         variant="outlined"
                     />
-                </FormControl>
             </>
         );
     },
