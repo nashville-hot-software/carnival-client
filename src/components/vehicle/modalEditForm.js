@@ -25,6 +25,10 @@ const VehicleEditModal = props => {
 
   const handleFieldChange = evt => {
       stateToChange[evt.target.id] = evt.target.value;
+
+      if (evt.target.id === "miles_count") {
+        stateToChange[evt.target.id] = parseInt(evt.target.value);
+      }
   };
 
   const handleSubmit = evt => {
@@ -34,6 +38,8 @@ const VehicleEditModal = props => {
         window.alert("Please enter a vehicle name")
     } else if (stateToChange.interior_color === "") {
         window.alert("Please enter city")
+    } else if (stateToChange.miles_count === "") {
+      window.alert("Please enter vehicle mileage")
     } else {
         setUpdatedVehicle(stateToChange);
 
@@ -80,7 +86,6 @@ const VehicleEditModal = props => {
   useEffect(() => {
     VehicleManager.getOne("vehicles", props.vehicle.id)
       .then(data => {
-        console.log(data)
         setVehicle(data)
       });
   }, [props.vehicle])
@@ -92,7 +97,9 @@ const VehicleEditModal = props => {
         .then(() => {
           VehicleManager.getOne("vehicles", props.vehicle.id)
             .then(resp => {
+              console.log("Respone from DB VV")
               console.log(resp)
+
               setUpdatedVehicle();
               setVehicle(resp);
               props.setVehicleEdited(true);
@@ -102,12 +109,10 @@ const VehicleEditModal = props => {
           setEditMode(false);
 
           const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
           if (muiSwitch.classList.contains('Mui-checked')) {
             muiSwitch.click();
           }
         })
-        
     }
   }, [updatedVehicle])
 
@@ -159,6 +164,13 @@ const VehicleEditModal = props => {
                 </span>
               </div>
               <div>
+                <strong>Mileage:</strong> 
+                <span>
+                  {vehicle !== undefined ? (`${vehicle.miles_count}`) 
+                  : (`${props.vehicle.miles_count}`)}
+                </span>
+              </div>
+              <div>
                 <strong>Engine Type:</strong> 
                 <span>
                   {vehicle !== undefined ? (`${vehicle.engine_type}`) 
@@ -192,6 +204,16 @@ const VehicleEditModal = props => {
         ) : (
             <div className="modal-edit--body">
             
+                <label><strong>Mileage:</strong></label> 
+                <input 
+                    type="text"
+                    id="miles_count"
+                    placeholder={vehicle !== undefined ? (`${vehicle.miles_count}`) 
+                                : (`${props.vehicle.miles_count}`)}
+                    onChange={handleFieldChange}
+                    className="modal--input"
+                />
+
                 <label><strong>Exterior Color:</strong></label> 
                 <input 
                     type="text"
