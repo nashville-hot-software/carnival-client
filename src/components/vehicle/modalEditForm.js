@@ -196,7 +196,10 @@ const VehicleEditModal = props => {
               <button onClick={handleDelete} className="removeEmployee--btn">
                   Remove
               </button>
-              <button className="closeBtn" onClick={handleModalClose}>
+              <button 
+                className={`closeBtn ${props.vehicleEdited === true ? "disabled" : ""}`} 
+                disabled={props.vehicleEdited === true ? true : false}
+                onClick={handleModalClose}>
                   Cancel  
               </button>
           </div>
