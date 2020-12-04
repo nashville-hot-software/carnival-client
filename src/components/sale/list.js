@@ -16,7 +16,7 @@ const SaleList = (props) => {
     const [show, setShow] = useState(false);
     // const handleShow = () => setShow(true);
     const handleDropdownClose = () => setOpen(false);
-    
+
     const showDetailsModal = salesArg => {
         setDetailsView(true);
         const foundSale = sales.filter(matchedSales => matchedSales.id === salesArg.id);
@@ -55,6 +55,7 @@ const SaleList = (props) => {
     return (
         <>
             <ModalWrapper
+                setMatchedSale={setMatchedSale}
                 matchedSale={matchedSale}
                 setCreationView={setCreationView}
                 creationView={creationView}

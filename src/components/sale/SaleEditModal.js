@@ -8,9 +8,9 @@ import FormControl from "@material-ui/core/FormControl";
 import DealershipDropdown from "../modal/dealershipDropdown";
 import VehicleSearch from "../modal/vehicleSearch";
 import DataManager from "../../api/dataManager";
-import StateSelectDropdown from '../modal/StateSelect'
-import PaymentTypeSelectDropdown from '../modal/PaymentTypeSelect'
-import Input from '../saleInput/Input'
+import StateSelectDropdown from "../modal/StateSelect";
+import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
+import Input from "../saleInput/Input";
 
 const SaleEditModal = (props) => {
   const [sale, setSale] = useState();
@@ -19,20 +19,17 @@ const SaleEditModal = (props) => {
   const [selectedState, setSelectedState] = useState();
   const [selectedPaymentType, setSelectedPaymentType] = useState();
 
-
-
   const handleEditMode = () => {
     setEditMode(!editMode);
     const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
     muiSwitch.classList.add("Mui-checked", "PrivateSwitchBase-checked-2");
   };
 
-
   var stateToChange = { ...sale };
 
   // (For edit mode)
   const handleInputFieldChange = (evt) => {
-    console.log(stateToChange)
+    console.log(stateToChange);
     stateToChange[evt.target.id] = evt.target.value;
   };
 
@@ -81,6 +78,7 @@ const SaleEditModal = (props) => {
   const handleModalClose = () => {
     setEditMode(!editMode);
     setUpdatedSale();
+    props.setMatchedSale();
 
     const inputs = document.querySelectorAll("input");
     const selects = document.querySelectorAll("select");
@@ -107,15 +105,15 @@ const SaleEditModal = (props) => {
   useEffect(() => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
       setSale(data[0]);
-      console.log(data)
-      setSelectedState(data.state)
-      setSelectedPaymentType(data.payment_method)
+      console.log(data);
+      setSelectedState(data.state);
+      setSelectedPaymentType(data.payment_method);
     });
   }, [props.sale]);
-  
+
   useEffect(() => {
     if (updatedSale !== undefined) {
-      console.log("this is updated state",updatedSale)
+      console.log("this is updated state", updatedSale);
       DataManager.update("sales", updatedSale, props.sale.id)
         // Later update API to return updated obj on the PUT response instead of re-fetching
         .then(() => {
@@ -191,54 +189,111 @@ const SaleEditModal = (props) => {
           <strong>sales type id:</strong> {`${props.sale.sales_type_id}`}
           <strong>Vehicle Id:</strong> {`${props.sale.vehicle_id}`}
           <strong>Dealership:</strong> {`${props.sale.dealership_id}`}
+          <div className="addEmployee--btn--container">
+            <button className="closeBtn" onClick={handleModalClose}>
+              Close
+            </button>
+          </div>
         </div>
       ) : (
-          <>
-            <div className="modal-details--body">
-              <Input.FirstName handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
-              <Input.LastName handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
-              <Input.Email handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
-              <Input.Phone handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
-              <Input.Street handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
-              <Input.City handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
-              <Input.ZipCode handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
-              <Input.CompanyName handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
-              <Input.Deposit handleInputFieldChange={handleInputFieldChange}{...props} sale={props.sale} />
-              <Input.Price handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
-              <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
-              <Input.PickupDate handleInputFieldChange={handleInputFieldChange} {...props}sale={props.sale} />
-              <StateSelectDropdown
-                sale={sale}
-                selectedState={selectedState}
-                setSale={setSale} />
-              <label>Sale Types:</label>
-              <select
-                onChange={handleInputFieldChange}
-                id="sales_type_id"
-                className="sale-type--select"
-              >
-                <option value="0">Select Type</option>
-                <option value="1">Purchase</option>
-                <option value="2">Lease</option>
-              </select>
-              <PaymentTypeSelectDropdown
-                selectedPaymentType={selectedPaymentType}
-                sale={sale}
-                setSale={setSale} />
-              {/* This block is for the dealership search dropdown menu (lines 157-184) */}
-
-            </div>
+        <>
+          <div className="modal-details--body">
+            <Input.FirstName
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.LastName
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.Email
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.Phone
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.Street
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.City
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.ZipCode
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.CompanyName
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.Deposit
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.Price
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.PurchaseDate
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <Input.PickupDate
+              handleInputFieldChange={handleInputFieldChange}
+              {...props}
+              sale={props.sale}
+            />
+            <StateSelectDropdown
+              sale={sale}
+              selectedState={selectedState}
+              setSale={setSale}
+            />
+            <label>Sale Types:</label>
+            <select
+              onChange={handleInputFieldChange}
+              id="sales_type_id"
+              className="sale-type--select"
+            >
+              <option value="0">Select Type</option>
+              <option value="1">Purchase</option>
+              <option value="2">Lease</option>
+            </select>
+            <PaymentTypeSelectDropdown
+              selectedPaymentType={selectedPaymentType}
+              sale={sale}
+              setSale={setSale}
+            />
+            {/* This block is for the dealership search dropdown menu (lines 157-184) */}
 
             <div className="addEmployee--btn--container">
-              <button onClick={handleEditSubmit} className="updateEmployee--btn">
+              <button
+                onClick={handleEditSubmit}
+                className="updateEmployee--btn"
+              >
                 Update
-            </button>
+              </button>
               <button className="closeBtn" onClick={handleModalClose}>
                 Cancel
-            </button>
+              </button>
             </div>
-          </>
-        )}
+          </div>
+        </>
+      )}
     </>
   );
 };

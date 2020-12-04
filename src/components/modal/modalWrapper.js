@@ -44,8 +44,9 @@ const ModalWrapper = (props) => {
                         setFilteredCustomer={props.setFilteredCustomer}
                     />
                 ) : null}
-
+                
                 {props.filteredSale !== undefined ? (
+                    // this needs to be renamed to saleDashboardDetails to reflect the sale details on dashboard
                     <SaleDetailModal
                         sale={props.filteredSale}
                         setFilteredSale={props.setFilteredSale}
