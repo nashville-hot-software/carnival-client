@@ -20,10 +20,10 @@ const EmployeeDetailModal = props => {
   // for success snackbar
   const [employeeUpdated, setEmployeeUpdated] = useState(false);
 
-  const [editMode, setEditMode] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
-      setEditMode(!editMode);
+      props.setEditMode(!props.editMode);
 
       const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
@@ -61,8 +61,6 @@ const EmployeeDetailModal = props => {
         
         setUpdatedEmployee(stateToChange);
 
-        // NOTE: may need to move these guys to after the PUT (could be clearing form 
-        // before the PUT... not sure if that will change stateToChange back to null...)
         const inputs = document.querySelectorAll('input')
         const selects = document.querySelectorAll('select')
         inputs.forEach(input => input.value = "")
@@ -78,7 +76,7 @@ const EmployeeDetailModal = props => {
   }
 
   const handleModalClose = () => {
-    setEditMode(false);
+    props.setEditMode(false);
     setUpdatedEmployee();
 
     const inputs = document.querySelectorAll('input')
@@ -121,7 +119,7 @@ const EmployeeDetailModal = props => {
             })
         })
         .then(() => {
-          setEditMode(false);
+          props.setEditMode(false);
 
           const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
@@ -173,7 +171,7 @@ const EmployeeDetailModal = props => {
             </ul> */}
         </div>
 
-        {editMode === false ? (
+        {props.editMode === false ? (
         <>
           <div className="modal-details--body">
               <div>

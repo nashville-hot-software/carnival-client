@@ -9,9 +9,14 @@ const Employees = (props) => {
     
     const [creationView, setCreationView] = useState(false);
     const [filteredEmployee, setFilteredEmployee] = useState();
+    const [editMode, setEditMode] = useState(false);
+    
+    const [query, setQuery] = useState();
 
     const handleEmployeeSearch = (evt) => {
         if (evt.target.value.length > 0) {
+            setQuery(evt.target.value);
+
             EmployeeManager.getAll("employees", "searchTerm", evt.target.value).then(
                 (matchedEmployees) => {
                     setEmployees(matchedEmployees);
@@ -34,8 +39,6 @@ const Employees = (props) => {
         setFilteredEmployee(foundEmployee[0]);
     }
 
-    // Probably don't need this guy... Just one to open modal and the different clicks
-    // will update different states for the modal create/details/edit modes
     const handleShow = () => {
         setCreationView(true)
 
@@ -43,13 +46,24 @@ const Employees = (props) => {
         document.querySelector(".modal-bg").classList.add("show");
     };
 
+    // this reflects the employee update in the search list realtime by re-searching for the
+    // employee when edit mode switched off
+    useEffect(() => {
+        EmployeeManager.getAll("employees", "searchTerm", query).then(
+            (matchedEmployees) => {
+                setEmployees(matchedEmployees);
+            }
+        );
+    }, [editMode])
+
     return (
         <>
             <ModalWrapper 
                 filteredEmployee={filteredEmployee} 
                 setCreationView={setCreationView}
                 employeeCreationView={creationView}
-                {...props}
+                editMode={editMode}
+                setEditMode={setEditMode}
             />
                 
             {/* EMPLOYEE SEARCH PAGE */}

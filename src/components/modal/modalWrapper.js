@@ -18,7 +18,11 @@ const ModalWrapper = (props) => {
             </div>
             <div className="modal-box">
                 {props.filteredEmployee !== undefined && props.employeeCreationView === false? (
-                    <EmployeeDetailModal employee={props.filteredEmployee} {...props} />
+                    <EmployeeDetailModal 
+                        employee={props.filteredEmployee} 
+                        editMode={props.editMode}
+                        setEditMode={props.setEditMode}
+                    />
                 ) : null}
                 
                 {props.employeeCreationView === true ? (
