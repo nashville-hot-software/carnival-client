@@ -32,7 +32,7 @@ const Input = {
                         id="firstName"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.first_name}
+                        placeholders={props.sale.first_name}
                         autoFocus
                         variant="outlined"
                     />
@@ -50,7 +50,7 @@ const Input = {
                         id="lastName"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.last_name}
+                        placeholders={props.sale.last_name}
                         autoFocus
                         variant="outlined"
                     />
@@ -67,7 +67,7 @@ const Input = {
                         id="email"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.email}
+                        placeholders={props.sale.email}
                         autoFocus
                         variant="outlined"
                     />
@@ -84,7 +84,7 @@ const Input = {
                         id="phone"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.phone}
+                        placeholders={props.sale.phone}
                         autoFocus
                         variant="outlined"
                     />
@@ -101,7 +101,7 @@ const Input = {
                         id="street"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.street}
+                        placeholders={props.sale.street}
                         autoFocus
                         variant="outlined"
                     />
@@ -115,7 +115,7 @@ const Input = {
                 <label shrink>City:</label>
                     <input
                         type="text"
-                        label={props.sale.city}
+                        placeholders={props.sale.city}
                         id="city"
                         onChange={props.handleInputFieldChange}
                         className={classes.searchBarStyle}
@@ -135,7 +135,7 @@ const Input = {
                         id="zipcode"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.zipcode}
+                        placeholders={props.sale.zipcode}
                         autoFocus
                         variant="outlined"
                     />
@@ -152,7 +152,7 @@ const Input = {
                         id="companyName"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.company_name}
+                        placeholders={props.sale.company_name}
                         autoFocus
                         variant="outlined"
                     />
@@ -169,7 +169,7 @@ const Input = {
                     <input
                         onChange={props.handleInputFieldChange}
                         type="text"
-                        label={depositFormat}
+                        placeholders={depositFormat}
                         id="deposit"
                         className={classes.searchBarStyle}
                         autoFocus
@@ -189,7 +189,7 @@ const Input = {
                         id="phone"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={priceFormat}
+                        placeholders={priceFormat}
                         autoFocus
                         variant="outlined"
                     />
@@ -206,7 +206,7 @@ const Input = {
                         id="phone"
                         className={classes.searchBarStyle}
                         type="text"
-                        label={props.sale.phone}
+                        placeholders={props.sale.phone}
                         autoFocus
                         variant="outlined"
                     />
