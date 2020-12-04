@@ -33,7 +33,7 @@ const Input = {
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
-                        id="firstName"
+                        id="first_name"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.first_name}
@@ -53,7 +53,7 @@ const Input = {
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
-                        id="lastName"
+                        id="last_name"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.last_name}
@@ -167,7 +167,7 @@ const Input = {
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
-                        id="companyName"
+                        id="company_name"
                         className={classes.searchBarStyle}
                         type="text"
                         label={props.sale.company_name}
@@ -208,7 +208,7 @@ const Input = {
                 <FormControl>
                     <TextField
                         onChange={props.handleInputFieldChange}
-                        id="phone"
+                        id="price"
                         className={classes.searchBarStyle}
                         type="text"
                         label={priceFormat}

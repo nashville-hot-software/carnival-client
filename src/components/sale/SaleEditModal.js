@@ -106,7 +106,7 @@ const SaleEditModal = (props) => {
   };
   useEffect(() => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
-      setSale(data);
+      setSale(data[0]);
       console.log(data)
       setSelectedState(data.state)
       setSelectedPaymentType(data.payment_method)
@@ -115,13 +115,14 @@ const SaleEditModal = (props) => {
   
   useEffect(() => {
     if (updatedSale !== undefined) {
+      console.log("this is updated state",updatedSale)
       DataManager.update("sales", updatedSale, props.sale.id)
         // Later update API to return updated obj on the PUT response instead of re-fetching
         .then(() => {
           DataManager.getOne("sales", props.sale.id).then((data) => {
-            console.log(data);
+            console.log(data[0]);
             setUpdatedSale();
-            setSale(data);
+            setSale(data[0]);
           });
         })
         .then(() => {
