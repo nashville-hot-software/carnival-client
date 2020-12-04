@@ -12,11 +12,10 @@ const DealershipDetailModal = props => {
 
   const [dealership, setDealership] = useState();  
   const [updatedDealership, setUpdatedDealership] = useState();
-  const [editMode, setEditMode] = useState(false); 
   const [dealershipEdited, setDealershipEdited] = useState(false);
 
   const handleEditMode = () => {
-      setEditMode(!editMode);
+      props.setEditMode(!props.editMode);
 
       const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
@@ -26,7 +25,6 @@ const DealershipDetailModal = props => {
 
   const handleFieldChange = evt => {
       stateToChange[evt.target.id] = evt.target.value;
-      console.log(stateToChange)
   };
 
   const handleSubmit = evt => {
@@ -56,12 +54,15 @@ const DealershipDetailModal = props => {
   const handleDelete = () => {
     if (window.confirm(`Are you sure you want to delete Dealership #${props.dealership.id}?`)) {
       DealershipManager.deleteUserData("dealerships", props.dealership.id)
-        .then(handleModalClose());
+        .then(() => {
+          props.setDealershipDeleted(true);
+          handleModalClose();
+        });
     }
   }
 
   const handleModalClose = () => {
-    setEditMode(false);
+    props.setEditMode(false);
     setUpdatedDealership();
 
     const inputs = document.querySelectorAll('input')
@@ -73,7 +74,7 @@ const DealershipDetailModal = props => {
     
     setTimeout(() => {
       document.querySelector(".modal-bg").classList.remove("show");
-    }, 400);
+    }, 300);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
@@ -103,7 +104,7 @@ const DealershipDetailModal = props => {
             })
         })
         .then(() => {
-          setEditMode(false);
+          props.setEditMode(false);
 
           const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
@@ -154,7 +155,7 @@ const DealershipDetailModal = props => {
             </ul> */}
         </div>
 
-        {editMode === false ? (
+        {props.editMode === false ? (
         <>
           <div className="modal-details--body">
               <div>
@@ -197,8 +198,13 @@ const DealershipDetailModal = props => {
               <button onClick={handleDelete} className="removeEmployee--btn">
                   Remove
               </button>
-              <button className="closeBtn" onClick={handleModalClose}>
-                  Cancel  
+              <button 
+                // className="closeBtn" 
+                className={`closeBtn ${dealershipEdited === true ? "disabled" : ""}`} 
+                disabled={dealershipEdited === true ? true : false}
+                onClick={handleModalClose}
+              >
+                  Close  
               </button>
           </div>
         </>

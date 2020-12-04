@@ -6,7 +6,7 @@
     position: fixed;
 
     transform: translateX(400%);
-    transition: transform 400ms linear;
+    transition: transform 300ms linear;
 
     display: flex;
     flex-direction: column;

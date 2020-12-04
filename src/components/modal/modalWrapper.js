@@ -18,8 +18,13 @@ const ModalWrapper = (props) => {
             <div className="modal-bg">
             </div>
             <div className="modal-box">
-                {props.filteredEmployee !== undefined && props.employeeCreationView === false ? (
-                    <EmployeeDetailModal employee={props.filteredEmployee} {...props} />
+                {props.filteredEmployee !== undefined && props.employeeCreationView === false? (
+                    <EmployeeDetailModal 
+                        employee={props.filteredEmployee} 
+                        editMode={props.editMode}
+                        setEditMode={props.setEditMode}
+                        setEmployeeDeleted={props.setEmployeeDeleted}
+                    />
                 ) : null}
 
                 {props.employeeCreationView === true ? (
@@ -58,6 +63,9 @@ const ModalWrapper = (props) => {
                     <DealershipDetailModal
                         dealership={props.filteredDealership}
                         setFilteredDealership={props.setFilteredDealership}
+                        editMode={props.editMode}
+                        setEditMode={props.setEditMode}
+                        setDealershipDeleted={props.setDealershipDeleted}
                     />
                 ) : null}
 
@@ -69,6 +77,9 @@ const ModalWrapper = (props) => {
                     <VehicleEditModal
                         vehicle={props.matchedVehicle}
                         setFilteredVehicle={props.setFilteredVehicle}
+                        vehicleEdited={props.vehicleEdited}
+                        setVehicleEdited={props.setVehicleEdited}
+                        setVehicleDeleted={props.setVehicleDeleted}
                     />
                 ) : null}
 

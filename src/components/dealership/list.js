@@ -10,22 +10,30 @@ const Dealerships = props => {
   const [dealerships, setDealerships] = useState([]);
   const [filteredDealership, setFilteredDealership] = useState();
   const [creationView, setCreationView] = useState(false);
+  
+  // below 3 states are for useEffect to re-render search page with user's query
+  // to reflect realtime updates/deletes from the modal form
+  const [editMode, setEditMode] = useState(false);
+  const [dealershipDeleted, setDealershipDeleted] = useState(false);
+  const [query, setQuery] = useState();
 
   const handleDealershipSearch = evt => {
-    DealershipManager.getAll("dealerships","searchTerm",evt.target.value)
-      .then(matchedDealerships => {
-        setDealerships(matchedDealerships);
-    });
+    if (evt.target.value.length > 0) {
+      setQuery(evt.target.value);
+
+      DealershipManager.getAll("dealerships","searchTerm",evt.target.value)
+        .then(matchedDealerships => {
+          setDealerships(matchedDealerships);
+      });
+    }
   }
 
-  // Runs when you click on dealership card for details
   const showDetailsModal = dealership => {
+    // so we can reset state to watch for n deletes after the first delete
+    setDealershipDeleted(false);
+
     const foundDealership = dealerships.filter(filteredDealership => filteredDealership.id === dealership.id);
 
-    console.log(foundDealership)
-
-    // document.querySelector(".modal-box").classList.remove("fade-out");
-    // document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
 
@@ -36,11 +44,18 @@ const Dealerships = props => {
   const handleShow = () => {
     setCreationView(true)
 
-    document.querySelector(".modal-box").classList.remove("fade-out");
-    document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   };
+
+    // this reflects the dealership update in the search list realtime by re-searching for the
+    // dealership when edit mode switched off
+    useEffect(() => {
+      DealershipManager.getAll("dealerships","searchTerm",query)
+      .then(matchedDealerships => {
+        setDealerships(matchedDealerships);
+      });
+    }, [editMode, dealershipDeleted])
 
   return (
     <>
@@ -49,7 +64,9 @@ const Dealerships = props => {
           setFilteredDealership={setFilteredDealership}
           setCreationView={setCreationView}
           dealershipCreationView={creationView}
-          {...props}
+          editMode={editMode}
+          setEditMode={setEditMode}
+          setDealershipDeleted={setDealershipDeleted}
       />
 
       <div className="dealerships--container">
