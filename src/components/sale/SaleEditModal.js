@@ -86,15 +86,11 @@ const SaleEditModal = (props) => {
     inputs.forEach((input) => (input.value = ""));
     selects.forEach((select) => (select.value = "none"));
 
-    document.querySelector(".modal-bg").classList.add("fade-out");
-    document.querySelector(".modal-box").classList.add("fade-out");
+    document.querySelector(".modal-box").classList.remove("show");
 
-    setTimeout(function () {
-      document.querySelector(".modal-box").classList.remove("fade-out");
-      document.querySelector(".modal-bg").classList.remove("fade-out");
-      document.querySelector(".modal-box").classList.remove("show");
+    setTimeout(() => {
       document.querySelector(".modal-bg").classList.remove("show");
-    }, 500);
+    }, 300);
 
     const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
 
