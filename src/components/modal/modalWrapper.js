@@ -65,6 +65,8 @@ const ModalWrapper = (props) => {
                     <VehicleEditModal 
                         vehicle={props.matchedVehicle} 
                         setFilteredVehicle={props.setFilteredVehicle}
+                        vehicleEdited={props.vehicleEdited}
+                        setVehicleEdited={props.setVehicleEdited}
                     />
                 ) : null}
 

@@ -11,8 +11,13 @@ const VehiclesList = props => {
   const [filteredVehicle, setFilteredVehicle] = useState();
   const [creationView, setCreationView] = useState(false);
 
+  const [vehicleEdited, setVehicleEdited] = useState(false);
+  const [query, setQuery] = useState();
+
   const handleVehicleSearch = evt => {
     if (evt.target.value.length > 0) {
+        setQuery(evt.target.value);
+
         VehicleManager.getAll("vehicles","vehicle",evt.target.value)
           .then(matchedVehicles => {
             setVehicles(matchedVehicles);
@@ -46,6 +51,15 @@ const VehiclesList = props => {
     document.querySelector(".modal-bg").classList.add("show");
   };
 
+  // this reflects the employee update in the search list realtime by re-searching for the
+    // employee when edit mode switched off
+    useEffect(() => {
+      VehicleManager.getAll("vehicles", "vehicle", query)
+          .then(matchedVehicles => {
+            setVehicles(matchedVehicles);
+        });
+    }, [vehicleEdited])
+
   return (
     <>
       <ModalWrapper 
@@ -53,6 +67,8 @@ const VehiclesList = props => {
           setFilteredVehicle={setFilteredVehicle}
           setCreationView={setCreationView}
           vehicleCreationView={creationView}
+          vehicleEdited={vehicleEdited}
+          setVehicleEdited={setVehicleEdited}
           {...props}
       />
 

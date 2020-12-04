@@ -13,7 +13,7 @@ const VehicleEditModal = props => {
   const [vehicle, setVehicle] = useState();  
   const [updatedVehicle, setUpdatedVehicle] = useState();
   const [editMode, setEditMode] = useState(false);
-  const [vehicleEdited, setVehicleEdited] = useState(false);
+  // const [vehicleEdited, setVehicleEdited] = useState(false);
 
   const handleEditMode = () => {
       setEditMode(!editMode);
@@ -93,7 +93,7 @@ const VehicleEditModal = props => {
               console.log(resp)
               setUpdatedVehicle();
               setVehicle(resp);
-              setVehicleEdited(true);
+              props.setVehicleEdited(true);
             })
         })
         .then(() => {
@@ -224,8 +224,8 @@ const VehicleEditModal = props => {
             </div>
         )}
         <SuccessSnackbar 
-            vehicleEdited={vehicleEdited} 
-            setVehicleEdited={setVehicleEdited}
+            vehicleEdited={props.vehicleEdited} 
+            setVehicleEdited={props.setVehicleEdited}
         />
     </>
   );
