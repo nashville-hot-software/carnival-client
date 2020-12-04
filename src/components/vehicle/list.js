@@ -4,7 +4,6 @@ import VehicleManager from "../../api/dataManager";
 import "./list.css"
 import ModalWrapper from "../modal/modalWrapper"
 
-
 const VehiclesList = props => {
 
   const [vehicles, setVehicles] = useState([]);
@@ -31,10 +30,6 @@ const VehiclesList = props => {
   const showDetailsModal = vehicle => {
     const foundVehicle = vehicles.filter(filteredVehicle => filteredVehicle.id === vehicle.id);
 
-    console.log(foundVehicle)
-
-    // document.querySelector(".modal-box").classList.remove("fade-out");
-    // document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
 
@@ -45,14 +40,12 @@ const VehiclesList = props => {
   const handleShow = () => {
     setCreationView(true)
 
-    document.querySelector(".modal-box").classList.remove("fade-out");
-    document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   };
 
-  // this reflects the employee update in the search list realtime by re-searching for the
-    // employee when edit mode switched off
+  // this reflects the vehicle update in the search list realtime by re-searching for the
+  // vehicle when edit mode switched off
     useEffect(() => {
       VehicleManager.getAll("vehicles", "vehicle", query)
           .then(matchedVehicles => {
@@ -65,11 +58,10 @@ const VehiclesList = props => {
       <ModalWrapper 
           matchedVehicle={filteredVehicle} 
           setFilteredVehicle={setFilteredVehicle}
-          setCreationView={setCreationView}
           vehicleCreationView={creationView}
+          setCreationView={setCreationView}
           vehicleEdited={vehicleEdited}
           setVehicleEdited={setVehicleEdited}
-          {...props}
       />
 
       <div className="vehicles--container">

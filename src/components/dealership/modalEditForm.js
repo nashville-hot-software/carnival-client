@@ -12,11 +12,10 @@ const DealershipDetailModal = props => {
 
   const [dealership, setDealership] = useState();  
   const [updatedDealership, setUpdatedDealership] = useState();
-  const [editMode, setEditMode] = useState(false); 
   const [dealershipEdited, setDealershipEdited] = useState(false);
 
   const handleEditMode = () => {
-      setEditMode(!editMode);
+      props.setEditMode(!props.editMode);
 
       const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
@@ -61,7 +60,7 @@ const DealershipDetailModal = props => {
   }
 
   const handleModalClose = () => {
-    setEditMode(false);
+    props.setEditMode(false);
     setUpdatedDealership();
 
     const inputs = document.querySelectorAll('input')
@@ -103,7 +102,7 @@ const DealershipDetailModal = props => {
             })
         })
         .then(() => {
-          setEditMode(false);
+          props.setEditMode(false);
 
           const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
@@ -154,7 +153,7 @@ const DealershipDetailModal = props => {
             </ul> */}
         </div>
 
-        {editMode === false ? (
+        {props.editMode === false ? (
         <>
           <div className="modal-details--body">
               <div>

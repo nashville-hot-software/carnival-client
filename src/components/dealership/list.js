@@ -10,12 +10,19 @@ const Dealerships = props => {
   const [dealerships, setDealerships] = useState([]);
   const [filteredDealership, setFilteredDealership] = useState();
   const [creationView, setCreationView] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+
+  const [query, setQuery] = useState();
 
   const handleDealershipSearch = evt => {
-    DealershipManager.getAll("dealerships","searchTerm",evt.target.value)
-      .then(matchedDealerships => {
-        setDealerships(matchedDealerships);
-    });
+    if (evt.target.value.length > 0) {
+      setQuery(evt.target.value);
+
+      DealershipManager.getAll("dealerships","searchTerm",evt.target.value)
+        .then(matchedDealerships => {
+          setDealerships(matchedDealerships);
+      });
+    }
   }
 
   // Runs when you click on dealership card for details
@@ -42,6 +49,15 @@ const Dealerships = props => {
     document.querySelector(".modal-bg").classList.add("show");
   };
 
+    // this reflects the dealership update in the search list realtime by re-searching for the
+    // dealership when edit mode switched off
+    useEffect(() => {
+      DealershipManager.getAll("dealerships","searchTerm",query)
+      .then(matchedDealerships => {
+        setDealerships(matchedDealerships);
+      });
+    }, [editMode])
+
   return (
     <>
       <ModalWrapper 
@@ -49,7 +65,8 @@ const Dealerships = props => {
           setFilteredDealership={setFilteredDealership}
           setCreationView={setCreationView}
           dealershipCreationView={creationView}
-          {...props}
+          editMode={editMode}
+          setEditMode={setEditMode}
       />
 
       <div className="dealerships--container">

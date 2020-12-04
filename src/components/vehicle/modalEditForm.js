@@ -13,7 +13,6 @@ const VehicleEditModal = props => {
   const [vehicle, setVehicle] = useState();  
   const [updatedVehicle, setUpdatedVehicle] = useState();
   const [editMode, setEditMode] = useState(false);
-  // const [vehicleEdited, setVehicleEdited] = useState(false);
 
   const handleEditMode = () => {
       setEditMode(!editMode);
@@ -108,8 +107,6 @@ const VehicleEditModal = props => {
         
     }
   }, [updatedVehicle])
-
-
 
   return (
     <>
