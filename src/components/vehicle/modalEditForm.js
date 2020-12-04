@@ -49,7 +49,7 @@ const VehicleEditModal = props => {
     if (window.confirm(`Are you sure you want to delete Vehicle #${props.vehicle.id}?`)) {
       VehicleManager.deleteUserData("vehicles", props.vehicle.id)
         .then(() => {
-          props.setVehicleDeleted();
+          props.setVehicleDeleted(true);
           handleModalClose();
         });
     }

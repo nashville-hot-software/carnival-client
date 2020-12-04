@@ -57,6 +57,7 @@ const ModalWrapper = (props) => {
                         setFilteredDealership={props.setFilteredDealership}
                         editMode={props.editMode}
                         setEditMode={props.setEditMode}
+                        setDealershipDeleted={props.setDealershipDeleted}
                     />
                 ) : null}
 

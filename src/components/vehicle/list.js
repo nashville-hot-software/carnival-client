@@ -10,6 +10,8 @@ const VehiclesList = props => {
   const [filteredVehicle, setFilteredVehicle] = useState();
   const [creationView, setCreationView] = useState(false);
 
+  // below 3 states are for useEffect to re-render search page with user's query
+  // to reflect realtime updates/deletes from the modal form
   const [vehicleEdited, setVehicleEdited] = useState(false);
   const [vehicleDeleted, setVehicleDeleted] = useState(false);
   const [query, setQuery] = useState();

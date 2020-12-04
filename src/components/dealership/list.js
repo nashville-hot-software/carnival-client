@@ -10,8 +10,11 @@ const Dealerships = props => {
   const [dealerships, setDealerships] = useState([]);
   const [filteredDealership, setFilteredDealership] = useState();
   const [creationView, setCreationView] = useState(false);
+  
+  // below 3 states are for useEffect to re-render search page with user's query
+  // to reflect realtime updates/deletes from the modal form
   const [editMode, setEditMode] = useState(false);
-
+  const [dealershipDeleted, setDealershipDeleted] = useState(false);
   const [query, setQuery] = useState();
 
   const handleDealershipSearch = evt => {
@@ -25,14 +28,12 @@ const Dealerships = props => {
     }
   }
 
-  // Runs when you click on dealership card for details
   const showDetailsModal = dealership => {
+    // so we can reset state to watch for n deletes after the first delete
+    setDealershipDeleted(false);
+
     const foundDealership = dealerships.filter(filteredDealership => filteredDealership.id === dealership.id);
 
-    console.log(foundDealership)
-
-    // document.querySelector(".modal-box").classList.remove("fade-out");
-    // document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
 
@@ -43,8 +44,6 @@ const Dealerships = props => {
   const handleShow = () => {
     setCreationView(true)
 
-    document.querySelector(".modal-box").classList.remove("fade-out");
-    document.querySelector(".modal-bg").classList.remove("fade-out");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   };
@@ -56,7 +55,7 @@ const Dealerships = props => {
       .then(matchedDealerships => {
         setDealerships(matchedDealerships);
       });
-    }, [editMode])
+    }, [editMode, dealershipDeleted])
 
   return (
     <>
@@ -67,6 +66,7 @@ const Dealerships = props => {
           dealershipCreationView={creationView}
           editMode={editMode}
           setEditMode={setEditMode}
+          setDealershipDeleted={setDealershipDeleted}
       />
 
       <div className="dealerships--container">

@@ -25,7 +25,6 @@ const DealershipDetailModal = props => {
 
   const handleFieldChange = evt => {
       stateToChange[evt.target.id] = evt.target.value;
-      console.log(stateToChange)
   };
 
   const handleSubmit = evt => {
@@ -55,7 +54,10 @@ const DealershipDetailModal = props => {
   const handleDelete = () => {
     if (window.confirm(`Are you sure you want to delete Dealership #${props.dealership.id}?`)) {
       DealershipManager.deleteUserData("dealerships", props.dealership.id)
-        .then(handleModalClose());
+        .then(() => {
+          props.setDealershipDeleted(true);
+          handleModalClose();
+        });
     }
   }
 
