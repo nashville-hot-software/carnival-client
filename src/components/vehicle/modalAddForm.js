@@ -338,9 +338,6 @@ const AddVehicleModal = (props) => {
                 
                 <label className="name--label">Interior Color:</label>
                 <input onChange={handleInputFieldChange} id="interior_color" className="modal--input" type="text"/>
-                
-                <label className="name--label">Is Sold?</label>
-                <input onChange={handleInputFieldChange} id="is_sold" className="modal--input" type="checkbox"/>
 
                 <div className="addEmployee--btn--container">
                     <button onClick={handleVehicleSubmit} className="modal--addBtn">

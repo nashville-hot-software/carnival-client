@@ -221,7 +221,7 @@ const EmployeeDetailModal = props => {
                 className={`closeBtn ${employeeUpdated !== false ? "disabled" : ""}`} 
                 disabled={employeeUpdated !== false ? true : false}
                 onClick={handleModalClose}>
-                  Cancel  
+                  Close  
               </button>
           </div>
         </>
