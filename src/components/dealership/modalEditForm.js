@@ -204,7 +204,7 @@ const DealershipDetailModal = props => {
                 disabled={dealershipEdited === true ? true : false}
                 onClick={handleModalClose}
               >
-                  Cancel  
+                  Close  
               </button>
           </div>
         </>
