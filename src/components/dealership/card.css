@@ -31,6 +31,7 @@
     display: flex !important;
     flex-direction: column !important;
     margin-top: 20px;
+    overflow: scroll;
 }
 
 .modal-edit--body {

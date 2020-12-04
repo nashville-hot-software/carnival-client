@@ -16,21 +16,13 @@ const VehicleSearch = (props) => {
         setShowVehicles(true);
         DataManager.getAll("vehicles", "vehicle", evt.target.value).then(
             (matchedVehicles) => {
+                console.log(matchedVehicles)
                 setVehicles(matchedVehicles);
             }
         );
     };
     //
-    const handleVehicleSelect = (evt) => {
-        const stateToChange = { ...props.state };
-        stateToChange.vehicle_id = parseInt(evt.target.id);
-        stateToChange.price = parseFloat(evt.target.title);
-        props.setState(stateToChange);
-        console.log(stateToChange);
-        // console.dir(evt.target)
-        console.log(evt.target.title);
-        setShowVehicles(false);
-    };
+  
     return (
         <>
             <label className="name--label">Select Vehicle:</label>
@@ -41,9 +33,10 @@ const VehicleSearch = (props) => {
             />
 
             <VehicleDropdown
-                handleVehicleSelect={handleVehicleSelect}
                 vehicles={vehicles}
                 handleCloseVehicleSearch={handleCloseVehicleSearch}
+                showVehicles={showVehicles}
+                setShowVehicles={setShowVehicles}
                 {...props} />
 
         </>
