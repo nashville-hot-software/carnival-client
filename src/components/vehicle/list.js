@@ -11,6 +11,7 @@ const VehiclesList = props => {
   const [creationView, setCreationView] = useState(false);
 
   const [vehicleEdited, setVehicleEdited] = useState(false);
+  const [vehicleDeleted, setVehicleDeleted] = useState(false);
   const [query, setQuery] = useState();
 
   const handleVehicleSearch = evt => {
@@ -26,8 +27,10 @@ const VehiclesList = props => {
     }
   }
 
-  // Runs when you click on dealership card for details
   const showDetailsModal = vehicle => {
+    // so we can reset state to watch for n deletes after the first delete
+    setVehicleDeleted(false);
+
     const foundVehicle = vehicles.filter(filteredVehicle => filteredVehicle.id === vehicle.id);
 
     document.querySelector(".modal-box").classList.add("show");
@@ -45,13 +48,13 @@ const VehiclesList = props => {
   };
 
   // this reflects the vehicle update in the search list realtime by re-searching for the
-  // vehicle when edit mode switched off
+  // vehicle after edit/delete
     useEffect(() => {
       VehicleManager.getAll("vehicles", "vehicle", query)
           .then(matchedVehicles => {
             setVehicles(matchedVehicles);
         });
-    }, [vehicleEdited])
+    }, [vehicleEdited, vehicleDeleted])
 
   return (
     <>
@@ -62,6 +65,7 @@ const VehiclesList = props => {
           setCreationView={setCreationView}
           vehicleEdited={vehicleEdited}
           setVehicleEdited={setVehicleEdited}
+          setVehicleDeleted={setVehicleDeleted}
       />
 
       <div className="vehicles--container">
