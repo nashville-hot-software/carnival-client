@@ -29,7 +29,7 @@ const Input = {
                 <label>First Name:</label>
                 <input
                     onChange={props.handleInputFieldChange}
-                    id="firstName"
+                    id="first_name"
                     className={classes.searchBarStyle}
                     type="text"
                     placeholder={props.sale.first_name}
@@ -47,7 +47,7 @@ const Input = {
                 <label>Last Name:</label>
                 <input
                     onChange={props.handleInputFieldChange}
-                    id="lastName"
+                    id="last_name"
                     className={classes.searchBarStyle}
                     type="text"
                     placeholder={props.sale.last_name}
@@ -68,23 +68,6 @@ const Input = {
                     className={classes.searchBarStyle}
                     type="text"
                     placeholder={props.sale.email}
-                    autoFocus
-
-                />
-            </>
-        );
-    },
-    Phone: (props) => {
-        const classes = useStyles();
-        return (
-            <>
-                <label>Phone:</label>
-                <input
-                    onChange={props.handleInputFieldChange}
-                    id="phone"
-                    className={classes.searchBarStyle}
-                    type="text"
-                    placeholder={props.sale.phone}
                     autoFocus
 
                 />
@@ -149,7 +132,7 @@ const Input = {
                 <label>Company Name:</label>
                 <input
                     onChange={props.handleInputFieldChange}
-                    id="companyName"
+                    id="company_name"
                     className={classes.searchBarStyle}
                     type="text"
                     placeholder={props.sale.company_name}
@@ -186,7 +169,7 @@ const Input = {
                 <label>Price:</label>
                 <input
                     onChange={props.handleInputFieldChange}
-                    id="phone"
+                    id="price"
                     className={classes.searchBarStyle}
                     type="text"
                     placeholder={`$${props.sale.price}`}
