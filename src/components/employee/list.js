@@ -9,12 +9,16 @@ const Employees = (props) => {
     
     const [creationView, setCreationView] = useState(false);
     const [filteredEmployee, setFilteredEmployee] = useState();
-    const [editMode, setEditMode] = useState(false);
     
+    // below 3 states are for useEffect to re-render search page with user's query
+    // to reflect realtime updates/deletes from the modal form
+    const [editMode, setEditMode] = useState(false);
+    const [employeeDeleted, setEmployeeDeleted] = useState(false);
     const [query, setQuery] = useState();
 
     const handleEmployeeSearch = (evt) => {
         if (evt.target.value.length > 0) {
+            // set the query state to re-search later after updates/deletes
             setQuery(evt.target.value);
 
             EmployeeManager.getAll("employees", "searchTerm", evt.target.value).then(
@@ -30,6 +34,9 @@ const Employees = (props) => {
     // Runs when you click on employee card for details
     const showDetailsModal = employeeArg => {
         const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
+        
+        // so we can reset state to watch for n deletes after the first delete
+        setEmployeeDeleted(false);
 
         document.querySelector(".modal-box").classList.add("show");
         document.querySelector(".modal-bg").classList.add("show");
@@ -54,7 +61,7 @@ const Employees = (props) => {
                 setEmployees(matchedEmployees);
             }
         );
-    }, [editMode])
+    }, [editMode, employeeDeleted])
 
     return (
         <>
@@ -64,6 +71,7 @@ const Employees = (props) => {
                 employeeCreationView={creationView}
                 editMode={editMode}
                 setEditMode={setEditMode}
+                setEmployeeDeleted={setEmployeeDeleted}
             />
                 
             {/* EMPLOYEE SEARCH PAGE */}

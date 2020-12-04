@@ -22,6 +22,7 @@ const ModalWrapper = (props) => {
                         employee={props.filteredEmployee} 
                         editMode={props.editMode}
                         setEditMode={props.setEditMode}
+                        setEmployeeDeleted={props.setEmployeeDeleted}
                     />
                 ) : null}
                 

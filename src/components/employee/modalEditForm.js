@@ -71,7 +71,10 @@ const EmployeeDetailModal = props => {
   const handleDelete = () => {
     if (window.confirm(`Are you sure you want to delete Employee #${props.employee.id}?`)) {
       EmployeeManager.deleteUserData("employees", props.employee.id)
-        .then(handleModalClose());
+        .then(() => {
+          handleModalClose();
+          props.setEmployeeDeleted(true);
+        });
     }
   }
 
