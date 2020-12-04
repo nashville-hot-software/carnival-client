@@ -1,33 +1,30 @@
 //move Dealership Dropdown and Employee Type Select menu out of 'employees' folder and into the new 'modal' folder 
 
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./dealershipDropdown.css";
 
 const DealershipDropdown = (props) => {
 
-    // Below 4 are for dealership dropdown (opening/closing, searched dealerships, selected, and search query)
+    // (searched dealership results, opening/closing dropdown, 
+    // and search query to show in input field value)
     const [dealerships, setDealerships] = useState([]);
     const [open, setOpen] = useState(false);
-    const [selectedDealership, setSelectedDealership] = useState("");
     const [query, setQuery] = useState("");
 
-    const handleDealershipDropdownClose = () => setOpen(false);
+    // for dealership dropdown component
+    const [selectedDealership, setSelectedDealership] = useState("");
 
-    // Pings API for all dealerships matching dealership input value ,
-    // Setting query state for the input field so we can dynamically set the value of the text input,
-    // Conditionals to either search for dealerships and map the list, OR set a selected dealership
-    // to show as the new input value
+    // Conditionals to either search for dealerships and map the list, 
+    // OR update selectedDealership state to allow user to change input 
+    // value to a new value, OR close the dropdown if no search value
     const handleDealershipSearch = (evt) => {
         setQuery(evt.target.value);
 
         if (evt.target.value.length > 0 && selectedDealership === "") {
-            EmployeeManager.getAll(
-                "dealerships",
-                "searchTerm",
-                evt.target.value
-            ).then((matchedDealerships) => {
+            EmployeeManager.getAll("dealerships", "searchTerm", evt.target.value)
+                .then((matchedDealerships) => {
                 setDealerships(matchedDealerships);
             });
 
@@ -45,12 +42,25 @@ const DealershipDropdown = (props) => {
         const stateToChange = props.state;
         stateToChange.dealership_id = parseInt(evt.target.id);
 
+        // for search input value
         setSelectedDealership(evt.target.innerHTML);
+        
+        // resets query to empty string so when request is finished the query value will be reset
+        setQuery("");
 
-        const dropdownDiv = document.querySelector(".dealership-list--dropdown");
-        dropdownDiv.scrollTop = 0;
+        document.querySelector(".dealership-list--dropdown").scrollTop = 0;
     };
-    let uniqueID = "unique--ID"
+    
+
+    const handleDealershipDropdownClose = () => setOpen(false);
+
+    useEffect(() => {
+        setSelectedDealership("");
+
+        document.querySelector(".dealership--search").value = "";
+
+    }, [props.employeeUpdated, props.postedEmployee])
+
     return (
         <>
         <label className="name--label dealership--label">Dealership:</label>
@@ -63,8 +73,7 @@ const DealershipDropdown = (props) => {
                 type="text"
                 onChange={handleDealershipSearch}
                 placeholder="Search Dealerships"
-                value={`${selectedDealership !== "" ? selectedDealership : query
-                    }`}
+                value={`${selectedDealership !== "" ? selectedDealership : query}`}
             />
 
             {dealerships.length > 0 ? (
@@ -73,7 +82,7 @@ const DealershipDropdown = (props) => {
                         return (
                             <>
                                 <div
-                                    key={uniqueID} 
+                                    key={dealership.id} 
                                     className={"dealership--select"}
                                     id={dealership.id}
                                     onClick={handleDealerSelect}

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "./list.css";
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
+import SuccessSnackbar from "../modal/snackbar"
 
 const AddEmployeeModal = (props) => {
 
@@ -15,16 +16,18 @@ const AddEmployeeModal = (props) => {
         employee_type_id: 1,
     });
 
+    const [postedEmployee, setPostedEmployee] = useState();
+    const [selectedDealership, setSelectedDealership] = useState("");
+
     const handleClose = () => {
 
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
+        clearForm();
 
         document.querySelector(".modal-box").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
+        
+        setTimeout(() => {
+            document.querySelector(".modal-bg").classList.remove("show");
+        }, 400);
         
         setTimeout(function () {
             props.setCreationView(false)
@@ -36,6 +39,14 @@ const AddEmployeeModal = (props) => {
         stateToChange[evt.target.id] = evt.target.value;
         setNewEmployee(stateToChange);
     };
+
+    const clearForm = () => {
+        const inputs = document.querySelectorAll('input')
+        const selects = document.querySelectorAll('select')
+
+        inputs.forEach(input => input.value = "")
+        selects.forEach(select => select.value = "none")
+    }
 
     const handleSubmit = () => {
         if (newEmployee.first_name === "" || newEmployee.last_name === "") {
@@ -49,8 +60,14 @@ const AddEmployeeModal = (props) => {
         } else if (newEmployee.employee_type_id === 0) {
             window.alert("Please select a valid employee type");
         } else {
-            // Make the POST, then clear all data from form
-            EmployeeManager.PostData("employees", newEmployee).then(() => {
+            // POST
+            EmployeeManager.PostData("employees", newEmployee).then(resp => {
+                console.log(resp);
+
+                // this is for the success snackbar to know a successful POST was made
+                setPostedEmployee(resp);
+
+                // reset field values for next form POST
                 setNewEmployee({
                     first_name: "",
                     last_name: "",
@@ -60,11 +77,11 @@ const AddEmployeeModal = (props) => {
                     employee_type_id: 0,
                 });
                 
-                const inputs = document.querySelectorAll('input')
-                const selects = document.querySelectorAll('select')
+                
+                clearForm();
 
-                inputs.forEach(input => input.value = "")
-                selects.forEach(select => select.value = "none")
+                // below clears the dealershipDropdown input
+                setSelectedDealership("");
             });
         }
     };
@@ -73,21 +90,6 @@ const AddEmployeeModal = (props) => {
         <>
             <div className="modalHeader addEmployee">
                 Add Employee
-
-                {/* <ul>
-                    <li class="ele">
-                        <div
-                            type="button"
-                            onClick={handleClose}
-                            className="x spin large "
-                        >
-                            <b></b>
-                            <b></b>
-                            <b></b>
-                            <b></b>
-                        </div>
-                    </li>
-                </ul> */}
             </div>
                 
             <div className="modal-add--body">
@@ -126,6 +128,9 @@ const AddEmployeeModal = (props) => {
                 <DealershipDropdown 
                     state={newEmployee} 
                     setState={setNewEmployee}
+                    selectedDealership={selectedDealership}
+                    setSelectedDealership={setSelectedDealership}
+                    postedEmployee={postedEmployee}
                 />
 
                 <EmployeeTypeSelect
@@ -137,11 +142,20 @@ const AddEmployeeModal = (props) => {
                     <button onClick={handleSubmit} className="modal--addBtn">
                         Add Employee 
                     </button>
-                    <button className="closeBtn" onClick={handleClose}>
+                    <button 
+                        className={`closeBtn ${postedEmployee !== undefined ? "disabled" : ""}`} 
+                        disabled={postedEmployee !== undefined ? true : false}
+                        onClick={handleClose} 
+                    >
                         Close  
                     </button>
                 </div>
             </div>
+
+            <SuccessSnackbar 
+                postedEmployee={postedEmployee} 
+                setPostedEmployee={setPostedEmployee}
+            />
         </>
     );
 };

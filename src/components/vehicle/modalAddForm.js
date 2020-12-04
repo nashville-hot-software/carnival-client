@@ -11,6 +11,7 @@ import VehicleManager from "../../api/dataManager"
 import "./list.css";
 import "./modalAddForm.css";
 import AddVehicleTypeForm from "./modalAddVTForm"
+import SuccessSnackbar from "../modal/snackbar"
 
 const AddVehicleModal = (props) => {
 
@@ -48,6 +49,8 @@ const AddVehicleModal = (props) => {
         year_of_car: 0
       })
 
+      const [vehiclePosted, setVehiclePosted] = useState(false);
+
     //   const textInput = useRef();
 
     const handleModalClose = () => {
@@ -58,7 +61,10 @@ const AddVehicleModal = (props) => {
         selects.forEach(select => select.value = "none")
 
         document.querySelector(".modal-box").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
+        
+        setTimeout(() => {
+            document.querySelector(".modal-bg").classList.remove("show");
+        }, 400);
 
         setTimeout(function () {
             props.setCreationView(false)
@@ -188,6 +194,7 @@ const AddVehicleModal = (props) => {
                     year_of_car: 0
                 });
                 setFilteredVehicle();
+                setVehiclePosted(true);
                 
                 const inputs = document.querySelectorAll('input')
                 const selects = document.querySelectorAll('select')
@@ -337,10 +344,19 @@ const AddVehicleModal = (props) => {
                     <button onClick={handleVehicleSubmit} className="modal--addBtn">
                         Submit 
                     </button>
-                    <button className="closeBtn" onClick={handleModalClose}>
+                    <button 
+                        className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
+                        disabled={vehiclePosted === true ? true : false}
+                        onClick={handleModalClose}
+                    >
                         Close  
                     </button>
                 </div>
+
+                <SuccessSnackbar 
+                    vehiclePosted={vehiclePosted} 
+                    setVehiclePosted={setVehiclePosted}
+                />
             </div>
         </>
     );

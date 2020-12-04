@@ -6,12 +6,14 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import SuccessSnackbar from "../modal/snackbar"
 
 const VehicleEditModal = props => {
 
   const [vehicle, setVehicle] = useState();  
   const [updatedVehicle, setUpdatedVehicle] = useState();
   const [editMode, setEditMode] = useState(false);
+  const [vehicleEdited, setVehicleEdited] = useState(false);
 
   const handleEditMode = () => {
       setEditMode(!editMode);
@@ -61,7 +63,10 @@ const VehicleEditModal = props => {
     selects.forEach(select => select.value = "none")
 
     document.querySelector(".modal-box").classList.remove("show");
-    document.querySelector(".modal-bg").classList.remove("show");
+    
+    setTimeout(() => {
+      document.querySelector(".modal-bg").classList.remove("show");
+    }, 400);
 
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
@@ -88,6 +93,7 @@ const VehicleEditModal = props => {
               console.log(resp)
               setUpdatedVehicle();
               setVehicle(resp);
+              setVehicleEdited(true);
             })
         })
         .then(() => {
@@ -217,6 +223,10 @@ const VehicleEditModal = props => {
 
             </div>
         )}
+        <SuccessSnackbar 
+            vehicleEdited={vehicleEdited} 
+            setVehicleEdited={setVehicleEdited}
+        />
     </>
   );
 };
