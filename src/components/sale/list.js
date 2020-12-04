@@ -8,7 +8,7 @@ import ModalWrapper from "../modal/modalWrapper"
 import "./list.css";
 
 const SaleList = (props) => {
-    const [filteredSale, setFilteredSale] = useState();
+    const [matchedSale, setMatchedSale] = useState();
     const [creationView, setCreationView] = useState(false);
     const [detailsView, setDetailsView] = useState(false);
     const [open, setOpen] = useState(false);
@@ -16,15 +16,17 @@ const SaleList = (props) => {
     const [show, setShow] = useState(false);
     // const handleShow = () => setShow(true);
     const handleDropdownClose = () => setOpen(false);
-    
+
     const showDetailsModal = salesArg => {
         setDetailsView(true);
         const foundSale = sales.filter(matchedSales => matchedSales.id === salesArg.id);
         document.querySelector(".modal-box").classList.add("show");
         document.querySelector(".modal-bg").classList.add("show");
         console.log(foundSale);
-        setFilteredSale(foundSale[0]);
+        setMatchedSale(foundSale[0]);
     }
+
+
     const handleShow = () => {
         setCreationView(true)
 
@@ -53,7 +55,8 @@ const SaleList = (props) => {
     return (
         <>
             <ModalWrapper
-                filteredSale={filteredSale}
+                setMatchedSale={setMatchedSale}
+                matchedSale={matchedSale}
                 setCreationView={setCreationView}
                 creationView={creationView}
             />

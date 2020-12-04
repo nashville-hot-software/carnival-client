@@ -18,7 +18,7 @@
 }
 
 .dealership-list--dropdown {
-    width: 421px;
+    max-width: 421px;
     overflow: scroll;
     -ms-overflow-style: none;
     /* IE and Edge */
