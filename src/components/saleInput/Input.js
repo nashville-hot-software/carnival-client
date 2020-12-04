@@ -32,7 +32,7 @@ const Input = {
                         id="firstName"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.first_name}
+                        placeholder={props.sale.first_name}
                         autoFocus
                         variant="outlined"
                     />
@@ -50,7 +50,7 @@ const Input = {
                         id="lastName"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.last_name}
+                        placeholder={props.sale.last_name}
                         autoFocus
                         variant="outlined"
                     />
@@ -67,7 +67,7 @@ const Input = {
                         id="email"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.email}
+                        placeholder={props.sale.email}
                         autoFocus
                         variant="outlined"
                     />
@@ -84,7 +84,7 @@ const Input = {
                         id="phone"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.phone}
+                        placeholder={props.sale.phone}
                         autoFocus
                         variant="outlined"
                     />
@@ -101,7 +101,7 @@ const Input = {
                         id="street"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.street}
+                        placeholder={props.sale.street}
                         autoFocus
                         variant="outlined"
                     />
@@ -115,7 +115,7 @@ const Input = {
                 <label shrink>City:</label>
                     <input
                         type="text"
-                        placeholders={props.sale.city}
+                        placeholder={props.sale.city}
                         id="city"
                         onChange={props.handleInputFieldChange}
                         className={classes.searchBarStyle}
@@ -135,7 +135,7 @@ const Input = {
                         id="zipcode"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.zipcode}
+                        placeholder={props.sale.zipcode}
                         autoFocus
                         variant="outlined"
                     />
@@ -152,7 +152,7 @@ const Input = {
                         id="companyName"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.company_name}
+                        placeholder={props.sale.company_name}
                         autoFocus
                         variant="outlined"
                     />
@@ -169,7 +169,7 @@ const Input = {
                     <input
                         onChange={props.handleInputFieldChange}
                         type="text"
-                        placeholders={depositFormat}
+                        placeholder={depositFormat}
                         id="deposit"
                         className={classes.searchBarStyle}
                         autoFocus
@@ -189,7 +189,7 @@ const Input = {
                         id="phone"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={priceFormat}
+                        placeholder={priceFormat}
                         autoFocus
                         variant="outlined"
                     />
@@ -206,7 +206,7 @@ const Input = {
                         id="phone"
                         className={classes.searchBarStyle}
                         type="text"
-                        placeholders={props.sale.phone}
+                        placeholder={props.sale.phone}
                         autoFocus
                         variant="outlined"
                     />
