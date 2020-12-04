@@ -26,16 +26,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>First Name:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="firstName"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.first_name}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>First Name:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="firstName"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.first_name}
+                    autoFocus
+
+                />
             </>
         );
     },
@@ -44,16 +44,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>Last Name:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="lastName"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.last_name}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Last Name:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="lastName"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.last_name}
+                    autoFocus
+
+                />
             </>
         );
     },
@@ -61,16 +61,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>Email:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="email"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.email}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Email:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="email"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.email}
+                    autoFocus
+
+                />
             </>
         );
     },
@@ -78,16 +78,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>Phone:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="phone"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.phone}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Phone:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="phone"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.phone}
+                    autoFocus
+
+                />
             </>
         );
     },
@@ -95,16 +95,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>Street:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="street"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.street}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Street:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="street"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.street}
+                    autoFocus
+
+                />
             </>
         );
     },
@@ -112,16 +112,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>City:</label>
-                    <input
-                        type="text"
-                        placeholder={props.sale.city}
-                        id="city"
-                        onChange={props.handleInputFieldChange}
-                        className={classes.searchBarStyle}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>City:</label>
+                <input
+                    type="text"
+                    placeholder={props.sale.city}
+                    id="city"
+                    onChange={props.handleInputFieldChange}
+                    className={classes.searchBarStyle}
+                    autoFocus
+
+                />
             </>
         );
     },
@@ -129,16 +129,16 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>Zipcode:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="zipcode"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.zipcode}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Zipcode:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="zipcode"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.zipcode}
+                    autoFocus
+
+                />
             </>
         );
     },
@@ -146,53 +146,52 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>Company Name:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="companyName"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.company_name}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Company Name:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="companyName"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.company_name}
+                    autoFocus
+
+                />
             </>
         );
     },
     Deposit: (props) => {
         const classes = useStyles();
-        let depositFormat = <NumberFormat value={props.sale.deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+        // let depositFormat = <NumberFormat value={props.sale.deposit} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         return (
             <>
 
-                <label shrink>Deposit:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        type="text"
-                        placeholder={depositFormat}
-                        id="deposit"
-                        className={classes.searchBarStyle}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Deposit:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    type="text"
+                    placeholder={`$${props.sale.deposit}`}
+                    id="deposit"
+                    className={classes.searchBarStyle}
+                    autoFocus
+
+                />
             </>
         );
     },
     Price: (props) => {
         const classes = useStyles();
-        let priceFormat = <NumberFormat value={props.sale.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+        // let priceFormat = <NumberFormat value={props.sale.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         return (
             <>
-                <label shrink>Price:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="phone"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={priceFormat}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Price:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="phone"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={`$${props.sale.price}`}
+                    autoFocus
+                />
             </>
         );
     },
@@ -200,16 +199,15 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>Phone:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="phone"
-                        className={classes.searchBarStyle}
-                        type="text"
-                        placeholder={props.sale.phone}
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Phone:</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="phone"
+                    className={classes.searchBarStyle}
+                    type="text"
+                    placeholder={props.sale.phone}
+                    autoFocus
+                />
             </>
         );
     },
@@ -217,15 +215,14 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>{props.sale.purchase_date}:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="purchase_date"
-                        className={classes.searchBarStyle}
-                        type="date"
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Purchase Date</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="purchase_date"
+                    className={classes.searchBarStyle}
+                    type="date"
+                    autoFocus
+                />
             </>
         );
     },
@@ -233,15 +230,14 @@ const Input = {
         const classes = useStyles();
         return (
             <>
-                <label shrink>{props.sale.pickup_date}:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="pickup_date"
-                        className={classes.searchBarStyle}
-                        type="date"
-                        autoFocus
-                        variant="outlined"
-                    />
+                <label>Pickup Date</label>
+                <input
+                    onChange={props.handleInputFieldChange}
+                    id="pickup_date"
+                    className={classes.searchBarStyle}
+                    type="date"
+                    autoFocus
+                />
             </>
         );
     },
