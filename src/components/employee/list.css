@@ -161,6 +161,30 @@
     padding-top: 16px;
     padding-bottom: 8px;
 }
+.dashVehicles--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 108%;
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+.dashCustomers--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 71%;
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+.dashSales--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    padding-top: 16px;
+    padding-bottom: 15px;
+}
 
 
 .addEmployee--btn:hover {

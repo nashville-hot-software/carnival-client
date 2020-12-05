@@ -50,7 +50,7 @@ const CustomerDetailModal = props => {
             </div>
         </div>
         
-        <div className="employee--btn--container">
+        <div className="dashCustomers--btn--container">
             <button className="closeBtn" onClick={handleModalClose}>
                 Close  
             </button>

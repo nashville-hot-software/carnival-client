@@ -63,22 +63,9 @@ const SaleEditModal = (props) => {
     }
   };
 
-  const handleDelete = () => {
-    if (
-      window.confirm(
-        `Are you sure you want to delete Employee #${props.employee.id}?`
-      )
-    ) {
-      DataManager.deleteUserData("sales", props.sale.id).then(
-        handleModalClose()
-      );
-    }
-  };
-
   const handleModalClose = () => {
     setEditMode(!editMode);
     setUpdatedSale();
-    props.setMatchedSale();
 
     const inputs = document.querySelectorAll("input");
     const selects = document.querySelectorAll("select");
@@ -89,6 +76,7 @@ const SaleEditModal = (props) => {
     document.querySelector(".modal-box").classList.remove("show");
 
     setTimeout(() => {
+      props.setMatchedSale();
       document.querySelector(".modal-bg").classList.remove("show");
     }, 300);
 

@@ -71,7 +71,7 @@ const SaleDetailModal = props => {
             </div>
         </div>
 
-        <div className="employee--btn--container">
+        <div className="dashSales--btn--container">
             <button className="closeBtn" onClick={handleModalClose}>
                 Close  
             </button>
