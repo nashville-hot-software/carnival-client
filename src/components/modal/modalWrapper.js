@@ -32,6 +32,7 @@ const ModalWrapper = (props) => {
                 ) : null}
 
                 {props.filteredVehicle !== undefined ? (
+                    // For dash
                     <VehicleDetailModal
                         vehicle={props.filteredVehicle}
                         setFilteredVehicle={props.setFilteredVehicle}
@@ -39,6 +40,7 @@ const ModalWrapper = (props) => {
                 ) : null}
 
                 {props.filteredCustomer !== undefined ? (
+                    // For dash
                     <CustomerDetailModal
                         customer={props.filteredCustomer}
                         setFilteredCustomer={props.setFilteredCustomer}

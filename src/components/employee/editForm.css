@@ -16,15 +16,15 @@
 }
 
 .removeEmployee--btn {
-    border: 1px solid #fd1c0c;
+    border: 1px solid #ff4235;
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 15px;
     width: 100px;
     height: 40px;
-    background-color: #fff;
+    background-color: #ff4235;
     margin-right: 7%;
-    color: #fd1c0c;
+    color: #fff;
     transition: transform 0.4s ease;   
 }
 .removeEmployee--btn:hover {

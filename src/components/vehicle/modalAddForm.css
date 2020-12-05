@@ -1,6 +1,6 @@
 .modal-add--body {
     overflow: scroll;
-
+    max-height: 81%;
 }
 
 .modal--input.msrp-div {
