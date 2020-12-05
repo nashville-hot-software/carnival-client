@@ -92,6 +92,25 @@
     margin-bottom: 10px;
     padding-top: 18px;
 }
+.saleDetails--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-top: 18px;
+    padding-bottom: 5px;
+}
+.saleEdit--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-top: 18px;
+    padding-bottom: 5px;
+}
+
 
 .addEmployee--btn:hover {
     transform: scale(1.07);
