@@ -129,18 +129,18 @@ const AddSaleForm = (props) => {
     </div>
     <div className="modalBody">
 
-        <Input.FirstName handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.LastName handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.Email handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.Phone handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.Street handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.City handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.ZipCode handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.CompanyName handleInputFieldChange={handleInputFieldChange}{...props}sale={newSale}/>
-        <Input.Deposit handleInputFieldChange={handleInputFieldChange}{...props}newSale={newSale}/>
-        <Input.Price handleInputFieldChange={handleInputFieldChange}{...props} newSale={newSale}/>
-        <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}{...props}newSale={newSale}/>
-        <Input.PickupDate handleInputFieldChange={handleInputFieldChange}{...props}newSale={newSale}/>
+        <Input.FirstName handleInputFieldChange={handleInputFieldChange}/>
+        <Input.LastName handleInputFieldChange={handleInputFieldChange}/>
+        <Input.Email handleInputFieldChange={handleInputFieldChange}/>
+        <Input.Phone handleInputFieldChange={handleInputFieldChange}/>
+        <Input.Street handleInputFieldChange={handleInputFieldChange}/>
+        <Input.City handleInputFieldChange={handleInputFieldChange}/>
+        <Input.ZipCode handleInputFieldChange={handleInputFieldChange}/>
+        <Input.CompanyName handleInputFieldChange={handleInputFieldChange}/>
+        <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
+        <Input.Price handleInputFieldChange={handleInputFieldChange} />
+        <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}/>
+        <Input.PickupDate handleInputFieldChange={handleInputFieldChange}/>
 
         <StateSelectDropdown
         state={newSale}

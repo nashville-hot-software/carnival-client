@@ -32,7 +32,8 @@ const Input = {
                     id="first_name"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={props.sale.first_name}
+                    placeholder={props.sale ? props.sale.first_name : "First Name"}
+                    placeholder={props.sale ? props.sale.first_name : "First Name"}
                     autoFocus
 
                 />
@@ -50,7 +51,7 @@ const Input = {
                     id="last_name"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={props.sale.last_name}
+                    placeholder={props.sale ? props.sale.last_name : "Last_Name"}
                     autoFocus
 
                 />
@@ -67,7 +68,7 @@ const Input = {
                     id="email"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={props.sale.email}
+                    placeholder={props.sale ? props.sale.email : "Email"}
                     autoFocus
 
                 />
@@ -84,7 +85,7 @@ const Input = {
                     id="street"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={props.sale.street}
+                    placeholder={props.sale ? props.sale.street : "Street"}
                     autoFocus
 
                 />
@@ -98,7 +99,7 @@ const Input = {
                 <label>City:</label>
                 <input
                     type="text"
-                    placeholder={props.sale.city}
+                    placeholder={props.sale ? props.sale.city : "City"}
                     id="city"
                     onChange={props.handleInputFieldChange}
                     className={classes.searchBarStyle}
@@ -118,7 +119,7 @@ const Input = {
                     id="zipcode"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={props.sale.zipcode}
+                    placeholder={props.sale ? props.sale.zipcode : "Zip"}
                     autoFocus
 
                 />
@@ -135,7 +136,7 @@ const Input = {
                     id="company_name"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={props.sale.company_name}
+                    placeholder={props.sale ? props.sale.company_name : "Company Name"}
                     autoFocus
 
                 />
@@ -152,7 +153,7 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     type="text"
-                    placeholder={`$${props.sale.deposit}`}
+                    placeholder={props.sale ? `$${props.sale.deposit}` : "Deposit"}
                     id="deposit"
                     className={classes.searchBarStyle}
                     autoFocus
@@ -172,7 +173,7 @@ const Input = {
                     id="price"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={`$${props.sale.price}`}
+                    placeholder={props.sale ? `$${props.sale.price}` : "Price"}
                     autoFocus
                 />
             </>
@@ -188,7 +189,7 @@ const Input = {
                     id="phone"
                     className={classes.searchBarStyle}
                     type="text"
-                    placeholder={props.sale.phone}
+                    placeholder={props.sale ? props.sale.phone : "Phone"}
                     autoFocus
                 />
             </>
