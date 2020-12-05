@@ -86,15 +86,11 @@ const SaleEditModal = (props) => {
     inputs.forEach((input) => (input.value = ""));
     selects.forEach((select) => (select.value = "none"));
 
-    document.querySelector(".modal-bg").classList.add("fade-out");
-    document.querySelector(".modal-box").classList.add("fade-out");
+    document.querySelector(".modal-box").classList.remove("show");
 
-    setTimeout(function () {
-      document.querySelector(".modal-box").classList.remove("fade-out");
-      document.querySelector(".modal-bg").classList.remove("fade-out");
-      document.querySelector(".modal-box").classList.remove("show");
+    setTimeout(() => {
       document.querySelector(".modal-bg").classList.remove("show");
-    }, 500);
+    }, 300);
 
     const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
 
@@ -102,6 +98,7 @@ const SaleEditModal = (props) => {
       muiSwitch.click();
     }
   };
+  
   useEffect(() => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
       setSale(data[0]);
@@ -169,32 +166,34 @@ const SaleEditModal = (props) => {
       </div>
 
       {editMode === false ? (
-        <div className="modal-details--body">
-          <strong>Name:</strong>{" "}
-          {`${props.sale.first_name} ${props.sale.last_name}`}
-          <strong>Price:</strong> {`${props.sale.price}`}
-          <strong>Deposit:</strong> {`${props.sale.deposit}`}
-          <strong>Pickup Date:</strong> {`${props.sale.pickup_date}`}
-          <strong>Email:</strong> {`${props.sale.email}`}
-          <strong>InvoiceNumber:</strong> {`${props.sale.invoice_number}`}
-          <strong>Payment Method:</strong> {`${props.sale.payment_method}`}
-          <strong>returned:</strong> {`${props.sale.returned}`}
-          <strong>Phone:</strong> {`${props.sale.phone}`}
-          <strong>Company Name:</strong> {`${props.sale.company_name}`}
-          <strong>employee Id:</strong> {`${props.sale.employee_id}`}
-          <strong>City:</strong> {`${props.sale.city}`}
-          <strong>State:</strong> {`${props.sale.state}`}
-          <strong>zipcode:</strong> {`${props.sale.zipcode}`}
-          <strong>City:</strong> {`${props.sale.city}`}
-          <strong>sales type id:</strong> {`${props.sale.sales_type_id}`}
-          <strong>Vehicle Id:</strong> {`${props.sale.vehicle_id}`}
-          <strong>Dealership:</strong> {`${props.sale.dealership_id}`}
-          <div className="addEmployee--btn--container">
+        <>
+          <div className="modal-details--body">
+            <strong>Name:</strong>{" "}
+            {`${props.sale.first_name} ${props.sale.last_name}`}
+            <strong>Price:</strong> {`${props.sale.price}`}
+            <strong>Deposit:</strong> {`${props.sale.deposit}`}
+            <strong>Pickup Date:</strong> {`${props.sale.pickup_date}`}
+            <strong>Email:</strong> {`${props.sale.email}`}
+            <strong>InvoiceNumber:</strong> {`${props.sale.invoice_number}`}
+            <strong>Payment Method:</strong> {`${props.sale.payment_method}`}
+            <strong>returned:</strong> {`${props.sale.returned}`}
+            <strong>Phone:</strong> {`${props.sale.phone}`}
+            <strong>Company Name:</strong> {`${props.sale.company_name}`}
+            <strong>employee Id:</strong> {`${props.sale.employee_id}`}
+            <strong>City:</strong> {`${props.sale.city}`}
+            <strong>State:</strong> {`${props.sale.state}`}
+            <strong>zipcode:</strong> {`${props.sale.zipcode}`}
+            <strong>City:</strong> {`${props.sale.city}`}
+            <strong>sales type id:</strong> {`${props.sale.sales_type_id}`}
+            <strong>Vehicle Id:</strong> {`${props.sale.vehicle_id}`}
+            <strong>Dealership:</strong> {`${props.sale.dealership_id}`}
+          </div>
+          <div className="saleDetails--btn--container">
             <button className="closeBtn" onClick={handleModalClose}>
               Close
             </button>
           </div>
-        </div>
+        </>
       ) : (
           <>
             <div className="modal-details--body">
@@ -279,18 +278,17 @@ const SaleEditModal = (props) => {
                 setSale={setSale}
               />
               {/* This block is for the dealership search dropdown menu (lines 157-184) */}
-
-              <div className="addEmployee--btn--container">
-                <button
-                  onClick={handleEditSubmit}
-                  className="updateEmployee--btn"
-                >
-                  Update
+            </div>
+            <div className="saleEdit--btn--container">
+              <button
+                onClick={handleEditSubmit}
+                className="updateEmployee--btn"
+              >
+                Update
               </button>
-                <button className="closeBtn" onClick={handleModalClose}>
-                  Cancel
+              <button className="closeBtn" onClick={handleModalClose}>
+                Cancel
               </button>
-              </div>
             </div>
           </>
         )}

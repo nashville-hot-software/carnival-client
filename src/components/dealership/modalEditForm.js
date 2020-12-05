@@ -194,12 +194,11 @@ const DealershipDetailModal = props => {
                 </span>
               </div>
           </div>
-          <div className="employee--btn--container">
+          <div className="dealershipDetails--btn--container">
               <button onClick={handleDelete} className="removeEmployee--btn">
                   Remove
               </button>
               <button 
-                // className="closeBtn" 
                 className={`closeBtn ${dealershipEdited === true ? "disabled" : ""}`} 
                 disabled={dealershipEdited === true ? true : false}
                 onClick={handleModalClose}
@@ -209,6 +208,7 @@ const DealershipDetailModal = props => {
           </div>
         </>
         ) : (
+          <>
             <div className="modal-edit--body">
                 <label><strong>Dealership Name:</strong></label> 
                 <input 
@@ -219,7 +219,6 @@ const DealershipDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
-            
             
                 <label><strong>City:</strong></label> 
                 <input 
@@ -263,16 +262,18 @@ const DealershipDetailModal = props => {
                     className="modal--input"
                 />
 
-                <div className="addEmployee--btn--container">
-                    <button onClick={handleSubmit} className="updateEmployee--btn">
-                        Update
-                    </button>
-                    <button className="closeBtn" onClick={handleModalClose}>
-                        Cancel  
-                    </button>
-                </div>
 
             </div>
+
+            <div className="editDealership--btn--container">
+                <button onClick={handleSubmit} className="updateEmployee--btn">
+                    Update
+                </button>
+                <button className="closeBtn" onClick={handleModalClose}>
+                    Cancel  
+                </button>
+            </div>
+          </>
         )}
         <SuccessSnackbar 
             dealershipEdited={dealershipEdited} 

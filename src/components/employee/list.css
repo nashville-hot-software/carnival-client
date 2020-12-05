@@ -69,10 +69,99 @@
 }
 
 .addEmployee--btn--container {
+    border-top: 3px solid #6a78d1;
     display: flex;
-    margin-top: 40px;
+    justify-content: center;
+    margin-top: 47%;
     margin-bottom: 10px;
+    padding-top: 18px;
 }
+.editEmployee--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 42%;
+    margin-bottom: 10px;
+    padding-top: 18px;
+}
+.removeEmployee--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 70%;
+    margin-bottom: 10px;
+    padding-top: 18px;
+}
+.saleDetails--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-top: 18px;
+    padding-bottom: 5px;
+}
+.saleEdit--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-top: 18px;
+    padding-bottom: 5px;
+}
+.vehicleDetails--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 40%;
+    margin-bottom: 10px;
+    padding-top: 18px;
+    padding-bottom: 10px;
+}
+.editVehicle--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 97%;
+    margin-bottom: 10px;
+    padding-top: 16px;
+    padding-bottom: 3px;
+}
+.addVehicle--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-top: 16px;
+    padding-bottom: 4px;
+}
+.addDealership--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 67%;
+    padding-top: 16px;
+    padding-bottom: 4px;
+}
+.dealershipDetails--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 70%;
+    padding-top: 16px;
+    padding-bottom: 4px;
+}
+.editDealership--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-top: 61%;
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+
 
 .addEmployee--btn:hover {
     transform: scale(1.07);

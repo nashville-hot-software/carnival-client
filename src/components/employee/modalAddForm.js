@@ -138,18 +138,19 @@ const AddEmployeeModal = (props) => {
                     setState={setNewEmployee}
                 />
 
-                <div className="addEmployee--btn--container">
-                    <button onClick={handleSubmit} className="modal--addBtn">
-                        Add Employee 
-                    </button>
-                    <button 
-                        className={`closeBtn ${postedEmployee !== undefined ? "disabled" : ""}`} 
-                        disabled={postedEmployee !== undefined ? true : false}
-                        onClick={handleClose} 
-                    >
-                        Close  
-                    </button>
-                </div>
+            </div>
+            
+            <div className="addEmployee--btn--container">
+                <button onClick={handleSubmit} className="modal--addBtn">
+                    Add Employee 
+                </button>
+                <button 
+                    className={`closeBtn ${postedEmployee !== undefined ? "disabled" : ""}`} 
+                    disabled={postedEmployee !== undefined ? true : false}
+                    onClick={handleClose} 
+                >
+                    Close  
+                </button>
             </div>
 
             <SuccessSnackbar 

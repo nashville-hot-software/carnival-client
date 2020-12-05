@@ -192,7 +192,7 @@ const VehicleEditModal = props => {
                 </span>
               </div>
           </div>
-          <div className="employee--btn--container">
+          <div className="vehicleDetails--btn--container">
               <button onClick={handleDelete} className="removeEmployee--btn">
                   Remove
               </button>
@@ -205,6 +205,7 @@ const VehicleEditModal = props => {
           </div>
         </>
         ) : (
+          <>
             <div className="modal-edit--body">
             
                 <label><strong>Mileage:</strong></label> 
@@ -236,17 +237,16 @@ const VehicleEditModal = props => {
                     onChange={handleFieldChange}
                     className="modal--input"
                 />
-
-                <div className="addEmployee--btn--container">
-                    <button onClick={handleSubmit} className="updateEmployee--btn">
-                        Update
-                    </button>
-                    <button className="closeBtn" onClick={handleModalClose}>
-                        Cancel  
-                    </button>
-                </div>
-
             </div>
+            <div className="editVehicle--btn--container">
+                <button onClick={handleSubmit} className="updateEmployee--btn">
+                    Update
+                </button>
+                <button className="closeBtn" onClick={handleModalClose}>
+                    Cancel  
+                </button>
+            </div>
+          </>
         )}
         <SuccessSnackbar 
             vehicleEdited={props.vehicleEdited} 
