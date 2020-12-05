@@ -173,6 +173,7 @@ const Input = {
                     id="price"
                     className={classes.searchBarStyle}
                     type="text"
+                    value={props.selectedVehicle ? `$${props.selectedVehicle.price}`: "" }
                     placeholder={props.sale ? `$${props.sale.price}` : "Price"}
                     autoFocus
                 />

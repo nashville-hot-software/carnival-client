@@ -14,7 +14,6 @@ const AddSaleForm = (props) => {
         price: 0.0,
         deposit: 0,
         pickup_date: "",
-        invoice_number: "",
         payment_method: "",
         returned: false,
         dealership_id: 0,
@@ -35,7 +34,7 @@ const AddSaleForm = (props) => {
     const [selectedDealership, setSelectedDealership] = useState("");
     const [selectedVehicle, setSelectedVehicle] = useState("");
     const [selectedState, setSelectedState] = useState();
-    const [selectedPaymentType, setSelectedPaymentType] = useState();
+    
 
     const handleClose = () => {
         clearForm();
@@ -55,6 +54,7 @@ const AddSaleForm = (props) => {
     };
 
     const handleSubmit = () => {
+        console.log(newSale)
         if (
             newSale.first_name === "" ||
             newSale.last_name === "" ||
@@ -74,11 +74,11 @@ const AddSaleForm = (props) => {
             alert("Please fill out all the fields");
         } else {
             DataManager.PostData("sales", newSale).then((data) => {
+
                 setNewSale({
                     price: 0.0,
                     deposit: 0,
                     pickup_date: "",
-                    invoice_number: "",
                     payment_method: "",
                     returned: false,
                     dealership_id: 0,
@@ -127,7 +127,7 @@ const AddSaleForm = (props) => {
         </li>
     </ul> */}
     </div>
-    <div className="modalBody">
+    <div className="modal-add--body">
 
         <Input.FirstName handleInputFieldChange={handleInputFieldChange}/>
         <Input.LastName handleInputFieldChange={handleInputFieldChange}/>
@@ -138,14 +138,14 @@ const AddSaleForm = (props) => {
         <Input.ZipCode handleInputFieldChange={handleInputFieldChange}/>
         <Input.CompanyName handleInputFieldChange={handleInputFieldChange}/>
         <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
-        <Input.Price handleInputFieldChange={handleInputFieldChange} />
+        <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
         <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}/>
         <Input.PickupDate handleInputFieldChange={handleInputFieldChange}/>
 
         <StateSelectDropdown
         state={newSale}
         selectedState={selectedState}
-        setNewEmployee={setNewSale}/>
+        setState={setNewSale}/>
 
         <label> Sale Types: </label>
         <select
@@ -158,7 +158,6 @@ const AddSaleForm = (props) => {
             <option value="2"> Lease </option>
         </select>
         <PaymentTypeSelectDropdown
-            selectedPaymentType={selectedPaymentType}
             state={newSale}
             setNewSale={setNewSale}
         />
@@ -168,15 +167,23 @@ const AddSaleForm = (props) => {
             selectedDealership={selectedDealership}
             setSelectedDealership={setSelectedDealership}
             postedSale={postedSale} />
-        <div className="addSale--btn--container">
-            <button onClick={handleSubmit} className="addEmployee--btn">Add Sale</button>
-            <button className="closeBtn" onClick={handleClose}> Close</button>
-        </div>
+        <VehicleSearch
+        state={newSale}
+        setState={setNewSale}
+        setSelectedVehicle={setSelectedVehicle}
+        selectedVehicle={selectedVehicle}
+
+        />
+
         <SuccessSnackbar 
         postedSale={postedSale} 
         setPostedSale={setPostedSale}
     />
     </div>
+        <div className="addSale--btn--container">
+            <button onClick={handleSubmit} className="addEmployee--btn">Add Sale</button>
+            <button className="closeBtn" onClick={handleClose}> Close</button>
+        </div>
 </>
 );
 };

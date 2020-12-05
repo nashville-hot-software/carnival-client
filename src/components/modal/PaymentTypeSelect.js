@@ -1,30 +1,35 @@
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import "../employee/list.css";
 
 const PaymentTypeSelectDropdown = (props) => {
-
-
     const handlePaymentTypeSelect = (evt) => {
         const stateToChange = props.state;
         stateToChange[evt.target.id] = evt.target.value;
-        props.setSale(stateToChange);
+        if (props.setSale) {
+            props.setSale(stateToChange);
+        }
+
+        else if (props.setNewSale) {
+
+            props.setNewSale(stateToChange);
+
+        }
     };
 
-    let paymentTypes =
-        ["Mastercard",
-            "Visa",
-            "American Express",
-            "Discover",
-            "Capital One"]
+    let paymentTypes = [
+        "Mastercard",
+        "Visa",
+        "American Express",
+        "Discover",
+        "Capital One",
+    ];
 
-    useEffect(() => {
-    }, [props.selectedPaymentType]);
+    useEffect(() => { }, [props.selectedPaymentType]);
 
     return (
         <>
             {props.selectedPaymentType !== undefined ? (
                 <>
-
                     <label className="name--label">Payment Method</label>
                     <select
                         onChange={handlePaymentTypeSelect}
@@ -32,15 +37,43 @@ const PaymentTypeSelectDropdown = (props) => {
                         className="sale-type--select"
                         defaultValue={props.selectedPaymentType}
                     >
-                        <option value={props.selectedPaymentType}>{props.selectedPaymentType}</option>
+                        <option value={props.selectedPaymentType}>
+                            {props.selectedPaymentType}
+                        </option>
                         {props.selectedPaymentType !== undefined
                             ? paymentTypes.map((item, i) => {
-                                return <option key={i} value={item}>{item}</option>;
+                                return (
+                                    <option key={i} value={item}>
+                                        {item}
+                                    </option>
+                                );
                             })
                             : null}
                     </select>
                 </>
-            ) : null}
+            ) : (
+                    <>
+                        <label className="name--label">Payment Method</label>
+                        <select
+                            onChange={handlePaymentTypeSelect}
+                            id="payment_method"
+                            className="sale-type--select"
+                            defaultValue="choose a payment type"
+                        >
+                            <option value="choose a payment type">
+                                choose a payment type
+                            </option>
+                            {paymentTypes.map((item, i) => {
+                                return (
+                                    <option key={i} value={item}>
+                                        {item}
+                                    </option>
+                                );
+                            })
+                            }
+                        </select>
+                    </>
+                )}
         </>
     );
 };

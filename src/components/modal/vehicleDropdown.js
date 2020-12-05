@@ -3,11 +3,17 @@ const VehicleDropdown = (props) => {
 
 
     const handleVehicleSelect = (evt) => {
-        const stateToChange = props.state 
+        const stateToChange = props.state
         stateToChange.vehicle_id = parseInt(evt.target.id);
         stateToChange.price = parseFloat(evt.target.title);
-        console.log(stateToChange);
-        // console.dir(evt.target)
+        console.log(evt.target.innerHTML.split("<")[0]);
+        props.setSelectedVehicle(
+            {
+                price: parseFloat(evt.target.title),
+                vehicleName: evt.target.innerHTML.split("<")[0]
+            })
+        props.setShowVehicles(false)
+
         console.log(evt.target.title);
         // props.setShowVehicles(false);
     };
@@ -23,7 +29,7 @@ const VehicleDropdown = (props) => {
                     onBlur={props.handleCloseVehicleSearch}
                     className={`vehicles--dropdown ${props.showVehicles ? "open" : ""}`}
                 >
-                    <button onClick={()=>props.handleCloseVehicleSearch()}>Close</button>
+                    <button onClick={() => props.handleCloseVehicleSearch()}>Close</button>
                     {props.vehicles.map((vehicle) => {
                         return (
                             <>
@@ -38,7 +44,7 @@ const VehicleDropdown = (props) => {
                                         className="vin"
                                         id={vehicle.id}
                                         title={vehicle.floor_price}
-                                        type="button disabled"
+                                        style={{pointerEvents: "none"}}
                                     >
                                         #{vehicle.vin}
                                     </span>
