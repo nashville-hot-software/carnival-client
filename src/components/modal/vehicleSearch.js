@@ -22,7 +22,7 @@ const VehicleSearch = (props) => {
         );
     };
     //
-  
+
     return (
         <>
             <label className="name--label">Select Vehicle:</label>
@@ -30,14 +30,19 @@ const VehicleSearch = (props) => {
                 className="modal--input"
                 type="text"
                 onChange={handleVehicleSearch}
+                value={props.selectedVehicle.vehicleName ? props.selectedVehicle.vehicleName : "" }
             />
-
-            <VehicleDropdown
+            {showVehicles ? (
+                <VehicleDropdown
                 vehicles={vehicles}
                 handleCloseVehicleSearch={handleCloseVehicleSearch}
                 showVehicles={showVehicles}
                 setShowVehicles={setShowVehicles}
+                state={props.newSale}
+                setSelectedVehicle={props.setSelectedVehicle}
+                setState={props.setNewSale}
                 {...props} />
+                ): null}
 
         </>
     )

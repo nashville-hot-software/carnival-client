@@ -58,7 +58,7 @@ const SaleList = (props) => {
                 setMatchedSale={setMatchedSale}
                 matchedSale={matchedSale}
                 setCreationView={setCreationView}
-                creationView={creationView}
+                saleCreationView={creationView}
             />
             {/* SALE SEARCH PAGE */}
 
