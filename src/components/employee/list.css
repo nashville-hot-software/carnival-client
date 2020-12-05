@@ -72,118 +72,155 @@
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 47%;
-    margin-bottom: 10px;
-    padding-top: 18px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .editEmployee--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 42%;
-    margin-bottom: 10px;
-    padding-top: 18px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .removeEmployee--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 70%;
-    margin-bottom: 10px;
-    padding-top: 18px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .saleDetails--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 10%;
-    margin-bottom: 10px;
-    padding-top: 18px;
-    padding-bottom: 5px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .saleEdit--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 10%;
-    margin-bottom: 10px;
-    padding-top: 18px;
-    padding-bottom: 5px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .vehicleDetails--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 40%;
-    margin-bottom: 10px;
-    padding-top: 18px;
-    padding-bottom: 10px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .editVehicle--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 97%;
-    margin-bottom: 10px;
-    padding-top: 16px;
-    padding-bottom: 3px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .addVehicle--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 10%;
-    margin-bottom: 10px;
-    padding-top: 16px;
-    padding-bottom: 4px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .addDealership--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 67%;
-    padding-top: 16px;
-    padding-bottom: 4px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .dealershipDetails--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 70%;
-    padding-top: 16px;
-    padding-bottom: 4px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .editDealership--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 61%;
-    padding-top: 16px;
-    padding-bottom: 8px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .dashVehicles--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 108%;
-    padding-top: 16px;
-    padding-bottom: 8px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .dashCustomers--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 71%;
-    padding-top: 16px;
-    padding-bottom: 8px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .dashSales--btn--container {
     border-top: 3px solid #6a78d1;
     display: flex;
     justify-content: center;
-    margin-top: 5%;
-    padding-top: 16px;
-    padding-bottom: 15px;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 
