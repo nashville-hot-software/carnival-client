@@ -339,24 +339,25 @@ const AddVehicleModal = (props) => {
                 <label className="name--label">Interior Color:</label>
                 <input onChange={handleInputFieldChange} id="interior_color" className="modal--input" type="text"/>
 
-                <div className="addEmployee--btn--container">
-                    <button onClick={handleVehicleSubmit} className="modal--addBtn">
-                        Submit 
-                    </button>
-                    <button 
-                        className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
-                        disabled={vehiclePosted === true ? true : false}
-                        onClick={handleModalClose}
-                    >
-                        Close  
-                    </button>
-                </div>
-
-                <SuccessSnackbar 
-                    vehiclePosted={vehiclePosted} 
-                    setVehiclePosted={setVehiclePosted}
-                />
             </div>
+            
+            <div className="addVehicle--btn--container">
+                <button onClick={handleVehicleSubmit} className="modal--addBtn">
+                    Submit 
+                </button>
+                <button 
+                    className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
+                    disabled={vehiclePosted === true ? true : false}
+                    onClick={handleModalClose}
+                >
+                    Close  
+                </button>
+            </div>
+
+            <SuccessSnackbar 
+                vehiclePosted={vehiclePosted} 
+                setVehiclePosted={setVehiclePosted}
+            />
         </>
     );
 };

@@ -94,25 +94,25 @@ const AddDealershipModal = (props) => {
 
                 <label className="name--label">Website:</label>
                 <input onChange={handleInputFieldChange} id="website" className="modal--input" type="text"/>
-
-                <div className="addEmployee--btn--container">
-                    <button onClick={handleSubmit} className="modal--addBtn">
-                        Submit 
-                    </button>
-                    <button 
-                        className={`closeBtn ${dealershipPosted === true ? "disabled" : ""}`} 
-                        disabled={dealershipPosted === true ? true : false}
-                        onClick={handleClose}
-                    >
-                        Close  
-                    </button>
-                </div>
-                
-                <SuccessSnackbar 
-                    dealershipPosted={dealershipPosted} 
-                    setDealershipPosted={setDealershipPosted}
-                />
             </div>
+
+            <div className="addDealership--btn--container">
+                <button onClick={handleSubmit} className="modal--addBtn">
+                    Submit 
+                </button>
+                <button 
+                    className={`closeBtn ${dealershipPosted === true ? "disabled" : ""}`} 
+                    disabled={dealershipPosted === true ? true : false}
+                    onClick={handleClose}
+                >
+                    Close  
+                </button>
+            </div>
+            
+            <SuccessSnackbar 
+                dealershipPosted={dealershipPosted} 
+                setDealershipPosted={setDealershipPosted}
+            />
         </>
     );
 };
