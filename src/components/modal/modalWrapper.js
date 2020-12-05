@@ -10,7 +10,7 @@ import DealershipDetailModal from "../dealership/modalEditForm"
 import AddDealershipModal from "../dealership/modalAddForm"
 import AddVehicleModal from "../vehicle/modalAddForm"
 import VehicleEditModal from "../vehicle/modalEditForm"
-
+import AddSaleForm from '../sale/SaleAddForm'
 const ModalWrapper = (props) => {
     // debugger;
     return (
@@ -58,11 +58,11 @@ const ModalWrapper = (props) => {
                         sale={props.matchedSale}
                         setMatchedSale={props.setMatchedSale}
                     />
-                ) : null}
-                {props.matchedSale !== undefined ? (
-                    <SaleEditModal
-                        sale={props.matchedSale}
-                        setMatchedSale={props.setMatchedSale}
+                ) : null},
+
+                {props.saleCreationView === true ? (
+                    <AddSaleForm
+                    setCreationView={props.setCreationView}
                     />
                 ) : null}
 

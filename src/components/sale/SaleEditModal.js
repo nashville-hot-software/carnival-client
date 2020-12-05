@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./card.css";
-import Modal from "react-bootstrap/Modal";
 import Switch from "@material-ui/core/Switch";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import DealershipDropdown from "../modal/dealershipDropdown";
-import VehicleSearch from "../modal/vehicleSearch";
 import DataManager from "../../api/dataManager";
 import StateSelectDropdown from "../modal/StateSelect";
 import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";

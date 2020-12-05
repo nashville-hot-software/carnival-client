@@ -50,7 +50,6 @@ const DealershipDropdown = (props) => {
 
         document.querySelector(".dealership-list--dropdown").scrollTop = 0;
     };
-    
 
     const handleDealershipDropdownClose = () => setOpen(false);
 
@@ -82,7 +81,6 @@ const DealershipDropdown = (props) => {
                         return (
                             <>
                                 <div
-                                    key={dealership.id} 
                                     className={"dealership--select"}
                                     id={dealership.id}
                                     onClick={handleDealerSelect}

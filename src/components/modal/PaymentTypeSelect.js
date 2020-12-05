@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import "../employee/list.css";
 
 const PaymentTypeSelectDropdown = (props) => {
 
 
     const handlePaymentTypeSelect = (evt) => {
-        const stateToChange = { ...props.sale };
+        const stateToChange = props.state;
         stateToChange[evt.target.id] = evt.target.value;
         props.setSale(stateToChange);
     };
 
-    let paymentTypes = 
-    ["mastercard", 
-    "visa", 
-    "americanexpress", 
-    "discover", 
-    "capitalone"]
+    let paymentTypes =
+        ["Mastercard",
+            "Visa",
+            "American Express",
+            "Discover",
+            "Capital One"]
 
     useEffect(() => {
     }, [props.selectedPaymentType]);

@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from "react";
 import USAStatesArray from "../usaStateArray/stateList";
-import DataManager from "../../api/dataManager";
-
 import "../employee/list.css";
 
 const StateSelectDropdown = (props) => {
 
     const [states, setStates] = useState(USAStatesArray);
-   
-
+    
     const handleStateTypeSelect = (evt) => {
-        const stateToChange = {...props.sale};
+        const stateToChange = props.state;
         stateToChange[evt.target.id] = evt.target.value;
         props.setSale(stateToChange);
+        props.setNewSale(stateToChange);
     };
 
-    useEffect(() => {
-      
-      }, [props.selectedState]);
+    useEffect(() => {}, [props.selectedState]);
 
     return (
         <>
