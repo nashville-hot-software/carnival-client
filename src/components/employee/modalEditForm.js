@@ -213,7 +213,7 @@ const EmployeeDetailModal = props => {
                 </span>
               </div>
           </div>
-          <div className="employee--btn--container">
+          <div className="removeEmployee--btn--container">
               <button onClick={handleDelete} className="removeEmployee--btn">
                   Remove
               </button>
@@ -226,6 +226,7 @@ const EmployeeDetailModal = props => {
           </div>
         </>
         ) : (
+          <>
             <div className="modal-edit--body">
                 <label><strong>First Name:</strong></label> 
                 <input 
@@ -278,18 +279,17 @@ const EmployeeDetailModal = props => {
                 <EmployeeTypeSelect
                     state={stateToChange}
                 />
-
-                <div className="addEmployee--btn--container">
-                    <button onClick={handleSubmit} className="updateEmployee--btn">
-                        Update
-                    </button>
-                    <button className="closeBtn" onClick={handleModalClose}>
-                        Cancel  
-                    </button>
-                </div>
-
-
             </div>
+
+            <div className="editEmployee--btn--container">
+                <button onClick={handleSubmit} className="updateEmployee--btn">
+                    Update
+                </button>
+                <button className="closeBtn" onClick={handleModalClose}>
+                    Cancel  
+                </button>
+            </div>
+          </>
         )}
         <SuccessSnackbar 
             employeeUpdated={employeeUpdated} 

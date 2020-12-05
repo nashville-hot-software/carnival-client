@@ -98,6 +98,7 @@ const SaleEditModal = (props) => {
       muiSwitch.click();
     }
   };
+  
   useEffect(() => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
       setSale(data[0]);
