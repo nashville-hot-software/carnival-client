@@ -42,7 +42,7 @@ const VehicleDetailModal = props => {
             </div>
         </div>
         
-        <div className="employee--btn--container">
+        <div className="dashVehicles--btn--container">
             <button className="closeBtn" onClick={handleModalClose}>
                 Close  
             </button>
