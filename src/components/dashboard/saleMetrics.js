@@ -28,7 +28,7 @@ const SaleMetrics = props => {
                         </div>
                         <div className="totalRevenue--container">
                             <p className="totalRevenue--label">
-                            <strong>Total Sales Revenue:</strong>
+                            <strong>Gross Sales Revenue:</strong>
                             </p>
                             <NumberFormat
                             className="totalRevenue"
