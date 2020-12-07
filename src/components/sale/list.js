@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
 import SaleCard from "./card";
 import DataManager from "../../api/dataManager";
-import Modal from 'react-bootstrap/Modal';
-import Moment from 'react-moment';
 import ModalWrapper from "../modal/modalWrapper"
-
 import "./list.css";
 
 const SaleList = (props) => {
     const [matchedSale, setMatchedSale] = useState();
     const [creationView, setCreationView] = useState(false);
-    const [detailsView, setDetailsView] = useState(false);
-    const [open, setOpen] = useState(false);
     const [sales, setSales] = useState();
-    const [show, setShow] = useState(false);
-    // const handleShow = () => setShow(true);
-    const handleDropdownClose = () => setOpen(false);
+
+    // When edit mode is switched off the search list will re-render with searched
+    // query to reflect the updates in realtime
+    const [editMode, setEditMode] = useState(false);
+    const [query, setQuery] = useState();
 
     const showDetailsModal = salesArg => {
-        setDetailsView(true);
         const foundSale = sales.filter(matchedSales => matchedSales.id === salesArg.id);
         document.querySelector(".modal-box").classList.add("show");
         document.querySelector(".modal-bg").classList.add("show");
@@ -28,10 +24,8 @@ const SaleList = (props) => {
 
 
     const handleShow = () => {
-        setCreationView(true)
+        setCreationView(true);
 
-        document.querySelector(".modal-box").classList.remove("fade-out");
-        document.querySelector(".modal-bg").classList.remove("fade-out");
         document.querySelector(".modal-box").classList.add("show");
         document.querySelector(".modal-bg").classList.add("show");
     };
@@ -39,6 +33,8 @@ const SaleList = (props) => {
 
     const handleSalesSearch = evt => {
         if (evt.target.value.length > 0) {
+            setQuery(evt.target.value);
+
             DataManager.getAll("sales", "searchTerm", evt.target.value)
                 .then(matchedSales => {
                     console.log(matchedSales)
@@ -49,9 +45,16 @@ const SaleList = (props) => {
         }
     }
 
-
+    // this reflects the sale update in the search list realtime by re-searching for the
+    // sale when edit mode switched off
     useEffect(() => {
-    }, [sales]);
+        DataManager.getAll("sales", "searchTerm", query).then(
+            (matchedSales) => {
+                setSales(matchedSales);
+            }
+        );
+    }, [editMode])
+
     return (
         <>
             <ModalWrapper
@@ -59,6 +62,8 @@ const SaleList = (props) => {
                 matchedSale={matchedSale}
                 setCreationView={setCreationView}
                 saleCreationView={creationView}
+                editMode={editMode}
+                setEditMode={setEditMode}
             />
             {/* SALE SEARCH PAGE */}
 
@@ -78,7 +83,6 @@ const SaleList = (props) => {
                                     return <SaleCard key={sale.id}
                                         sale={sale}
                                         {...props}
-                                        handleDropdownClose={handleDropdownClose}
                                         showDetailsModal={showDetailsModal}
                                     />;
                                 })}

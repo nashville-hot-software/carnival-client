@@ -12,19 +12,17 @@ import Input from "../saleInput/Input";
 const SaleEditModal = (props) => {
   const [sale, setSale] = useState();
   const [updatedSale, setUpdatedSale] = useState();
-  const [editMode, setEditMode] = useState(false);
   const [selectedState, setSelectedState] = useState();
   const [selectedPaymentType, setSelectedPaymentType] = useState();
 
   const handleEditMode = () => {
-    setEditMode(!editMode);
+    props.setEditMode(!props.editMode);
     const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
     muiSwitch.classList.add("Mui-checked", "PrivateSwitchBase-checked-2");
   };
 
   var stateToChange = { ...sale };
 
-  // (For edit mode)
   const handleInputFieldChange = (evt) => {
     console.log(stateToChange);
     stateToChange[evt.target.id] = evt.target.value;
@@ -51,17 +49,17 @@ const SaleEditModal = (props) => {
       window.alert("Please fill out all the fields");
     } else if (stateToChange !== undefined) {
       setUpdatedSale(stateToChange);
-      // NOTE: may need to move these guys to after the PUT (could be clearing form
-      // before the PUT... not sure if that will change stateToChange back to null...)
+      
       const inputs = document.querySelectorAll("input");
       const selects = document.querySelectorAll("select");
+      
       inputs.forEach((input) => (input.value = ""));
       selects.forEach((select) => (select.value = "none"));
     }
   };
 
   const handleModalClose = () => {
-    setEditMode(!editMode);
+    props.setEditMode(!props.editMode);
     setUpdatedSale();
 
     const inputs = document.querySelectorAll("input");
@@ -106,7 +104,7 @@ const SaleEditModal = (props) => {
           });
         })
         .then(() => {
-          setEditMode(false);
+          props.setEditMode(false);
           const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
           if (muiSwitch.classList.contains("Mui-checked")) {
             muiSwitch.click();
@@ -150,7 +148,7 @@ const SaleEditModal = (props) => {
               </ul> */}
       </div>
 
-      {editMode === false ? (
+      {props.editMode === false ? (
         <>
           <div className="modal-details--body">
             <strong>Name:</strong>{" "}

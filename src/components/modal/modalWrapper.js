@@ -59,6 +59,8 @@ const ModalWrapper = (props) => {
                     <SaleEditModal
                         sale={props.matchedSale}
                         setMatchedSale={props.setMatchedSale}
+                        editMode={props.editMode}
+                        setEditMode={props.setEditMode}
                     />
                 ) : null}
 
