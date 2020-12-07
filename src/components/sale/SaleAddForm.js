@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import DataManager from "../../api/dataManager";
 import DealershipDropdown from "../modal/dealershipDropdown";
-import VehicleSearch from "../modal/vehicleSearch";
+import VehicleDropdown from "../modal/vehicleSearch";
 import StateSelectDropdown from "../modal/StateSelect";
 import Input from "../saleInput/Input";
 import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
 import SuccessSnackbar from "../modal/snackbar"
-
 import "./list.css";
+
 const AddSaleForm = (props) => {
-    // const [sales, setSales] = useState();
     const [newSale, setNewSale] = useState({
         price: 0.0,
         deposit: 0,
@@ -46,6 +45,7 @@ const AddSaleForm = (props) => {
             props.setCreationView(false);
         }, 700);
     };
+
     const clearForm = () => {
         const inputs = document.querySelectorAll("input");
         const selects = document.querySelectorAll("select");
@@ -106,9 +106,7 @@ const AddSaleForm = (props) => {
     const handleInputFieldChange = (evt) => {
         const stateToChange = {...newSale}
 
-        if (
-            evt.target.id === 'deposit'
-           ) {
+        if (evt.target.id === 'deposit') {
             let value = evt.target.value;
             
             if (value.includes('$') && value.includes(',')) {
@@ -131,88 +129,88 @@ const AddSaleForm = (props) => {
         stateToChange[evt.target.id] = evt.target.value;
         setNewSale(stateToChange);
     };
+
     return (
-<>
-    <div className="modalHeader">
-        Add Sale
-        {/* <ul>
-        <li class="ele">
-            <div
-                type="button"
-                onClick={handleClose}
-                className="x spin large "
+    <>
+        <div className="modalHeader">
+            Add Sale
+            {/* <ul>
+            <li class="ele">
+                <div
+                    type="button"
+                    onClick={handleClose}
+                    className="x spin large "
+                >
+                    <b></b>
+                    <b></b>
+                    <b></b>
+                    <b></b>
+                </div>
+            </li>
+        </ul> */}
+        </div>
+        <div className="modal-add--body">
+
+            <Input.FirstName handleInputFieldChange={handleInputFieldChange}/>
+            <Input.LastName handleInputFieldChange={handleInputFieldChange}/>
+            <Input.Email handleInputFieldChange={handleInputFieldChange}/>
+            <Input.Phone handleInputFieldChange={handleInputFieldChange}/>
+            <Input.Street handleInputFieldChange={handleInputFieldChange}/>
+            <Input.City handleInputFieldChange={handleInputFieldChange}/>
+            <Input.ZipCode handleInputFieldChange={handleInputFieldChange}/>
+            <StateSelectDropdown
+                state={newSale}
+                selectedState={selectedState}
+                setState={setNewSale}
+            />
+            <Input.CompanyName handleInputFieldChange={handleInputFieldChange}/>
+            <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
+            
+            <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}/>
+            <Input.PickupDate handleInputFieldChange={handleInputFieldChange}/>
+
+            <label> Sale Types: </label>
+            <select
+                onChange={handleInputFieldChange}
+                id="sales_type_id"
+                className="sale-type--select"
+                defaultValue="0"
             >
-                <b></b>
-                <b></b>
-                <b></b>
-                <b></b>
-            </div>
-        </li>
-    </ul> */}
-    </div>
-    <div className="modal-add--body">
+                <option value="0"> Select Type </option>
+                <option value="1"> Purchase </option>
+                <option value="2"> Lease </option>
+            </select>
+            
+            <PaymentTypeSelectDropdown
+                state={newSale}
+                setNewSale={setNewSale}
+            />
+            <DealershipDropdown
+                state={newSale}
+                setNewSale={setNewSale}
+                selectedDealership={selectedDealership}
+                setSelectedDealership={setSelectedDealership}
+                postedSale={postedSale} 
+            />
+            <VehicleDropdown
+                state={newSale}
+                setState={setNewSale}
+                setSelectedVehicle={setSelectedVehicle}
+                selectedVehicle={selectedVehicle}
+                postedSale={postedSale}
+            />
+            <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
 
-        <Input.FirstName handleInputFieldChange={handleInputFieldChange}/>
-        <Input.LastName handleInputFieldChange={handleInputFieldChange}/>
-        <Input.Email handleInputFieldChange={handleInputFieldChange}/>
-        <Input.Phone handleInputFieldChange={handleInputFieldChange}/>
-        <Input.Street handleInputFieldChange={handleInputFieldChange}/>
-        <Input.City handleInputFieldChange={handleInputFieldChange}/>
-        <Input.ZipCode handleInputFieldChange={handleInputFieldChange}/>
-        <StateSelectDropdown
-            state={newSale}
-            selectedState={selectedState}
-            setState={setNewSale}
-        />
-        <Input.CompanyName handleInputFieldChange={handleInputFieldChange}/>
-        <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
-        
-        <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}/>
-        <Input.PickupDate handleInputFieldChange={handleInputFieldChange}/>
-
-        
-
-        <label> Sale Types: </label>
-        <select
-            onChange={handleInputFieldChange}
-            id="sales_type_id"
-            className="sale-type--select"
-            defaultValue="0"
-        >
-            <option value="0"> Select Type </option>
-            <option value="1"> Purchase </option>
-            <option value="2"> Lease </option>
-        </select>
-        <PaymentTypeSelectDropdown
-            state={newSale}
-            setNewSale={setNewSale}
-        />
-        <DealershipDropdown
-            state={newSale}
-            setNewSale={setNewSale}
-            selectedDealership={selectedDealership}
-            setSelectedDealership={setSelectedDealership}
-            postedSale={postedSale} 
-        />
-        <VehicleSearch
-            state={newSale}
-            setState={setNewSale}
-            setSelectedVehicle={setSelectedVehicle}
-            selectedVehicle={selectedVehicle}
-            postedSale={postedSale}
-        />
-        <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
-
-        <SuccessSnackbar 
-        postedSale={postedSale} 
-        setPostedSale={setPostedSale}
-        />
-    </div>
+            <SuccessSnackbar 
+                postedSale={postedSale} 
+                setPostedSale={setPostedSale}
+            />
+        </div>
         <div className="addSale--btn--container">
             <button onClick={handleSubmit} className="addEmployee--btn">Add Sale</button>
             <button className="closeBtn" onClick={handleClose}> Close</button>
         </div>
-</>
+    </>
 );
 };
 export default AddSaleForm;
