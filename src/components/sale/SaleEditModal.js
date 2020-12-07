@@ -59,7 +59,7 @@ const SaleEditModal = (props) => {
   };
 
   const handleModalClose = () => {
-    props.setEditMode(!props.editMode);
+    props.setEditMode(false);
     setUpdatedSale();
 
     const inputs = document.querySelectorAll("input");
@@ -179,7 +179,7 @@ const SaleEditModal = (props) => {
         </>
       ) : (
           <>
-            <div className="modal-details--body">
+            <div className="modal-edit--body">
               <Input.FirstName
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
