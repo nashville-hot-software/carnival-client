@@ -105,6 +105,29 @@ const AddSaleForm = (props) => {
 
     const handleInputFieldChange = (evt) => {
         const stateToChange = {...newSale}
+
+        if (
+            evt.target.id === 'deposit'
+           ) {
+            let value = evt.target.value;
+            
+            if (value.includes('$') && value.includes(',')) {
+                const splitPrice = value.split('$');
+                value = splitPrice[1];
+                const secondSplitPrice = value.split(',');
+                value = secondSplitPrice.join('');
+            } else if (value.includes(',')) {
+                const splitPrice = value.split(',');
+                value = splitPrice.join('');
+            } else if (value.includes('$')) {
+                const splitPrice = value.split('$');
+                value = splitPrice.join('');
+            } 
+
+            stateToChange.deposit = parseInt(value);
+        } 
+
+        
         stateToChange[evt.target.id] = evt.target.value;
         setNewSale(stateToChange);
     };
