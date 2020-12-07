@@ -58,7 +58,7 @@ const DealershipDropdown = (props) => {
 
         document.querySelector(".dealership--search").value = "";
 
-    }, [props.employeeUpdated, props.postedEmployee])
+    }, [props.employeeUpdated, props.postedEmployee, props.postedSale])
 
     return (
         <>

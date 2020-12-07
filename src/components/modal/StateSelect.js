@@ -44,9 +44,9 @@ const StateSelectDropdown = (props) => {
                 <select
                 className="modal--input"
                 onChange={handleStateTypeSelect}
-                defaultValue="select a state"
+                defaultValue="0"
                 id="state">
-                    <option value="select a state">Select a state</option>
+                    <option value="0">Select a state</option>
                     {states !== undefined
                         ? states.map((state, i) => {
                             return <option key={i} value={state.id}>{state.name}</option>;

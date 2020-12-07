@@ -50,7 +50,7 @@ const AddSaleForm = (props) => {
         const inputs = document.querySelectorAll("input");
         const selects = document.querySelectorAll("select");
         inputs.forEach((input) => (input.value = ""));
-        selects.forEach((select) => (select.value = "none"));
+        selects.forEach((select) => (select.value = "0"));
     };
 
     const handleSubmit = () => {
@@ -154,6 +154,7 @@ const AddSaleForm = (props) => {
             onChange={handleInputFieldChange}
             id="sales_type_id"
             className="sale-type--select"
+            defaultValue="0"
         >
             <option value="0"> Select Type </option>
             <option value="1"> Purchase </option>
@@ -168,12 +169,14 @@ const AddSaleForm = (props) => {
             setNewSale={setNewSale}
             selectedDealership={selectedDealership}
             setSelectedDealership={setSelectedDealership}
-            postedSale={postedSale} />
+            postedSale={postedSale} 
+        />
         <VehicleSearch
             state={newSale}
             setState={setNewSale}
             setSelectedVehicle={setSelectedVehicle}
             selectedVehicle={selectedVehicle}
+            postedSale={postedSale}
         />
         <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
 

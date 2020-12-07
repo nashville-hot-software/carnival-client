@@ -13,6 +13,7 @@ const VehicleDropdown = (props) => {
                 vehicleName: evt.target.innerHTML.split("<")[0]
             })
         props.setShowVehicles(false)
+        props.setQuery("");
 
         console.log(evt.target.title);
         // props.setShowVehicles(false);
