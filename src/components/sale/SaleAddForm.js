@@ -136,16 +136,18 @@ const AddSaleForm = (props) => {
         <Input.Street handleInputFieldChange={handleInputFieldChange}/>
         <Input.City handleInputFieldChange={handleInputFieldChange}/>
         <Input.ZipCode handleInputFieldChange={handleInputFieldChange}/>
+        <StateSelectDropdown
+            state={newSale}
+            selectedState={selectedState}
+            setState={setNewSale}
+        />
         <Input.CompanyName handleInputFieldChange={handleInputFieldChange}/>
         <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
-        <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
+        
         <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}/>
         <Input.PickupDate handleInputFieldChange={handleInputFieldChange}/>
 
-        <StateSelectDropdown
-        state={newSale}
-        selectedState={selectedState}
-        setState={setNewSale}/>
+        
 
         <label> Sale Types: </label>
         <select
@@ -168,17 +170,17 @@ const AddSaleForm = (props) => {
             setSelectedDealership={setSelectedDealership}
             postedSale={postedSale} />
         <VehicleSearch
-        state={newSale}
-        setState={setNewSale}
-        setSelectedVehicle={setSelectedVehicle}
-        selectedVehicle={selectedVehicle}
-
+            state={newSale}
+            setState={setNewSale}
+            setSelectedVehicle={setSelectedVehicle}
+            selectedVehicle={selectedVehicle}
         />
+        <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
 
         <SuccessSnackbar 
         postedSale={postedSale} 
         setPostedSale={setPostedSale}
-    />
+        />
     </div>
         <div className="addSale--btn--container">
             <button onClick={handleSubmit} className="addEmployee--btn">Add Sale</button>

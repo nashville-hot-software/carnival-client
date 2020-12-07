@@ -151,25 +151,42 @@ const SaleEditModal = (props) => {
       {props.editMode === false ? (
         <>
           <div className="modal-details--body">
-            <strong>Name:</strong>{" "}
-            {`${props.sale.first_name} ${props.sale.last_name}`}
-            <strong>Price:</strong> {`${props.sale.price}`}
-            <strong>Deposit:</strong> {`${props.sale.deposit}`}
-            <strong>Pickup Date:</strong> {`${props.sale.pickup_date}`}
-            <strong>Email:</strong> {`${props.sale.email}`}
-            <strong>InvoiceNumber:</strong> {`${props.sale.invoice_number}`}
-            <strong>Payment Method:</strong> {`${props.sale.payment_method}`}
-            <strong>returned:</strong> {`${props.sale.returned}`}
-            <strong>Phone:</strong> {`${props.sale.phone}`}
-            <strong>Company Name:</strong> {`${props.sale.company_name}`}
-            <strong>employee Id:</strong> {`${props.sale.employee_id}`}
-            <strong>City:</strong> {`${props.sale.city}`}
-            <strong>State:</strong> {`${props.sale.state}`}
-            <strong>zipcode:</strong> {`${props.sale.zipcode}`}
-            <strong>City:</strong> {`${props.sale.city}`}
-            <strong>sales type id:</strong> {`${props.sale.sales_type_id}`}
-            <strong>Vehicle Id:</strong> {`${props.sale.vehicle_id}`}
-            <strong>Dealership:</strong> {`${props.sale.dealership_id}`}
+            <strong>Name:</strong>
+            {sale !== undefined ? (`${sale.first_name} ${sale.last_name}`) : (`${props.sale.first_name} ${props.sale.last_name}`)}
+            <strong>Price:</strong> 
+            {sale !== undefined ? (sale.price) : (props.sale.price)}
+            <strong>Deposit:</strong> 
+            {sale !== undefined ? (sale.deposit) : (props.sale.deposit)}
+            <strong>Pickup Date:</strong> 
+            {sale !== undefined ? (sale.pickup_date) : (props.sale.pickup_date)}
+            <strong>Email:</strong> 
+            {sale !== undefined ? (sale.email) : (props.sale.email)}
+            <strong>InvoiceNumber:</strong> 
+            {sale !== undefined ? (sale.invoice_number) : (props.sale.invoice_number)}
+            <strong>Payment Method:</strong> 
+            {sale !== undefined ? (sale.payment_method) : (props.sale.payment_method)}
+            <strong>returned:</strong> 
+            {sale !== undefined ? (sale.returned) : (props.sale.returned)}
+            <strong>Phone:</strong> 
+            {sale !== undefined ? (sale.phone) : (props.sale.phone)}
+            <strong>Company Name:</strong> 
+            {sale !== undefined ? (sale.company_name) : (props.sale.company_name)}
+            <strong>employee Id:</strong> 
+            {sale !== undefined ? (sale.employee_id) : (props.sale.employee_id)}
+            <strong>City:</strong> 
+            {sale !== undefined ? (sale.city) : (props.sale.city)}
+            <strong>State:</strong> 
+            {sale !== undefined ? (sale.state) : (props.sale.state)}
+            <strong>zipcode:</strong> 
+            {sale !== undefined ? (sale.zipcode) : (props.sale.zipcode)}
+            <strong>City:</strong> 
+            {sale !== undefined ? (sale.city) : (props.sale.city)}
+            <strong>sales type id:</strong> 
+            {sale !== undefined ? (sale.sales_type_id) : (props.sale.sales_type_id)}
+            <strong>Vehicle Id:</strong> 
+            {sale !== undefined ? (sale.vehicle_id) : (props.sale.vehicle_id)}
+            <strong>Dealership:</strong> 
+            {sale !== undefined ? (sale.dealership_id) : (props.sale.dealership_id)}
           </div>
           <div className="saleDetails--btn--container">
             <button className="closeBtn" onClick={handleModalClose}>
@@ -215,6 +232,11 @@ const SaleEditModal = (props) => {
                 {...props}
                 sale={props.sale}
               />
+              <StateSelectDropdown
+                sale={sale}
+                selectedState={selectedState}
+                setSale={setSale}
+              />
               <Input.CompanyName
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
@@ -240,16 +262,11 @@ const SaleEditModal = (props) => {
                 {...props}
                 sale={props.sale}
               />
-              <StateSelectDropdown
-                sale={sale}
-                selectedState={selectedState}
-                setSale={setSale}
-              />
-              <label>Sale Types:</label>
+              <label style={{marginTop: "20px"}}>Sale Types:</label>
               <select
                 onChange={handleInputFieldChange}
                 id="sales_type_id"
-                className="sale-type--select"
+                className="modal--input"
               >
                 <option value="0">Select Type</option>
                 <option value="1">Purchase</option>

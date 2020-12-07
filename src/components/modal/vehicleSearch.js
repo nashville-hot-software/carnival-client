@@ -25,7 +25,7 @@ const VehicleSearch = (props) => {
 
     return (
         <>
-            <label className="name--label">Select Vehicle:</label>
+            <label style={{marginTop: "20px"}} className="name--label">Select Vehicle:</label>
             <input
                 className="modal--input"
                 type="text"

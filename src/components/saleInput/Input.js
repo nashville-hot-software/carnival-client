@@ -1,41 +1,17 @@
 import React from "react";
 import "../sale/editForm.css"
-import InputLabel from "@material-ui/core/InputLabel";
-import { makeStyles } from "@material-ui/core/styles";
-import NumberFormat from 'react-number-format';
 
-// const useStyles = makeStyles((theme) => ({
-//     searchBarStyle: {
-//         // height: "25px",
-//         width: "350px",
-//         margin: "0 0 0 0",
-//         float: "center",
-//         "& .MuiOutlinedInput-root": {
-//             "& fieldset": {
-//                 borderRadius: "5px",
-//                 borderColor: "#6a78d1",
-//             },
-//             "&.Mui-focused fieldset": {
-//                 borderColor: "#6a78d1;",
-//                 borderWidth: "1px",
-//             },
-//         },
-//     },
-// }));
 const Input = {
     FirstName: (props) => {
-        // const classes = useStyles();
         return (
             <>
                 <label>First Name:</label>
                 <input
                     onChange={props.handleInputFieldChange}
                     id="first_name"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.first_name : "First Name"}
-                    autoFocus
 
                 />
             </>
@@ -50,11 +26,9 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="last_name"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.last_name : "Last_Name"}
-                    autoFocus
 
                 />
             </>
@@ -68,11 +42,9 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="email"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.email : "Email"}
-                    autoFocus
 
                 />
             </>
@@ -86,11 +58,9 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="street"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.street : "Street"}
-                    autoFocus
 
                 />
             </>
@@ -106,9 +76,7 @@ const Input = {
                     placeholder={props.sale ? props.sale.city : "City"}
                     id="city"
                     onChange={props.handleInputFieldChange}
-                    // className={classes.searchBarStyle}
                     className="modal--input"
-                    autoFocus
 
                 />
             </>
@@ -122,11 +90,9 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="zipcode"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.zipcode : "Zip"}
-                    autoFocus
 
                 />
             </>
@@ -140,11 +106,9 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="company_name"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.company_name : "Company Name"}
-                    autoFocus
 
                 />
             </>
@@ -162,9 +126,7 @@ const Input = {
                     type="text"
                     placeholder={props.sale ? `$${props.sale.deposit}` : "Deposit"}
                     id="deposit"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
-                    autoFocus
 
                 />
             </>
@@ -175,17 +137,28 @@ const Input = {
         // let priceFormat = <NumberFormat value={props.sale.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         return (
             <>
-                <label>Price:</label>
-                <input
-                    onChange={props.handleInputFieldChange}
-                    id="price"
-                    // className={classes.searchBarStyle}
-                    className="modal--input"
-                    type="text"
-                    value={props.selectedVehicle ? `$${props.selectedVehicle.price}`: "" }
-                    placeholder={props.sale ? `$${props.sale.price}` : "Price"}
-                    autoFocus
-                />
+                
+
+                {props.sale ? (
+                    <>
+                    <label>Price:</label>
+                    <input
+                        onChange={props.handleInputFieldChange}
+                        id="price"
+                        className="modal--input"
+                        type="text"
+                        value={props.selectedVehicle ? `$${props.selectedVehicle.price}`: "" }
+                        placeholder={props.sale ? `$${props.sale.price}` : "Price"}
+                    />
+                    </>
+                ) : (
+                    <>
+                    <label style={{marginTop: "20px"}}>Price:</label>
+                    <div>
+                        {props.selectedVehicle ? `$${props.selectedVehicle.price}`: "" }
+                    </div>
+                    </>
+                )}
             </>
         );
     },
@@ -197,11 +170,9 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="phone"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.phone : "Phone"}
-                    autoFocus
                 />
             </>
         );
@@ -214,10 +185,8 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="purchase_date"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="date"
-                    autoFocus
                 />
             </>
         );
@@ -230,10 +199,8 @@ const Input = {
                 <input
                     onChange={props.handleInputFieldChange}
                     id="pickup_date"
-                    // className={classes.searchBarStyle}
                     className="modal--input"
                     type="date"
-                    autoFocus
                 />
             </>
         );

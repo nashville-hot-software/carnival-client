@@ -34,7 +34,7 @@ const PaymentTypeSelectDropdown = (props) => {
                     <select
                         onChange={handlePaymentTypeSelect}
                         id="payment_method"
-                        className="sale-type--select"
+                        className="modal--input"
                         defaultValue={props.selectedPaymentType}
                     >
                         <option value={props.selectedPaymentType}>
@@ -57,7 +57,7 @@ const PaymentTypeSelectDropdown = (props) => {
                         <select
                             onChange={handlePaymentTypeSelect}
                             id="payment_method"
-                            className="sale-type--select"
+                            className="modal--input"
                             defaultValue="choose a payment type"
                         >
                             <option value="choose a payment type">
