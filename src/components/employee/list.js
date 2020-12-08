@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
-import "./list.css";
+import "../../styles/employees/list.css"
 import ModalWrapper from "../modal/modalWrapper"
 
 const Employees = (props) => {

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import "./searchCard.css"
 import "../../styles/vehicles/searchCard.css"
 import NumberFormat from 'react-number-format';
 

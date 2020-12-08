@@ -1,0 +1,38 @@
+.employee-details--header {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.employee-id {
+    font-size: 18px;
+    color: lightgray;
+}
+
+.modal-edit--body {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.removeEmployee--btn {
+    border: 1px solid #ff4235;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 15px;
+    width: 100px;
+    height: 40px;
+    background-color: #ff4235;
+    margin-right: 7%;
+    color: #fff;
+    transition: transform 0.4s ease;   
+}
+.removeEmployee--btn:hover {
+    transform: scale(1.07);
+}
+
+.employee--btn--container {
+    display: flex;
+    margin-left: 7%;
+    margin-top: 4%;
+}

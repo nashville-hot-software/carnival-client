@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import VehicleCard from "./vehicleCard"
 import VehicleManager from "../../api/dataManager";
-// import "./list.css"
 import "../../styles/vehicles/list.css"
 import ModalWrapper from "../modal/modalWrapper"
 

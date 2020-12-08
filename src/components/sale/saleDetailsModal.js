@@ -1,5 +1,4 @@
 import React from "react";
-// import "./card.css"
 import "../../styles/sales/card.css"
 import "../employee/list.css"
 import "../employee/card.css"

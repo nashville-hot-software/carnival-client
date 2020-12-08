@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SaleManager from "../../api/dataManager";
-// import "./detail.css"
 import "../../styles/sales/detail.css"
 
 const SaleDetails = props => {
