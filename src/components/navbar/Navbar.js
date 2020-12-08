@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import "./nav.css";
-import Nav from 'react-bootstrap/Nav';
+import "../../styles/nav/nav.css"
 
 const NavBar = props => {
   const hasUser = props.hasUser;
