@@ -1,5 +1,4 @@
 import React from "react";
-import "../sale/editForm.css"
 
 const Input = {
     FirstName: (props) => {

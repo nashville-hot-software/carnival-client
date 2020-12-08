@@ -1,4 +1,4 @@
-/* .sales-dashboard--container {
+.sales-dashboard--container {
     margin-left: 3%;
 }
 .sales-searchlist--container {
@@ -47,13 +47,13 @@
     height: 400px;
     overflow: scroll;
     -ms-overflow-style: none;
-
+    /* IE and Edge */
     scrollbar-width: none;
-
+    /* Firefox */
     width: 50%;
     margin-top: 5%;
 }
-
+/* Hide scrollbar for Chrome/Safari/Opera */
 .searchResults::-webkit-scrollbar {
     display: none;
 }
@@ -90,4 +90,4 @@
     height: 75px;
     padding-top: 15px;
     padding-left: 15px;
-} */
+}

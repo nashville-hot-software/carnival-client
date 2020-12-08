@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./card.css";
+// import "./card.css";
+import "../../styles/sales/card.css"
 import Switch from "@material-ui/core/Switch";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";

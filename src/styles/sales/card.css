@@ -1,4 +1,4 @@
-/* .sale-grid--container {
+.sale-grid--container {
     border-bottom: 1px solid rgb(209, 159, 159) !important;
 }
 
@@ -26,4 +26,8 @@
 .saleEdit--header .edit--switch {
     margin-top: 15px;
     margin-left: 49%;
-} */
+}
+
+.modal--input {
+    min-height: 35px;
+}

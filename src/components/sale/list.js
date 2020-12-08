@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SaleCard from "./card";
 import DataManager from "../../api/dataManager";
 import ModalWrapper from "../modal/modalWrapper"
-import "./list.css";
+import "../../styles/sales/list.css"
 
 const SaleList = (props) => {
     const [matchedSale, setMatchedSale] = useState();

@@ -6,7 +6,8 @@ import StateSelectDropdown from "../modal/StateSelect";
 import Input from "../saleInput/Input";
 import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
 import SuccessSnackbar from "../modal/snackbar"
-import "./list.css";
+// import "./list.css";
+import "../../styles/sales/list.css"
 
 const AddSaleForm = (props) => {
     const [newSale, setNewSale] = useState({
