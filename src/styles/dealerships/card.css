@@ -1,0 +1,67 @@
+.dealership-card--container {
+    border-bottom: 1px solid gray;
+    padding: 10px 10px 2px 10px;
+}
+
+.dealership-card--container:hover {
+    cursor: pointer;
+}
+
+.dealership-card--name {
+    font-size: 20px;
+}
+.dealership-card--name:hover {
+    color: lightgray;
+}
+
+/* Modal styling below */
+
+
+.modal-details--form {
+    margin-top: 70px !important;
+    border-radius: 8px;
+}
+
+.modalHeader {
+    margin: 0 auto;
+}
+
+.modal-details--body {
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-top: 20px;
+    max-height: 75%;
+    overflow: scroll;
+}
+
+.modal-edit--body {
+    border-radius: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-top: 20px;
+    max-height: 78%;
+    overflow: scroll;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+}
+
+.updateEmployee--btn {
+    line-height: 40px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF7A59;
+    color: #252222;
+    transition: transform .5s ease;
+}
+.updateEmployee--btn:hover {
+    transform: scale(1.07);
+}
+.updateEmployee--btn:focus {
+    outline: none;
+}

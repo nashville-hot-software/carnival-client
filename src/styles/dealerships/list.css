@@ -1,0 +1,70 @@
+.dealerships--container {
+    margin-left: 13%;
+}
+
+.dealerships--subContainer {
+    background-color: #F5F8FA;
+    box-shadow: 1px 3px 6px 1px #cacaca;
+    border-radius: 7px;
+    width: 95%;
+    height: 800px;
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dealership--header {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 3rem;
+    color: #33475B;
+}
+
+.dealerships-searchBar {
+    width: 400px;
+    line-height: 35px;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    padding-left: 7px;
+}
+
+.dealerships-searchBar:focus {
+    outline: none;
+    border-color: #6a78d1;
+    box-shadow: 0 0 8px #6a78d1;
+}
+
+.searchResults.dealerships {
+    border: 2px solid lightgray;
+    box-shadow: 1px 5px 10px 1px lightgrey;
+    border-radius: 5px;
+    background-color: #fff;
+    height: 400px;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    width: 50%;
+    margin-top: 5%;
+}
+
+.addDealership--btn {
+    line-height: 40px;
+    width: 200px;
+    margin-top: 3.5%;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF7A59;
+    color: #252222;
+    transition: transform .5s ease;
+}
+.addDealership--btn:hover {
+    transform: scale(1.07);
+}
+.addDealership--btn:focus {
+    outline: none;
+}
