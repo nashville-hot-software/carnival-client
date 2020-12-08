@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VehicleManager from "../../api/dataManager";
-import "./detail.css"
+// import "./detail.css"
+import "../../styles/vehicles/detail.css"
 
 const VehicleDetails = props => {
 

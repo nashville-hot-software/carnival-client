@@ -8,8 +8,10 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import VehicleManager from "../../api/dataManager"
-import "./list.css";
-import "./modalAddForm.css";
+// import "./list.css";
+import "../../styles/vehicles/list.css"
+// import "./modalAddForm.css";
+import "../../styles/vehicles/addForm.css"
 import AddVehicleTypeForm from "./modalAddVTForm"
 import SuccessSnackbar from "../modal/snackbar"
 
