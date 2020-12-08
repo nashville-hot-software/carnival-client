@@ -19,11 +19,11 @@
 
 .dealership-list--dropdown {
     max-width: 421px;
-    overflow: scroll;
-    -ms-overflow-style: none;
+    overflow: hidden;
     /* IE and Edge */
-    scrollbar-width: none;
+    -ms-overflow-style: none;
     /* Firefox */
+    scrollbar-width: none;
     border: 2px solid gray;
     border-radius: 4px;
     height: 35px;
@@ -36,6 +36,7 @@
 
 .dealership-list--dropdown.open {
     height: 220px;
+    overflow: scroll;
     outline: none;
     border-color: #6a78d1;
     box-shadow: 0 0 8px #6a78d1;

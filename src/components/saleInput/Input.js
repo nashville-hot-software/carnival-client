@@ -154,7 +154,13 @@ const Input = {
                 ) : (
                     <>
                     <label style={{marginTop: "20px"}}>Price:</label>
-                    <div>
+                    <div 
+                        className="modal--input"
+                        style={{
+                            backgroundColor: "#fff",
+                            paddingTop: "4px"
+                        }}
+                    >
                         {props.selectedVehicle ? `$${props.selectedVehicle.price}`: "" }
                     </div>
                     </>

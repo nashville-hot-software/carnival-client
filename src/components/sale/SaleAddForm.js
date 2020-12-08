@@ -164,23 +164,24 @@ const AddSaleForm = (props) => {
                 setState={setNewSale}
             />
             <Input.CompanyName handleInputFieldChange={handleInputFieldChange}/>
-            <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
             
             <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}/>
             <Input.PickupDate handleInputFieldChange={handleInputFieldChange}/>
 
-            <label> Sale Types: </label>
+            <label > 
+                Sale Types: 
+            </label>
             <select
                 onChange={handleInputFieldChange}
                 id="sales_type_id"
-                className="sale-type--select"
+                className="modal--input"
                 defaultValue="0"
             >
                 <option value="0"> Select Type </option>
                 <option value="1"> Purchase </option>
                 <option value="2"> Lease </option>
             </select>
-            
+
             <PaymentTypeSelectDropdown
                 state={newSale}
                 setNewSale={setNewSale}
@@ -200,6 +201,7 @@ const AddSaleForm = (props) => {
                 postedSale={postedSale}
             />
             <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
+            <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
 
             <SuccessSnackbar 
                 postedSale={postedSale} 
