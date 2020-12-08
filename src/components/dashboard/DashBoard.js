@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DataManager from "../../api/dataManager";
-import "./DashBoard.css";
+// import "./DashBoard.css";
+import "../../styles/dashboard/dashboard.css"
 import SaleMetrics from "./saleMetrics"
 import Customers from "../customer/list.js";
 import Sales from "../sale/table.js";
