@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VehicleManager from "../../api/dataManager";
-import "../employee/card.css"
-import "../employee/editForm.css"
+import "../../styles/employees/card.css"
+import "../../styles/employees/editForm.css"
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';

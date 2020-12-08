@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/sales/card.css"
-import "../employee/list.css"
-import "../employee/card.css"
+import "../../styles/employees/card.css"
+import "../../styles/employees/list.css"
 import NumberFormat from 'react-number-format';
 
 
