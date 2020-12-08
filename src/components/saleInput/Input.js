@@ -161,7 +161,7 @@ const Input = {
                             paddingTop: "4px"
                         }}
                     >
-                        {props.selectedVehicle ? `$${props.selectedVehicle.price}`: "" }
+                        {props.selectedVehicle ? `$${props.selectedVehicle.price}`: <span style={{color: 'gray'}}>Select a vehicle</span> }
                     </div>
                     </>
                 )}
