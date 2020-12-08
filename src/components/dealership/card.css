@@ -40,7 +40,7 @@
     display: flex !important;
     flex-direction: column !important;
     margin-top: 20px;
-    max-height: 75%;
+    max-height: 78%;
     overflow: scroll;
 }
 

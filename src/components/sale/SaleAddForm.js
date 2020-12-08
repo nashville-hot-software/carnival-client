@@ -132,7 +132,7 @@ const AddSaleForm = (props) => {
 
     return (
     <>
-        <div className="modalHeader">
+        <div className="modalHeader sale">
             Add Sale
             {/* <ul>
             <li class="ele">
@@ -209,7 +209,7 @@ const AddSaleForm = (props) => {
             />
         </div>
         <div className="addSale--btn--container">
-            <button onClick={handleSubmit} className="addEmployee--btn">Add Sale</button>
+            <button onClick={handleSubmit} className="addSaleModal--btn">Add Sale</button>
             <button className="closeBtn" onClick={handleClose}> Close</button>
         </div>
     </>

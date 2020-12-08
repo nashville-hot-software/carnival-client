@@ -68,6 +68,15 @@
     color: #252222;
     transition: transform .5s ease;
 }
+.addSaleModal--btn {
+    line-height: 40px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF7A59;
+    color: #252222;
+    transition: transform .5s ease;
+}
 .addSale--btn:hover {
     transform: scale(1.07);
 }
@@ -75,4 +84,10 @@
 .fieldset {
     padding: 0 !important;
     margin-bottom: 15px;
+}
+
+.modalHeader.sale {
+    height: 75px;
+    padding-top: 15px;
+    padding-left: 15px;
 }

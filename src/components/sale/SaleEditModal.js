@@ -114,7 +114,7 @@ const SaleEditModal = (props) => {
   }, [updatedSale]);
   return (
     <>
-      <div className="modalHeader">
+      <div className="modalHeader saleEdit--header">
         <div className="employee-details--header">
           <span>Sale</span>
           <span className="employee-id">#{props.sale.id}</span>
@@ -151,42 +151,95 @@ const SaleEditModal = (props) => {
       {props.editMode === false ? (
         <>
           <div className="modal-details--body">
-            <strong>Name:</strong>
-            {sale !== undefined ? (`${sale.first_name} ${sale.last_name}`) : (`${props.sale.first_name} ${props.sale.last_name}`)}
-            <strong>Price:</strong> 
-            {sale !== undefined ? (sale.price) : (props.sale.price)}
-            <strong>Deposit:</strong> 
-            {sale !== undefined ? (sale.deposit) : (props.sale.deposit)}
-            <strong>Pickup Date:</strong> 
-            {sale !== undefined ? (sale.pickup_date) : (props.sale.pickup_date)}
-            <strong>Email:</strong> 
-            {sale !== undefined ? (sale.email) : (props.sale.email)}
-            <strong>InvoiceNumber:</strong> 
-            {sale !== undefined ? (sale.invoice_number) : (props.sale.invoice_number)}
-            <strong>Payment Method:</strong> 
-            {sale !== undefined ? (sale.payment_method) : (props.sale.payment_method)}
-            <strong>returned:</strong> 
-            {sale !== undefined ? (sale.returned) : (props.sale.returned)}
-            <strong>Phone:</strong> 
-            {sale !== undefined ? (sale.phone) : (props.sale.phone)}
-            <strong>Company Name:</strong> 
-            {sale !== undefined ? (sale.company_name) : (props.sale.company_name)}
-            <strong>employee Id:</strong> 
-            {sale !== undefined ? (sale.employee_id) : (props.sale.employee_id)}
-            <strong>City:</strong> 
-            {sale !== undefined ? (sale.city) : (props.sale.city)}
-            <strong>State:</strong> 
-            {sale !== undefined ? (sale.state) : (props.sale.state)}
-            <strong>zipcode:</strong> 
-            {sale !== undefined ? (sale.zipcode) : (props.sale.zipcode)}
-            <strong>City:</strong> 
-            {sale !== undefined ? (sale.city) : (props.sale.city)}
-            <strong>sales type id:</strong> 
-            {sale !== undefined ? (sale.sales_type_id) : (props.sale.sales_type_id)}
-            <strong>Vehicle Id:</strong> 
-            {sale !== undefined ? (sale.vehicle_id) : (props.sale.vehicle_id)}
-            <strong>Dealership:</strong> 
-            {sale !== undefined ? (sale.dealership_id) : (props.sale.dealership_id)}
+            <div>
+              <strong>Name:</strong>
+              {sale !== undefined ? (`${sale.first_name} ${sale.last_name}`) : (`${props.sale.first_name} ${props.sale.last_name}`)}
+            </div>
+            
+            <div>
+              <strong>Price:</strong> 
+              {sale !== undefined ? (sale.price) : (props.sale.price)}
+            </div>
+
+            <div>
+              <strong>Deposit:</strong> 
+              {sale !== undefined ? (sale.deposit) : (props.sale.deposit)}
+            </div>
+
+            <div>
+              <strong>Pickup Date:</strong> 
+              {sale !== undefined ? (sale.pickup_date) : (props.sale.pickup_date)}
+            </div>
+
+            <div>
+              <strong>Email:</strong> 
+              {sale !== undefined ? (sale.email) : (props.sale.email)}
+            </div>
+
+            <div>
+              <strong>InvoiceNumber:</strong> 
+              {sale !== undefined ? (sale.invoice_number) : (props.sale.invoice_number)}
+            </div>
+
+            <div>
+              <strong>Payment Method:</strong> 
+              {sale !== undefined ? (sale.payment_method) : (props.sale.payment_method)}
+            </div>
+
+            <div>
+              <strong>returned:</strong> 
+              {sale !== undefined ? (sale.returned) : (props.sale.returned)}
+            </div>
+
+            <div>
+              <strong>Phone:</strong> 
+              {sale !== undefined ? (sale.phone) : (props.sale.phone)}
+            </div>
+
+            <div>
+              <strong>Company Name:</strong> 
+              {sale !== undefined ? (sale.company_name) : (props.sale.company_name)}
+            </div>
+
+            <div>
+              <strong>employee Id:</strong> 
+              {sale !== undefined ? (sale.employee_id) : (props.sale.employee_id)}
+            </div>
+
+            <div>
+              <strong>City:</strong> 
+              {sale !== undefined ? (sale.city) : (props.sale.city)}
+            </div>
+
+            <div>
+              <strong>State:</strong> 
+              {sale !== undefined ? (sale.state) : (props.sale.state)}
+            </div>
+
+            <div>
+              <strong>zipcode:</strong> 
+              {sale !== undefined ? (sale.zipcode) : (props.sale.zipcode)}
+            </div>
+
+            <div>
+              <strong>City:</strong> 
+              {sale !== undefined ? (sale.city) : (props.sale.city)}
+            </div>
+
+            <div>
+              <strong>sales type id:</strong> 
+              {sale !== undefined ? (sale.sales_type_id) : (props.sale.sales_type_id)}
+            </div>
+
+            <div>
+              <strong>Vehicle Id:</strong> 
+              {sale !== undefined ? (sale.vehicle_id) : (props.sale.vehicle_id)}
+            </div>
+
+            <div>
+              <strong>Dealership:</strong> 
+              {sale !== undefined ? (sale.dealership_id) : (props.sale.dealership_id)}
+            </div>
           </div>
           <div className="saleDetails--btn--container">
             <button className="closeBtn" onClick={handleModalClose}>
