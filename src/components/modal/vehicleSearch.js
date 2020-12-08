@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DataManager from "../../api/dataManager";
 import "./vehicleDropdown.css";
+import NumberFormat from "react-number-format";
 
 const VehicleDropdown = (props) => {
 
@@ -13,6 +14,10 @@ const VehicleDropdown = (props) => {
     };
     
     const handleVehicleSearch = (evt) => {
+        // lets user delete selected vehicle from input field to 
+        // search for different vehicle
+        props.setSelectedVehicle("");
+
         if (evt.target.value.length > 0) {
             setQuery(evt.target.value);
             setShowVehicles(true);
@@ -35,17 +40,21 @@ const VehicleDropdown = (props) => {
         stateToChange.vehicle_id = parseInt(evt.target.id);
         stateToChange.price = parseFloat(evt.target.title);
 
-        console.log(evt.target.innerHTML.split("<")[0]);
+        // getting vehicle name from child element's innerHTML
+        const splitOne = evt.target.innerHTML.split("<");
+        const vehicleName = splitOne[1].split(">")[1];
 
+        // setting JSX values in form based on selected vehicle
         props.setSelectedVehicle(
             {
                 price: parseFloat(evt.target.title),
-                vehicleName: evt.target.innerHTML.split("<")[0]
+                vehicleName: vehicleName
             })
 
         document.querySelector(".vehicles--dropdown").scrollTop = 0;
     };
 
+    // resets dropdown input value after new sale POST
     useEffect(() => {
         props.setSelectedVehicle("");
 
@@ -80,7 +89,17 @@ const VehicleDropdown = (props) => {
                                         title={vehicle.floor_price}
                                         onClick={handleVehicleSelect}
                                     >
-                                        {`${vehicle.make} ${vehicle.model}`}
+                                        <div className="vehicle--title">
+                                            {`${vehicle.make} ${vehicle.model}`}
+                                        </div>
+                                        <div className="vehicle--price">
+                                            <NumberFormat
+                                                value={vehicle.floor_price}
+                                                displayType={"text"}
+                                                thousandSeparator={true}
+                                                prefix={"$"}
+                                            />
+                                        </div>
                                         <span
                                             className="vin"
                                             id={vehicle.id}

@@ -2,7 +2,7 @@
     CUSTOM DROPDOWN STARTS HERE 
 ############ */
 .vehicle--label {
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 .vehicle--search {
@@ -42,14 +42,31 @@
     background-color: #fff;
 }
 
-.vehicles-results--container {
-    padding: 10px;
+.vehicles--select {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.vehicle--title {
+    font-size: 18px;
+    color: #343a40;
+    font-weight: 500;
+    padding-top: 7px;
+}
+.vehicle--title, .vehicle--price, 
+.vin {
+    pointer-events: none;
 }
 
 .vehicles--select:hover {
     cursor: pointer;
-    color: #6a78d1;
+    background-color: #f3f7f9d9;
 }
+
 
 /* ############ 
     CUSTOM DROPDOWN ENDS HERE 
