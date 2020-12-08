@@ -11,8 +11,8 @@ import AddDealershipModal from "../dealership/modalAddForm"
 import AddVehicleModal from "../vehicle/modalAddForm"
 import VehicleEditModal from "../vehicle/modalEditForm"
 import AddSaleForm from '../sale/SaleAddForm'
+
 const ModalWrapper = (props) => {
-    // debugger;
     return (
         <>
             <div className="modal-bg">
@@ -48,7 +48,7 @@ const ModalWrapper = (props) => {
                 ) : null}
                 
                 {props.filteredSale !== undefined ? (
-                    // this needs to be renamed to saleDashboardDetails to reflect the sale details on dashboard
+                    // For dash
                     <SaleDetailModal
                         sale={props.filteredSale}
                         setFilteredSale={props.setFilteredSale}
@@ -59,8 +59,10 @@ const ModalWrapper = (props) => {
                     <SaleEditModal
                         sale={props.matchedSale}
                         setMatchedSale={props.setMatchedSale}
+                        editMode={props.editMode}
+                        setEditMode={props.setEditMode}
                     />
-                ) : null},
+                ) : null}
 
                 {props.saleCreationView === true ? (
                     <AddSaleForm

@@ -22,3 +22,8 @@
 .sale-card--name:hover {
     color: lightgray;
 }
+
+.saleEdit--header .edit--switch {
+    margin-top: 15px;
+    margin-left: 49%;
+}

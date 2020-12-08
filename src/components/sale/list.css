@@ -68,6 +68,15 @@
     color: #252222;
     transition: transform .5s ease;
 }
+.addSaleModal--btn {
+    line-height: 40px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF7A59;
+    color: #252222;
+    transition: transform .5s ease;
+}
 .addSale--btn:hover {
     transform: scale(1.07);
 }
@@ -77,43 +86,8 @@
     margin-bottom: 15px;
 }
 
-
-.vehicles--dropdown.open {
-    margin-top: 20px;
-    background-color: #F5F8FA;
-    box-shadow: 1px 3px 11px 7px #a5a0a0;
-    padding: 20px;
-    border-radius: 8px;
-    overflow: scroll;
-    z-index: 100000;
-    width: 600px;
-    max-height: 400px;
-    display: flex;
-    flex-flow: wrap;
-}
-
-.vehicles--select {
-    display: flex;
-    flex-direction: column;
-    width: 159px;
-    padding: 5px;
-    margin-right: 27px;
-    margin-bottom: 30px;
-    overflow: scroll;
-    border: 1px solid black;
-    border-radius: 7px;
-    background-color: #fff;
-    height: 100px;
-}
-.vehicles--select:nth-of-type(3n) {
-    margin-right: 0;
-}
-.vehicles--select:hover {
-    cursor: pointer;
-    border: 1px solid #FF7A59;
-}
-
-.vin {
-    font-size: 11px;
-    color: gray;
+.modalHeader.sale {
+    height: 75px;
+    padding-top: 15px;
+    padding-left: 15px;
 }

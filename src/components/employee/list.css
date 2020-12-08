@@ -222,6 +222,17 @@
     right: 0;
     left: 0;
 }
+.addSale--btn--container {
+    border-top: 3px solid #6a78d1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
 
 
 .addEmployee--btn:hover {

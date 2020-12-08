@@ -24,8 +24,9 @@ const StateSelectDropdown = (props) => {
         <>
             {props.selectedState !== undefined ? (
                 <>
+                    <label>Select a State</label>
                     <select
-                        className="employeeType--select"
+                        className="modal--input"
                         onChange={handleStateTypeSelect}
                         defaultValue={props.selectedState}
                         id="state">
@@ -37,18 +38,23 @@ const StateSelectDropdown = (props) => {
                             : null}
                     </select>
                 </>
-            ) : <select
-                className="employeeType--select"
+            ) : (
+            <>
+                <label>Select a State</label>
+                <select
+                className="modal--input"
                 onChange={handleStateTypeSelect}
-                defaultValue="select a state"
+                defaultValue="0"
                 id="state">
-                    <option value="select a state">Select a state</option>
+                    <option value="0">Select a state</option>
                     {states !== undefined
                         ? states.map((state, i) => {
                             return <option key={i} value={state.id}>{state.name}</option>;
                         })
                         : null}
-                </select>}
+                </select>
+            </>
+            )}
         </>
     );
 };
