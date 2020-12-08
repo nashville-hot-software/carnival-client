@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import "./card.css"
+// import "./card.css"
+import "../../styles/customers/card.css"
 import "../employee/list.css"
 import "../employee/card.css"
 

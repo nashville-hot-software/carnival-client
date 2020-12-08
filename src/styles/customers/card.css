@@ -1,0 +1,27 @@
+.customer-card--container {
+    border-bottom: 1px solid lightgray;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.customer-card--container:hover {
+    cursor: pointer;
+    border-bottom: 2px solid rgba(54, 162, 235, 0.8);
+}
+
+.customer-card--name {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.customer-card--saleInvoice {
+    margin-bottom: 5px;
+    font-weight: 300;
+    font-size: 16px;
+    color: rgb(102, 102, 102);
+}
+
+.label {
+    margin: 0;
+}

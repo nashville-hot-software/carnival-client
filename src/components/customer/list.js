@@ -1,6 +1,7 @@
 import React from "react";
 import CustomerCard from "./card";
-import "./list.css"
+// import "./list.css"
+import "../../styles/customers/list.css"
 
 const Customers = props => {
 
