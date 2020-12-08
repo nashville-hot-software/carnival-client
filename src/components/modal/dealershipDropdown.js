@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
-import "./dealershipDropdown.css";
+import "../../styles/modal/dealershipDropdown.css"
 
 const DealershipDropdown = (props) => {
 

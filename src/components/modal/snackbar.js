@@ -1,5 +1,5 @@
 import React from "react"
-import "./snackbar.css"
+import "../../styles/modal/snackbar.css"
 
 const SuccessSnackbar = (props) => {
 

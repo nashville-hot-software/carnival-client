@@ -1,5 +1,5 @@
 import React from "react";
-import "./modalWrapper.css";
+import "../../styles/modal/modalWrapper.css"
 import EmployeeDetailModal from "../employee/modalEditForm"
 import AddEmployeeModal from "../employee/modalAddForm"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
