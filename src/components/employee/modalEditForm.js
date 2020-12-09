@@ -9,10 +9,23 @@ import FormControl from '@material-ui/core/FormControl';
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
+import { errorHandler } from "../validation/formValidator"
 
 const EmployeeDetailModal = props => {
 
   const [employee, setEmployee] = useState();  
+  
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    street: '',
+    city: '',
+    zipcode: '',
+    price: '',
+    deposit: ''
+});
 
   // updated employee for the PUT 
   const [updatedEmployee, setUpdatedEmployee] = useState();
@@ -37,6 +50,8 @@ const EmployeeDetailModal = props => {
   const handleFieldChange = evt => {
       
       stateToChange[evt.target.id] = evt.target.value;
+
+      errorHandler(stateToChange, errors, setErrors);
       
       console.log(stateToChange)
   };
@@ -237,6 +252,7 @@ const EmployeeDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
+                {errors.firstName !== '' ? <span className="errorMessage">{errors.firstName}</span> : null}
             
             
                 <label><strong>Last Name:</strong></label> 
@@ -248,6 +264,7 @@ const EmployeeDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
+                {errors.lastName !== '' ? <span className="errorMessage">{errors.lastName}</span> : null}
             
             
                 <label><strong>Email:</strong></label> 
@@ -259,6 +276,7 @@ const EmployeeDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
+                {errors.email !== '' ? <span className="errorMessage">{errors.email}</span> : null}
             
             
                 <label><strong>Phone:</strong></label> 
@@ -270,6 +288,7 @@ const EmployeeDetailModal = props => {
                     onChange={handleFieldChange}
                     className="modal--input"
                 />
+                {errors.phone !== '' ? <span className="errorMessage phone">{errors.phone}</span> : null}
 
                 <DealershipDropdown 
                     state={stateToChange}
