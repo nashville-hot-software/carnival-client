@@ -1,3 +1,7 @@
+const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/, 'i');
+const validPhoneRegex = RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/, 'i');
+const validStreetRegex = RegExp(/^\s*\S+(?:\s+\S+){2}/, 'i');
+
 
 //      1) function checks all values of state built in form,
 //      and assigns error strings if the values are no good
@@ -8,7 +12,6 @@
     // will pass error state in as arg to this handler function (but can it set that arg state??)
     export const errorHandler = (state, errorsState, setErrorsState) => {
         const errors = {...errorsState};
-        console.log(state);
 
         switch (true) {
             case state.first_name !== undefined:
@@ -21,18 +24,18 @@
 
             case state.email_address !== undefined:
                 // create a good RegExp for this
-                errors.email = state.email_address !== undefined && state.email_address !== "" && state.email_address.length <= 1 
-                ? 'Email must be greater than 1 character' : '';
+                errors.email = state.email_address !== undefined && state.email_address !== "" && validEmailRegex.test(state.email_address)
+                ? '' : 'Email is not valid';
 
             case state.phone !== undefined:
                 // create a good RegExp for this
-                errors.phone = state.phone !== undefined && state.phone !== "" && state.phone.length <= 1 
-                ? 'First name must be greater than 1 character' : '';
+                errors.phone = state.phone !== undefined && state.phone !== "" && validPhoneRegex.test(state.phone)
+                ? '' : 'Phone number is not valid';
 
             case state.street !== undefined:
                 // create a good RegExp for this
-                errors.street = state.street !== undefined && state.street !== "" && state.street.length <= 1 
-                ? 'First name must be greater than 1 character' : '';
+                errors.street = state.street !== undefined && state.street !== "" && validStreetRegex.test(state.street)
+                ? '' : 'Street address is not valid';
 
             case state.city !== undefined:
                 // create a good RegExp for this
@@ -58,6 +61,5 @@
                 break;
         }
 
-        console.log(errors);
         setErrorsState(errors);
     };
