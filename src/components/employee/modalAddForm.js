@@ -4,6 +4,7 @@ import "../../styles/employees/list.css"
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
+import { errorHandler } from "../validation/formValidator"
 
 const AddEmployeeModal = (props) => {
 
@@ -14,6 +15,17 @@ const AddEmployeeModal = (props) => {
         phone: "",
         dealership_id: 1,
         employee_type_id: 1,
+    });
+    const [errors, setErrors] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        zipcode: '',
+        price: '',
+        deposit: ''
     });
 
     const [postedEmployee, setPostedEmployee] = useState();
@@ -37,7 +49,11 @@ const AddEmployeeModal = (props) => {
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newEmployee };
         stateToChange[evt.target.id] = evt.target.value;
+
+        errorHandler(stateToChange, errors, setErrors);
+
         setNewEmployee(stateToChange);
+
     };
 
     const clearForm = () => {
@@ -100,6 +116,8 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.firstName !== '' ? <span className="errorMessage">{errors.firstName}</span> : null}
+                
 
                 <label className="name--label">Last Name:</label>
                 <input
@@ -108,6 +126,7 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.lastName !== '' ? <span className="errorMessage">{errors.lastName}</span> : null}
 
                 <label className="name--label">Email:</label>
                 <input
@@ -116,6 +135,7 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.email !== '' ? <span className="errorMessage">{errors.email}</span> : null}
 
                 <label className="name--label">Phone:</label>
                 <input
@@ -124,6 +144,7 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.phone !== '' ? <span className="errorMessage phone">{errors.phone}</span> : null}
 
                 <DealershipDropdown 
                     state={newEmployee} 
