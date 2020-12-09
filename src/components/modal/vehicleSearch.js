@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DataManager from "../../api/dataManager";
-import "./vehicleDropdown.css";
+import "../../styles/modal/vehicleDropdown.css"
 import NumberFormat from "react-number-format";
 
 const VehicleDropdown = (props) => {

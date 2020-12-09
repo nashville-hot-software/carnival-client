@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DealershipCard from "./card";
 import DealershipManager from "../../api/dataManager";
-import "./list.css"
+import "../../styles/dealerships/list.css"
 import ModalWrapper from "../modal/modalWrapper"
 
 

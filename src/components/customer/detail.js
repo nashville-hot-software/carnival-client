@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CustomerManager from "../../api/dataManager";
-import "./detail.css"
+import "../../styles/customers/detail.css"
 
 const CustomerDetails = props => {
 

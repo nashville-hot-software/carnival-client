@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import EmployeeManager from "../../api/dataManager";
-import "./list.css";
+import "../../styles/employees/list.css"
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"

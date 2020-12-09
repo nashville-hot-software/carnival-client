@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EmployeeManager from "../../api/dataManager";
-import "../employee/list.css";
+import "../../styles/employees/list.css"
 
 const EmployeeTypeSelect = (props) => {
 

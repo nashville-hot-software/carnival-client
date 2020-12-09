@@ -27,3 +27,7 @@
     margin-top: 15px;
     margin-left: 49%;
 }
+
+.modal--input {
+    min-height: 35px;
+}

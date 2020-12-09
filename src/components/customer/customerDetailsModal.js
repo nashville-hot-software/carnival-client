@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "./card.css"
-import "../employee/list.css"
-import "../employee/card.css"
+import "../../styles/customers/card.css"
+import "../../styles/employees/list.css"
+import "../../styles/employees/card.css"
 
 
 const CustomerDetailModal = props => {

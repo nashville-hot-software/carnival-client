@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DealershipManager from "../../api/dataManager";
-import "./list.css";
+import "../../styles/dealerships/list.css"
 import SuccessSnackbar from "../modal/snackbar"
 
 const AddDealershipModal = (props) => {

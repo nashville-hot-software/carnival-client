@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import USAStatesArray from "../usaStateArray/stateList";
-import "../employee/list.css";
+import "../../styles/employees/list.css"
 
 const StateSelectDropdown = (props) => {
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../employee/list.css";
+import "../../styles/employees/list.css"
 
 const PaymentTypeSelectDropdown = (props) => {
     const handlePaymentTypeSelect = (evt) => {

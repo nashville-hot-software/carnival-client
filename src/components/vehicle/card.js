@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./card.css"
+import "../../styles/vehicles/card.css"
 
 const VehicleCard = props => {
 

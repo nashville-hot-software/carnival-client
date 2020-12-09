@@ -1,7 +1,7 @@
 import React from "react";
-import "./card.css"
-import "../employee/list.css"
-import "../employee/card.css"
+import "../../styles/vehicles/card.css"
+import "../../styles/employees/list.css"
+import "../../styles/employees/card.css"
 
 
 const VehicleDetailModal = props => {
