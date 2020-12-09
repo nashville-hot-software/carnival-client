@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import API from "../../api/dataManager";
-import "./PieChart.css"
+import "../../styles/charts/pieChart.css"
 
 const SalesPieChart = (props) => {
     const [purchaseData, setPurchaseData] = useState();
