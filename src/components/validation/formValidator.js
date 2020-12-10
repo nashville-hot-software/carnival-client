@@ -1,5 +1,6 @@
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/, 'i');
 const validPhoneRegex = RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/, 'i');
+const validZipcodeRegex = RegExp(/(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)/, 'i');
 const validPriceRegex = RegExp(/^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/, 'i');
 const validYearRegex = RegExp(/(?:\bdigit-|\s|^)(\d{4})(?=[.?\s]|-digit\b|$)/, 'i');
 const validMilesRegex = RegExp(/^[0-9]{1,6}$/, 'i');
@@ -23,11 +24,11 @@ const validWebsiteRegex = RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1
                 break;
             case "phone":
                 errors.phone = value !== "" && validPhoneRegex.test(value)
-                ? '' : 'Phone number is not valid';
+                ? '' : 'Phone number is not valid (Ex: (555)-123-4567)';
                 break;
             case "zipcode":
-                errors.zipcode = value !== "" && value.length <= 1 
-                ? 'First name must be greater than 1 character' : '';
+                errors.zipcode = value !== "" && validZipcodeRegex.test(value) 
+                ? '' : 'Zipcode is not valid';
                 break;
             case "price":
                 errors.price = value !== "" && validPriceRegex.test(value) 
