@@ -68,3 +68,11 @@
 .addDealership--btn:focus {
     outline: none;
 }
+.errorMessage.website {
+    font-size: 11px;
+    color: red;
+    display: block;
+    position: relative;
+    top: 0px;
+    padding-left: 2px;
+}

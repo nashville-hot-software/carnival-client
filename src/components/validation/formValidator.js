@@ -3,6 +3,7 @@ const validPhoneRegex = RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}
 const validPriceRegex = RegExp(/^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/, 'i');
 const validYearRegex = RegExp(/(?:\bdigit-|\s|^)(\d{4})(?=[.?\s]|-digit\b|$)/, 'i');
 const validMilesRegex = RegExp(/^[0-9]{1,6}$/, 'i');
+const validWebsiteRegex = RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, 'i');
 
 
 //      1) function checks all values of state built in form,
@@ -51,6 +52,10 @@ const validMilesRegex = RegExp(/^[0-9]{1,6}$/, 'i');
             case "miles_count":
                 errors.milesCount = value !== "" && validMilesRegex.test(value)
                 ? '' : 'Mileage format not valid (no commas)';
+                break;
+            case "website":
+                errors.website = value !== "" && validWebsiteRegex.test(value)
+                ? '' : 'Website format not valid (Ex: www.examplewebsite.com)';
                 break;
             default:
                 break;
