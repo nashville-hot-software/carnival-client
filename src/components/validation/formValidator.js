@@ -1,5 +1,8 @@
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/, 'i');
 const validPhoneRegex = RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/, 'i');
+const validPriceRegex = RegExp(/^(\d*([.,](?=\d{3}))?\d+)+((?!\2)[.,]\d\d)?$/, 'i');
+const validYearRegex = RegExp(/(?:\bdigit-|\s|^)(\d{4})(?=[.?\s]|-digit\b|$)/, 'i');
+const validMilesRegex = RegExp(/^[0-9]{1,6}$/, 'i');
 
 
 //      1) function checks all values of state built in form,
@@ -22,16 +25,32 @@ const validPhoneRegex = RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}
                 ? '' : 'Phone number is not valid';
                 break;
             case "zipcode":
-                errors.zipcode = value !== "" && value <= 1 
+                errors.zipcode = value !== "" && value.length <= 1 
                 ? 'First name must be greater than 1 character' : '';
                 break;
             case "price":
-                errors.price = value !== "" && value <= 1 
-                ? 'First name must be greater than 1 character' : '';
+                errors.price = value !== "" && validPriceRegex.test(value) 
+                ? '' : 'Price not valid (no dollar sign)';
+                break;
+            case "floor_price":
+                errors.floorPrice = value !== "" && validPriceRegex.test(value) 
+                ? '' : 'Floor price not valid (no dollar sign)';
+                break;
+            case "msr_price":
+                errors.msrPrice = value !== "" && validPriceRegex.test(value) 
+                ? '' : 'Floor price not valid (no dollar sign)';
                 break;
             case "deposit":
-                errors.deposit = value !== "" && value <= 1 
-                ? 'First name must be greater than 1 character' : '';
+                errors.deposit = value !== "" && validPriceRegex.test(value) 
+                ? '' : 'Deposit not valid (no dollar sign)';
+                break;
+            case "year_of_car":
+                errors.yearOfCar = value !== "" && validYearRegex.test(value)
+                ? '' : 'Please enter 4 digit year';
+                break;
+            case "miles_count":
+                errors.milesCount = value !== "" && validMilesRegex.test(value)
+                ? '' : 'Mileage format not valid (no commas)';
                 break;
             default:
                 break;

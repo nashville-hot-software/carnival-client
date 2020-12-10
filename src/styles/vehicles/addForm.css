@@ -7,3 +7,12 @@
     background-color: #FFF;
     padding: 3px 0 3px 6px;
 }
+
+.errorMessage {
+    font-size: 11px;
+    color: red;
+    display: block;
+    position: relative;
+    top: -20px;
+    padding-left: 2px;
+}
