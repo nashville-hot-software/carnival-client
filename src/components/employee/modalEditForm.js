@@ -14,7 +14,6 @@ import { errorHandler, validateForm} from "../validation/formValidator"
 const EmployeeDetailModal = props => {
 
   const [employee, setEmployee] = useState();  
-  const [updatedEmployee, setUpdatedEmployee] = useState();
   
   const [errors, setErrors] = useState({
     firstName: '',
@@ -76,9 +75,6 @@ const EmployeeDetailModal = props => {
             .then(() => {
               EmployeeManager.getOne("employees", props.employee.id)
                 .then(resp => {
-                  console.log("New employee from DB!," + resp);
-                  // console.log(resp)
-                  setUpdatedEmployee();
                   setEmployee(resp);
                   setEmployeeUpdated(true);
                 })
@@ -115,7 +111,6 @@ const EmployeeDetailModal = props => {
 
   const handleModalClose = () => {
     props.setEditMode(false);
-    setUpdatedEmployee();
 
     const inputs = document.querySelectorAll('input')
     const selects = document.querySelectorAll('select')
