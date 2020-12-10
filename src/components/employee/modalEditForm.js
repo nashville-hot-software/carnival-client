@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
-import { errorHandler } from "../validation/formValidator"
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const EmployeeDetailModal = props => {
 
@@ -69,6 +69,8 @@ const EmployeeDetailModal = props => {
     } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
     } else {
+
+        if (validateForm(errors)) {
           EmployeeManager.update("employees", employee, props.employee.id)
             // Later update API to return updated obj on the PUT response instead of re-fetching
             .then(() => {
@@ -94,7 +96,10 @@ const EmployeeDetailModal = props => {
               if (muiSwitch.classList.contains('Mui-checked')) {
                 muiSwitch.click();
               }
-            })            
+            })         
+        } else {
+            window.alert('Please fix form entries')
+        }   
     }
   } 
 
