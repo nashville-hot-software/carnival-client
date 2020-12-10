@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import DealershipManager from "../../api/dataManager";
 import "../../styles/dealerships/list.css"
 import SuccessSnackbar from "../modal/snackbar"
-import { errorHandler, validateForm} from "../validation/formValidator"
 import StateSelectDropdown from "../modal/StateSelect";
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const AddDealershipModal = (props) => {
 
@@ -106,8 +106,7 @@ const AddDealershipModal = (props) => {
                 <label className="name--label">City:</label>
                 <input onChange={handleInputFieldChange} id="city" className="modal--input" type="text"/>
 
-                <label className="name--label">State:</label>
-                {/* <input onChange={handleInputFieldChange} id="state" className="modal--input" type="text"/> */}
+                {/* <label className="name--label">State:</label> */}
                 <StateSelectDropdown 
                     state={newDealership}
                 />
