@@ -51,7 +51,7 @@ const EmployeeDetailModal = props => {
       
       stateToChange[evt.target.id] = evt.target.value;
 
-      errorHandler(stateToChange, errors, setErrors);
+      errorHandler(evt.target.id, evt.target.value, errors, setErrors);
       
       console.log(stateToChange)
   };

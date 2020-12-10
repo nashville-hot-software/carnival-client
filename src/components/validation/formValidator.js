@@ -10,56 +10,58 @@ const validStreetRegex = RegExp(/^\s*\S+(?:\s+\S+){2}/, 'i');
 
 
     // will pass error state in as arg to this handler function (but can it set that arg state??)
-    export const errorHandler = (state, errorsState, setErrorsState) => {
+    export const errorHandler = (state, value, errorsState, setErrorsState) => {
         const errors = {...errorsState};
 
-        switch (true) {
-            case state.first_name !== undefined:
-                errors.firstName = state.first_name !== undefined && state.first_name !== "" && state.first_name.length <= 1 
-                ? 'First name must be greater than 1 character' : '';
-
-            case state.last_name !== undefined:
-                errors.lastName = state.last_name !== undefined && state.last_name !== "" && state.last_name.length <= 4 
+        switch (state) {
+            case "first_name":
+                errors.firstName = value !== "" && value.length <= 1 ? 'First name must be greater than 1 character' : '';
+                break;
+            case "last_name":
+                errors.lastName = value !== "" && value.length <= 4 
                 ? 'Last name must be greater than 4 characters' : '';
-
-            case state.email_address !== undefined:
-                // create a good RegExp for this
-                errors.email = state.email_address !== undefined && state.email_address !== "" && validEmailRegex.test(state.email_address)
+                break;
+            case "email_address":
+                errors.email = value !== "" && validEmailRegex.test(value)
                 ? '' : 'Email is not valid';
-
-            case state.phone !== undefined:
-                // create a good RegExp for this
-                errors.phone = state.phone !== undefined && state.phone !== "" && validPhoneRegex.test(state.phone)
+                break;
+            case "phone":
+                errors.phone = value !== "" && validPhoneRegex.test(value)
                 ? '' : 'Phone number is not valid';
-
-            case state.street !== undefined:
-                // create a good RegExp for this
-                errors.street = state.street !== undefined && state.street !== "" && validStreetRegex.test(state.street)
+                break;
+            case "street":
+                errors.street = value !== "" && validStreetRegex.test(value)
                 ? '' : 'Street address is not valid';
-
-            case state.city !== undefined:
-                // create a good RegExp for this
-                errors.city = state.city !== undefined && state.city !== "" && state.city.length <= 1 
+                break;
+            case "city":
+                errors.city = value !== "" && value <= 1 
                 ? 'First name must be greater than 1 character' : '';
-                
-            case state.zipcode !== undefined:
-                // create a good RegExp for this
-                errors.zipcode = state.zipcode !== undefined && state.zipcode !== "" && state.zipcode.length <= 1 
+                break;
+            case "zipcode":
+                errors.zipcode = value !== "" && value <= 1 
                 ? 'First name must be greater than 1 character' : '';
-                
-            case state.price !== undefined:
-                // create a good RegExp for this
-                errors.price = state.price !== undefined && state.price !== "" && state.price.length <= 1 
+                break;
+            case "price":
+                errors.price = value !== "" && value <= 1 
                 ? 'First name must be greater than 1 character' : '';
-                
-            case state.deposit !== undefined:
-                // create a good RegExp for this
-                errors.deposit = state.deposit !== undefined && state.deposit !== "" && state.deposit.length <= 1 
+                break;
+            case "deposit":
+                errors.deposit = value !== "" && value <= 1 
                 ? 'First name must be greater than 1 character' : '';
-                
+                break;
             default:
                 break;
         }
 
         setErrorsState(errors);
+    };
+
+    export const validateForm = (errors) => {
+        let valid = true;
+        console.log(Object.values(errors))
+        Object.values(errors).forEach(
+          // if we have an error string set valid to false
+          (val) => val.length > 0 && (valid = false)
+        );
+        return valid;
     };

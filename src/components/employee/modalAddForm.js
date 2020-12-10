@@ -4,7 +4,7 @@ import "../../styles/employees/list.css"
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
-import { errorHandler } from "../validation/formValidator"
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const AddEmployeeModal = (props) => {
 
@@ -50,7 +50,7 @@ const AddEmployeeModal = (props) => {
         const stateToChange = { ...newEmployee };
         stateToChange[evt.target.id] = evt.target.value;
 
-        errorHandler(stateToChange, errors, setErrors);
+        errorHandler(evt.target.id, evt.target.value, errors, setErrors);
 
         setNewEmployee(stateToChange);
 
@@ -64,7 +64,9 @@ const AddEmployeeModal = (props) => {
         selects.forEach(select => select.value = "none")
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+
         if (newEmployee.first_name === "" || newEmployee.last_name === "") {
             window.alert("Please fill out employee name fields");
         } else if (newEmployee.email_address === "") {
@@ -76,29 +78,34 @@ const AddEmployeeModal = (props) => {
         } else if (newEmployee.employee_type_id === 0) {
             window.alert("Please select a valid employee type");
         } else {
-            // POST
-            EmployeeManager.PostData("employees", newEmployee).then(resp => {
-                console.log(resp);
 
-                // this is for the success snackbar to know a successful POST was made
-                setPostedEmployee(resp);
-
-                // reset field values for next form POST
-                setNewEmployee({
-                    first_name: "",
-                    last_name: "",
-                    email_address: "",
-                    phone: "",
-                    dealership_id: 0,
-                    employee_type_id: 0,
+            if (validateForm(errors)) {
+                console.log('No errors! Good to go!');
+                
+                // POST
+                EmployeeManager.PostData("employees", newEmployee).then(resp => {
+                    // this is for the success snackbar to know a successful POST was made
+                    setPostedEmployee(resp);
+    
+                    // reset field values for next form POST
+                    setNewEmployee({
+                        first_name: "",
+                        last_name: "",
+                        email_address: "",
+                        phone: "",
+                        dealership_id: 0,
+                        employee_type_id: 0,
+                    });
+                    
+                    
+                    clearForm();
+    
+                    // below clears the dealershipDropdown input
+                    setSelectedDealership("");
                 });
-                
-                
-                clearForm();
-
-                // below clears the dealershipDropdown input
-                setSelectedDealership("");
-            });
+            } else {
+                window.alert('Please fix form entries');
+            }
         }
     };
 
