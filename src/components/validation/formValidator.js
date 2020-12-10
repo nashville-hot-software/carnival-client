@@ -1,6 +1,5 @@
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/, 'i');
 const validPhoneRegex = RegExp(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/, 'i');
-const validStreetRegex = RegExp(/^\s*\S+(?:\s+\S+){2}/, 'i');
 
 
 //      1) function checks all values of state built in form,
@@ -14,13 +13,6 @@ const validStreetRegex = RegExp(/^\s*\S+(?:\s+\S+){2}/, 'i');
         const errors = {...errorsState};
 
         switch (state) {
-            case "first_name":
-                errors.firstName = value !== "" && value.length <= 1 ? 'First name must be greater than 1 character' : '';
-                break;
-            case "last_name":
-                errors.lastName = value !== "" && value.length <= 4 
-                ? 'Last name must be greater than 4 characters' : '';
-                break;
             case "email_address":
                 errors.email = value !== "" && validEmailRegex.test(value)
                 ? '' : 'Email is not valid';
@@ -28,14 +20,6 @@ const validStreetRegex = RegExp(/^\s*\S+(?:\s+\S+){2}/, 'i');
             case "phone":
                 errors.phone = value !== "" && validPhoneRegex.test(value)
                 ? '' : 'Phone number is not valid';
-                break;
-            case "street":
-                errors.street = value !== "" && validStreetRegex.test(value)
-                ? '' : 'Street address is not valid';
-                break;
-            case "city":
-                errors.city = value !== "" && value <= 1 
-                ? 'First name must be greater than 1 character' : '';
                 break;
             case "zipcode":
                 errors.zipcode = value !== "" && value <= 1 
