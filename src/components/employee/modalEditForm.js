@@ -38,46 +38,63 @@ const EmployeeDetailModal = props => {
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
-  // NOTE: So the problem here is when I'm passing this down as a prop to 
-  //       dealershipDropdown it's holding on to the old employee state
-  //       before field updates...
-  var stateToChange = {...employee};
-
+  
   const handleFieldChange = evt => {
-      
-      stateToChange[evt.target.id] = evt.target.value;
+    
+    // NOTE: NEED to figure out why stateToChange is resetting back to old data
+    //       on next handleFieldChange run...
+    var stateToChange = {...employee};
+    stateToChange[evt.target.id] = evt.target.value;
+    console.log(stateToChange);
 
-      // NOTE: this is updating errors state, which triggers re-render, and 
-      // causes stateToChange to reset...
-      errorHandler(evt.target.id, evt.target.value, errors, setErrors);
+    setEmployee(stateToChange);
+
+    // NOTE: this is updating errors state, which triggers re-render, and 
+    // causes stateToChange to reset...
+    errorHandler(evt.target.id, evt.target.value, errors, setErrors);
       
-      console.log(stateToChange)
   };
 
   const handleSubmit = evt => {
     evt.preventDefault()
 
-    if (stateToChange.first_name === "" || stateToChange.last_name === "") {
-        window.alert("Please fill out stateToChange name fields")
-    } else if (stateToChange.email_address === "") {
+    if (employee.first_name === "" || employee.last_name === "") {
+        window.alert("Please fill out employee name fields")
+    } else if (employee.email_address === "") {
         window.alert("Please enter an email address")
-    } else if (stateToChange.phone === "") {
+    } else if (employee.phone === "") {
         window.alert("Please enter a phone number")
-    } else if (stateToChange.dealership_id === 0) {
+    } else if (employee.dealership_id === 0) {
         window.alert("Please select a valid dealership")
-    } else if (stateToChange.employee_type_id === 0) {
+    } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
     } else {
+          EmployeeManager.update("employees", employee, props.employee.id)
+            // Later update API to return updated obj on the PUT response instead of re-fetching
+            .then(() => {
+              EmployeeManager.getOne("employees", props.employee.id)
+                .then(resp => {
+                  console.log("New employee from DB!," + resp);
+                  // console.log(resp)
+                  setUpdatedEmployee();
+                  setEmployee(resp);
+                  setEmployeeUpdated(true);
+                })
+            })
+            .then(() => {
+              props.setEditMode(false);
 
-        // NOTE: this stateToChange is not the updated one after handleFieldChange runs...
-        console.log(stateToChange);
-        
-        setUpdatedEmployee(stateToChange);
-
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
+              const inputs = document.querySelectorAll('input')
+              const selects = document.querySelectorAll('select')
+              inputs.forEach(input => input.value = "")
+              selects.forEach(select => select.value = "none")
+    
+              const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+    
+              if (muiSwitch.classList.contains('Mui-checked')) {
+                muiSwitch.click();
+              }
+            })            
     }
   } 
 
@@ -119,34 +136,6 @@ const EmployeeDetailModal = props => {
         setEmployee(data)
       });
   }, [props.employee])
-  
-  // Only runs when an employee's been edited (updatedEmployee defined on 'Update' btn click)
-  useEffect(() => {
-    if (updatedEmployee !== undefined) {
-      EmployeeManager.update("employees", updatedEmployee, props.employee.id)
-        // Later update API to return updated obj on the PUT response instead of re-fetching
-        .then(() => {
-          EmployeeManager.getOne("employees", props.employee.id)
-            .then(resp => {
-              console.log(resp)
-              setUpdatedEmployee();
-              setEmployee(resp);
-              setEmployeeUpdated(true);
-            })
-        })
-        .then(() => {
-          props.setEditMode(false);
-
-          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-          if (muiSwitch.classList.contains('Mui-checked')) {
-            muiSwitch.click();
-          }
-        })
-        
-    }
-  }, [updatedEmployee])
-
 
 
   return (
@@ -289,12 +278,12 @@ const EmployeeDetailModal = props => {
                 {errors.phone !== '' ? <span className="errorMessage phone">{errors.phone}</span> : null}
 
                 <DealershipDropdown 
-                    state={stateToChange}
+                    state={employee}
                     employeeUpdated={employeeUpdated}
                 />
 
                 <EmployeeTypeSelect
-                    state={stateToChange}
+                    state={employee}
                 />
             </div>
 
