@@ -7,6 +7,7 @@ import Input from "../saleInput/Input";
 import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
 import SuccessSnackbar from "../modal/snackbar"
 import "../../styles/sales/list.css"
+import { errorHandler, validateForm } from "../validation/formValidator"
 
 const AddSaleForm = (props) => {
     const [newSale, setNewSale] = useState({
@@ -29,11 +30,22 @@ const AddSaleForm = (props) => {
         zipcode: "",
         company_name: "",
     });
+    const [errors, setErrors] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        zipcode: '',
+        price: '',
+        deposit: ''
+    });
     const [postedSale, setPostedSale] = useState();
     const [selectedDealership, setSelectedDealership] = useState("");
     const [selectedVehicle, setSelectedVehicle] = useState("");
     const [selectedState, setSelectedState] = useState();
-    
+
 
     const handleClose = () => {
         clearForm();
@@ -73,42 +85,49 @@ const AddSaleForm = (props) => {
         ) {
             alert("Please fill out all the fields");
         } else {
-            DataManager.PostData("sales", newSale).then((data) => {
 
-                setNewSale({
-                    price: 0.0,
-                    deposit: 0,
-                    pickup_date: "",
-                    payment_method: "",
-                    returned: false,
-                    dealership_id: 0,
-                    employee_id: 1,
-                    sales_type_id: 0,
-                    vehicle_id: 0,
-                    first_name: "",
-                    last_name: "",
-                    email: "",
-                    phone: "",
-                    street: "",
-                    city: "",
-                    state: "",
-                    zipcode: "",
-                    company_name: "",
+            if (validateForm(errors)) {
+                DataManager.PostData("sales", newSale).then((data) => {
+
+                    setNewSale({
+                        price: 0.0,
+                        deposit: 0,
+                        pickup_date: "",
+                        payment_method: "",
+                        returned: false,
+                        dealership_id: 0,
+                        employee_id: 1,
+                        sales_type_id: 0,
+                        vehicle_id: 0,
+                        first_name: "",
+                        last_name: "",
+                        email: "",
+                        phone: "",
+                        street: "",
+                        city: "",
+                        state: "",
+                        zipcode: "",
+                        company_name: "",
+                    });
+                    setPostedSale(data);
+                    clearForm();
+                    setSelectedDealership("");
+                    setSelectedVehicle("")
                 });
-                setPostedSale(data);
-                clearForm();
-                setSelectedDealership("");
-                setSelectedVehicle("")
-            });
-        }
-    };
+            } else {
+                window.alert('Please fix form entries');
 
+            }
+        };
+    }
     const handleInputFieldChange = (evt) => {
-        const stateToChange = {...newSale}
+        errorHandler(evt.target.id, evt.target.value, errors, setErrors);
+
+        const stateToChange = { ...newSale }
 
         if (evt.target.id === 'deposit') {
             let value = evt.target.value;
-            
+
             if (value.includes('$') && value.includes(',')) {
                 const splitPrice = value.split('$');
                 value = splitPrice[1];
@@ -120,20 +139,20 @@ const AddSaleForm = (props) => {
             } else if (value.includes('$')) {
                 const splitPrice = value.split('$');
                 value = splitPrice.join('');
-            } 
+            }
 
             stateToChange.deposit = parseInt(value);
-        } 
+        }
 
-        
+
         stateToChange[evt.target.id] = evt.target.value;
         setNewSale(stateToChange);
     };
 
     return (
-    <>
-        <div className="modalHeader sale">
-            Add Sale
+        <>
+            <div className="modalHeader sale">
+                Add Sale
             {/* <ul>
             <li class="ele">
                 <div
@@ -148,71 +167,71 @@ const AddSaleForm = (props) => {
                 </div>
             </li>
         </ul> */}
-        </div>
-        <div className="modal-add--body">
+            </div>
+            <div className="modal-add--body">
 
-            <Input.FirstName handleInputFieldChange={handleInputFieldChange}/>
-            <Input.LastName handleInputFieldChange={handleInputFieldChange}/>
-            <Input.Email handleInputFieldChange={handleInputFieldChange}/>
-            <Input.Phone handleInputFieldChange={handleInputFieldChange}/>
-            <Input.Street handleInputFieldChange={handleInputFieldChange}/>
-            <Input.City handleInputFieldChange={handleInputFieldChange}/>
-            <Input.ZipCode handleInputFieldChange={handleInputFieldChange}/>
-            <StateSelectDropdown
-                state={newSale}
-                selectedState={selectedState}
-                setState={setNewSale}
-            />
-            <Input.CompanyName handleInputFieldChange={handleInputFieldChange}/>
-            
-            <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange}/>
-            <Input.PickupDate handleInputFieldChange={handleInputFieldChange}/>
+                <Input.FirstName handleInputFieldChange={handleInputFieldChange} />
+                <Input.LastName handleInputFieldChange={handleInputFieldChange} />
+                <Input.Email errors={errors} handleInputFieldChange={handleInputFieldChange} />
+                <Input.Phone errors={errors} handleInputFieldChange={handleInputFieldChange} />
+                <Input.Street handleInputFieldChange={handleInputFieldChange} />
+                <Input.City handleInputFieldChange={handleInputFieldChange} />
+                <Input.ZipCode errors={errors} handleInputFieldChange={handleInputFieldChange} />
+                <StateSelectDropdown
+                    state={newSale}
+                    selectedState={selectedState}
+                    setState={setNewSale}
+                />
+                <Input.CompanyName handleInputFieldChange={handleInputFieldChange} />
 
-            <label > 
-                Sale Types: 
+                <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange} />
+                <Input.PickupDate handleInputFieldChange={handleInputFieldChange} />
+
+                <label >
+                    Sale Types:
             </label>
-            <select
-                onChange={handleInputFieldChange}
-                id="sales_type_id"
-                className="modal--input"
-                defaultValue="0"
-            >
-                <option value="0"> Select Type </option>
-                <option value="1"> Purchase </option>
-                <option value="2"> Lease </option>
-            </select>
+                <select
+                    onChange={handleInputFieldChange}
+                    id="sales_type_id"
+                    className="modal--input"
+                    defaultValue="0"
+                >
+                    <option value="0"> Select Type </option>
+                    <option value="1"> Purchase </option>
+                    <option value="2"> Lease </option>
+                </select>
 
-            <PaymentTypeSelectDropdown
-                state={newSale}
-                setNewSale={setNewSale}
-            />
-            <DealershipDropdown
-                state={newSale}
-                setNewSale={setNewSale}
-                selectedDealership={selectedDealership}
-                setSelectedDealership={setSelectedDealership}
-                postedSale={postedSale} 
-            />
-            <VehicleDropdown
-                state={newSale}
-                setState={setNewSale}
-                setSelectedVehicle={setSelectedVehicle}
-                selectedVehicle={selectedVehicle}
-                postedSale={postedSale}
-            />
-            <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
-            <Input.Deposit handleInputFieldChange={handleInputFieldChange}/>
+                <PaymentTypeSelectDropdown
+                    state={newSale}
+                    setNewSale={setNewSale}
+                />
+                <DealershipDropdown
+                    state={newSale}
+                    setNewSale={setNewSale}
+                    selectedDealership={selectedDealership}
+                    setSelectedDealership={setSelectedDealership}
+                    postedSale={postedSale}
+                />
+                <VehicleDropdown
+                    state={newSale}
+                    setState={setNewSale}
+                    setSelectedVehicle={setSelectedVehicle}
+                    selectedVehicle={selectedVehicle}
+                    postedSale={postedSale}
+                />
+                <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
+                <Input.Deposit errors={errors} handleInputFieldChange={handleInputFieldChange} />
 
-            <SuccessSnackbar 
-                postedSale={postedSale} 
-                setPostedSale={setPostedSale}
-            />
-        </div>
-        <div className="addSale--btn--container">
-            <button onClick={handleSubmit} className="addSaleModal--btn">Add Sale</button>
-            <button className="closeBtn" onClick={handleClose}> Close</button>
-        </div>
-    </>
-);
+                <SuccessSnackbar
+                    postedSale={postedSale}
+                    setPostedSale={setPostedSale}
+                />
+            </div>
+            <div className="addSale--btn--container">
+                <button onClick={handleSubmit} className="addSaleModal--btn">Add Sale</button>
+                <button className="closeBtn" onClick={handleClose}> Close</button>
+            </div>
+        </>
+    );
 };
 export default AddSaleForm;

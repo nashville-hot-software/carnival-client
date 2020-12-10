@@ -8,12 +8,27 @@ import DataManager from "../../api/dataManager";
 import StateSelectDropdown from "../modal/StateSelect";
 import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
 import Input from "../saleInput/Input";
+import { errorHandler, validateForm } from "../validation/formValidator"
+
 
 const SaleEditModal = (props) => {
   const [sale, setSale] = useState();
-  const [updatedSale, setUpdatedSale] = useState();
+  // const [updatedSale, setUpdatedSale] = useState();
   const [selectedState, setSelectedState] = useState();
   const [selectedPaymentType, setSelectedPaymentType] = useState();
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    street: '',
+    city: '',
+    zipcode: '',
+    price: '',
+    deposit: ''
+  });
+
+
 
   const handleEditMode = () => {
     props.setEditMode(!props.editMode);
@@ -21,11 +36,12 @@ const SaleEditModal = (props) => {
     muiSwitch.classList.add("Mui-checked", "PrivateSwitchBase-checked-2");
   };
 
-  var stateToChange = { ...sale };
 
   const handleInputFieldChange = (evt) => {
-    console.log(stateToChange);
+    errorHandler(evt.target.id, evt.target.value, errors, setErrors);
+    var stateToChange = { ...sale };
     stateToChange[evt.target.id] = evt.target.value;
+    setSale(stateToChange)
   };
 
   const handleEditSubmit = (evt) => {
@@ -46,13 +62,31 @@ const SaleEditModal = (props) => {
       sale.price === "" ||
       sale.deposit === ""
     ) {
-      window.alert("Please fill out all the fields");
-    } else if (stateToChange !== undefined) {
-      setUpdatedSale(stateToChange);
-      
+      alert("Please fill out all the fields");
+    } else if (sale !== undefined) {
+      if (validateForm(errors)) {
+        DataManager.update("sales", sale, props.sale.id)
+        // Later update API to return updated obj on the PUT response instead of re-fetching
+        .then(() => {
+          DataManager.getOne("sales", props.sale.id).then((data) => {
+            console.log(data[0]);
+            setSale(data[0]);
+          });
+        })
+        .then(() => {
+          props.setEditMode(false);
+          const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
+          if (muiSwitch.classList.contains("Mui-checked")) {
+            muiSwitch.click();
+          }
+        });
+      }else {
+        alert("Please fix form entries")
+      }
+
       const inputs = document.querySelectorAll("input");
       const selects = document.querySelectorAll("select");
-      
+
       inputs.forEach((input) => (input.value = ""));
       selects.forEach((select) => (select.value = "none"));
     }
@@ -60,8 +94,6 @@ const SaleEditModal = (props) => {
 
   const handleModalClose = () => {
     props.setEditMode(false);
-    setUpdatedSale();
-
     const inputs = document.querySelectorAll("input");
     const selects = document.querySelectorAll("select");
 
@@ -81,7 +113,7 @@ const SaleEditModal = (props) => {
       muiSwitch.click();
     }
   };
-  
+
   useEffect(() => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
       setSale(data[0]);
@@ -91,27 +123,6 @@ const SaleEditModal = (props) => {
     });
   }, [props.sale]);
 
-  useEffect(() => {
-    if (updatedSale !== undefined) {
-      console.log("this is updated state", updatedSale);
-      DataManager.update("sales", updatedSale, props.sale.id)
-        // Later update API to return updated obj on the PUT response instead of re-fetching
-        .then(() => {
-          DataManager.getOne("sales", props.sale.id).then((data) => {
-            console.log(data[0]);
-            setUpdatedSale();
-            setSale(data[0]);
-          });
-        })
-        .then(() => {
-          props.setEditMode(false);
-          const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
-          if (muiSwitch.classList.contains("Mui-checked")) {
-            muiSwitch.click();
-          }
-        });
-    }
-  }, [updatedSale]);
   return (
     <>
       <div className="modalHeader saleEdit--header">
@@ -119,7 +130,6 @@ const SaleEditModal = (props) => {
           <span>Sale</span>
           <span className="employee-id">#{props.sale.id}</span>
         </div>
-
         <div className="edit--switch">
           <FormControl component="fieldset">
             <FormGroup aria-label="position" row>
@@ -155,89 +165,89 @@ const SaleEditModal = (props) => {
               <strong>Name:</strong>
               {sale !== undefined ? (`${sale.first_name} ${sale.last_name}`) : (`${props.sale.first_name} ${props.sale.last_name}`)}
             </div>
-            
+
             <div>
-              <strong>Price:</strong> 
+              <strong>Price:</strong>
               {sale !== undefined ? (sale.price) : (props.sale.price)}
             </div>
 
             <div>
-              <strong>Deposit:</strong> 
+              <strong>Deposit:</strong>
               {sale !== undefined ? (sale.deposit) : (props.sale.deposit)}
             </div>
 
             <div>
-              <strong>Pickup Date:</strong> 
+              <strong>Pickup Date:</strong>
               {sale !== undefined ? (sale.pickup_date) : (props.sale.pickup_date)}
             </div>
 
             <div>
-              <strong>Email:</strong> 
+              <strong>Email:</strong>
               {sale !== undefined ? (sale.email) : (props.sale.email)}
             </div>
 
             <div>
-              <strong>InvoiceNumber:</strong> 
+              <strong>InvoiceNumber:</strong>
               {sale !== undefined ? (sale.invoice_number) : (props.sale.invoice_number)}
             </div>
 
             <div>
-              <strong>Payment Method:</strong> 
+              <strong>Payment Method:</strong>
               {sale !== undefined ? (sale.payment_method) : (props.sale.payment_method)}
             </div>
 
             <div>
-              <strong>returned:</strong> 
+              <strong>returned:</strong>
               {sale !== undefined ? (sale.returned) : (props.sale.returned)}
             </div>
 
             <div>
-              <strong>Phone:</strong> 
+              <strong>Phone:</strong>
               {sale !== undefined ? (sale.phone) : (props.sale.phone)}
             </div>
 
             <div>
-              <strong>Company Name:</strong> 
+              <strong>Company Name:</strong>
               {sale !== undefined ? (sale.company_name) : (props.sale.company_name)}
             </div>
 
             <div>
-              <strong>employee Id:</strong> 
+              <strong>employee Id:</strong>
               {sale !== undefined ? (sale.employee_id) : (props.sale.employee_id)}
             </div>
 
             <div>
-              <strong>City:</strong> 
+              <strong>City:</strong>
               {sale !== undefined ? (sale.city) : (props.sale.city)}
             </div>
 
             <div>
-              <strong>State:</strong> 
+              <strong>State:</strong>
               {sale !== undefined ? (sale.state) : (props.sale.state)}
             </div>
 
             <div>
-              <strong>zipcode:</strong> 
+              <strong>zipcode:</strong>
               {sale !== undefined ? (sale.zipcode) : (props.sale.zipcode)}
             </div>
 
             <div>
-              <strong>City:</strong> 
+              <strong>City:</strong>
               {sale !== undefined ? (sale.city) : (props.sale.city)}
             </div>
 
             <div>
-              <strong>sales type id:</strong> 
+              <strong>sales type id:</strong>
               {sale !== undefined ? (sale.sales_type_id) : (props.sale.sales_type_id)}
             </div>
 
             <div>
-              <strong>Vehicle Id:</strong> 
+              <strong>Vehicle Id:</strong>
               {sale !== undefined ? (sale.vehicle_id) : (props.sale.vehicle_id)}
             </div>
 
             <div>
-              <strong>Dealership:</strong> 
+              <strong>Dealership:</strong>
               {sale !== undefined ? (sale.dealership_id) : (props.sale.dealership_id)}
             </div>
           </div>
@@ -253,6 +263,8 @@ const SaleEditModal = (props) => {
               <Input.FirstName
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
+
+
                 sale={props.sale}
               />
               <Input.LastName
@@ -263,11 +275,13 @@ const SaleEditModal = (props) => {
               <Input.Email
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
+                errors={errors}
                 sale={props.sale}
               />
               <Input.Phone
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
+                errors={errors}
                 sale={props.sale}
               />
               <Input.Street
@@ -283,10 +297,11 @@ const SaleEditModal = (props) => {
               <Input.ZipCode
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
+                errors={errors}
                 sale={props.sale}
               />
               <StateSelectDropdown
-                sale={sale}
+                state={sale}
                 selectedState={selectedState}
                 setSale={setSale}
               />
@@ -298,11 +313,13 @@ const SaleEditModal = (props) => {
               <Input.Deposit
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
+                errors={errors}
                 sale={props.sale}
               />
               <Input.Price
                 handleInputFieldChange={handleInputFieldChange}
                 {...props}
+                errors={errors}
                 sale={props.sale}
               />
               <Input.PurchaseDate
@@ -315,7 +332,7 @@ const SaleEditModal = (props) => {
                 {...props}
                 sale={props.sale}
               />
-              <label style={{marginTop: "20px"}}>Sale Types:</label>
+              <label style={{ marginTop: "20px" }}>Sale Types:</label>
               <select
                 onChange={handleInputFieldChange}
                 id="sales_type_id"
@@ -327,7 +344,7 @@ const SaleEditModal = (props) => {
               </select>
               <PaymentTypeSelectDropdown
                 selectedPaymentType={selectedPaymentType}
-                sale={sale}
+                state={sale}
                 setSale={setSale}
               />
               {/* This block is for the dealership search dropdown menu (lines 157-184) */}

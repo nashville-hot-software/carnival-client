@@ -20,7 +20,11 @@ const validWebsiteRegex = RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1
         switch (state) {
             case "email_address":
                 errors.email = value !== "" && validEmailRegex.test(value)
-                ? '' : 'Email is not valid';
+                ? '' : 'Email is not valid (Ex: example@example.com)';
+                break;
+            case "email":
+                errors.email = value !== "" && validEmailRegex.test(value)
+                ? '' : 'Email is not valid (Ex: example@example.com)';
                 break;
             case "phone":
                 errors.phone = value !== "" && validPhoneRegex.test(value)
