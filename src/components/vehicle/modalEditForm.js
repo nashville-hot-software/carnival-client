@@ -26,9 +26,12 @@ const VehicleEditModal = props => {
   const handleFieldChange = evt => {
       stateToChange[evt.target.id] = evt.target.value;
 
+      
       if (evt.target.id === "miles_count") {
         stateToChange[evt.target.id] = parseInt(evt.target.value);
       }
+      
+      console.log(stateToChange);
   };
 
   const handleSubmit = evt => {
@@ -41,6 +44,8 @@ const VehicleEditModal = props => {
     } else if (stateToChange.miles_count === "") {
       window.alert("Please enter vehicle mileage")
     } else {
+        console.log(stateToChange);
+      
         setUpdatedVehicle(stateToChange);
 
         // clear form

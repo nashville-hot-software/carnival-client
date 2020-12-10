@@ -14,6 +14,7 @@ import { errorHandler } from "../validation/formValidator"
 const EmployeeDetailModal = props => {
 
   const [employee, setEmployee] = useState();  
+  const [updatedEmployee, setUpdatedEmployee] = useState();
   
   const [errors, setErrors] = useState({
     firstName: '',
@@ -25,15 +26,10 @@ const EmployeeDetailModal = props => {
     zipcode: '',
     price: '',
     deposit: ''
-});
-
-  // updated employee for the PUT 
-  const [updatedEmployee, setUpdatedEmployee] = useState();
+  });  
 
   // for success snackbar
   const [employeeUpdated, setEmployeeUpdated] = useState(false);
-
-  // const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
       props.setEditMode(!props.editMode);
@@ -51,6 +47,8 @@ const EmployeeDetailModal = props => {
       
       stateToChange[evt.target.id] = evt.target.value;
 
+      // NOTE: this is updating errors state, which triggers re-render, and 
+      // causes stateToChange to reset...
       errorHandler(evt.target.id, evt.target.value, errors, setErrors);
       
       console.log(stateToChange)
@@ -59,17 +57,17 @@ const EmployeeDetailModal = props => {
   const handleSubmit = evt => {
     evt.preventDefault()
 
-    if (employee.first_name === "" || employee.last_name === "") {
-        window.alert("Please fill out employee name fields")
-    } else if (employee.email_address === "") {
+    if (stateToChange.first_name === "" || stateToChange.last_name === "") {
+        window.alert("Please fill out stateToChange name fields")
+    } else if (stateToChange.email_address === "") {
         window.alert("Please enter an email address")
-    } else if (employee.phone === "") {
+    } else if (stateToChange.phone === "") {
         window.alert("Please enter a phone number")
-    } else if (employee.dealership_id === 0) {
+    } else if (stateToChange.dealership_id === 0) {
         window.alert("Please select a valid dealership")
-    } else if (employee.employee_type_id === 0) {
+    } else if (stateToChange.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
-    } else if (stateToChange !== undefined) {
+    } else {
 
         // NOTE: this stateToChange is not the updated one after handleFieldChange runs...
         console.log(stateToChange);
