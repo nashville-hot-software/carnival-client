@@ -30,19 +30,19 @@ const validMilesRegex = RegExp(/^[0-9]{1,6}$/, 'i');
                 break;
             case "price":
                 errors.price = value !== "" && validPriceRegex.test(value) 
-                ? '' : 'Price not valid (no dollar sign)';
+                ? '' : 'Price not valid (no $)';
                 break;
             case "floor_price":
                 errors.floorPrice = value !== "" && validPriceRegex.test(value) 
-                ? '' : 'Floor price not valid (no dollar sign)';
+                ? '' : 'Floor price not valid (no $)';
                 break;
             case "msr_price":
                 errors.msrPrice = value !== "" && validPriceRegex.test(value) 
-                ? '' : 'Floor price not valid (no dollar sign)';
+                ? '' : 'Floor price not valid (no $)';
                 break;
             case "deposit":
                 errors.deposit = value !== "" && validPriceRegex.test(value) 
-                ? '' : 'Deposit not valid (no dollar sign)';
+                ? '' : 'Deposit not valid (no $)';
                 break;
             case "year_of_car":
                 errors.yearOfCar = value !== "" && validYearRegex.test(value)

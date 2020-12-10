@@ -48,8 +48,6 @@ const EmployeeDetailModal = props => {
 
     setEmployee(stateToChange);
 
-    // NOTE: this is updating errors state, which triggers re-render, and 
-    // causes stateToChange to reset...
     errorHandler(evt.target.id, evt.target.value, errors, setErrors);
       
   };

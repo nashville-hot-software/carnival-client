@@ -7,10 +7,25 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SuccessSnackbar from "../modal/snackbar"
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const VehicleEditModal = props => {
 
   const [vehicle, setVehicle] = useState();  
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    street: '',
+    city: '',
+    zipcode: '',
+    msrPrice: '',
+    floorPrice: '',
+    deposit: '',
+    yearOfCar: '',
+    milesCount: ''
+    });
   const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
@@ -31,6 +46,8 @@ const VehicleEditModal = props => {
       
       console.log(stateToChange);
 
+      errorHandler(evt.target.id, evt.target.value, errors, setErrors);
+
       setVehicle(stateToChange);
   };
 
@@ -46,26 +63,30 @@ const VehicleEditModal = props => {
     } else {
         console.log(vehicle);
 
-        VehicleManager.update("vehicles", vehicle, props.vehicle.id)
-        // Later update API to return updated obj on the PUT response instead of re-fetching
-        .then(() => {
-          VehicleManager.getOne("vehicles", props.vehicle.id)
-            .then(resp => {
-              console.log("Respone from DB VV")
-              console.log(resp)
+        if (validateForm(errors)) {
+            VehicleManager.update("vehicles", vehicle, props.vehicle.id)
+            // Later update API to return updated obj on the PUT response instead of re-fetching
+            .then(() => {
+              VehicleManager.getOne("vehicles", props.vehicle.id)
+                .then(resp => {
+                  console.log("Respone from DB VV")
+                  console.log(resp)
 
-              setVehicle(resp);
-              props.setVehicleEdited(true);
+                  setVehicle(resp);
+                  props.setVehicleEdited(true);
+                })
             })
-        })
-        .then(() => {
-          setEditMode(false);
+            .then(() => {
+              setEditMode(false);
 
-          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-          if (muiSwitch.classList.contains('Mui-checked')) {
-            muiSwitch.click();
-          }
-        })
+              const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+              if (muiSwitch.classList.contains('Mui-checked')) {
+                muiSwitch.click();
+              }
+            })
+      } else {
+        window.alert('Please fix form fields')
+      }
       
         // clear form
         const inputs = document.querySelectorAll('input')
@@ -214,6 +235,7 @@ const VehicleEditModal = props => {
                     onChange={handleFieldChange}
                     className="modal--input"
                 />
+                {errors.milesCount !== '' ? <span className="errorMessage">{errors.milesCount}</span> : null}
 
                 <label><strong>Exterior Color:</strong></label> 
                 <input 
