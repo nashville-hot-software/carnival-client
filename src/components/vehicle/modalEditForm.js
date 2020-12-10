@@ -11,7 +11,6 @@ import SuccessSnackbar from "../modal/snackbar"
 const VehicleEditModal = props => {
 
   const [vehicle, setVehicle] = useState();  
-  const [updatedVehicle, setUpdatedVehicle] = useState();
   const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
@@ -21,33 +20,53 @@ const VehicleEditModal = props => {
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
-  var stateToChange = {...vehicle};
-
+  
   const handleFieldChange = evt => {
+      var stateToChange = {...vehicle};
       stateToChange[evt.target.id] = evt.target.value;
 
-      
       if (evt.target.id === "miles_count") {
         stateToChange[evt.target.id] = parseInt(evt.target.value);
       }
       
       console.log(stateToChange);
+
+      setVehicle(stateToChange);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault()
 
-    if (stateToChange.exterior_color === "") {
+    if (vehicle.exterior_color === "") {
         window.alert("Please enter a vehicle name")
-    } else if (stateToChange.interior_color === "") {
+    } else if (vehicle.interior_color === "") {
         window.alert("Please enter city")
-    } else if (stateToChange.miles_count === "") {
+    } else if (vehicle.miles_count === "") {
       window.alert("Please enter vehicle mileage")
     } else {
-        console.log(stateToChange);
-      
-        setUpdatedVehicle(stateToChange);
+        console.log(vehicle);
 
+        VehicleManager.update("vehicles", vehicle, props.vehicle.id)
+        // Later update API to return updated obj on the PUT response instead of re-fetching
+        .then(() => {
+          VehicleManager.getOne("vehicles", props.vehicle.id)
+            .then(resp => {
+              console.log("Respone from DB VV")
+              console.log(resp)
+
+              setVehicle(resp);
+              props.setVehicleEdited(true);
+            })
+        })
+        .then(() => {
+          setEditMode(false);
+
+          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+          if (muiSwitch.classList.contains('Mui-checked')) {
+            muiSwitch.click();
+          }
+        })
+      
         // clear form
         const inputs = document.querySelectorAll('input')
         const selects = document.querySelectorAll('select')
@@ -68,7 +87,6 @@ const VehicleEditModal = props => {
 
   const handleModalClose = () => {
     setEditMode(false);
-    setUpdatedVehicle();
 
     const inputs = document.querySelectorAll('input')
     const selects = document.querySelectorAll('select')
@@ -94,32 +112,6 @@ const VehicleEditModal = props => {
         setVehicle(data)
       });
   }, [props.vehicle])
-  
-  useEffect(() => {
-    if (updatedVehicle !== undefined) {
-      VehicleManager.update("vehicles", updatedVehicle, props.vehicle.id)
-        // Later update API to return updated obj on the PUT response instead of re-fetching
-        .then(() => {
-          VehicleManager.getOne("vehicles", props.vehicle.id)
-            .then(resp => {
-              console.log("Respone from DB VV")
-              console.log(resp)
-
-              setUpdatedVehicle();
-              setVehicle(resp);
-              props.setVehicleEdited(true);
-            })
-        })
-        .then(() => {
-          setEditMode(false);
-
-          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-          if (muiSwitch.classList.contains('Mui-checked')) {
-            muiSwitch.click();
-          }
-        })
-    }
-  }, [updatedVehicle])
 
   return (
     <>
