@@ -42,10 +42,11 @@ const Input = {
                     onChange={props.handleInputFieldChange}
                     id="email"
                     className="modal--input"
-                    type="text"
+                    type="email"
                     placeholder={props.sale ? props.sale.email : "Email"}
 
                 />
+                {props.errors.email !== '' ? <span className="errorMessage">{props.errors.email}</span> : null}
             </>
         );
     },
@@ -92,8 +93,9 @@ const Input = {
                     className="modal--input"
                     type="text"
                     placeholder={props.sale ? props.sale.zipcode : "Zip"}
-
                 />
+                {props.errors.zipcode !== '' ? <span className="errorMessage">{props.errors.zipcode}</span> : null}
+
             </>
         );
     },
@@ -126,8 +128,9 @@ const Input = {
                     placeholder={props.sale ? `$${props.sale.deposit}` : "Deposit"}
                     id="deposit"
                     className="modal--input"
-
                 />
+                {props.errors.deposit !== '' ? <span className="errorMessage">{props.errors.deposit}</span> : null}
+
             </>
         );
     },
@@ -136,34 +139,34 @@ const Input = {
         // let priceFormat = <NumberFormat value={props.sale.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         return (
             <>
-                
+
 
                 {props.sale ? (
                     <>
-                    <label>Price:</label>
-                    <input
-                        onChange={props.handleInputFieldChange}
-                        id="price"
-                        className="modal--input"
-                        type="text"
-                        value={props.selectedVehicle ? `$${props.selectedVehicle.price}`: "" }
-                        placeholder={props.sale ? `$${props.sale.price}` : "Price"}
-                    />
+                        <label>Price:</label>
+                        <input
+                            onChange={props.handleInputFieldChange}
+                            id="price"
+                            className="modal--input"
+                            type="text"
+                            value={props.selectedVehicle ? `$${props.selectedVehicle.price}` : ""}
+                            placeholder={props.sale ? `$${props.sale.price}` : "Price"}
+                        />
                     </>
                 ) : (
-                    <>
-                    <label style={{marginTop: "20px"}}>Price:</label>
-                    <div 
-                        className="modal--input"
-                        style={{
-                            backgroundColor: "#fff",
-                            paddingTop: "4px"
-                        }}
-                    >
-                        {props.selectedVehicle ? `$${props.selectedVehicle.price}`: <span style={{color: 'gray'}}>Select a vehicle</span> }
-                    </div>
-                    </>
-                )}
+                        <>
+                            <label style={{ marginTop: "20px" }}>Price:</label>
+                            <div
+                                className="modal--input"
+                                style={{
+                                    backgroundColor: "#fff",
+                                    paddingTop: "4px"
+                                }}
+                            >
+                                {props.selectedVehicle ? `$${props.selectedVehicle.price}` : <span style={{ color: 'gray' }}>Select a vehicle</span>}
+                            </div>
+                        </>
+                    )}
             </>
         );
     },
@@ -179,6 +182,8 @@ const Input = {
                     type="text"
                     placeholder={props.sale ? props.sale.phone : "Phone"}
                 />
+                {props.errors.phone !== '' ? <span className="errorMessage">{props.errors.phone}</span> : null}
+
             </>
         );
     },

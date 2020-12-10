@@ -2,16 +2,31 @@ import React, { useEffect, useState } from "react";
 import DealershipManager from "../../api/dataManager";
 import "../../styles/employees/card.css"
 import "../../styles/employees/editForm.css"
+import "../../styles/dealerships/list.css"
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SuccessSnackbar from "../modal/snackbar"
+import StateSelectDropdown from "../modal/StateSelect";
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const DealershipDetailModal = props => {
 
   const [dealership, setDealership] = useState();  
-  const [updatedDealership, setUpdatedDealership] = useState();
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    street: '',
+    city: '',
+    zipcode: '',
+    price: '',
+    deposit: '',
+    website: ''
+  });
+
   const [dealershipEdited, setDealershipEdited] = useState(false);
 
   const handleEditMode = () => {
@@ -21,10 +36,13 @@ const DealershipDetailModal = props => {
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
-  var stateToChange = {...dealership};
-
+  
   const handleFieldChange = evt => {
+      var stateToChange = {...dealership};
       stateToChange[evt.target.id] = evt.target.value;
+      setDealership(stateToChange);
+
+      errorHandler(evt.target.id, evt.target.value, errors, setErrors);
   };
 
   const handleSubmit = evt => {
@@ -40,8 +58,32 @@ const DealershipDetailModal = props => {
         window.alert("Please enter a phone number")
     } else if (dealership.website === "") {
         window.alert("Please enter a website")
-    } else if (stateToChange !== undefined) {
-        setUpdatedDealership(stateToChange);
+    } else if (dealership !== undefined) {
+
+        if (validateForm(errors)) {
+            DealershipManager.update("dealerships", dealership, props.dealership.id)
+            // Later update API to return updated obj on the PUT response instead of re-fetching
+            .then(() => {
+              DealershipManager.getOne("dealerships", props.dealership.id)
+                .then(resp => {
+                  console.log(resp)
+                  // setUpdatedDealership();
+                  setDealership(resp);
+                  setDealershipEdited(true);
+                })
+            })
+            .then(() => {
+              props.setEditMode(false);
+
+              const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+
+              if (muiSwitch.classList.contains('Mui-checked')) {
+                muiSwitch.click();
+              }
+            })
+        } else {
+          window.alert('Please fix form fields')
+        }
 
         // clear form
         const inputs = document.querySelectorAll('input')
@@ -63,7 +105,7 @@ const DealershipDetailModal = props => {
 
   const handleModalClose = () => {
     props.setEditMode(false);
-    setUpdatedDealership();
+    // setUpdatedDealership();
 
     const inputs = document.querySelectorAll('input')
     const selects = document.querySelectorAll('select')
@@ -89,33 +131,6 @@ const DealershipDetailModal = props => {
         setDealership(data)
       });
   }, [props.dealership])
-  
-  useEffect(() => {
-    if (updatedDealership !== undefined) {
-      DealershipManager.update("dealerships", updatedDealership, props.dealership.id)
-        // Later update API to return updated obj on the PUT response instead of re-fetching
-        .then(() => {
-          DealershipManager.getOne("dealerships", props.dealership.id)
-            .then(resp => {
-              console.log(resp)
-              setUpdatedDealership();
-              setDealership(resp);
-              setDealershipEdited(true);
-            })
-        })
-        .then(() => {
-          props.setEditMode(false);
-
-          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-          if (muiSwitch.classList.contains('Mui-checked')) {
-            muiSwitch.click();
-          }
-        })
-    }
-  }, [updatedDealership])
-
-
 
   return (
     <>
@@ -230,14 +245,8 @@ const DealershipDetailModal = props => {
                 className="modal--input"
                 />
                 
-                <label><strong>State:</strong></label> 
-                <input 
-                type="text"
-                id="state"
-                placeholder={dealership !== undefined ? (`${dealership.state}`) 
-                            : (`${props.dealership.state}`)}
-                onChange={handleFieldChange}
-                className="modal--input"
+                <StateSelectDropdown 
+                    state={dealership}
                 />
             
             
@@ -250,6 +259,7 @@ const DealershipDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
+                {errors.phone !== '' ? <span className="errorMessage">{errors.phone}</span> : null}
             
             
                 <label><strong>Website:</strong></label> 
@@ -261,6 +271,7 @@ const DealershipDetailModal = props => {
                     onChange={handleFieldChange}
                     className="modal--input"
                 />
+                {errors.website !== '' ? <span className="errorMessage website">{errors.website}</span> : null}
 
 
             </div>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DealershipManager from "../../api/dataManager";
 import "../../styles/dealerships/list.css"
 import SuccessSnackbar from "../modal/snackbar"
+import StateSelectDropdown from "../modal/StateSelect";
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const AddDealershipModal = (props) => {
 
@@ -12,6 +14,18 @@ const AddDealershipModal = (props) => {
         phone: "",
         website: ""
       })
+    const [errors, setErrors] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        zipcode: '',
+        price: '',
+        deposit: '',
+        website: ''
+    });
     
     const [dealershipPosted, setDealershipPosted] = useState(false);
 
@@ -37,6 +51,8 @@ const AddDealershipModal = (props) => {
         const stateToChange = { ...newDealership };
         stateToChange[evt.target.id] = evt.target.value;
         setNewDealership(stateToChange);
+
+        errorHandler(evt.target.id, evt.target.value, errors, setErrors);
     };
 
     const handleSubmit = () => {
@@ -51,25 +67,29 @@ const AddDealershipModal = (props) => {
         } else if (newDealership.employee_type_id === 0) {
             window.alert("Please select a valid employee type");
         } else {
-            // Make the POST, then clear all data from form
-            DealershipManager.PostData("dealerships", newDealership).then(() => {
-                setNewDealership({
-                    business_name: "",
-                    city: "",
-                    state: "",
-                    phone: "",
-                    website: "",
-                    tax_id: ""
-                });
-                
-                setDealershipPosted(true);
-                
-                const inputs = document.querySelectorAll('input')
-                const selects = document.querySelectorAll('select')
+            if (validateForm(errors)) {
+                // Make the POST, then clear all data from form
+                DealershipManager.PostData("dealerships", newDealership).then(() => {
+                    setNewDealership({
+                        business_name: "",
+                        city: "",
+                        state: "",
+                        phone: "",
+                        website: "",
+                        tax_id: ""
+                    });
+                    
+                    setDealershipPosted(true);
+                    
+                    const inputs = document.querySelectorAll('input')
+                    const selects = document.querySelectorAll('select')
 
-                inputs.forEach(input => input.value = "")
-                selects.forEach(select => select.value = "none")
-            });
+                    inputs.forEach(input => input.value = "")
+                    selects.forEach(select => select.value = "none")
+                });
+            } else {
+                window.alert('Please fix form fields')
+            }
         }
     };
 
@@ -86,14 +106,18 @@ const AddDealershipModal = (props) => {
                 <label className="name--label">City:</label>
                 <input onChange={handleInputFieldChange} id="city" className="modal--input" type="text"/>
 
-                <label className="name--label">State:</label>
-                <input onChange={handleInputFieldChange} id="state" className="modal--input" type="text"/>
+                {/* <label className="name--label">State:</label> */}
+                <StateSelectDropdown 
+                    state={newDealership}
+                />
 
                 <label className="name--label">Phone:</label>
                 <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
+                {errors.phone !== '' ? <span className="errorMessage">{errors.phone}</span> : null}
 
                 <label className="name--label">Website:</label>
                 <input onChange={handleInputFieldChange} id="website" className="modal--input" type="text"/>
+                {errors.website !== '' ? <span className="errorMessage website">{errors.website}</span> : null}
             </div>
 
             <div className="addDealership--btn--container">

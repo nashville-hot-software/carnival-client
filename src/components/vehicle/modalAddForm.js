@@ -12,6 +12,7 @@ import "../../styles/vehicles/list.css"
 import "../../styles/vehicles/addForm.css"
 import AddVehicleTypeForm from "./modalAddVTForm"
 import SuccessSnackbar from "../modal/snackbar"
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const AddVehicleModal = (props) => {
 
@@ -48,6 +49,21 @@ const AddVehicleModal = (props) => {
         vehicle_type_id: 0,
         year_of_car: 0
       })
+
+    const [errors, setErrors] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        zipcode: '',
+        msrPrice: '',
+        floorPrice: '',
+        deposit: '',
+        yearOfCar: '',
+        milesCount: ''
+        });
 
       const [vehiclePosted, setVehiclePosted] = useState(false);
 
@@ -96,6 +112,7 @@ const AddVehicleModal = (props) => {
             stateToChange[evt.target.id] = parseInt(value);
             setNewVehicle(stateToChange);
 
+            errorHandler(evt.target.id, evt.target.value, errors, setErrors);
         } 
         // clear fields, then get/set filtered vehicle makes based on body type selected
         else if (evt.target.id === 'body_type') {
@@ -180,30 +197,34 @@ const AddVehicleModal = (props) => {
            ) {
             window.alert("Please fill out all fields");
         } else {
-            VehicleManager.PostData("vehicles", newVehicle).then(resp => {
-                console.log(`New vehicle from DB! VV`);
-                console.log(resp);
-                
-                setNewVehicle({
-                    engine_type: "",
-                    exterior_color: "",
-                    floor_price: 0,
-                    interior_color: "",
-                    is_sold: false,
-                    miles_count: 0,
-                    msr_price: 0,
-                    vehicle_type_id: 0,
-                    year_of_car: 0
-                });
-                setFilteredVehicle();
-                setVehiclePosted(true);
-                
-                const inputs = document.querySelectorAll('input')
-                const selects = document.querySelectorAll('select')
+            if (validateForm(errors)) {
+                VehicleManager.PostData("vehicles", newVehicle).then(resp => {
+                    console.log(`New vehicle from DB! VV`);
+                    console.log(resp);
+                    
+                    setNewVehicle({
+                        engine_type: "",
+                        exterior_color: "",
+                        floor_price: 0,
+                        interior_color: "",
+                        is_sold: false,
+                        miles_count: 0,
+                        msr_price: 0,
+                        vehicle_type_id: 0,
+                        year_of_car: 0
+                    });
+                    setFilteredVehicle();
+                    setVehiclePosted(true);
+                    
+                    const inputs = document.querySelectorAll('input')
+                    const selects = document.querySelectorAll('select')
 
-                inputs.forEach(input => input.value = "")
-                selects.forEach(select => select.value = "none")
-            });
+                    inputs.forEach(input => input.value = "")
+                    selects.forEach(select => select.value = "none")
+                });
+            } else {
+                window.alert('Please fix form entries');
+            }
         }
     };
 
@@ -298,9 +319,11 @@ const AddVehicleModal = (props) => {
 
                 <label className="name--label">Year:</label>
                 <input onChange={handleInputFieldChange} id="year_of_car" className="modal--input" type="text"/>
+                {errors.yearOfCar !== '' ? <span className="errorMessage">{errors.yearOfCar}</span> : null}
 
                 <label className="name--label">Miles:</label>
                 <input onChange={handleInputFieldChange} id="miles_count" className="modal--input" type="text"/>
+                {errors.milesCount !== '' ? <span className="errorMessage">{errors.milesCount}</span> : null}
                 
                 <label className="name--label">MSR Price:</label>
                 {filteredVehicle !== undefined ? (
@@ -315,6 +338,7 @@ const AddVehicleModal = (props) => {
                     // />
                     <div className="modal--input msrp-div" >{`$${filteredVehicle.msr_price}`}</div>
                 ) : (
+                    <>
                     <input 
                         onChange={handleInputFieldChange} 
                         id="msr_price" 
@@ -322,6 +346,8 @@ const AddVehicleModal = (props) => {
                         type="text"
                         placeholder="$"
                     />
+                    {errors.msrPrice !== '' ? <span className="errorMessage">{errors.msrPrice}</span> : null}
+                    </>
                 )}
                 
                 <label className="name--label">Floor Price:</label>
@@ -332,6 +358,7 @@ const AddVehicleModal = (props) => {
                     type="text"
                     placeholder={`$${filteredVehicle !== undefined ? filteredVehicle.floor_price : ""}`}
                 />
+                {errors.floorPrice !== '' ? <span className="errorMessage">{errors.floorPrice}</span> : null}
                 
                 <label className="name--label">Exterior Color:</label>
                 <input onChange={handleInputFieldChange} id="exterior_color" className="modal--input" type="text"/>

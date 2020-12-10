@@ -9,18 +9,26 @@ import FormControl from '@material-ui/core/FormControl';
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const EmployeeDetailModal = props => {
 
   const [employee, setEmployee] = useState();  
-
-  // updated employee for the PUT 
-  const [updatedEmployee, setUpdatedEmployee] = useState();
+  
+  const [errors, setErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    street: '',
+    city: '',
+    zipcode: '',
+    price: '',
+    deposit: ''
+  });  
 
   // for success snackbar
   const [employeeUpdated, setEmployeeUpdated] = useState(false);
-
-  // const [editMode, setEditMode] = useState(false);
 
   const handleEditMode = () => {
       props.setEditMode(!props.editMode);
@@ -29,16 +37,19 @@ const EmployeeDetailModal = props => {
       muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   };
 
-  // NOTE: So the problem here is when I'm passing this down as a prop to 
-  //       dealershipDropdown it's holding on to the old employee state
-  //       before field updates...
-  var stateToChange = {...employee};
-
+  
   const handleFieldChange = evt => {
+    
+    // NOTE: NEED to figure out why stateToChange is resetting back to old data
+    //       on next handleFieldChange run...
+    var stateToChange = {...employee};
+    stateToChange[evt.target.id] = evt.target.value;
+    console.log(stateToChange);
+
+    setEmployee(stateToChange);
+
+    errorHandler(evt.target.id, evt.target.value, errors, setErrors);
       
-      stateToChange[evt.target.id] = evt.target.value;
-      
-      console.log(stateToChange)
   };
 
   const handleSubmit = evt => {
@@ -54,17 +65,35 @@ const EmployeeDetailModal = props => {
         window.alert("Please select a valid dealership")
     } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
-    } else if (stateToChange !== undefined) {
+    } else {
 
-        // NOTE: this stateToChange is not the updated one after handleFieldChange runs...
-        console.log(stateToChange);
-        
-        setUpdatedEmployee(stateToChange);
+        if (validateForm(errors)) {
+          EmployeeManager.update("employees", employee, props.employee.id)
+            // Later update API to return updated obj on the PUT response instead of re-fetching
+            .then(() => {
+              EmployeeManager.getOne("employees", props.employee.id)
+                .then(resp => {
+                  setEmployee(resp);
+                  setEmployeeUpdated(true);
+                })
+            })
+            .then(() => {
+              props.setEditMode(false);
 
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
+              const inputs = document.querySelectorAll('input')
+              const selects = document.querySelectorAll('select')
+              inputs.forEach(input => input.value = "")
+              selects.forEach(select => select.value = "none")
+    
+              const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+    
+              if (muiSwitch.classList.contains('Mui-checked')) {
+                muiSwitch.click();
+              }
+            })         
+        } else {
+            window.alert('Please fix form entries')
+        }   
     }
   } 
 
@@ -80,7 +109,6 @@ const EmployeeDetailModal = props => {
 
   const handleModalClose = () => {
     props.setEditMode(false);
-    setUpdatedEmployee();
 
     const inputs = document.querySelectorAll('input')
     const selects = document.querySelectorAll('select')
@@ -106,34 +134,6 @@ const EmployeeDetailModal = props => {
         setEmployee(data)
       });
   }, [props.employee])
-  
-  // Only runs when an employee's been edited (updatedEmployee defined on 'Update' btn click)
-  useEffect(() => {
-    if (updatedEmployee !== undefined) {
-      EmployeeManager.update("employees", updatedEmployee, props.employee.id)
-        // Later update API to return updated obj on the PUT response instead of re-fetching
-        .then(() => {
-          EmployeeManager.getOne("employees", props.employee.id)
-            .then(resp => {
-              console.log(resp)
-              setUpdatedEmployee();
-              setEmployee(resp);
-              setEmployeeUpdated(true);
-            })
-        })
-        .then(() => {
-          props.setEditMode(false);
-
-          const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-          if (muiSwitch.classList.contains('Mui-checked')) {
-            muiSwitch.click();
-          }
-        })
-        
-    }
-  }, [updatedEmployee])
-
 
 
   return (
@@ -237,6 +237,7 @@ const EmployeeDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
+                {errors.firstName !== '' ? <span className="errorMessage">{errors.firstName}</span> : null}
             
             
                 <label><strong>Last Name:</strong></label> 
@@ -248,6 +249,7 @@ const EmployeeDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
+                {errors.lastName !== '' ? <span className="errorMessage">{errors.lastName}</span> : null}
             
             
                 <label><strong>Email:</strong></label> 
@@ -259,6 +261,7 @@ const EmployeeDetailModal = props => {
                 onChange={handleFieldChange}
                 className="modal--input"
                 />
+                {errors.email !== '' ? <span className="errorMessage">{errors.email}</span> : null}
             
             
                 <label><strong>Phone:</strong></label> 
@@ -270,14 +273,15 @@ const EmployeeDetailModal = props => {
                     onChange={handleFieldChange}
                     className="modal--input"
                 />
+                {errors.phone !== '' ? <span className="errorMessage phone">{errors.phone}</span> : null}
 
                 <DealershipDropdown 
-                    state={stateToChange}
+                    state={employee}
                     employeeUpdated={employeeUpdated}
                 />
 
                 <EmployeeTypeSelect
-                    state={stateToChange}
+                    state={employee}
                 />
             </div>
 

@@ -4,6 +4,7 @@ import "../../styles/employees/list.css"
 import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
+import { errorHandler, validateForm} from "../validation/formValidator"
 
 const AddEmployeeModal = (props) => {
 
@@ -14,6 +15,17 @@ const AddEmployeeModal = (props) => {
         phone: "",
         dealership_id: 1,
         employee_type_id: 1,
+    });
+    const [errors, setErrors] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        zipcode: '',
+        price: '',
+        deposit: ''
     });
 
     const [postedEmployee, setPostedEmployee] = useState();
@@ -37,7 +49,11 @@ const AddEmployeeModal = (props) => {
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newEmployee };
         stateToChange[evt.target.id] = evt.target.value;
+
+        errorHandler(evt.target.id, evt.target.value, errors, setErrors);
+
         setNewEmployee(stateToChange);
+
     };
 
     const clearForm = () => {
@@ -48,7 +64,9 @@ const AddEmployeeModal = (props) => {
         selects.forEach(select => select.value = "none")
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+
         if (newEmployee.first_name === "" || newEmployee.last_name === "") {
             window.alert("Please fill out employee name fields");
         } else if (newEmployee.email_address === "") {
@@ -60,29 +78,34 @@ const AddEmployeeModal = (props) => {
         } else if (newEmployee.employee_type_id === 0) {
             window.alert("Please select a valid employee type");
         } else {
-            // POST
-            EmployeeManager.PostData("employees", newEmployee).then(resp => {
-                console.log(resp);
 
-                // this is for the success snackbar to know a successful POST was made
-                setPostedEmployee(resp);
-
-                // reset field values for next form POST
-                setNewEmployee({
-                    first_name: "",
-                    last_name: "",
-                    email_address: "",
-                    phone: "",
-                    dealership_id: 0,
-                    employee_type_id: 0,
+            if (validateForm(errors)) {
+                console.log('No errors! Good to go!');
+                
+                // POST
+                EmployeeManager.PostData("employees", newEmployee).then(resp => {
+                    // this is for the success snackbar to know a successful POST was made
+                    setPostedEmployee(resp);
+    
+                    // reset field values for next form POST
+                    setNewEmployee({
+                        first_name: "",
+                        last_name: "",
+                        email_address: "",
+                        phone: "",
+                        dealership_id: 0,
+                        employee_type_id: 0,
+                    });
+                    
+                    
+                    clearForm();
+    
+                    // below clears the dealershipDropdown input
+                    setSelectedDealership("");
                 });
-                
-                
-                clearForm();
-
-                // below clears the dealershipDropdown input
-                setSelectedDealership("");
-            });
+            } else {
+                window.alert('Please fix form entries');
+            }
         }
     };
 
@@ -100,6 +123,8 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.firstName !== '' ? <span className="errorMessage">{errors.firstName}</span> : null}
+                
 
                 <label className="name--label">Last Name:</label>
                 <input
@@ -108,6 +133,7 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.lastName !== '' ? <span className="errorMessage">{errors.lastName}</span> : null}
 
                 <label className="name--label">Email:</label>
                 <input
@@ -116,6 +142,7 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.email !== '' ? <span className="errorMessage">{errors.email}</span> : null}
 
                 <label className="name--label">Phone:</label>
                 <input
@@ -124,6 +151,7 @@ const AddEmployeeModal = (props) => {
                     className="modal--input"
                     type="text"
                 />
+                {errors.phone !== '' ? <span className="errorMessage phone">{errors.phone}</span> : null}
 
                 <DealershipDropdown 
                     state={newEmployee} 
