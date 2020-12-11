@@ -4,6 +4,7 @@ import "../../styles/dealerships/list.css"
 import SuccessSnackbar from "../modal/snackbar"
 import StateSelectDropdown from "../modal/StateSelect";
 import { errorHandler, validateForm} from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const AddDealershipModal = (props) => {
 
@@ -28,24 +29,6 @@ const AddDealershipModal = (props) => {
     });
     
     const [dealershipPosted, setDealershipPosted] = useState(false);
-
-    const handleClose = () => {
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
-
-        document.querySelector(".modal-box").classList.remove("show");
-        
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
-
-        setTimeout(function () {
-            props.setCreationView(false)
-        }, 700);
-    };
 
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newDealership };
@@ -106,7 +89,6 @@ const AddDealershipModal = (props) => {
                 <label className="name--label">City:</label>
                 <input onChange={handleInputFieldChange} id="city" className="modal--input" type="text"/>
 
-                {/* <label className="name--label">State:</label> */}
                 <StateSelectDropdown 
                     state={newDealership}
                 />
@@ -127,7 +109,7 @@ const AddDealershipModal = (props) => {
                 <button 
                     className={`closeBtn ${dealershipPosted === true ? "disabled" : ""}`} 
                     disabled={dealershipPosted === true ? true : false}
-                    onClick={handleClose}
+                    onClick={() => modal.handleAddFormClose(props.setCreationView)}
                 >
                     Close  
                 </button>

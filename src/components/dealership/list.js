@@ -3,6 +3,7 @@ import DealershipCard from "./card";
 import DealershipManager from "../../api/dataManager";
 import "../../styles/dealerships/list.css"
 import ModalWrapper from "../modal/modalWrapper"
+import { modal } from "../../modules/modal/helpers"
 
 
 const Dealerships = props => {
@@ -39,14 +40,7 @@ const Dealerships = props => {
 
     setFilteredDealership(foundDealership[0]);
   }
-
-  // Runs when click add dealership button
-  const handleShow = () => {
-    setCreationView(true)
-
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
-  };
+  
 
     // this reflects the dealership update in the search list realtime by re-searching for the
     // dealership when edit mode switched off
@@ -95,7 +89,7 @@ const Dealerships = props => {
             </div>
           ) : null}
 
-            <button onClick={() => handleShow()} className="addDealership--btn">
+            <button onClick={() => modal.handleShow(setCreationView)} className="addDealership--btn">
                 Add New Dealership
             </button>
         </div>
