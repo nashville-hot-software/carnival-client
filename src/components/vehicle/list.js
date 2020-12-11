@@ -45,6 +45,7 @@ const VehiclesList = props => {
   const handleShow = () => {
     setCreationView(true)
 
+    document.querySelector(".modal--container").classList.add("show");
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   };
