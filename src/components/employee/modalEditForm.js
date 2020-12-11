@@ -10,11 +10,10 @@ import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const EmployeeDetailModal = props => {
-
   const [employee, setEmployee] = useState();  
-  
   const [errors, setErrors] = useState({
     firstName: '',
     lastName: '',
@@ -26,30 +25,15 @@ const EmployeeDetailModal = props => {
     price: '',
     deposit: ''
   });  
-
   // for success snackbar
   const [employeeUpdated, setEmployeeUpdated] = useState(false);
 
-  const handleEditMode = () => {
-      props.setEditMode(!props.editMode);
-
-      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
-  };
-
-  
   const handleFieldChange = evt => {
-    
-    // NOTE: NEED to figure out why stateToChange is resetting back to old data
-    //       on next handleFieldChange run...
     var stateToChange = {...employee};
     stateToChange[evt.target.id] = evt.target.value;
-    console.log(stateToChange);
-
     setEmployee(stateToChange);
 
     errorHandler(evt.target.id, evt.target.value, errors, setErrors);
-      
   };
 
   const handleSubmit = evt => {
@@ -66,7 +50,6 @@ const EmployeeDetailModal = props => {
     } else if (employee.employee_type_id === 0) {
         window.alert("Please select a valid employee type")
     } else {
-
         if (validateForm(errors)) {
           EmployeeManager.update("employees", employee, props.employee.id)
             // Later update API to return updated obj on the PUT response instead of re-fetching
@@ -78,15 +61,11 @@ const EmployeeDetailModal = props => {
                 })
             })
             .then(() => {
+              modal.clearForm();
+              
+              // turn off edit switch and go back to details view
               props.setEditMode(false);
-
-              const inputs = document.querySelectorAll('input')
-              const selects = document.querySelectorAll('select')
-              inputs.forEach(input => input.value = "")
-              selects.forEach(select => select.value = "none")
-    
               const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-    
               if (muiSwitch.classList.contains('Mui-checked')) {
                 muiSwitch.click();
               }
@@ -101,32 +80,11 @@ const EmployeeDetailModal = props => {
     if (window.confirm(`Are you sure you want to delete Employee #${props.employee.id}?`)) {
       EmployeeManager.deleteUserData("employees", props.employee.id)
         .then(() => {
-          handleModalClose();
+          modal.handleEditFormClose(props.setEditMode);
           props.setEmployeeDeleted(true);
         });
     }
   }
-
-  const handleModalClose = () => {
-    props.setEditMode(false);
-
-    const inputs = document.querySelectorAll('input')
-    const selects = document.querySelectorAll('select')
-    inputs.forEach(input => input.value = "")
-    selects.forEach(select => select.value = "none")
-
-    document.querySelector(".modal-box").classList.remove("show");
-    
-    setTimeout(() => {
-      document.querySelector(".modal-bg").classList.remove("show");
-    }, 300);
-
-    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-    if (muiSwitch.classList.contains('Mui-checked')) {
-      muiSwitch.click();
-    }
-  };
 
   useEffect(() => {
     EmployeeManager.getOne("employees", props.employee.id)
@@ -150,28 +108,13 @@ const EmployeeDetailModal = props => {
                 <FormControlLabel
                     
                     value="Edit"
-                    control={<Switch onClick={handleEditMode} color="#ced5f7" />}
+                    control={<Switch onClick={() => modal.handleEditMode(props.editMode,props.setEditMode)} color="#ced5f7" />}
                     label="Update"
                     labelPlacement="top"
                 />
                 </FormGroup>
                 </FormControl>
             </div>
-
-            {/* <ul>
-                <li class="ele">
-                    <div
-                        type="button"
-                        onClick={handleModalClose}
-                        className="x spin large "
-                    >
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                    </div>
-                </li>
-            </ul> */}
         </div>
 
         {props.editMode === false ? (
@@ -220,7 +163,7 @@ const EmployeeDetailModal = props => {
               <button 
                 className={`closeBtn ${employeeUpdated !== false ? "disabled" : ""}`} 
                 disabled={employeeUpdated !== false ? true : false}
-                onClick={handleModalClose}>
+                onClick={() => modal.handleEditFormClose(props.setEditMode)}>
                   Close  
               </button>
           </div>
@@ -289,7 +232,7 @@ const EmployeeDetailModal = props => {
                 <button onClick={handleSubmit} className="updateEmployee--btn">
                     Update
                 </button>
-                <button className="closeBtn" onClick={handleModalClose}>
+                <button className="closeBtn" onClick={() => modal.handleEditFormClose(props.setEditMode)}>
                     Cancel  
                 </button>
             </div>
