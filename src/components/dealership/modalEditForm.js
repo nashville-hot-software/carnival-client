@@ -10,9 +10,9 @@ import FormControl from '@material-ui/core/FormControl';
 import SuccessSnackbar from "../modal/snackbar"
 import StateSelectDropdown from "../modal/StateSelect";
 import { errorHandler, validateForm} from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const DealershipDetailModal = props => {
-
   const [dealership, setDealership] = useState();  
   const [errors, setErrors] = useState({
     firstName: '',
@@ -26,16 +26,7 @@ const DealershipDetailModal = props => {
     deposit: '',
     website: ''
   });
-
   const [dealershipEdited, setDealershipEdited] = useState(false);
-
-  const handleEditMode = () => {
-      props.setEditMode(!props.editMode);
-
-      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
-  };
-
   
   const handleFieldChange = evt => {
       var stateToChange = {...dealership};
@@ -59,7 +50,6 @@ const DealershipDetailModal = props => {
     } else if (dealership.website === "") {
         window.alert("Please enter a website")
     } else if (dealership !== undefined) {
-
         if (validateForm(errors)) {
             DealershipManager.update("dealerships", dealership, props.dealership.id)
             // Later update API to return updated obj on the PUT response instead of re-fetching
@@ -67,16 +57,16 @@ const DealershipDetailModal = props => {
               DealershipManager.getOne("dealerships", props.dealership.id)
                 .then(resp => {
                   console.log(resp)
-                  // setUpdatedDealership();
                   setDealership(resp);
                   setDealershipEdited(true);
                 })
             })
             .then(() => {
+              modal.clearForm();
+
+              // flip edit switch back to off
               props.setEditMode(false);
-
               const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
               if (muiSwitch.classList.contains('Mui-checked')) {
                 muiSwitch.click();
               }
@@ -84,12 +74,6 @@ const DealershipDetailModal = props => {
         } else {
           window.alert('Please fix form fields')
         }
-
-        // clear form
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
     }
   } 
 
@@ -98,32 +82,10 @@ const DealershipDetailModal = props => {
       DealershipManager.deleteUserData("dealerships", props.dealership.id)
         .then(() => {
           props.setDealershipDeleted(true);
-          handleModalClose();
+          modal.handleEditFormClose(props.setEditMode);
         });
     }
   }
-
-  const handleModalClose = () => {
-    props.setEditMode(false);
-    // setUpdatedDealership();
-
-    const inputs = document.querySelectorAll('input')
-    const selects = document.querySelectorAll('select')
-    inputs.forEach(input => input.value = "")
-    selects.forEach(select => select.value = "none")
-
-    document.querySelector(".modal-box").classList.remove("show");
-    
-    setTimeout(() => {
-      document.querySelector(".modal-bg").classList.remove("show");
-    }, 300);
-
-    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-    if (muiSwitch.classList.contains('Mui-checked')) {
-      muiSwitch.click();
-    }
-  };
 
   useEffect(() => {
     DealershipManager.getOne("dealerships", props.dealership.id)
@@ -146,28 +108,13 @@ const DealershipDetailModal = props => {
                 <FormControlLabel
                     
                     value="Edit"
-                    control={<Switch onClick={handleEditMode} color="#ced5f7" />}
+                    control={<Switch onClick={() => modal.handleEditMode(props.editMode,props.setEditMode)} color="#ced5f7" />}
                     label="Update"
                     labelPlacement="top"
                 />
                 </FormGroup>
                 </FormControl>
             </div>
-
-            {/* <ul>
-                <li class="ele">
-                    <div
-                        type="button"
-                        onClick={handleModalClose}
-                        className="x spin large "
-                    >
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                        <b></b>
-                    </div>
-                </li>
-            </ul> */}
         </div>
 
         {props.editMode === false ? (
@@ -216,7 +163,7 @@ const DealershipDetailModal = props => {
               <button 
                 className={`closeBtn ${dealershipEdited === true ? "disabled" : ""}`} 
                 disabled={dealershipEdited === true ? true : false}
-                onClick={handleModalClose}
+                onClick={() => modal.handleEditFormClose(props.setEditMode)}
               >
                   Close  
               </button>
@@ -280,7 +227,7 @@ const DealershipDetailModal = props => {
                 <button onClick={handleSubmit} className="updateEmployee--btn">
                     Update
                 </button>
-                <button className="closeBtn" onClick={handleModalClose}>
+                <button className="closeBtn" onClick={() => modal.handleEditFormClose(props.setEditMode)}>
                     Cancel  
                 </button>
             </div>

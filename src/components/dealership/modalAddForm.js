@@ -7,7 +7,6 @@ import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
 
 const AddDealershipModal = (props) => {
-
     const [newDealership, setNewDealership] = useState({
         business_name: "",
         city: "",
@@ -27,7 +26,6 @@ const AddDealershipModal = (props) => {
         deposit: '',
         website: ''
     });
-    
     const [dealershipPosted, setDealershipPosted] = useState(false);
 
     const handleInputFieldChange = (evt) => {
