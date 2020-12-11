@@ -6,43 +6,46 @@ export const modal = {
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   },
-  handleClose: (setCreationView) => {
-    const inputs = document.querySelectorAll('input')
-    const selects = document.querySelectorAll('select')
+  clearForm: () => {
+    const inputs = document.querySelectorAll('input');
+    const selects = document.querySelectorAll('select');
+    inputs.forEach(input => input.value = "");
+    selects.forEach(select => select.value = "none");
+  },
+  handleClose: (setEditMode) => {
+    modal.clearForm();
 
-    inputs.forEach(input => input.value = "")
-    selects.forEach(select => select.value = "none")
+    if (setEditMode) {
+        setEditMode(false);
+    }
 
+    // close modal
     document.querySelector(".modal-box").classList.remove("show");
-    
     setTimeout(() => {
         document.querySelector(".modal--container").classList.remove("show");
         document.querySelector(".modal-bg").classList.remove("show");
     }, 300);
-
+  },
+  handleAddFormClose: (setCreationView) => {
+    modal.handleClose()
+    
     setTimeout(function () {
         setCreationView(false)
     }, 700);
   },
-  handleEditClose: (setEditMode) => {
-    setEditMode(false);
+  handleEditFormClose: (setEditMode) => {
+    modal.handleClose(setEditMode);
     
-    const inputs = document.querySelectorAll('input')
-    const selects = document.querySelectorAll('select')
-    inputs.forEach(input => input.value = "")
-    selects.forEach(select => select.value = "none")
-
-    document.querySelector(".modal-box").classList.remove("show");
-    
-    setTimeout(() => {
-        document.querySelector(".modal--container").classList.remove("show");
-        document.querySelector(".modal-bg").classList.remove("show");
-    }, 300);
-
     const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
 
     if (muiSwitch.classList.contains('Mui-checked')) {
       muiSwitch.click();
     }
+  },
+  handleEditMode: (editMode, setEditMode) => {
+    setEditMode(!editMode);
+
+    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
+    muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
   }
 }

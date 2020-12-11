@@ -358,7 +358,7 @@ const AddVehicleModal = (props) => {
                 <button 
                     className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
                     disabled={vehiclePosted === true ? true : false}
-                    onClick={() => modal.handleClose(props.setCreationView)}
+                    onClick={() => modal.handleAddFormClose(props.setCreationView)}
                 >
                     Close  
                 </button>

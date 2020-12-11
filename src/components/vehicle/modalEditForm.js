@@ -28,14 +28,6 @@ const VehicleEditModal = props => {
     milesCount: ''
     });
   const [editMode, setEditMode] = useState(false);
-
-  const handleEditMode = () => {
-      setEditMode(!editMode);
-
-      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
-  };
-
   
   const handleFieldChange = evt => {
       var stateToChange = {...vehicle};
@@ -78,8 +70,8 @@ const VehicleEditModal = props => {
                 })
             })
             .then(() => {
+              modal.clearForm();
               setEditMode(false);
-
               const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
               if (muiSwitch.classList.contains('Mui-checked')) {
                 muiSwitch.click();
@@ -87,13 +79,7 @@ const VehicleEditModal = props => {
             })
       } else {
         window.alert('Please fix form fields')
-      }
-      
-        // clear form
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
+      }  
     }
   } 
 
@@ -128,7 +114,7 @@ const VehicleEditModal = props => {
                 <FormControlLabel
                     
                     value="Edit"
-                    control={<Switch onClick={handleEditMode} color="#ced5f7" />}
+                    control={<Switch onClick={() => modal.handleEditMode(editMode,setEditMode)} color="#ced5f7" />}
                     label="Update"
                     labelPlacement="top"
                 />
@@ -197,7 +183,7 @@ const VehicleEditModal = props => {
               <button 
                 className={`closeBtn ${props.vehicleEdited === true ? "disabled" : ""}`} 
                 disabled={props.vehicleEdited === true ? true : false}
-                onClick={() => modal.handleEditClose(setEditMode)}>
+                onClick={() => modal.handleEditFormClose(setEditMode)}>
                   Close  
               </button>
           </div>
@@ -241,7 +227,7 @@ const VehicleEditModal = props => {
                 <button onClick={handleSubmit} className="updateEmployee--btn">
                     Update
                 </button>
-                <button className="closeBtn" onClick={() => modal.handleEditClose(setEditMode)}>
+                <button className="closeBtn" onClick={() => modal.handleEditFormClose(setEditMode)}>
                     Cancel  
                 </button>
             </div>
