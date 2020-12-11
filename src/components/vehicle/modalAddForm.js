@@ -13,6 +13,7 @@ import "../../styles/vehicles/addForm.css"
 import AddVehicleTypeForm from "./modalAddVTForm"
 import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const AddVehicleModal = (props) => {
 
@@ -68,24 +69,6 @@ const AddVehicleModal = (props) => {
       const [vehiclePosted, setVehiclePosted] = useState(false);
 
     //   const textInput = useRef();
-
-    const handleModalClose = () => {
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
-
-        document.querySelector(".modal-box").classList.remove("show");
-        
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
-
-        setTimeout(function () {
-            props.setCreationView(false)
-        }, 700);
-    };
 
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newVehicle };
@@ -375,7 +358,7 @@ const AddVehicleModal = (props) => {
                 <button 
                     className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
                     disabled={vehiclePosted === true ? true : false}
-                    onClick={handleModalClose}
+                    onClick={() => modal.handleClose(props.setCreationView)}
                 >
                     Close  
                 </button>
