@@ -61,12 +61,7 @@ const AddDealershipModal = (props) => {
                     });
                     
                     setDealershipPosted(true);
-                    
-                    const inputs = document.querySelectorAll('input')
-                    const selects = document.querySelectorAll('select')
-
-                    inputs.forEach(input => input.value = "")
-                    selects.forEach(select => select.value = "none")
+                    modal.clearForm();
                 });
             } else {
                 window.alert('Please fix form fields')

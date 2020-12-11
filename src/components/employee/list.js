@@ -3,10 +3,10 @@ import EmployeeCard from "./card";
 import EmployeeManager from "../../api/dataManager";
 import "../../styles/employees/list.css"
 import ModalWrapper from "../modal/modalWrapper"
+import { modal } from "../../modules/modal/helpers"
 
 const Employees = (props) => {
     const [employees, setEmployees] = useState([]);
-    
     const [creationView, setCreationView] = useState(false);
     const [filteredEmployee, setFilteredEmployee] = useState();
     
@@ -33,25 +33,11 @@ const Employees = (props) => {
 
     // Runs when you click on employee card for details
     const showDetailsModal = employeeArg => {
-        const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
+        modal.handleDetailsShow(setEmployeeDeleted);
         
-        // so we can reset state to watch for n deletes after the first delete
-        setEmployeeDeleted(false);
-
-        document.querySelector(".modal-box").classList.add("show");
-        document.querySelector(".modal-bg").classList.add("show");
-
-        // NOTE: thinking if we can get editModal useEffect to watch for this to update when
-        // different employee is clicked, that could re-render the modal correctly....
+        const foundEmployee = employees.filter(matchedEmployee => matchedEmployee.id === employeeArg.id);
         setFilteredEmployee(foundEmployee[0]);
     }
-
-    const handleShow = () => {
-        setCreationView(true)
-
-        document.querySelector(".modal-box").classList.add("show");
-        document.querySelector(".modal-bg").classList.add("show");
-    };
 
     // this reflects the employee update in the search list realtime by re-searching for the
     // employee when edit mode switched off
@@ -74,7 +60,6 @@ const Employees = (props) => {
                 setEmployeeDeleted={setEmployeeDeleted}
             />
                 
-            {/* EMPLOYEE SEARCH PAGE */}
             <div className="employees--container">
                 <div className="employees--subContainer">
                     <div className="employees--header">
@@ -96,7 +81,6 @@ const Employees = (props) => {
                                         <EmployeeCard
                                             key={i}
                                             employee={employee}
-                                            // handleDropdownClose={handleDropdownClose}
                                             showDetailsModal={showDetailsModal}
                                             {...props}
                                         />
@@ -106,7 +90,7 @@ const Employees = (props) => {
                         ) : null}
                     </div>
 
-                    <button onClick={() => handleShow()} className="addEmployee--btn">
+                    <button onClick={() => modal.handleShow(setCreationView)} className="addEmployee--btn">
                         Add New Employee
                     </button>
                 </div>
