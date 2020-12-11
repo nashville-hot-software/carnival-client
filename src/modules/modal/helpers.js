@@ -6,6 +6,14 @@ export const modal = {
     document.querySelector(".modal-box").classList.add("show");
     document.querySelector(".modal-bg").classList.add("show");
   },
+  handleDetailsShow: (setDeletedState) => {
+    // so we can reset state to watch for n deletes after the first delete
+    setDeletedState(false);
+
+    document.querySelector(".modal--container").classList.add("show");
+    document.querySelector(".modal-box").classList.add("show");
+    document.querySelector(".modal-bg").classList.add("show");
+  },
   clearForm: () => {
     const inputs = document.querySelectorAll('input');
     const selects = document.querySelectorAll('select');

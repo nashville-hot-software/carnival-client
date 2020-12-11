@@ -30,17 +30,11 @@ const Dealerships = props => {
   }
 
   const showDetailsModal = dealership => {
-    // so we can reset state to watch for n deletes after the first delete
-    setDealershipDeleted(false);
-
+    modal.handleDetailsShow(setDealershipDeleted);
+    
     const foundDealership = dealerships.filter(filteredDealership => filteredDealership.id === dealership.id);
-
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
-
     setFilteredDealership(foundDealership[0]);
   }
-  
 
     // this reflects the dealership update in the search list realtime by re-searching for the
     // dealership when edit mode switched off

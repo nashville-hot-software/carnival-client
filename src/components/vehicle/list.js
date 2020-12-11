@@ -31,15 +31,9 @@ const VehiclesList = props => {
   }
 
   const showDetailsModal = vehicle => {
-    // so we can reset state to watch for n deletes after the first delete
-    setVehicleDeleted(false);
+    modal.handleDetailsShow(setVehicleDeleted);
 
     const foundVehicle = vehicles.filter(filteredVehicle => filteredVehicle.id === vehicle.id);
-
-    document.querySelector(".modal--container").classList.add("show");
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
-
     setFilteredVehicle(foundVehicle[0]);
   }
 
