@@ -8,7 +8,9 @@ export const modal = {
   },
   handleDetailsShow: (setDeletedState) => {
     // so we can reset state to watch for n deletes after the first delete
-    setDeletedState(false);
+    if (setDeletedState) {
+      setDeletedState(false);
+    }
 
     document.querySelector(".modal--container").classList.add("show");
     document.querySelector(".modal-box").classList.add("show");

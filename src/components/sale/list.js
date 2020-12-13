@@ -3,6 +3,7 @@ import SaleCard from "./card";
 import DataManager from "../../api/dataManager";
 import ModalWrapper from "../modal/modalWrapper"
 import "../../styles/sales/list.css"
+import { modal } from "../../modules/modal/helpers"
 
 const SaleList = (props) => {
     const [matchedSale, setMatchedSale] = useState();
@@ -15,21 +16,11 @@ const SaleList = (props) => {
     const [query, setQuery] = useState();
 
     const showDetailsModal = salesArg => {
+        modal.handleDetailsShow();
+
         const foundSale = sales.filter(matchedSales => matchedSales.id === salesArg.id);
-        document.querySelector(".modal-box").classList.add("show");
-        document.querySelector(".modal-bg").classList.add("show");
-        console.log(foundSale);
         setMatchedSale(foundSale[0]);
     }
-
-
-    const handleShow = () => {
-        setCreationView(true);
-
-        document.querySelector(".modal-box").classList.add("show");
-        document.querySelector(".modal-bg").classList.add("show");
-    };
-
 
     const handleSalesSearch = evt => {
         if (evt.target.value.length > 0) {
@@ -65,7 +56,6 @@ const SaleList = (props) => {
                 editMode={editMode}
                 setEditMode={setEditMode}
             />
-            {/* SALE SEARCH PAGE */}
 
             <div className="sales-searchlist--container">
                 <div className="sales--subContainer">
@@ -89,7 +79,7 @@ const SaleList = (props) => {
                             </>
                         ) : null}
                     </div>
-                    <button onClick={() => handleShow()} className="addSale--btn">
+                    <button onClick={() => modal.handleShow(setCreationView)} className="addSale--btn">
                         Add Sale
                     </button>
                 </div>

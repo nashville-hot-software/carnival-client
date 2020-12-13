@@ -8,6 +8,7 @@ import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
 import SuccessSnackbar from "../modal/snackbar"
 import "../../styles/sales/list.css"
 import { errorHandler, validateForm } from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const AddSaleForm = (props) => {
     const [newSale, setNewSale] = useState({
@@ -45,25 +46,6 @@ const AddSaleForm = (props) => {
     const [selectedDealership, setSelectedDealership] = useState("");
     const [selectedVehicle, setSelectedVehicle] = useState("");
     const [selectedState, setSelectedState] = useState();
-
-
-    const handleClose = () => {
-        clearForm();
-        document.querySelector(".modal-box").classList.remove("show");
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
-        setTimeout(function () {
-            props.setCreationView(false);
-        }, 700);
-    };
-
-    const clearForm = () => {
-        const inputs = document.querySelectorAll("input");
-        const selects = document.querySelectorAll("select");
-        inputs.forEach((input) => (input.value = ""));
-        selects.forEach((select) => (select.value = "0"));
-    };
 
     const handleSubmit = () => {
         console.log(newSale)
@@ -110,7 +92,7 @@ const AddSaleForm = (props) => {
                         company_name: "",
                     });
                     setPostedSale(data);
-                    clearForm();
+                    modal.clearForm();
                     setSelectedDealership("");
                     setSelectedVehicle("")
                 });
@@ -120,6 +102,7 @@ const AddSaleForm = (props) => {
             }
         };
     }
+    
     const handleInputFieldChange = (evt) => {
         errorHandler(evt.target.id, evt.target.value, errors, setErrors);
 
@@ -229,7 +212,7 @@ const AddSaleForm = (props) => {
             </div>
             <div className="addSale--btn--container">
                 <button onClick={handleSubmit} className="addSaleModal--btn">Add Sale</button>
-                <button className="closeBtn" onClick={handleClose}> Close</button>
+                <button className="closeBtn" onClick={() => modal.handleClose()}>Close</button>
             </div>
         </>
     );
