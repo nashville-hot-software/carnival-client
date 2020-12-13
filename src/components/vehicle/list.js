@@ -6,7 +6,6 @@ import ModalWrapper from "../modal/modalWrapper"
 import { modal } from "../../modules/modal/helpers"
 
 const VehiclesList = props => {
-
   const [vehicles, setVehicles] = useState([]);
   const [filteredVehicle, setFilteredVehicle] = useState();
   const [creationView, setCreationView] = useState(false);

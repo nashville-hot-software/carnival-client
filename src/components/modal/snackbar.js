@@ -8,7 +8,6 @@ const SuccessSnackbar = (props) => {
 
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
-
             props.setPostedEmployee();
         }, 2500)
     } else if (props.employeeUpdated === true) {
@@ -16,7 +15,6 @@ const SuccessSnackbar = (props) => {
 
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
-
             props.setEmployeeUpdated(false);
         }, 2500)
     } else if (props.vehiclePosted === true) {
@@ -24,7 +22,6 @@ const SuccessSnackbar = (props) => {
 
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
-
             props.setVehiclePosted();
         }, 2500)
     } else if (props.vehicleEdited === true) {
@@ -32,7 +29,6 @@ const SuccessSnackbar = (props) => {
 
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
-
             props.setVehicleEdited();
         }, 2500)
     } else if (props.dealershipPosted === true) {
@@ -40,7 +36,6 @@ const SuccessSnackbar = (props) => {
 
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
-
             props.setDealershipPosted();
         }, 2500)
     } else if (props.dealershipEdited === true) {
@@ -48,14 +43,13 @@ const SuccessSnackbar = (props) => {
 
         setTimeout(() => {
             document.querySelector('.snackbar').classList.remove('show');
-
             props.setDealershipEdited();
         }, 2500)
     }
 
     return (
         <div className="snackbar">
-            <h1>Great Success!</h1>
+            <h1>Success!</h1>
         </div>
     );
 }

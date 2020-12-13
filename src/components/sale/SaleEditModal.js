@@ -29,9 +29,10 @@ const SaleEditModal = (props) => {
 
   const handleInputFieldChange = (evt) => {
     errorHandler(evt.target.id, evt.target.value, errors, setErrors);
+
     var stateToChange = { ...sale };
     stateToChange[evt.target.id] = evt.target.value;
-    setSale(stateToChange)
+    setSale(stateToChange);
   };
 
   const handleEditSubmit = (evt) => {
@@ -80,7 +81,6 @@ const SaleEditModal = (props) => {
   useEffect(() => {
     DataManager.getOne("sales", props.sale.id).then((data) => {
       setSale(data[0]);
-      console.log(data);
       setSelectedState(data.state);
       setSelectedPaymentType(data.payment_method);
     });

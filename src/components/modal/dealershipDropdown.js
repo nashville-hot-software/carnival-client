@@ -1,19 +1,14 @@
-//move Dealership Dropdown and Employee Type Select menu out of 'employees' folder and into the new 'modal' folder 
-
-
 import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "../../styles/modal/dealershipDropdown.css"
 
 const DealershipDropdown = (props) => {
-
     // (searched dealership results, opening/closing dropdown, 
     // and search query to show in input field value)
     const [dealerships, setDealerships] = useState([]);
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
-
-    // for dealership dropdown component
+    
     const [selectedDealership, setSelectedDealership] = useState("");
 
     // Conditionals to either search for dealerships and map the list, 
