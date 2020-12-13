@@ -10,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import carnivalImage from "../../images/carnival_cars_image.jpg";
 import useStyles from "./muiStyles"
 import ModalWrapper from "../modal/modalWrapper"
+import { modal } from "../../modules/modal/helpers"
 
 const DashBoard = (props) => {
   const classes = useStyles();
@@ -93,17 +94,14 @@ const DashBoard = (props) => {
     const foundVehicle = vehicles.filter(matchedVehicle => matchedVehicle.id === vehicle.id);
     setFilteredVehicle(foundVehicle[0]);
 
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
+    modal.handleDetailsShow();
   }
   
   const showCustomersModal = customer => {
     const foundCustomer = customers.filter(matchedCustomer => matchedCustomer.customer_id === customer.customer_id);
-    console.log(foundCustomer[0])
     setFilteredCustomer(foundCustomer[0]);
 
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
+    modal.handleDetailsShow();
   }
   
   const [filteredSale, setFilteredSale] = useState();
@@ -112,8 +110,7 @@ const DashBoard = (props) => {
     const foundSale = sales.filter(matchedSale => matchedSale.id === sale.id);
     setFilteredSale(foundSale[0]);
 
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
+    modal.handleDetailsShow();
   }
 
   useEffect(() => {

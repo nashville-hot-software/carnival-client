@@ -2,16 +2,12 @@ import React, { useEffect } from "react";
 import "../../styles/customers/card.css"
 import "../../styles/employees/list.css"
 import "../../styles/employees/card.css"
-
+import { modal } from "../../modules/modal/helpers"
 
 const CustomerDetailModal = props => {
 
     const handleModalClose = () => {
-        document.querySelector(".modal-box").classList.remove("show");
-        
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
+        modal.handleClose();
 
         setTimeout(function () {
             props.setFilteredCustomer();

@@ -2,22 +2,17 @@ import React from "react";
 import "../../styles/vehicles/card.css"
 import "../../styles/employees/list.css"
 import "../../styles/employees/card.css"
-
+import { modal } from "../../modules/modal/helpers"
 
 const VehicleDetailModal = props => {
 
     const handleModalClose = () => {
-        document.querySelector(".modal-box").classList.remove("show");
-        
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
+        modal.handleClose();
 
         setTimeout(function () {
             props.setFilteredVehicle();
         }, 700);
     };
-
 
   return (
     <>
