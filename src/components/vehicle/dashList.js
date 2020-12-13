@@ -12,7 +12,9 @@ const Vehicles = props => {
             <VehicleCard
               key={vehicle.id}
               vehicle={vehicle}
-              showVehiclesModal={props.showVehiclesModal}
+              showDetailsModal={props.showDetailsModal}
+              setFilteredVehicle={props.setFilteredVehicle}
+              vehicles={props.vehicles} 
               {...props}
             />
           );

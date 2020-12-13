@@ -32,7 +32,11 @@ const SaleTableCard = (props) => {
 
   return (
     <>
-      <StyledTableRow onClick={() => props.showSalesModal(props.row)} className={props.classes} key={props.row.name}>
+      <StyledTableRow 
+        onClick={() => props.showDetailsModal(props.row, props.sales, props.setFilteredSale)} 
+        className={props.classes} 
+        key={props.row.name}
+      >
         <StyledTableCell align="center">{props.row.purchase_date}</StyledTableCell>
         <StyledTableCell align="center">#{props.row.invoice_number}</StyledTableCell>
         <StyledTableCell align="center">{props.row.vehicle.vehicle_type.make} {props.row.vehicle.vehicle_type.model}</StyledTableCell>

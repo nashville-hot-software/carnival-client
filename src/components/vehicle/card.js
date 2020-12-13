@@ -7,7 +7,10 @@ const VehicleCard = props => {
 
   return (
     <>
-        <div onClick={() => props.showVehiclesModal(vehicle)} className="vehicle-card--container">
+        <div 
+          onClick={() => props.showDetailsModal(vehicle, props.vehicles, props.setFilteredVehicle)} 
+          className="vehicle-card--container"
+        >
             <h2 className="vehicle-card--name">{`${vehicle.make} ${vehicle.model}`}</h2>
             <p className="vehicle-card--numberSold"><span className="label">Vehicles Sold:</span> {`${vehicle.vehicles_sold}`}</p>
         </div>
