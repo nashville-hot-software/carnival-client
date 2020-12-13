@@ -200,7 +200,7 @@ const AddSaleForm = (props) => {
                 </button>
                 <button 
                     className="closeBtn" 
-                    onClick={() => modal.handleClose()}
+                    onClick={() => modal.handleAddFormClose(props.setCreationView)}
                 >
                     Close
                 </button>

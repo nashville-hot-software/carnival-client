@@ -56,7 +56,7 @@ const ModalWrapper = (props) => {
                         />
                     ) : null}
 
-                    {props.matchedSale !== undefined ? (
+                    {props.matchedSale !== undefined && props.saleCreationView === false ? (
                         <SaleEditModal
                             sale={props.matchedSale}
                             setMatchedSale={props.setMatchedSale}
@@ -67,7 +67,7 @@ const ModalWrapper = (props) => {
 
                     {props.saleCreationView === true ? (
                         <AddSaleForm
-                        setCreationView={props.setCreationView}
+                            setCreationView={props.setCreationView}
                         />
                     ) : null}
 
