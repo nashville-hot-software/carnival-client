@@ -9,11 +9,10 @@ import StateSelectDropdown from "../modal/StateSelect";
 import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
 import Input from "../saleInput/Input";
 import { errorHandler, validateForm } from "../validation/formValidator"
-
+import { modal } from "../../modules/modal/helpers"
 
 const SaleEditModal = (props) => {
   const [sale, setSale] = useState();
-  // const [updatedSale, setUpdatedSale] = useState();
   const [selectedState, setSelectedState] = useState();
   const [selectedPaymentType, setSelectedPaymentType] = useState();
   const [errors, setErrors] = useState({
@@ -27,15 +26,6 @@ const SaleEditModal = (props) => {
     price: '',
     deposit: ''
   });
-
-
-
-  const handleEditMode = () => {
-    props.setEditMode(!props.editMode);
-    const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
-    muiSwitch.classList.add("Mui-checked", "PrivateSwitchBase-checked-2");
-  };
-
 
   const handleInputFieldChange = (evt) => {
     errorHandler(evt.target.id, evt.target.value, errors, setErrors);
@@ -74,6 +64,7 @@ const SaleEditModal = (props) => {
           });
         })
         .then(() => {
+          modal.clearForm();
           props.setEditMode(false);
           const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
           if (muiSwitch.classList.contains("Mui-checked")) {
@@ -83,34 +74,6 @@ const SaleEditModal = (props) => {
       }else {
         alert("Please fix form entries")
       }
-
-      const inputs = document.querySelectorAll("input");
-      const selects = document.querySelectorAll("select");
-
-      inputs.forEach((input) => (input.value = ""));
-      selects.forEach((select) => (select.value = "none"));
-    }
-  };
-
-  const handleModalClose = () => {
-    props.setEditMode(false);
-    const inputs = document.querySelectorAll("input");
-    const selects = document.querySelectorAll("select");
-
-    inputs.forEach((input) => (input.value = ""));
-    selects.forEach((select) => (select.value = "none"));
-
-    document.querySelector(".modal-box").classList.remove("show");
-
-    setTimeout(() => {
-      props.setMatchedSale();
-      document.querySelector(".modal-bg").classList.remove("show");
-    }, 300);
-
-    const muiSwitch = document.querySelector(".MuiSwitch-switchBase");
-
-    if (muiSwitch.classList.contains("Mui-checked")) {
-      muiSwitch.click();
     }
   };
 
@@ -135,27 +98,13 @@ const SaleEditModal = (props) => {
             <FormGroup aria-label="position" row>
               <FormControlLabel
                 value="Edit"
-                control={<Switch onClick={handleEditMode} color="#ced5f7" />}
+                control={<Switch onClick={() => modal.handleEditMode(props.editMode,props.setEditMode)} color="#ced5f7" />}
                 label="Update Sale"
                 labelPlacement="top"
               />
             </FormGroup>
           </FormControl>
         </div>
-        {/* <ul>
-                  <li class="ele">
-                      <div
-                          type="button"
-                          onClick={handleClose}
-                          className="x spin large "
-                      >
-                          <b></b>
-                          <b></b>
-                          <b></b>
-                          <b></b>
-                      </div>
-                  </li>
-              </ul> */}
       </div>
 
       {props.editMode === false ? (
@@ -252,7 +201,7 @@ const SaleEditModal = (props) => {
             </div>
           </div>
           <div className="saleDetails--btn--container">
-            <button className="closeBtn" onClick={handleModalClose}>
+            <button className="closeBtn" onClick={() => modal.handleEditFormClose(props.setEditMode)}>
               Close
             </button>
           </div>
@@ -347,7 +296,6 @@ const SaleEditModal = (props) => {
                 state={sale}
                 setSale={setSale}
               />
-              {/* This block is for the dealership search dropdown menu (lines 157-184) */}
             </div>
             <div className="saleEdit--btn--container">
               <button
@@ -356,7 +304,7 @@ const SaleEditModal = (props) => {
               >
                 Update
               </button>
-              <button className="closeBtn" onClick={handleModalClose}>
+              <button className="closeBtn" onClick={() => modal.handleEditFormClose(props.setEditMode)}>
                 Cancel
               </button>
             </div>
