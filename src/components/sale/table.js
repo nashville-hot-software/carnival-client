@@ -69,7 +69,9 @@ const SalesTable = (props) => {
                                 <SaleTableCard 
                                     key={row.id} 
                                     row={row} 
-                                    showSalesModal={props.showSalesModal}
+                                    sales={props.sales}
+                                    setFilteredSale={props.setFilteredSale}
+                                    showDetailsModal={props.showDetailsModal}
                                     {...props} 
                                 />
                             </>

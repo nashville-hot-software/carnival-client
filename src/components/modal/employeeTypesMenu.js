@@ -3,7 +3,6 @@ import EmployeeManager from "../../api/dataManager";
 import "../../styles/employees/list.css"
 
 const EmployeeTypeSelect = (props) => {
-
     const [employeeTypes, setEmployeeTypes] = useState([]);
 
     const fetchEmployeeTypes = () => {
@@ -20,7 +19,9 @@ const EmployeeTypeSelect = (props) => {
     useEffect(() => {
         fetchEmployeeTypes();
     }, []);
-let uniqueID = "unique--ID"
+    
+    let uniqueID = "unique--ID"
+
     return (
         <>
         {employeeTypes !== undefined ? (

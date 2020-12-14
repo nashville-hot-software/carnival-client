@@ -8,6 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const VehicleEditModal = props => {
 
@@ -27,14 +28,6 @@ const VehicleEditModal = props => {
     milesCount: ''
     });
   const [editMode, setEditMode] = useState(false);
-
-  const handleEditMode = () => {
-      setEditMode(!editMode);
-
-      const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-      muiSwitch.classList.add('Mui-checked', 'PrivateSwitchBase-checked-2');
-  };
-
   
   const handleFieldChange = evt => {
       var stateToChange = {...vehicle};
@@ -77,8 +70,8 @@ const VehicleEditModal = props => {
                 })
             })
             .then(() => {
+              modal.clearForm();
               setEditMode(false);
-
               const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
               if (muiSwitch.classList.contains('Mui-checked')) {
                 muiSwitch.click();
@@ -86,13 +79,7 @@ const VehicleEditModal = props => {
             })
       } else {
         window.alert('Please fix form fields')
-      }
-      
-        // clear form
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
+      }  
     }
   } 
 
@@ -101,31 +88,10 @@ const VehicleEditModal = props => {
       VehicleManager.deleteUserData("vehicles", props.vehicle.id)
         .then(() => {
           props.setVehicleDeleted(true);
-          handleModalClose();
+          modal.handleEditClose(setEditMode);
         });
     }
   }
-
-  const handleModalClose = () => {
-    setEditMode(false);
-
-    const inputs = document.querySelectorAll('input')
-    const selects = document.querySelectorAll('select')
-    inputs.forEach(input => input.value = "")
-    selects.forEach(select => select.value = "none")
-
-    document.querySelector(".modal-box").classList.remove("show");
-    
-    setTimeout(() => {
-      document.querySelector(".modal-bg").classList.remove("show");
-    }, 300);
-
-    const muiSwitch = document.querySelector('.MuiSwitch-switchBase');
-
-    if (muiSwitch.classList.contains('Mui-checked')) {
-      muiSwitch.click();
-    }
-  };
 
   useEffect(() => {
     VehicleManager.getOne("vehicles", props.vehicle.id)
@@ -148,7 +114,7 @@ const VehicleEditModal = props => {
                 <FormControlLabel
                     
                     value="Edit"
-                    control={<Switch onClick={handleEditMode} color="#ced5f7" />}
+                    control={<Switch onClick={() => modal.handleEditMode(editMode,setEditMode)} color="#ced5f7" />}
                     label="Update"
                     labelPlacement="top"
                 />
@@ -217,7 +183,7 @@ const VehicleEditModal = props => {
               <button 
                 className={`closeBtn ${props.vehicleEdited === true ? "disabled" : ""}`} 
                 disabled={props.vehicleEdited === true ? true : false}
-                onClick={handleModalClose}>
+                onClick={() => modal.handleEditFormClose(setEditMode)}>
                   Close  
               </button>
           </div>
@@ -261,7 +227,7 @@ const VehicleEditModal = props => {
                 <button onClick={handleSubmit} className="updateEmployee--btn">
                     Update
                 </button>
-                <button className="closeBtn" onClick={handleModalClose}>
+                <button className="closeBtn" onClick={() => modal.handleEditFormClose(setEditMode)}>
                     Cancel  
                 </button>
             </div>

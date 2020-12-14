@@ -27,9 +27,25 @@
     transition: background-color 0.7s linear;
 }
 
-.modal-box.show {
-    transform: translateX(241%);
-    transition: transform 300ms linear;
-
-    z-index: 10;
+.modal--container {
+    display: hidden;
 }
+.modal--container.show {
+    display: block;
+    position: fixed;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0);
+    width: 470px;
+    height: 100%;
+}
+
+/* @media only screen and (min-width: 768px) { */
+
+    .modal-box.show {
+        transform: translateX(0%);
+        transition: transform 300ms linear;
+
+        z-index: 10;
+    }
+
+/* } */

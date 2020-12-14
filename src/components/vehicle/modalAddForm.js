@@ -13,9 +13,9 @@ import "../../styles/vehicles/addForm.css"
 import AddVehicleTypeForm from "./modalAddVTForm"
 import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const AddVehicleModal = (props) => {
-
     // Filters down to specific model for select menus
     const [vehicleTypes, setVehicleTypes] = useState()
     const [filteredMakes, setFilteredMakes] = useState()
@@ -48,8 +48,7 @@ const AddVehicleModal = (props) => {
         msr_price: 0,
         vehicle_type_id: 0,
         year_of_car: 0
-      })
-
+      });
     const [errors, setErrors] = useState({
         firstName: '',
         lastName: '',
@@ -69,24 +68,6 @@ const AddVehicleModal = (props) => {
 
     //   const textInput = useRef();
 
-    const handleModalClose = () => {
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
-
-        document.querySelector(".modal-box").classList.remove("show");
-        
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
-
-        setTimeout(function () {
-            props.setCreationView(false)
-        }, 700);
-    };
-
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newVehicle };
 
@@ -98,7 +79,7 @@ const AddVehicleModal = (props) => {
             evt.target.id === 'year_of_car'
            ) {
             let value = evt.target.value;
-            
+    
             if (value.includes('$') && value.includes(',')) {
                 const splitPrice = value.split('$');
                 value = splitPrice[1];
@@ -142,8 +123,6 @@ const AddVehicleModal = (props) => {
         // pre-set form fields based on model selected via fetching one from DB,
         // update newVehicle object with pre-set vehicle data
         else if (evt.target.id === 'model' && evt.target.value !== "none") {
-            
-
             const filteredVehicleType = vehicleTypes.filter(vehicleType => vehicleType.model === evt.target.value);
             stateToChange.vehicle_type_id = filteredVehicleType[0].id;
             setNewVehicle(stateToChange);
@@ -151,7 +130,6 @@ const AddVehicleModal = (props) => {
             // get a vehicle matching the filtered vehicle to update form fields
             VehicleManager.getAll("vehicles", "vehicle_type", filteredVehicleType[0].id)
                 .then(resp => {
-
                     if (resp[0] !== undefined) {
                         setFilteredVehicle(resp[0]);
                         document.querySelector('#engine_type').value="filtered-engine-type";
@@ -162,14 +140,11 @@ const AddVehicleModal = (props) => {
     
                         setNewVehicle(stateToChange);
                     }
-
-                })
-
+                });
         } else {
             // add rest of data to newVehicle object to be POSTed
             stateToChange[evt.target.id] = evt.target.value;
             setNewVehicle(stateToChange);
-
         }  
     };
 
@@ -178,11 +153,7 @@ const AddVehicleModal = (props) => {
         setFilteredVehicle();
         setAddVehicleTypeMode(!addVehicleTypeMode);
 
-        const inputs = document.querySelectorAll('input');
-        const selects = document.querySelectorAll('select');
-
-        inputs.forEach(input => input.value = "");
-        selects.forEach(select => select.value = "none");
+        modal.clearForm();
     }
 
     // If form data is good, POST new vehicle,
@@ -215,12 +186,7 @@ const AddVehicleModal = (props) => {
                     });
                     setFilteredVehicle();
                     setVehiclePosted(true);
-                    
-                    const inputs = document.querySelectorAll('input')
-                    const selects = document.querySelectorAll('select')
-
-                    inputs.forEach(input => input.value = "")
-                    selects.forEach(select => select.value = "none")
+                    modal.clearForm();
                 });
             } else {
                 window.alert('Please fix form entries');
@@ -244,7 +210,6 @@ const AddVehicleModal = (props) => {
             </div>
                 
             <div className="modal-add--body">
-                
                 {/* This ternary flips between vehicle type select form & vehicle type add form */}
                 {addVehicleTypeMode === false ? (
                     <>
@@ -327,15 +292,6 @@ const AddVehicleModal = (props) => {
                 
                 <label className="name--label">MSR Price:</label>
                 {filteredVehicle !== undefined ? (
-                    // <input 
-                    //     onChange={handleInputFieldChange} 
-                    //     id="msr_price" 
-                    //     className="modal--input" 
-                    //     type="text"
-                    //     value={`$${filteredVehicle.msr_price}`}
-                    //     readOnly
-                    //     // ref={textInput}
-                    // />
                     <div className="modal--input msrp-div" >{`$${filteredVehicle.msr_price}`}</div>
                 ) : (
                     <>
@@ -365,7 +321,6 @@ const AddVehicleModal = (props) => {
                 
                 <label className="name--label">Interior Color:</label>
                 <input onChange={handleInputFieldChange} id="interior_color" className="modal--input" type="text"/>
-
             </div>
             
             <div className="addVehicle--btn--container">
@@ -375,7 +330,7 @@ const AddVehicleModal = (props) => {
                 <button 
                     className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
                     disabled={vehiclePosted === true ? true : false}
-                    onClick={handleModalClose}
+                    onClick={() => modal.handleAddFormClose(props.setCreationView)}
                 >
                     Close  
                 </button>

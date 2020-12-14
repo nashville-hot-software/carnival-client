@@ -12,7 +12,9 @@ const Customers = props => {
             <CustomerCard
               key={customer.id}
               customer={customer}
-              showCustomersModal={props.showCustomersModal}
+              customers={props.customers}
+              setFilteredCustomer={props.setFilteredCustomer}
+              showDetailsModal={props.showDetailsModal}
               {...props}
             />
           );

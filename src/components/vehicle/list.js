@@ -3,9 +3,9 @@ import VehicleCard from "./vehicleCard"
 import VehicleManager from "../../api/dataManager";
 import "../../styles/vehicles/list.css"
 import ModalWrapper from "../modal/modalWrapper"
+import { modal } from "../../modules/modal/helpers"
 
 const VehiclesList = props => {
-
   const [vehicles, setVehicles] = useState([]);
   const [filteredVehicle, setFilteredVehicle] = useState();
   const [creationView, setCreationView] = useState(false);
@@ -30,24 +30,11 @@ const VehiclesList = props => {
   }
 
   const showDetailsModal = vehicle => {
-    // so we can reset state to watch for n deletes after the first delete
-    setVehicleDeleted(false);
+    modal.handleDetailsShow(setVehicleDeleted);
 
     const foundVehicle = vehicles.filter(filteredVehicle => filteredVehicle.id === vehicle.id);
-
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
-
     setFilteredVehicle(foundVehicle[0]);
   }
-
-  // Triggers add modal opening
-  const handleShow = () => {
-    setCreationView(true)
-
-    document.querySelector(".modal-box").classList.add("show");
-    document.querySelector(".modal-bg").classList.add("show");
-  };
 
   // this reflects the vehicle update in the search list realtime by re-searching for the
   // vehicle after edit/delete
@@ -96,7 +83,7 @@ const VehiclesList = props => {
             </div>
           ) : null}
 
-            <button onClick={() => handleShow()} className="addDealership--btn">
+            <button onClick={() => modal.handleShow(setCreationView)} className="addDealership--btn">
                 Add New Vehicle
             </button>
         </div>

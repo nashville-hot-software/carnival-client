@@ -8,6 +8,7 @@ import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
 import SuccessSnackbar from "../modal/snackbar"
 import "../../styles/sales/list.css"
 import { errorHandler, validateForm } from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const AddSaleForm = (props) => {
     const [newSale, setNewSale] = useState({
@@ -46,23 +47,33 @@ const AddSaleForm = (props) => {
     const [selectedVehicle, setSelectedVehicle] = useState("");
     const [selectedState, setSelectedState] = useState();
 
+    const handleInputFieldChange = (evt) => {
+        errorHandler(evt.target.id, evt.target.value, errors, setErrors);
 
-    const handleClose = () => {
-        clearForm();
-        document.querySelector(".modal-box").classList.remove("show");
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
-        setTimeout(function () {
-            props.setCreationView(false);
-        }, 700);
-    };
+        const stateToChange = { ...newSale }
 
-    const clearForm = () => {
-        const inputs = document.querySelectorAll("input");
-        const selects = document.querySelectorAll("select");
-        inputs.forEach((input) => (input.value = ""));
-        selects.forEach((select) => (select.value = "0"));
+        // remove any $ signs or commas from deposit field
+        if (evt.target.id === 'deposit') {
+            let value = evt.target.value;
+
+            if (value.includes('$') && value.includes(',')) {
+                const splitPrice = value.split('$');
+                value = splitPrice[1];
+                const secondSplitPrice = value.split(',');
+                value = secondSplitPrice.join('');
+            } else if (value.includes(',')) {
+                const splitPrice = value.split(',');
+                value = splitPrice.join('');
+            } else if (value.includes('$')) {
+                const splitPrice = value.split('$');
+                value = splitPrice.join('');
+            }
+
+            stateToChange.deposit = parseInt(value);
+        }
+
+        stateToChange[evt.target.id] = evt.target.value;
+        setNewSale(stateToChange);
     };
 
     const handleSubmit = () => {
@@ -85,7 +96,6 @@ const AddSaleForm = (props) => {
         ) {
             alert("Please fill out all the fields");
         } else {
-
             if (validateForm(errors)) {
                 DataManager.PostData("sales", newSale).then((data) => {
 
@@ -110,66 +120,23 @@ const AddSaleForm = (props) => {
                         company_name: "",
                     });
                     setPostedSale(data);
-                    clearForm();
+                    modal.clearForm();
                     setSelectedDealership("");
                     setSelectedVehicle("")
                 });
             } else {
                 window.alert('Please fix form entries');
-
             }
         };
     }
-    const handleInputFieldChange = (evt) => {
-        errorHandler(evt.target.id, evt.target.value, errors, setErrors);
-
-        const stateToChange = { ...newSale }
-
-        if (evt.target.id === 'deposit') {
-            let value = evt.target.value;
-
-            if (value.includes('$') && value.includes(',')) {
-                const splitPrice = value.split('$');
-                value = splitPrice[1];
-                const secondSplitPrice = value.split(',');
-                value = secondSplitPrice.join('');
-            } else if (value.includes(',')) {
-                const splitPrice = value.split(',');
-                value = splitPrice.join('');
-            } else if (value.includes('$')) {
-                const splitPrice = value.split('$');
-                value = splitPrice.join('');
-            }
-
-            stateToChange.deposit = parseInt(value);
-        }
-
-
-        stateToChange[evt.target.id] = evt.target.value;
-        setNewSale(stateToChange);
-    };
 
     return (
         <>
             <div className="modalHeader sale">
                 Add Sale
-            {/* <ul>
-            <li class="ele">
-                <div
-                    type="button"
-                    onClick={handleClose}
-                    className="x spin large "
-                >
-                    <b></b>
-                    <b></b>
-                    <b></b>
-                    <b></b>
-                </div>
-            </li>
-        </ul> */}
             </div>
-            <div className="modal-add--body">
 
+            <div className="modal-add--body">
                 <Input.FirstName handleInputFieldChange={handleInputFieldChange} />
                 <Input.LastName handleInputFieldChange={handleInputFieldChange} />
                 <Input.Email errors={errors} handleInputFieldChange={handleInputFieldChange} />
@@ -183,13 +150,11 @@ const AddSaleForm = (props) => {
                     setState={setNewSale}
                 />
                 <Input.CompanyName handleInputFieldChange={handleInputFieldChange} />
-
                 <Input.PurchaseDate handleInputFieldChange={handleInputFieldChange} />
                 <Input.PickupDate handleInputFieldChange={handleInputFieldChange} />
-
                 <label >
                     Sale Types:
-            </label>
+                </label>
                 <select
                     onChange={handleInputFieldChange}
                     id="sales_type_id"
@@ -200,7 +165,6 @@ const AddSaleForm = (props) => {
                     <option value="1"> Purchase </option>
                     <option value="2"> Lease </option>
                 </select>
-
                 <PaymentTypeSelectDropdown
                     state={newSale}
                     setNewSale={setNewSale}
@@ -221,15 +185,25 @@ const AddSaleForm = (props) => {
                 />
                 <Input.Price selectedVehicle={selectedVehicle} handleInputFieldChange={handleInputFieldChange} />
                 <Input.Deposit errors={errors} handleInputFieldChange={handleInputFieldChange} />
-
                 <SuccessSnackbar
                     postedSale={postedSale}
                     setPostedSale={setPostedSale}
                 />
             </div>
+
             <div className="addSale--btn--container">
-                <button onClick={handleSubmit} className="addSaleModal--btn">Add Sale</button>
-                <button className="closeBtn" onClick={handleClose}> Close</button>
+                <button 
+                    onClick={handleSubmit} 
+                    className="addSaleModal--btn"
+                >
+                    Add Sale
+                </button>
+                <button 
+                    className="closeBtn" 
+                    onClick={() => modal.handleAddFormClose(props.setCreationView)}
+                >
+                    Close
+                </button>
             </div>
         </>
     );

@@ -17,86 +17,88 @@ const ModalWrapper = (props) => {
         <>
             <div className="modal-bg">
             </div>
-            <div className="modal-box">
-                {props.filteredEmployee !== undefined && props.employeeCreationView === false? (
-                    <EmployeeDetailModal 
-                        employee={props.filteredEmployee} 
-                        editMode={props.editMode}
-                        setEditMode={props.setEditMode}
-                        setEmployeeDeleted={props.setEmployeeDeleted}
-                    />
-                ) : null}
+            <div className="modal--container">
+                <div className="modal-box">
+                    {props.filteredEmployee !== undefined && props.employeeCreationView === false? (
+                        <EmployeeDetailModal 
+                            employee={props.filteredEmployee} 
+                            editMode={props.editMode}
+                            setEditMode={props.setEditMode}
+                            setEmployeeDeleted={props.setEmployeeDeleted}
+                        />
+                    ) : null}
 
-                {props.employeeCreationView === true ? (
-                    <AddEmployeeModal setCreationView={props.setCreationView} />
-                ) : null}
+                    {props.employeeCreationView === true ? (
+                        <AddEmployeeModal setCreationView={props.setCreationView} />
+                    ) : null}
 
-                {props.filteredVehicle !== undefined ? (
-                    // For dash
-                    <VehicleDetailModal
-                        vehicle={props.filteredVehicle}
-                        setFilteredVehicle={props.setFilteredVehicle}
-                    />
-                ) : null}
+                    {props.filteredVehicle !== undefined ? (
+                        // For dash
+                        <VehicleDetailModal
+                            vehicle={props.filteredVehicle}
+                            setFilteredVehicle={props.setFilteredVehicle}
+                        />
+                    ) : null}
 
-                {props.filteredCustomer !== undefined ? (
-                    // For dash
-                    <CustomerDetailModal
-                        customer={props.filteredCustomer}
-                        setFilteredCustomer={props.setFilteredCustomer}
-                    />
-                ) : null}
-                
-                {props.filteredSale !== undefined ? (
-                    // For dash
-                    <SaleDetailModal
-                        sale={props.filteredSale}
-                        setFilteredSale={props.setFilteredSale}
-                    />
-                ) : null}
+                    {props.filteredCustomer !== undefined ? (
+                        // For dash
+                        <CustomerDetailModal
+                            customer={props.filteredCustomer}
+                            setFilteredCustomer={props.setFilteredCustomer}
+                        />
+                    ) : null}
+                    
+                    {props.filteredSale !== undefined ? (
+                        // For dash
+                        <SaleDetailModal
+                            sale={props.filteredSale}
+                            setFilteredSale={props.setFilteredSale}
+                        />
+                    ) : null}
 
-                {props.matchedSale !== undefined ? (
-                    <SaleEditModal
-                        sale={props.matchedSale}
-                        setMatchedSale={props.setMatchedSale}
-                        editMode={props.editMode}
-                        setEditMode={props.setEditMode}
-                    />
-                ) : null}
+                    {props.matchedSale !== undefined && props.saleCreationView === false ? (
+                        <SaleEditModal
+                            sale={props.matchedSale}
+                            setMatchedSale={props.setMatchedSale}
+                            editMode={props.editMode}
+                            setEditMode={props.setEditMode}
+                        />
+                    ) : null}
 
-                {props.saleCreationView === true ? (
-                    <AddSaleForm
-                    setCreationView={props.setCreationView}
-                    />
-                ) : null}
+                    {props.saleCreationView === true ? (
+                        <AddSaleForm
+                            setCreationView={props.setCreationView}
+                        />
+                    ) : null}
 
-                {props.filteredDealership !== undefined && props.dealershipCreationView === false ? (
-                    <DealershipDetailModal
-                        dealership={props.filteredDealership}
-                        setFilteredDealership={props.setFilteredDealership}
-                        editMode={props.editMode}
-                        setEditMode={props.setEditMode}
-                        setDealershipDeleted={props.setDealershipDeleted}
-                    />
-                ) : null}
+                    {props.filteredDealership !== undefined && props.dealershipCreationView === false ? (
+                        <DealershipDetailModal
+                            dealership={props.filteredDealership}
+                            setFilteredDealership={props.setFilteredDealership}
+                            editMode={props.editMode}
+                            setEditMode={props.setEditMode}
+                            setDealershipDeleted={props.setDealershipDeleted}
+                        />
+                    ) : null}
 
-                {props.dealershipCreationView === true ? (
-                    <AddDealershipModal setCreationView={props.setCreationView} />
-                ) : null}
+                    {props.dealershipCreationView === true ? (
+                        <AddDealershipModal setCreationView={props.setCreationView} />
+                    ) : null}
 
-                {props.matchedVehicle !== undefined && props.vehicleCreationView === false ? (
-                    <VehicleEditModal
-                        vehicle={props.matchedVehicle}
-                        setFilteredVehicle={props.setFilteredVehicle}
-                        vehicleEdited={props.vehicleEdited}
-                        setVehicleEdited={props.setVehicleEdited}
-                        setVehicleDeleted={props.setVehicleDeleted}
-                    />
-                ) : null}
+                    {props.matchedVehicle !== undefined && props.vehicleCreationView === false ? (
+                        <VehicleEditModal
+                            vehicle={props.matchedVehicle}
+                            setFilteredVehicle={props.setFilteredVehicle}
+                            vehicleEdited={props.vehicleEdited}
+                            setVehicleEdited={props.setVehicleEdited}
+                            setVehicleDeleted={props.setVehicleDeleted}
+                        />
+                    ) : null}
 
-                {props.vehicleCreationView === true ? (
-                    <AddVehicleModal setCreationView={props.setCreationView} />
-                ) : null}
+                    {props.vehicleCreationView === true ? (
+                        <AddVehicleModal setCreationView={props.setCreationView} />
+                    ) : null}
+                </div>
             </div>
         </>
     );

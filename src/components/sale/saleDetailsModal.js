@@ -3,16 +3,12 @@ import "../../styles/sales/card.css"
 import "../../styles/employees/card.css"
 import "../../styles/employees/list.css"
 import NumberFormat from 'react-number-format';
-
+import { modal } from "../../modules/modal/helpers"
 
 const SaleDetailModal = props => {
 
     const handleModalClose = () => {
-        document.querySelector(".modal-box").classList.remove("show");
-        
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
+        modal.handleClose();
 
         setTimeout(function () {
             props.setFilteredSale();

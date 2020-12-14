@@ -3,8 +3,8 @@ import { withRouter } from "react-router-dom";
 import "../../styles/nav/nav.css"
 
 const NavBar = props => {
-  const hasUser = props.hasUser;
-  const clearUser = props.clearUser;
+  // const hasUser = props.hasUser;
+  // const clearUser = props.clearUser;
 
   return (
     <>

@@ -9,11 +9,10 @@ const StateSelectDropdown = (props) => {
     const handleStateTypeSelect = (evt) => {
         const stateToChange = props.state;
         stateToChange[evt.target.id] = evt.target.value;
-        //this setter is for the edit form
+        
         if (props.setSale) {
             props.setSale(stateToChange);
-        } else if(props.setNewSale) {
-            // this setter is for the add form
+        } else if (props.setNewSale) {
             props.setNewSale(stateToChange);
         }
     };

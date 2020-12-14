@@ -5,6 +5,7 @@ import DealershipDropdown from "../modal/dealershipDropdown"
 import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
+import { modal } from "../../modules/modal/helpers"
 
 const AddEmployeeModal = (props) => {
 
@@ -27,24 +28,8 @@ const AddEmployeeModal = (props) => {
         price: '',
         deposit: ''
     });
-
     const [postedEmployee, setPostedEmployee] = useState();
     const [selectedDealership, setSelectedDealership] = useState("");
-
-    const handleClose = () => {
-
-        clearForm();
-
-        document.querySelector(".modal-box").classList.remove("show");
-        
-        setTimeout(() => {
-            document.querySelector(".modal-bg").classList.remove("show");
-        }, 300);
-        
-        setTimeout(function () {
-            props.setCreationView(false)
-        }, 700);
-    };
 
     const handleInputFieldChange = (evt) => {
         const stateToChange = { ...newEmployee };
@@ -53,16 +38,7 @@ const AddEmployeeModal = (props) => {
         errorHandler(evt.target.id, evt.target.value, errors, setErrors);
 
         setNewEmployee(stateToChange);
-
     };
-
-    const clearForm = () => {
-        const inputs = document.querySelectorAll('input')
-        const selects = document.querySelectorAll('select')
-
-        inputs.forEach(input => input.value = "")
-        selects.forEach(select => select.value = "none")
-    }
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -78,11 +54,7 @@ const AddEmployeeModal = (props) => {
         } else if (newEmployee.employee_type_id === 0) {
             window.alert("Please select a valid employee type");
         } else {
-
-            if (validateForm(errors)) {
-                console.log('No errors! Good to go!');
-                
-                // POST
+            if (validateForm(errors)) {                
                 EmployeeManager.PostData("employees", newEmployee).then(resp => {
                     // this is for the success snackbar to know a successful POST was made
                     setPostedEmployee(resp);
@@ -97,9 +69,8 @@ const AddEmployeeModal = (props) => {
                         employee_type_id: 0,
                     });
                     
-                    
-                    clearForm();
-    
+                    modal.clearForm();
+
                     // below clears the dealershipDropdown input
                     setSelectedDealership("");
                 });
@@ -175,7 +146,7 @@ const AddEmployeeModal = (props) => {
                 <button 
                     className={`closeBtn ${postedEmployee !== undefined ? "disabled" : ""}`} 
                     disabled={postedEmployee !== undefined ? true : false}
-                    onClick={handleClose} 
+                    onClick={() => modal.handleAddFormClose(props.setCreationView)} 
                 >
                     Close  
                 </button>
