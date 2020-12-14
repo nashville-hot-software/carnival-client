@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "../../styles/modal/dealershipDropdown.css"
+import DropdownMenu from "./dropdownMenu"
 
 const DealershipDropdown = (props) => {
     // (searched dealership results, opening/closing dropdown, 
@@ -56,39 +57,16 @@ const DealershipDropdown = (props) => {
     }, [props.employeeUpdated, props.postedEmployee, props.postedSale])
 
     return (
-        <>
-        <label className="name--label dealership--label">Dealership:</label>
-        <div
-            onBlur={handleDealershipDropdownClose}
-            className={`dealership-list--dropdown ${open ? "open" : ""}`}
-        >
-            <input
-                className="dealership--search"
-                type="text"
-                onChange={handleDealershipSearch}
-                placeholder="Search Dealerships"
-                value={`${selectedDealership !== "" ? selectedDealership : query}`}
-            />
-
-            {dealerships.length > 0 ? (
-                <div className="dealerships-results--container">
-                    {dealerships.map((dealership) => {
-                        return (
-                            <>
-                                <div
-                                    className={"dealership--select"}
-                                    id={dealership.id}
-                                    onClick={handleDealerSelect}
-                                >
-                                    {dealership.business_name}
-                                </div>
-                            </>
-                        );
-                    })}
-                </div>
-            ) : null}
-        </div>
-        </>
+        <DropdownMenu 
+            label={"Dealerships"}
+            handleDropdownClose={handleDealershipDropdownClose}
+            open={open}
+            handleSearch={handleDealershipSearch}
+            handleSelect={handleDealerSelect}
+            selectedOption={selectedDealership}
+            query={query}
+            list={dealerships}
+        />
     );
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataManager from "../../api/dataManager";
 import "../../styles/modal/vehicleDropdown.css"
 import NumberFormat from "react-number-format";
+import DropdownMenu from "./dropdownMenu"
 
 const VehicleDropdown = (props) => {
 
@@ -34,8 +35,6 @@ const VehicleDropdown = (props) => {
     };
 
     const handleVehicleSelect = (evt) => {
-        setQuery("");
-
         const stateToChange = props.state
         stateToChange.vehicle_id = parseInt(evt.target.id);
         stateToChange.price = parseFloat(evt.target.title);
@@ -51,72 +50,32 @@ const VehicleDropdown = (props) => {
                 vehicleName: vehicleName
             })
 
+        setQuery("");
+
         document.querySelector(".vehicles--dropdown").scrollTop = 0;
+
+        console.log(document.querySelector(".dealership-list--dropdown"));
     };
 
     // resets dropdown input value after new sale POST
     useEffect(() => {
         props.setSelectedVehicle("");
 
-        document.querySelector(".vehicle--search").value = "";
+        document.querySelector(".dealership--search").value = "";
 
     }, [props.postedSale])
 
     return (
-        <>
-            <label className="vehicle--label">Select Vehicle:</label>
-            
-            <div 
-                className={`vehicles--dropdown ${showVehicles ? "open" : ""}`}
-                onBlur={handleCloseVehicleSearch}
-            >
-                <input
-                    className="vehicle--search"
-                    type="text"
-                    onChange={handleVehicleSearch}
-                    value={props.selectedVehicle.vehicleName ? props.selectedVehicle.vehicleName : query }
-                    placeholder="Search Vehicles"
-                />
-
-                {vehicles.length > 0 ? (
-                    <div className="vehicles-results--container">
-                        {vehicles.map((vehicle) => {
-                            return (
-                                <>
-                                    <div
-                                        className="vehicles--select"
-                                        id={vehicle.id}
-                                        title={vehicle.floor_price}
-                                        onClick={handleVehicleSelect}
-                                    >
-                                        <div className="vehicle--title">
-                                            {`${vehicle.make} ${vehicle.model}`}
-                                        </div>
-                                        <div className="vehicle--price">
-                                            <NumberFormat
-                                                value={vehicle.floor_price}
-                                                displayType={"text"}
-                                                thousandSeparator={true}
-                                                prefix={"$"}
-                                            />
-                                        </div>
-                                        <span
-                                            className="vin"
-                                            id={vehicle.id}
-                                            title={vehicle.floor_price}
-                                            style={{pointerEvents: "none"}}
-                                        >
-                                            #{vehicle.vin}
-                                        </span>
-                                    </div>
-                                </>
-                            );
-                        })}
-                    </div>
-                ) : null}
-            </div>
-
-        </>
+        <DropdownMenu 
+            label={"Vehicles"}
+            handleDropdownClose={handleCloseVehicleSearch}
+            open={showVehicles}
+            handleSearch={handleVehicleSearch}
+            handleSelect={handleVehicleSelect}
+            selectedOption={props.selectedVehicle.vehicleName}
+            query={query}
+            list={vehicles}
+        />
     )
 }
 export default VehicleDropdown;
