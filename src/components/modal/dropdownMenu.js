@@ -18,7 +18,7 @@ const DropdownMenu = props => {
                 type="text"
                 onChange={props.handleSearch}
                 placeholder={`Search ${props.label}`}
-                value={`${props.selectedOption !== undefined ? props.selectedOption : props.query}`}
+                value={`${props.selectedOption !== "" ? props.selectedOption : props.query}`}
             />
 
             {props.list.length > 0 ? (

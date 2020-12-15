@@ -11,6 +11,7 @@ import EmployeeTypeSelect from "../modal/employeeTypesMenu"
 import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
+import DetailsEditContainer from "./detailsEditContainer"
 
 const EmployeeDetailModal = props => {
   const [employee, setEmployee] = useState();  
@@ -56,6 +57,7 @@ const EmployeeDetailModal = props => {
             .then(() => {
               EmployeeManager.getOne("employees", props.employee.id)
                 .then(resp => {
+                  console.log(resp);
                   setEmployee(resp);
                   setEmployeeUpdated(true);
                 })
@@ -96,152 +98,18 @@ const EmployeeDetailModal = props => {
 
   return (
     <>
-        <div className="modalHeader">
-            <div className="employee-details--header">
-              <span>Employee</span>
-              <span className="employee-id">#{props.employee.id}</span>
-            </div>
-
-            <div className="edit--switch">
-                <FormControl component="fieldset">
-                <FormGroup aria-label="position" row>
-                <FormControlLabel
-                    
-                    value="Edit"
-                    control={<Switch onClick={() => modal.handleEditMode(props.editMode,props.setEditMode)} color="#ced5f7" />}
-                    label="Update"
-                    labelPlacement="top"
-                />
-                </FormGroup>
-                </FormControl>
-            </div>
-        </div>
-
-        {props.editMode === false ? (
-        <>
-          <div className="modal-details--body">
-              <div>
-                <strong>Name:</strong> 
-                <span>
-                      {employee !== undefined ? (`${employee.first_name} ${employee.last_name}`) 
-                      : (`${props.employee.first_name} ${props.employee.last_name}`)} 
-                </span>
-              </div>
-              <div>
-                <strong>Email:</strong> 
-                <span>
-                  {employee !== undefined ? (`${employee.email_address}`) 
-                  : (`${props.employee.email_address}`)}
-                </span>
-              </div>
-              <div>
-                <strong>Phone:</strong> 
-                <span>
-                  {employee !== undefined ? (`${employee.phone}`) 
-                  : (`${props.employee.phone}`)}
-                </span>
-              </div>
-              <div>
-                <strong>Dealership:</strong> 
-                <span>
-                  {employee !== undefined ? (`${employee.dealership.business_name}`) 
-                    : (`${props.employee.business_name}`)}
-                </span>
-              </div>
-              <div>
-                <strong>Employee Type:</strong> 
-                <span>
-                    {employee !== undefined ? (`${employee.employee_type.name}`) 
-                    : (`${props.employee.employee_type}`)}
-                </span>
-              </div>
-          </div>
-          <div className="removeEmployee--btn--container">
-              <button onClick={handleDelete} className="removeEmployee--btn">
-                  Remove
-              </button>
-              <button 
-                className={`closeBtn ${employeeUpdated !== false ? "disabled" : ""}`} 
-                disabled={employeeUpdated !== false ? true : false}
-                onClick={() => modal.handleEditFormClose(props.setEditMode)}>
-                  Close  
-              </button>
-          </div>
-        </>
-        ) : (
-          <>
-            <div className="modal-edit--body">
-                <label><strong>First Name:</strong></label> 
-                <input 
-                type="text"
-                id="first_name"
-                placeholder={employee !== undefined ? (`${employee.first_name}`) 
-                            : (`${props.employee.first_name}`)} 
-                onChange={handleFieldChange}
-                className="modal--input"
-                />
-                {errors.firstName !== '' ? <span className="errorMessage">{errors.firstName}</span> : null}
-            
-            
-                <label><strong>Last Name:</strong></label> 
-                <input 
-                type="text"
-                id="last_name"
-                placeholder={employee !== undefined ? (`${employee.last_name}`) 
-                            : (`${props.employee.last_name}`)} 
-                onChange={handleFieldChange}
-                className="modal--input"
-                />
-                {errors.lastName !== '' ? <span className="errorMessage">{errors.lastName}</span> : null}
-            
-            
-                <label><strong>Email:</strong></label> 
-                <input 
-                type="text"
-                id="email_address"
-                placeholder={employee !== undefined ? (`${employee.email_address}`) 
-                            : (`${props.employee.email_address}`)}
-                onChange={handleFieldChange}
-                className="modal--input"
-                />
-                {errors.email !== '' ? <span className="errorMessage">{errors.email}</span> : null}
-            
-            
-                <label><strong>Phone:</strong></label> 
-                <input 
-                    type="text"
-                    id="phone"
-                    placeholder={employee !== undefined ? (`${employee.phone}`) 
-                                : (`${props.employee.phone}`)}
-                    onChange={handleFieldChange}
-                    className="modal--input"
-                />
-                {errors.phone !== '' ? <span className="errorMessage phone">{errors.phone}</span> : null}
-
-                <DealershipDropdown 
-                    state={employee}
-                    employeeUpdated={employeeUpdated}
-                />
-
-                <EmployeeTypeSelect
-                    state={employee}
-                />
-            </div>
-
-            <div className="editEmployee--btn--container">
-                <button onClick={handleSubmit} className="updateEmployee--btn">
-                    Update
-                </button>
-                <button className="closeBtn" onClick={() => modal.handleEditFormClose(props.setEditMode)}>
-                    Cancel  
-                </button>
-            </div>
-          </>
-        )}
-        <SuccessSnackbar 
-            employeeUpdated={employeeUpdated} 
-            setEmployeeUpdated={setEmployeeUpdated}
-        />
+      <DetailsEditContainer 
+        editMode={props.editMode}
+        setEditMode={props.setEditMode}
+        updatedEmployee={employee}
+        employee={props.employee}
+        handleFieldChange={handleFieldChange}
+        employeeUpdated={employeeUpdated}
+        setEmployeeUpdated={setEmployeeUpdated}
+        errors={errors}
+        handleDelete={handleDelete}
+        handleSubmit={handleSubmit}
+      />
     </>
   );
 };

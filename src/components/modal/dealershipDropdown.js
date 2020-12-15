@@ -36,7 +36,10 @@ const DealershipDropdown = (props) => {
 
     const handleDealerSelect = (evt) => {
         const stateToChange = props.state;
+        console.log(stateToChange);
+        console.log(evt.target.id);
         stateToChange.dealership_id = parseInt(evt.target.id);
+        console.log(stateToChange);
 
         // for search input value
         setSelectedDealership(evt.target.innerHTML);
