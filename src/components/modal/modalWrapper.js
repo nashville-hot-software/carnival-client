@@ -8,7 +8,7 @@ import SaleDetailModal from "../sale/saleDetailsModal"
 import SaleEditModal from '../sale/SaleEditModal'
 import DealershipDetailModal from "../dealership/modalEditForm"
 import AddDealershipModal from "../dealership/modalAddForm"
-import AddVehicleModal from "../vehicle/modalAddForm"
+import AddVehicleModal from "../vehicle/addFormContainer"
 import VehicleEditModal from "../vehicle/modalEditForm"
 import AddSaleForm from '../sale/SaleAddForm'
 

@@ -10,10 +10,9 @@ import React, { useEffect, useState, useRef } from "react";
 import VehicleManager from "../../api/dataManager"
 import "../../styles/vehicles/list.css"
 import "../../styles/vehicles/addForm.css"
-import AddVehicleTypeForm from "./modalAddVTForm"
-import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
+import AddForm from "./addForm"
 
 const AddVehicleModal = (props) => {
     // Filters down to specific model for select menus
@@ -169,25 +168,23 @@ const AddVehicleModal = (props) => {
             window.alert("Please fill out all fields");
         } else {
             if (validateForm(errors)) {
-                VehicleManager.PostData("vehicles", newVehicle).then(resp => {
-                    console.log(`New vehicle from DB! VV`);
-                    console.log(resp);
-                    
-                    setNewVehicle({
-                        engine_type: "",
-                        exterior_color: "",
-                        floor_price: 0,
-                        interior_color: "",
-                        is_sold: false,
-                        miles_count: 0,
-                        msr_price: 0,
-                        vehicle_type_id: 0,
-                        year_of_car: 0
+                VehicleManager.PostData("vehicles", newVehicle)
+                    .then(() => {
+                        setNewVehicle({
+                            engine_type: "",
+                            exterior_color: "",
+                            floor_price: 0,
+                            interior_color: "",
+                            is_sold: false,
+                            miles_count: 0,
+                            msr_price: 0,
+                            vehicle_type_id: 0,
+                            year_of_car: 0
+                        });
+                        setFilteredVehicle();
+                        setVehiclePosted(true);
+                        modal.clearForm();
                     });
-                    setFilteredVehicle();
-                    setVehiclePosted(true);
-                    modal.clearForm();
-                });
             } else {
                 window.alert('Please fix form entries');
             }
@@ -204,143 +201,22 @@ const AddVehicleModal = (props) => {
     }, [addVehicleTypeMode]);
 
     return (
-        <>
-            <div className="modalHeader addEmployee">
-                Add New Vehicle
-            </div>
-                
-            <div className="modal-add--body">
-                {/* This ternary flips between vehicle type select form & vehicle type add form */}
-                {addVehicleTypeMode === false ? (
-                    <>
-                    <label className="name--label">Body Type:</label>
-                    <select 
-                        onChange={handleInputFieldChange} 
-                        id="body_type" 
-                        className="modal--input" 
-                    >
-                        <option value="none">Select One</option>
-                        {uniqueBodyTypes !== undefined ? (
-                            uniqueBodyTypes.map(body_type => {
-                            return <option>{body_type}</option>
-                        })
-                        ) : null}
-                    </select>
-                    <label className="name--label">Make:</label>
-                    <select
-                        id="make"
-                        onChange={handleInputFieldChange}
-                        className="modal--input"
-                    >
-                        <option value="none">Select One</option>
-                        {uniqueMakes !== undefined ? (
-                            uniqueMakes.map(make => {
-                            return <option>{make}</option>
-                        })
-                        ) : null}
-                    </select>
-                    <label className="name--label">Model:</label>
-                    <select
-                        id="model"
-                        onChange={handleInputFieldChange}
-                        className="modal--input"
-                    >
-                        <option value="none">Select One</option>
-                        {filteredModels !== undefined ? (
-                            filteredModels.map(vehicle => {
-                            return <option>{vehicle.model}</option>
-                        })
-                        ) : null}
-                    </select>
-                    </>
-                ) : (
-                    <AddVehicleTypeForm 
-                        setAddVehicleTypeMode={setAddVehicleTypeMode}
-                        uniqueBodyTypes={uniqueBodyTypes}
-                    />
-                )}
-
-                <div>
-                    <label>Don't see the right vehicle?</label>
-                    <input onChange={handleAddNewVehicleType} type="checkbox" />
-                </div>
-
-                <label className="name--label">Engine Type:</label>
-                <select 
-                    id="engine_type"
-                    className="modal--input"
-                    onChange={handleInputFieldChange} 
-                    defaultValue="none"
-                >
-                    <option value="filtered-engine-type">
-                        {filteredVehicle !== undefined ? filteredVehicle.engine_type : null}
-                    </option>
-                    <option value="none">Select an Engine Type</option>
-                    <option value="V4">V4</option>
-                    <option value="V6">V6</option>
-                    <option value="V8">V8</option>
-                    <option value="EV">Electric Vehicle</option>
-                </select>
-
-                <label className="name--label">Year:</label>
-                <input onChange={handleInputFieldChange} id="year_of_car" className="modal--input" type="text"/>
-                {errors.yearOfCar !== '' ? <span className="errorMessage">{errors.yearOfCar}</span> : null}
-
-                <label className="name--label">Miles:</label>
-                <input onChange={handleInputFieldChange} id="miles_count" className="modal--input" type="text"/>
-                {errors.milesCount !== '' ? <span className="errorMessage">{errors.milesCount}</span> : null}
-                
-                <label className="name--label">MSR Price:</label>
-                {filteredVehicle !== undefined ? (
-                    <div className="modal--input msrp-div" >{`$${filteredVehicle.msr_price}`}</div>
-                ) : (
-                    <>
-                    <input 
-                        onChange={handleInputFieldChange} 
-                        id="msr_price" 
-                        className="modal--input" 
-                        type="text"
-                        placeholder="$"
-                    />
-                    {errors.msrPrice !== '' ? <span className="errorMessage">{errors.msrPrice}</span> : null}
-                    </>
-                )}
-                
-                <label className="name--label">Floor Price:</label>
-                <input 
-                    onChange={handleInputFieldChange} 
-                    id="floor_price" 
-                    className="modal--input" 
-                    type="text"
-                    placeholder={`$${filteredVehicle !== undefined ? filteredVehicle.floor_price : ""}`}
-                />
-                {errors.floorPrice !== '' ? <span className="errorMessage">{errors.floorPrice}</span> : null}
-                
-                <label className="name--label">Exterior Color:</label>
-                <input onChange={handleInputFieldChange} id="exterior_color" className="modal--input" type="text"/>
-                
-                <label className="name--label">Interior Color:</label>
-                <input onChange={handleInputFieldChange} id="interior_color" className="modal--input" type="text"/>
-            </div>
-            
-            <div className="addVehicle--btn--container">
-                <button onClick={handleVehicleSubmit} className="modal--addBtn">
-                    Submit 
-                </button>
-                <button 
-                    className={`closeBtn ${vehiclePosted === true ? "disabled" : ""}`} 
-                    disabled={vehiclePosted === true ? true : false}
-                    onClick={() => modal.handleAddFormClose(props.setCreationView)}
-                >
-                    Close  
-                </button>
-            </div>
-
-            <SuccessSnackbar 
-                vehiclePosted={vehiclePosted} 
-                setVehiclePosted={setVehiclePosted}
-            />
-        </>
+        <AddForm 
+            addVehicleTypeMode={addVehicleTypeMode}
+            handleInputFieldChange={handleInputFieldChange}
+            uniqueBodyTypes={uniqueBodyTypes}
+            uniqueMakes={uniqueMakes}
+            filteredModels={filteredModels}
+            setAddVehicleTypeMode={setAddVehicleTypeMode}
+            uniqueBodyTypes={uniqueBodyTypes}
+            handleAddNewVehicleType={handleAddNewVehicleType}
+            filteredVehicle={filteredVehicle}
+            errors={errors}
+            handleVehicleSubmit={handleVehicleSubmit}
+            vehiclePosted={vehiclePosted}
+            setVehiclePosted={setVehiclePosted}
+            setCreationView={props.setCreationView}
+        />
     );
 };
 
