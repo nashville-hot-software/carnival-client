@@ -55,12 +55,12 @@ const EmployeeEditForm = props => {
                 {props.errors.phone !== '' ? <span className="errorMessage phone">{props.errors.phone}</span> : null}
 
                 <DealershipDropdown 
-                    state={props.employee}
+                    state={props.updatedEmployee}
                     employeeUpdated={props.employeeUpdated}
                 />
 
                 <EmployeeTypeSelect
-                    state={props.employee}
+                    state={props.updatedEmployee}
                 />
             </div>
 

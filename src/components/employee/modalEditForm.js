@@ -2,13 +2,6 @@ import React, { useEffect, useState } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "../../styles/employees/card.css"
 import "../../styles/employees/editForm.css"
-import Switch from '@material-ui/core/Switch';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import DealershipDropdown from "../modal/dealershipDropdown"
-import EmployeeTypeSelect from "../modal/employeeTypesMenu"
-import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
 import DetailsEditContainer from "./detailsEditContainer"
@@ -57,7 +50,6 @@ const EmployeeDetailModal = props => {
             .then(() => {
               EmployeeManager.getOne("employees", props.employee.id)
                 .then(resp => {
-                  console.log(resp);
                   setEmployee(resp);
                   setEmployeeUpdated(true);
                 })
