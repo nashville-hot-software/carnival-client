@@ -9,7 +9,7 @@ import SaleEditModal from '../sale/SaleEditModal'
 import DealershipDetailModal from "../dealership/modalEditForm"
 import AddDealershipModal from "../dealership/modalAddForm"
 import AddVehicleModal from "../vehicle/addFormContainer"
-import VehicleEditModal from "../vehicle/modalEditForm"
+import VehicleEditModal from "../vehicle/detailsEditContainer"
 import AddSaleForm from '../sale/SaleAddForm'
 
 const ModalWrapper = (props) => {
