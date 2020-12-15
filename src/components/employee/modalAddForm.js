@@ -1,11 +1,9 @@
 import React, { useState, useRef } from "react";
 import EmployeeManager from "../../api/dataManager";
 import "../../styles/employees/list.css"
-import DealershipDropdown from "../modal/dealershipDropdown"
-import EmployeeTypeSelect from "../modal/employeeTypesMenu"
-import SuccessSnackbar from "../modal/snackbar"
 import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
+import EmployeeAddForm from "./addForm"
 
 const AddEmployeeModal = (props) => {
 
@@ -81,82 +79,20 @@ const AddEmployeeModal = (props) => {
     };
 
     return (
-        <>
-            <div className="modalHeader addEmployee">
-                Add Employee
-            </div>
-                
-            <div className="modal-add--body">
-                <label className="name--label">First Name:</label>
-                <input
-                    onChange={handleInputFieldChange}
-                    id="first_name"
-                    className="modal--input"
-                    type="text"
-                />
-                {errors.firstName !== '' ? <span className="errorMessage">{errors.firstName}</span> : null}
-                
-
-                <label className="name--label">Last Name:</label>
-                <input
-                    onChange={handleInputFieldChange}
-                    id="last_name"
-                    className="modal--input"
-                    type="text"
-                />
-                {errors.lastName !== '' ? <span className="errorMessage">{errors.lastName}</span> : null}
-
-                <label className="name--label">Email:</label>
-                <input
-                    onChange={handleInputFieldChange}
-                    id="email_address"
-                    className="modal--input"
-                    type="text"
-                />
-                {errors.email !== '' ? <span className="errorMessage">{errors.email}</span> : null}
-
-                <label className="name--label">Phone:</label>
-                <input
-                    onChange={handleInputFieldChange}
-                    id="phone"
-                    className="modal--input"
-                    type="text"
-                />
-                {errors.phone !== '' ? <span className="errorMessage phone">{errors.phone}</span> : null}
-
-                <DealershipDropdown 
-                    state={newEmployee} 
-                    setState={setNewEmployee}
-                    selectedDealership={selectedDealership}
-                    setSelectedDealership={setSelectedDealership}
-                    postedEmployee={postedEmployee}
-                />
-
-                <EmployeeTypeSelect
-                    state={newEmployee}
-                    setState={setNewEmployee}
-                />
-
-            </div>
-            
-            <div className="addEmployee--btn--container">
-                <button onClick={handleSubmit} className="modal--addBtn">
-                    Add Employee 
-                </button>
-                <button 
-                    className={`closeBtn ${postedEmployee !== undefined ? "disabled" : ""}`} 
-                    disabled={postedEmployee !== undefined ? true : false}
-                    onClick={() => modal.handleAddFormClose(props.setCreationView)} 
-                >
-                    Close  
-                </button>
-            </div>
-
-            <SuccessSnackbar 
-                postedEmployee={postedEmployee} 
-                setPostedEmployee={setPostedEmployee}
-            />
-        </>
+        <EmployeeAddForm 
+            handleInputFieldChange={handleInputFieldChange}
+            errors={errors}
+            state={newEmployee} 
+            setState={setNewEmployee}
+            selectedDealership={selectedDealership}
+            setSelectedDealership={setSelectedDealership}
+            newEmployee={newEmployee}
+            setNewEmployee={setNewEmployee}
+            postedEmployee={postedEmployee}
+            setPostedEmployee={setPostedEmployee}
+            setCreationView={props.setCreationView}
+            handleSubmit={handleSubmit}
+        />
     );
 };
 
