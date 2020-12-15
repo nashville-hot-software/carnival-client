@@ -1,5 +1,5 @@
 import React from "react"
-import AddVehicleTypeForm from "./modalAddVTForm"
+import AddVehicleTypeContainer from "./addVTFormContainer"
 import SuccessSnackbar from "../modal/snackbar"
 import { modal } from "../../modules/modal/helpers"
 
@@ -55,7 +55,7 @@ const AddForm = props => {
                     </select>
                     </>
                 ) : (
-                    <AddVehicleTypeForm 
+                    <AddVehicleTypeContainer 
                         setAddVehicleTypeMode={props.setAddVehicleTypeMode}
                         uniqueBodyTypes={props.uniqueBodyTypes}
                     />

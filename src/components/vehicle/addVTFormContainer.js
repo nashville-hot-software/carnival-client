@@ -1,12 +1,10 @@
-
-
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import VehicleManager from "../../api/dataManager"
 import "../../styles/vehicles/list.css"
 import "../../styles/vehicles/addForm.css"
+import AddVehicleTypeForm from "./addVTForm"
 
-const AddVehicleTypeForm = (props) => {
-    
+const AddVehicleTypeContainer = (props) => {
       // for new vehicletype POST   
       const [newVehicleType, setNewVehicleType] = useState({
         body_type: "",
@@ -44,29 +42,12 @@ const AddVehicleTypeForm = (props) => {
     }
 
     return (
-        <>
-            <label className="name--label">Body Type:</label>
-            <select 
-                onChange={handleVehicleTypeFieldChange} 
-                id="body_type" 
-                className="modal--input" 
-            >
-                <option>Select One</option>
-                {props.uniqueBodyTypes !== undefined ? (
-                    props.uniqueBodyTypes.map(body_type => {
-                    return <option>{body_type}</option>
-                })
-                ) : null}
-            </select> 
-            <label className="name--label">Make:</label>
-            <input onChange={handleVehicleTypeFieldChange} id="make" className="modal--input" type="text"/>
-
-            <label className="name--label">Model:</label>
-            <input onChange={handleVehicleTypeFieldChange} id="model" className="modal--input" type="text"/>
-
-            <button onClick={handleVehicleTypeSubmit}>Submit</button>
-        </>
+        <AddVehicleTypeForm 
+            handleVehicleTypeFieldChange={handleVehicleTypeFieldChange}
+            uniqueBodyTypes={props.uniqueBodyTypes}
+            handleVehicleTypeSubmit={handleVehicleTypeSubmit}
+        />
     );
 };
 
-export default AddVehicleTypeForm;
+export default AddVehicleTypeContainer;
