@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/modal/modalWrapper.css"
-import EmployeeDetailsEditContainer from "../employee/editFormContainer"
+import EmployeeDetailsEditContainer from "../employee/detailsEditContainer"
 import AddEmployeeContainer from "../employee/addFormContainer"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
