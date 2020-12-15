@@ -1,12 +1,7 @@
 import React from "react";
-// import "../../styles/vehicles/detail.css"
 import { modal } from "../../modules/modal/helpers"
 
 const VehicleDetails = props => {
-
-  React.useEffect(() => {
-    console.log(props.updatedVehicle);
-  })
 
   return (
     <>

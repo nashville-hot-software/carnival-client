@@ -1,12 +1,7 @@
 import React from "react"
 import { modal } from "../../modules/modal/helpers"
-import SuccessSnackbar from "../modal/snackbar"
 
 const VehicleEditForm = props => {
-    
-    React.useEffect(() => {
-        console.log(props.updatedVehicle);
-    })
 
     return (
         <>
@@ -15,8 +10,8 @@ const VehicleEditForm = props => {
                 <input 
                     type="text"
                     id="miles_count"
-                    placeholder={props.updatedVehicle !== undefined ? (`${props.updatedVehicle.miles_count}`) 
-                                : (`${props.vehicle.miles_count}`)}
+                    placeholder={props.updatedVehicle !== undefined ? `${props.updatedVehicle.miles_count}`
+                                : `${props.vehicle.miles_count}`}
                     onChange={props.handleFieldChange}
                     className="modal--input"
                 />
@@ -51,11 +46,6 @@ const VehicleEditForm = props => {
                     Cancel  
                 </button>
             </div>
-
-            <SuccessSnackbar 
-                vehicleEdited={props.vehicleEdited} 
-                setVehicleEdited={props.setVehicleEdited}
-            />
         </>
     )
 }
