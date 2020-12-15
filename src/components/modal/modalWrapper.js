@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/modal/modalWrapper.css"
-import EmployeeDetailModal from "../employee/modalEditForm"
-import AddEmployeeModal from "../employee/modalAddForm"
+import EmployeeDetailsEditContainer from "../employee/editFormContainer"
+import AddEmployeeContainer from "../employee/addFormContainer"
 import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
 import SaleDetailModal from "../sale/saleDetailsModal"
@@ -20,7 +20,7 @@ const ModalWrapper = (props) => {
             <div className="modal--container">
                 <div className="modal-box">
                     {props.filteredEmployee !== undefined && props.employeeCreationView === false? (
-                        <EmployeeDetailModal 
+                        <EmployeeDetailsEditContainer 
                             employee={props.filteredEmployee} 
                             editMode={props.editMode}
                             setEditMode={props.setEditMode}
@@ -29,7 +29,7 @@ const ModalWrapper = (props) => {
                     ) : null}
 
                     {props.employeeCreationView === true ? (
-                        <AddEmployeeModal setCreationView={props.setCreationView} />
+                        <AddEmployeeContainer setCreationView={props.setCreationView} />
                     ) : null}
 
                     {props.filteredVehicle !== undefined ? (

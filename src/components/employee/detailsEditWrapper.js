@@ -8,7 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SuccessSnackbar from "../modal/snackbar"
 
-const DetailsEditContainer = props => {
+const DetailsEditWrapper = props => {
     return (
         <>
             <div className="modalHeader">
@@ -58,4 +58,4 @@ const DetailsEditContainer = props => {
       );
 }
 
-export default DetailsEditContainer;
+export default DetailsEditWrapper;

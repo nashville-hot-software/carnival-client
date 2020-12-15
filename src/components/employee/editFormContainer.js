@@ -4,9 +4,9 @@ import "../../styles/employees/card.css"
 import "../../styles/employees/editForm.css"
 import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
-import DetailsEditContainer from "./detailsEditContainer"
+import DetailsEditWrapper from "./detailsEditWrapper"
 
-const EmployeeDetailModal = props => {
+const EmployeeDetailsEditContainer = props => {
   const [employee, setEmployee] = useState();  
   const [errors, setErrors] = useState({
     firstName: '',
@@ -90,7 +90,7 @@ const EmployeeDetailModal = props => {
 
   return (
     <>
-      <DetailsEditContainer 
+      <DetailsEditWrapper 
         editMode={props.editMode}
         setEditMode={props.setEditMode}
         updatedEmployee={employee}
@@ -106,4 +106,4 @@ const EmployeeDetailModal = props => {
   );
 };
 
-export default EmployeeDetailModal;
+export default EmployeeDetailsEditContainer;

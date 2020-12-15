@@ -5,7 +5,7 @@ import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
 import EmployeeAddForm from "./addForm"
 
-const AddEmployeeModal = (props) => {
+const AddEmployeeContainer = (props) => {
 
     const [newEmployee, setNewEmployee] = useState({
         first_name: "",
@@ -96,4 +96,4 @@ const AddEmployeeModal = (props) => {
     );
 };
 
-export default AddEmployeeModal;
+export default AddEmployeeContainer;
