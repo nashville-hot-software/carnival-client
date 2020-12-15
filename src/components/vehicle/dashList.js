@@ -1,5 +1,5 @@
 import React from "react";
-import VehicleCard from "./card";
+import VehicleCard from "./dashboardCard";
 import "../../styles/vehicles/dashList.css"
 
 const Vehicles = props => {
