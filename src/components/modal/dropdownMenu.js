@@ -30,6 +30,7 @@ const DropdownMenu = props => {
                                     <div
                                         className={"dealership--select"}
                                         id={item.id}
+                                        key={item.id}
                                         onClick={props.handleSelect}
                                     >
                                         {item.business_name}
@@ -40,6 +41,7 @@ const DropdownMenu = props => {
                                     <div
                                         className="vehicles--select"
                                         id={item.id}
+                                        key={item.id}
                                         title={item.floor_price}
                                         onClick={props.handleSelect}
                                     >
