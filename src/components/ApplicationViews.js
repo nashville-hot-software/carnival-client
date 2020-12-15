@@ -2,7 +2,7 @@ import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import DashBoard from "../components/dashboard/DashBoard.js"
 import DealershipList from "./dealership/list"
-import EmployeeList from "./employee/searchList"
+import EmployeeList from "./employee/searchListContainer"
 import VehiclesList from "./vehicle/list"
 import SaleList from "./sale/list"
 
