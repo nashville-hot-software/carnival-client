@@ -13,14 +13,6 @@ const VehicleDetails = props => {
         })
   }
 
-//   const deleteFriend = friendId => {
-//     if (window.confirm(`Are you sure you want to delete ${user.user.first_name + " " + user.user.last_name} as a friend?`)) {
-//       FriendsManager.deleteFriend(friendId).then(() => {
-//         props.getAllFriends();
-//       });
-//     }
-//   };
-
   useEffect(() => {
     getVehicle();
   }, []);

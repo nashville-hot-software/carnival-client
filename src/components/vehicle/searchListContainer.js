@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import VehicleCard from "./vehicleCard"
 import VehicleManager from "../../api/dataManager";
 import "../../styles/vehicles/list.css"
 import ModalWrapper from "../modal/modalWrapper"
 import { modal } from "../../modules/modal/helpers"
+import SearchList from "./searchList"
 
 const VehiclesList = props => {
   const [vehicles, setVehicles] = useState([]);
@@ -57,37 +57,12 @@ const VehiclesList = props => {
           setVehicleDeleted={setVehicleDeleted}
       />
 
-      <div className="vehicles--container">
-        <div className="vehicles--subContainer">
-          <div className="vehicles--header">Vehicles</div>
-
-          <input 
-            type='text' 
-            className="vehicles-searchBar" 
-            onChange={handleVehicleSearch} 
-            placeholder="Search for Vehicles" 
-          />
-          
-          {vehicles !== undefined ? (
-            <div className="searchResults vehicles">
-              {vehicles.map(vehicle => {
-                return (
-                  <VehicleCard
-                    key={vehicle.id}
-                    vehicle={vehicle}
-                    showDetailsModal={showDetailsModal}
-                    {...props}
-                  />
-                );
-              })}
-            </div>
-          ) : null}
-
-            <button onClick={() => modal.handleShow(setCreationView)} className="addDealership--btn">
-                Add New Vehicle
-            </button>
-        </div>
-      </div>
+      <SearchList 
+        handleVehicleSearch={handleVehicleSearch}
+        vehicles={vehicles}
+        showDetailsModal={showDetailsModal}
+        setCreationView={setCreationView}
+      />
     </>
   );
 };

@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom"
 import DashBoard from "../components/dashboard/DashBoard.js"
 import DealershipList from "./dealership/list"
 import EmployeeList from "./employee/searchListContainer"
-import VehiclesList from "./vehicle/list"
+import VehiclesList from "./vehicle/searchListContainer"
 import SaleList from "./sale/list"
 
 
