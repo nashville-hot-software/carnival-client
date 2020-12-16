@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import DealershipManager from "../../api/dataManager";
 import "../../styles/dealerships/list.css"
-import SuccessSnackbar from "../modal/snackbar"
-import StateSelectDropdown from "../modal/StateSelect";
 import { errorHandler, validateForm} from "../validation/formValidator"
 import { modal } from "../../modules/modal/helpers"
+import AddForm from "./addForm"
 
 const AddDealershipModal = (props) => {
     const [newDealership, setNewDealership] = useState({
@@ -70,49 +69,15 @@ const AddDealershipModal = (props) => {
     };
 
     return (
-        <>
-            <div className="modalHeader addEmployee">
-                Add Dealership
-            </div>
-                
-            <div className="modal-add--body">
-                <label className="name--label">Dealership Name:</label>
-                <input onChange={handleInputFieldChange} id="business_name" className="modal--input" type="text"/>
-
-                <label className="name--label">City:</label>
-                <input onChange={handleInputFieldChange} id="city" className="modal--input" type="text"/>
-
-                <StateSelectDropdown 
-                    state={newDealership}
-                />
-
-                <label className="name--label">Phone:</label>
-                <input onChange={handleInputFieldChange} id="phone" className="modal--input" type="text"/>
-                {errors.phone !== '' ? <span className="errorMessage">{errors.phone}</span> : null}
-
-                <label className="name--label">Website:</label>
-                <input onChange={handleInputFieldChange} id="website" className="modal--input" type="text"/>
-                {errors.website !== '' ? <span className="errorMessage website">{errors.website}</span> : null}
-            </div>
-
-            <div className="addDealership--btn--container">
-                <button onClick={handleSubmit} className="modal--addBtn">
-                    Submit 
-                </button>
-                <button 
-                    className={`closeBtn ${dealershipPosted === true ? "disabled" : ""}`} 
-                    disabled={dealershipPosted === true ? true : false}
-                    onClick={() => modal.handleAddFormClose(props.setCreationView)}
-                >
-                    Close  
-                </button>
-            </div>
-            
-            <SuccessSnackbar 
-                dealershipPosted={dealershipPosted} 
-                setDealershipPosted={setDealershipPosted}
-            />
-        </>
+        <AddForm 
+            handleInputFieldChange={handleInputFieldChange}
+            newDealership={newDealership}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            dealershipPosted={dealershipPosted}
+            setDealershipPosted={setDealershipPosted}
+            setCreationView={props.setCreationView}
+        />
     );
 };
 
