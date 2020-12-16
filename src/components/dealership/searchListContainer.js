@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import DealershipCard from "./card";
 import DealershipManager from "../../api/dataManager";
 import "../../styles/dealerships/list.css"
 import ModalWrapper from "../modal/modalWrapper"
 import { modal } from "../../modules/modal/helpers"
-
+import SearchList from "./searchList"
 
 const Dealerships = props => {
 
@@ -57,37 +56,12 @@ const Dealerships = props => {
           setDealershipDeleted={setDealershipDeleted}
       />
 
-      <div className="dealerships--container">
-        <div className="dealerships--subContainer">
-          <div className="dealership--header">Dealerships</div>
-
-          <input 
-            type='text' 
-            className="dealerships-searchBar" 
-            onChange={handleDealershipSearch} 
-            placeholder="Search for Dealerships" 
-          />
-          
-          {dealerships !== undefined ? (
-            <div className="searchResults dealerships">
-              {dealerships.map(dealership => {
-                return (
-                  <DealershipCard
-                    key={dealership.id}
-                    dealership={dealership}
-                    showDetailsModal={showDetailsModal}
-                    {...props}
-                  />
-                );
-              })}
-            </div>
-          ) : null}
-
-            <button onClick={() => modal.handleShow(setCreationView)} className="addDealership--btn">
-                Add New Dealership
-            </button>
-        </div>
-      </div>
+      <SearchList 
+        handleDealershipSearch={handleDealershipSearch}
+        dealerships={dealerships}
+        showDetailsModal={showDetailsModal}
+        setCreationView={setCreationView}
+      />
     </>
   );
 };
