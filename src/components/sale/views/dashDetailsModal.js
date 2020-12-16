@@ -1,9 +1,9 @@
 import React from "react";
-import "../../styles/sales/card.css"
-import "../../styles/employees/card.css"
-import "../../styles/employees/list.css"
+import "../../../styles/sales/card.css"
+import "../../../styles/employees/card.css"
+import "../../../styles/employees/list.css"
 import NumberFormat from 'react-number-format';
-import { modal } from "../../modules/modal/helpers"
+import { modal } from "../../../modules/modal/helpers"
 
 const SaleDetailModal = props => {
 

@@ -1,10 +1,10 @@
 import React from "react"
-import DealershipDropdown from "../modal/dealershipDropdown";
-import VehicleDropdown from "../modal/vehicleSearch";
-import StateSelectDropdown from "../modal/StateSelect";
-import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
-import SuccessSnackbar from "../modal/snackbar"
-import { modal } from "../../modules/modal/helpers"
+import DealershipDropdown from "../../modal/dealershipDropdown";
+import VehicleDropdown from "../../modal/vehicleSearch";
+import StateSelectDropdown from "../../modal/StateSelect";
+import PaymentTypeSelectDropdown from "../../modal/PaymentTypeSelect";
+import SuccessSnackbar from "../../modal/snackbar"
+import { modal } from "../../../modules/modal/helpers"
 
 const AddForm = props => {
     return (

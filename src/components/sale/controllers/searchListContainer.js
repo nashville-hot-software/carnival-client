@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import DataManager from "../../api/dataManager";
-import ModalWrapper from "../modal/modalWrapper"
-import "../../styles/sales/list.css"
-import { modal } from "../../modules/modal/helpers"
-import SearchList from "./searchList"
+import DataManager from "../../../api/dataManager";
+import ModalWrapper from "../../modal/modalWrapper"
+import "../../../styles/sales/list.css"
+import { modal } from "../../../modules/modal/helpers"
+import SearchList from "../views/searchList"
 
 const SaleList = (props) => {
     const [matchedSale, setMatchedSale] = useState();

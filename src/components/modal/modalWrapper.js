@@ -4,13 +4,13 @@ import EmployeeDetailsEditContainer from "../employee/controllers/detailsEditCon
 import AddEmployeeContainer from "../employee/controllers/addFormContainer"
 import VehicleDetailModal from "../vehicle/views/dashDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
-import SaleDetailModal from "../sale/saleDetailsModal"
-import SaleEditModal from '../sale/editDetailsContainer'
+import SaleDetailModal from "../sale/views/dashDetailsModal"
+import SaleEditModal from '../sale/controllers/editDetailsContainer'
 import DealershipDetailModal from "../dealership/controllers/detailsEditContainer"
 import AddDealershipModal from "../dealership/controllers/addFormContainer"
 import AddVehicleModal from "../vehicle/controllers/addFormContainer"
 import VehicleEditModal from "../vehicle/controllers/detailsEditContainer"
-import AddSaleForm from '../sale/addFormContainer'
+import AddSaleForm from '../sale/controllers/addFormContainer'
 
 const ModalWrapper = (props) => {
     return (

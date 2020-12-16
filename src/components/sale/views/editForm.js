@@ -1,8 +1,8 @@
 import React from "react"
-import StateSelectDropdown from "../modal/StateSelect";
-import PaymentTypeSelectDropdown from "../modal/PaymentTypeSelect";
-import Input from "../saleInput/Input";
-import { modal } from "../../modules/modal/helpers"
+import StateSelectDropdown from "../../modal/StateSelect";
+import PaymentTypeSelectDropdown from "../../modal/PaymentTypeSelect";
+import Input from "../../saleInput/Input";
+import { modal } from "../../../modules/modal/helpers"
 
 const EditForm = props => {
     return (

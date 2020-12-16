@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/sales/card.css"
-import DataManager from "../../api/dataManager";
-import { errorHandler, validateForm } from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import EditDetailsWrapper from "./editDetailsWrapper"
+import "../../../styles/sales/card.css"
+import DataManager from "../../../api/dataManager";
+import { errorHandler, validateForm } from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import EditDetailsWrapper from "../views/editDetailsWrapper"
 
 const SaleEditModal = (props) => {
 

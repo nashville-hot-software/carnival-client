@@ -1,6 +1,6 @@
 import React from "react";
 import SaleTableCard from "./tableCard.js";
-import "../../styles/sales/sale.css"
+import "../../../styles/sales/sale.css"
 import Table from "@material-ui/core/Table";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import TableBody from "@material-ui/core/TableBody";

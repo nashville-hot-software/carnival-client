@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import DataManager from "../../api/dataManager";
-import "../../styles/sales/list.css"
-import { errorHandler, validateForm } from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import AddForm from "./addForm"
+import DataManager from "../../../api/dataManager";
+import "../../../styles/sales/list.css"
+import { errorHandler, validateForm } from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import AddForm from "../views/addForm"
 
 const AddSaleForm = (props) => {
 
