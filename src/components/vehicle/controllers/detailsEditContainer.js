@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import VehicleManager from "../../api/dataManager";
-import "../../styles/employees/card.css"
-import "../../styles/employees/editForm.css"
-import { errorHandler, validateForm} from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import VehicleDetailsEditWrapper from "./detailsEditWrapper"
+import VehicleManager from "../../../api/dataManager";
+import "../../../styles/employees/card.css"
+import "../../../styles/employees/editForm.css"
+import { errorHandler, validateForm} from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import VehicleDetailsEditWrapper from "../views/detailsEditWrapper"
 
 const VehicleEditModal = props => {
 
@@ -84,7 +84,7 @@ const VehicleEditModal = props => {
       VehicleManager.deleteUserData("vehicles", props.vehicle.id)
         .then(() => {
           props.setVehicleDeleted(true);
-          modal.handleEditClose(setEditMode);
+          modal.handleEditFormClose(setEditMode);
         });
     }
   }

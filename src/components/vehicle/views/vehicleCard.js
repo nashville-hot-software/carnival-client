@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import "../../styles/vehicles/searchCard.css"
+import React from "react";
+import "../../../styles/vehicles/searchCard.css"
 import NumberFormat from 'react-number-format';
 
 const VehicleCard = props => {

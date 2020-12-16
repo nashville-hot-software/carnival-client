@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import VehicleManager from "../../api/dataManager";
-import "../../styles/vehicles/list.css"
-import ModalWrapper from "../modal/modalWrapper"
-import { modal } from "../../modules/modal/helpers"
-import SearchList from "./searchList"
+import VehicleManager from "../../../api/dataManager";
+import "../../../styles/vehicles/list.css"
+import ModalWrapper from "../../modal/modalWrapper"
+import { modal } from "../../../modules/modal/helpers"
+import SearchList from "../views/searchList"
 
 const VehiclesList = props => {
   const [vehicles, setVehicles] = useState([]);

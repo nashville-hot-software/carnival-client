@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import VehicleManager from "../../api/dataManager"
-import "../../styles/vehicles/list.css"
-import "../../styles/vehicles/addForm.css"
-import AddVehicleTypeForm from "./addVTForm"
+import VehicleManager from "../../../api/dataManager"
+import "../../../styles/vehicles/list.css"
+import "../../../styles/vehicles/addForm.css"
+import AddVehicleTypeForm from "../views/addVTForm"
 
 const AddVehicleTypeContainer = (props) => {
       // for new vehicletype POST   

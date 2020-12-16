@@ -1,7 +1,7 @@
 import React from "react"
-import AddVehicleTypeContainer from "./addVTFormContainer"
-import SuccessSnackbar from "../modal/snackbar"
-import { modal } from "../../modules/modal/helpers"
+import AddVehicleTypeContainer from "../controllers/addVTFormContainer"
+import SuccessSnackbar from "../../modal/snackbar"
+import { modal } from "../../../modules/modal/helpers"
 
 const AddForm = props => {
     return (

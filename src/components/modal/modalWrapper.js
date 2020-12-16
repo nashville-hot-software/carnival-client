@@ -2,14 +2,14 @@ import React from "react";
 import "../../styles/modal/modalWrapper.css"
 import EmployeeDetailsEditContainer from "../employee/controllers/detailsEditContainer"
 import AddEmployeeContainer from "../employee/controllers/addFormContainer"
-import VehicleDetailModal from "../vehicle/dashDetailsModal"
+import VehicleDetailModal from "../vehicle/views/dashDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
 import SaleDetailModal from "../sale/saleDetailsModal"
 import SaleEditModal from '../sale/SaleEditModal'
 import DealershipDetailModal from "../dealership/controllers/detailsEditContainer"
 import AddDealershipModal from "../dealership/controllers/addFormContainer"
-import AddVehicleModal from "../vehicle/addFormContainer"
-import VehicleEditModal from "../vehicle/detailsEditContainer"
+import AddVehicleModal from "../vehicle/controllers/addFormContainer"
+import VehicleEditModal from "../vehicle/controllers/detailsEditContainer"
 import AddSaleForm from '../sale/SaleAddForm'
 
 const ModalWrapper = (props) => {

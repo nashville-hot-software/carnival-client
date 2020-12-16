@@ -7,12 +7,12 @@
 //         clearing form fields.
 
 import React, { useEffect, useState, useRef } from "react";
-import VehicleManager from "../../api/dataManager"
-import "../../styles/vehicles/list.css"
-import "../../styles/vehicles/addForm.css"
-import { errorHandler, validateForm} from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import AddForm from "./addForm"
+import VehicleManager from "../../../api/dataManager"
+import "../../../styles/vehicles/list.css"
+import "../../../styles/vehicles/addForm.css"
+import { errorHandler, validateForm} from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import AddForm from "../views/addForm"
 
 const AddVehicleModal = (props) => {
     // Filters down to specific model for select menus

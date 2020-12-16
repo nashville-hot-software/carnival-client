@@ -1,8 +1,8 @@
 import React from "react";
-import "../../styles/vehicles/card.css"
-import "../../styles/employees/list.css"
-import "../../styles/employees/card.css"
-import { modal } from "../../modules/modal/helpers"
+import "../../../styles/vehicles/card.css"
+import "../../../styles/employees/list.css"
+import "../../../styles/employees/card.css"
+import { modal } from "../../../modules/modal/helpers"
 
 const VehicleDetailModal = props => {
 
