@@ -7,29 +7,24 @@ const StateSelectDropdown = (props) => {
     const [states, setStates] = useState(USAStatesArray);
 
     const handleStateTypeSelect = (evt) => {
-        const stateToChange = props.state;
+        const stateToChange = {...props.state};
         stateToChange[evt.target.id] = evt.target.value;
-        
-        if (props.setSale) {
-            props.setSale(stateToChange);
-        } else if (props.setNewSale) {
-            props.setNewSale(stateToChange);
-        }
+        props.setState(stateToChange);
     };
 
-    useEffect(() => { }, [props.selectedState]);
-
+    const stateLocale = props.state.state;
+    
     return (
         <>
-            {props.selectedState !== undefined ? (
+            {stateLocale !== undefined ? (
                 <>
                     <label>Select a State</label>
                     <select
                         className="modal--input"
                         onChange={handleStateTypeSelect}
-                        defaultValue={props.selectedState}
+                        defaultValue={stateLocale}
                         id="state">
-                        <option value={props.selectedState}>{props.selectedState}</option>
+                        <option value={stateLocale}>{stateLocale}</option>
                         {states !== undefined
                             ? states.map((state, i) => {
                                 return <option key={i} value={state.id}>{state.name}</option>;

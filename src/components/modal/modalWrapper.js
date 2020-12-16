@@ -5,7 +5,7 @@ import AddEmployeeContainer from "../employee/controllers/addFormContainer"
 import VehicleDetailModal from "../vehicle/views/dashDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
 import SaleDetailModal from "../sale/saleDetailsModal"
-import SaleEditModal from '../sale/SaleEditModal'
+import SaleEditModal from '../sale/editDetailsContainer'
 import DealershipDetailModal from "../dealership/controllers/detailsEditContainer"
 import AddDealershipModal from "../dealership/controllers/addFormContainer"
 import AddVehicleModal from "../vehicle/controllers/addFormContainer"
