@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
-import EmployeeManager from "../../api/dataManager";
-import "../../styles/employees/list.css"
-import { errorHandler, validateForm} from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import EmployeeAddForm from "./addForm"
+import EmployeeManager from "../../../api/dataManager";
+import "../../../styles/employees/list.css"
+import { errorHandler, validateForm} from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import EmployeeAddForm from "../views/addForm"
 
 const AddEmployeeContainer = (props) => {
 

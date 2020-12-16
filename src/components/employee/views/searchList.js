@@ -1,6 +1,6 @@
 import React from "react"
 import EmployeeCard from "./card";
-import { modal } from "../../modules/modal/helpers"
+import { modal } from "../../../modules/modal/helpers"
 
 const SearchList = props => {
     return (

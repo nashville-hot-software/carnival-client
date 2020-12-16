@@ -1,7 +1,7 @@
 import React from "react"
-import { modal } from "../../modules/modal/helpers"
-import DealershipDropdown from "../modal/dealershipDropdown"
-import EmployeeTypeSelect from "../modal/employeeTypesMenu"
+import { modal } from "../../../modules/modal/helpers"
+import DealershipDropdown from "../../modal/dealershipDropdown"
+import EmployeeTypeSelect from "../../modal/employeeTypesMenu"
 
 const EmployeeEditForm = props => {
     return (

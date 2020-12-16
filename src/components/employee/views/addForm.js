@@ -1,8 +1,8 @@
 import React from "react";
-import DealershipDropdown from "../modal/dealershipDropdown"
-import EmployeeTypeSelect from "../modal/employeeTypesMenu"
-import SuccessSnackbar from "../modal/snackbar"
-import { modal } from "../../modules/modal/helpers"
+import DealershipDropdown from "../../modal/dealershipDropdown"
+import EmployeeTypeSelect from "../../modal/employeeTypesMenu"
+import SuccessSnackbar from "../../modal/snackbar"
+import { modal } from "../../../modules/modal/helpers"
 
 const EmployeeAddForm = props => {
     return (

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import EmployeeManager from "../../api/dataManager";
-import "../../styles/employees/card.css"
-import "../../styles/employees/editForm.css"
-import { errorHandler, validateForm} from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import DetailsEditWrapper from "./detailsEditWrapper"
+import EmployeeManager from "../../../api/dataManager";
+import "../../../styles/employees/card.css"
+import "../../../styles/employees/editForm.css"
+import { errorHandler, validateForm} from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import DetailsEditWrapper from "../views/detailsEditWrapper"
 
 const EmployeeDetailsEditContainer = props => {
   const [employee, setEmployee] = useState();  

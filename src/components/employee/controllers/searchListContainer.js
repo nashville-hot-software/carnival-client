@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import EmployeeManager from "../../api/dataManager";
-import "../../styles/employees/list.css"
-import ModalWrapper from "../modal/modalWrapper"
-import { modal } from "../../modules/modal/helpers"
-import SearchList from "./searchList"
+import EmployeeManager from "../../../api/dataManager";
+import "../../../styles/employees/list.css"
+import ModalWrapper from "../../modal/modalWrapper"
+import { modal } from "../../../modules/modal/helpers"
+import SearchList from "../views/searchList"
 
 const Employees = (props) => {
     const [employees, setEmployees] = useState([]);
