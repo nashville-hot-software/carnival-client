@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import SaleCard from "./card";
 import DataManager from "../../api/dataManager";
 import ModalWrapper from "../modal/modalWrapper"
 import "../../styles/sales/list.css"
 import { modal } from "../../modules/modal/helpers"
+import SearchList from "./searchList"
 
 const SaleList = (props) => {
     const [matchedSale, setMatchedSale] = useState();
@@ -57,33 +57,12 @@ const SaleList = (props) => {
                 setEditMode={setEditMode}
             />
 
-            <div className="sales-searchlist--container">
-                <div className="sales--subContainer">
-                    <div className="sales--header">Sales</div>
-                    <input
-                        className="sales-searchBar"
-                        type="text"
-                        onChange={handleSalesSearch}
-                        placeholder="Search for Sales"
-                    />
-                    <div className="searchResults sales">
-                        {sales !== undefined ? (
-                            <>
-                                {sales.map((sale) => {
-                                    return <SaleCard key={sale.id}
-                                        sale={sale}
-                                        {...props}
-                                        showDetailsModal={showDetailsModal}
-                                    />;
-                                })}
-                            </>
-                        ) : null}
-                    </div>
-                    <button onClick={() => modal.handleShow(setCreationView)} className="addSale--btn">
-                        Add Sale
-                    </button>
-                </div>
-            </div>
+            <SearchList 
+                handleSalesSearch={handleSalesSearch}
+                sales={sales}
+                showDetailsModal={showDetailsModal}
+                setCreationView={setCreationView}
+            />
         </>
     );
 };
