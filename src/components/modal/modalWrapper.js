@@ -6,7 +6,7 @@ import VehicleDetailModal from "../vehicle/dashDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
 import SaleDetailModal from "../sale/saleDetailsModal"
 import SaleEditModal from '../sale/SaleEditModal'
-import DealershipDetailModal from "../dealership/modalEditForm"
+import DealershipDetailModal from "../dealership/detailsEditContainer"
 import AddDealershipModal from "../dealership/addFormContainer"
 import AddVehicleModal from "../vehicle/addFormContainer"
 import VehicleEditModal from "../vehicle/detailsEditContainer"
