@@ -1,11 +1,10 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import DashBoard from "../components/dashboard/DashBoard.js"
-import DealershipList from "./dealership/list"
-import EmployeeList from "./employee/list"
-import ModalWrapper from "./modal/modalWrapper"
-import VehiclesList from "./vehicle/list"
-import SaleList from "./sale/list"
+import DealershipList from "./dealership/controllers/searchListContainer"
+import EmployeeList from "./employee/controllers/searchListContainer"
+import VehiclesList from "./vehicle/controllers/searchListContainer"
+import SaleList from "./sale/controllers/searchListContainer"
 
 
 const ApplicationViews = props => {

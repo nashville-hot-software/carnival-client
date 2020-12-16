@@ -3,8 +3,8 @@ import DataManager from "../../api/dataManager";
 import "../../styles/dashboard/dashboard.css"
 import SaleMetrics from "./saleMetrics"
 import Customers from "../customer/list.js";
-import Sales from "../sale/table.js";
-import Vehicles from "../vehicle/dashList.js";
+import Sales from "../sale/views/table.js";
+import Vehicles from "../vehicle/views/dashList.js";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import carnivalImage from "../../images/carnival_cars_image.jpg";

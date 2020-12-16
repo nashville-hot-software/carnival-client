@@ -1,16 +1,16 @@
 import React from "react";
 import "../../styles/modal/modalWrapper.css"
-import EmployeeDetailModal from "../employee/modalEditForm"
-import AddEmployeeModal from "../employee/modalAddForm"
-import VehicleDetailModal from "../vehicle/vehicleDetailsModal"
+import EmployeeDetailsEditContainer from "../employee/controllers/detailsEditContainer"
+import AddEmployeeContainer from "../employee/controllers/addFormContainer"
+import VehicleDetailModal from "../vehicle/views/dashDetailsModal"
 import CustomerDetailModal from "../customer/customerDetailsModal"
-import SaleDetailModal from "../sale/saleDetailsModal"
-import SaleEditModal from '../sale/SaleEditModal'
-import DealershipDetailModal from "../dealership/modalEditForm"
-import AddDealershipModal from "../dealership/modalAddForm"
-import AddVehicleModal from "../vehicle/modalAddForm"
-import VehicleEditModal from "../vehicle/modalEditForm"
-import AddSaleForm from '../sale/SaleAddForm'
+import SaleDetailModal from "../sale/views/dashDetailsModal"
+import SaleEditModal from '../sale/controllers/editDetailsContainer'
+import DealershipDetailModal from "../dealership/controllers/detailsEditContainer"
+import AddDealershipModal from "../dealership/controllers/addFormContainer"
+import AddVehicleModal from "../vehicle/controllers/addFormContainer"
+import VehicleEditModal from "../vehicle/controllers/detailsEditContainer"
+import AddSaleForm from '../sale/controllers/addFormContainer'
 
 const ModalWrapper = (props) => {
     return (
@@ -20,7 +20,7 @@ const ModalWrapper = (props) => {
             <div className="modal--container">
                 <div className="modal-box">
                     {props.filteredEmployee !== undefined && props.employeeCreationView === false? (
-                        <EmployeeDetailModal 
+                        <EmployeeDetailsEditContainer 
                             employee={props.filteredEmployee} 
                             editMode={props.editMode}
                             setEditMode={props.setEditMode}
@@ -29,7 +29,7 @@ const ModalWrapper = (props) => {
                     ) : null}
 
                     {props.employeeCreationView === true ? (
-                        <AddEmployeeModal setCreationView={props.setCreationView} />
+                        <AddEmployeeContainer setCreationView={props.setCreationView} />
                     ) : null}
 
                     {props.filteredVehicle !== undefined ? (
