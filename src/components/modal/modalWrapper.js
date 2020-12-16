@@ -10,7 +10,7 @@ import DealershipDetailModal from "../dealership/controllers/detailsEditContaine
 import AddDealershipModal from "../dealership/controllers/addFormContainer"
 import AddVehicleModal from "../vehicle/controllers/addFormContainer"
 import VehicleEditModal from "../vehicle/controllers/detailsEditContainer"
-import AddSaleForm from '../sale/SaleAddForm'
+import AddSaleForm from '../sale/addFormContainer'
 
 const ModalWrapper = (props) => {
     return (

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import NumberFormat from "react-number-format";
 
 const DropdownMenu = props => {
@@ -13,13 +13,24 @@ const DropdownMenu = props => {
                 "vehicles--dropdown" } ${props.open ? "open" : ""}`
             }
         >
-            <input
-                className="dealership--search"
-                type="text"
-                onChange={props.handleSearch}
-                placeholder={`Search ${props.label}`}
-                value={`${props.selectedOption !== "" ? props.selectedOption : props.query}`}
-            />
+            {props.vehicleMode ? (
+                <input
+                    className="dealership--search"
+                    type="text"
+                    onChange={props.handleSearch}
+                    placeholder={`Search ${props.label}`}
+                    value={`${props.selectedOption !== undefined ? props.selectedOption : props.query}`}
+                />
+            ) : (
+                <input
+                    className="dealership--search"
+                    type="text"
+                    onChange={props.handleSearch}
+                    placeholder={`Search ${props.label}`}
+                    value={`${props.selectedOption !== "" ? props.selectedOption : props.query}`}
+                />
+            )}
+            
 
             {props.list.length > 0 ? (
                 <div className="dealerships-results--container">

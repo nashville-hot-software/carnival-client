@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DataManager from "../../api/dataManager";
 import "../../styles/modal/vehicleDropdown.css"
-import NumberFormat from "react-number-format";
 import DropdownMenu from "./dropdownMenu"
 
 const VehicleDropdown = (props) => {
@@ -75,6 +74,7 @@ const VehicleDropdown = (props) => {
             selectedOption={props.selectedVehicle.vehicleName}
             query={query}
             list={vehicles}
+            vehicleMode="true"
         />
     )
 }
