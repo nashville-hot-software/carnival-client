@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import DealershipManager from "../../api/dataManager";
-import "../../styles/employees/card.css"
-import "../../styles/employees/editForm.css"
-import "../../styles/dealerships/list.css"
-import { errorHandler, validateForm} from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import DetailsEditWrapper from "./detailsEditWrapper"
+import DealershipManager from "../../../api/dataManager";
+import "../../../styles/employees/card.css"
+import "../../../styles/employees/editForm.css"
+import "../../../styles/dealerships/list.css"
+import { errorHandler, validateForm} from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import DetailsEditWrapper from "../views/detailsEditWrapper"
 
 const DealershipDetailModal = props => {
   const [dealership, setDealership] = useState();  

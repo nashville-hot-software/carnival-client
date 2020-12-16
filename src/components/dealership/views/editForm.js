@@ -1,6 +1,6 @@
 import React from "react"
-import StateSelectDropdown from "../modal/StateSelect";
-import { modal } from "../../modules/modal/helpers"
+import StateSelectDropdown from "../../modal/StateSelect";
+import { modal } from "../../../modules/modal/helpers"
 
 const DealershipEditForm = props => {
     return (

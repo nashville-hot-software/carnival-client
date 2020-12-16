@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import DealershipManager from "../../api/dataManager";
-import "../../styles/dealerships/list.css"
-import { errorHandler, validateForm} from "../validation/formValidator"
-import { modal } from "../../modules/modal/helpers"
-import AddForm from "./addForm"
+import DealershipManager from "../../../api/dataManager";
+import "../../../styles/dealerships/list.css"
+import { errorHandler, validateForm} from "../../validation/formValidator"
+import { modal } from "../../../modules/modal/helpers"
+import AddForm from "../views/addForm"
 
 const AddDealershipModal = (props) => {
     const [newDealership, setNewDealership] = useState({

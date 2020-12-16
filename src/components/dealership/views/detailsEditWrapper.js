@@ -1,12 +1,12 @@
 import React from "react"
 import DealershipDetails from "./details"
 import DealershipEditForm from "./editForm"
-import SuccessSnackbar from "../modal/snackbar"
+import SuccessSnackbar from "../../modal/snackbar"
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { modal } from "../../modules/modal/helpers"
+import { modal } from "../../../modules/modal/helpers"
 
 const DetailsEditWrapper = props => {
     return (

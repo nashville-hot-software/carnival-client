@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import DealershipManager from "../../api/dataManager";
-import "../../styles/dealerships/list.css"
-import ModalWrapper from "../modal/modalWrapper"
-import { modal } from "../../modules/modal/helpers"
-import SearchList from "./searchList"
+import DealershipManager from "../../../api/dataManager";
+import "../../../styles/dealerships/list.css"
+import ModalWrapper from "../../modal/modalWrapper"
+import { modal } from "../../../modules/modal/helpers"
+import SearchList from "../views/searchList"
 
 const Dealerships = props => {
 

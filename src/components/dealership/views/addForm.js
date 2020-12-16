@@ -1,7 +1,7 @@
 import React from "react"
-import SuccessSnackbar from "../modal/snackbar"
-import StateSelectDropdown from "../modal/StateSelect";
-import { modal } from "../../modules/modal/helpers"
+import SuccessSnackbar from "../../modal/snackbar"
+import StateSelectDropdown from "../../modal/StateSelect";
+import { modal } from "../../../modules/modal/helpers"
 
 const AddForm = props => {
     return (

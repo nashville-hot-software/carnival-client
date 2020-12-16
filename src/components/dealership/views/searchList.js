@@ -1,6 +1,6 @@
 import React from "react"
-import { modal } from "../../modules/modal/helpers"
-import DealershipCard from "./card";
+import { modal } from "../../../modules/modal/helpers"
+import DealershipCard from "./listCard";
 
 const SearchList = props => {
     return (
