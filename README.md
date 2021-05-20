@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Carnival Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+React-based Desktop single page application to help Car dealership handle inventory managment across multiple dealerships, sales and employee tracking.
 
 ## Available Scripts
 
